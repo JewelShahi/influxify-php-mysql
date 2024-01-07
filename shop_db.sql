@@ -1,3 +1,12 @@
+-- Creating the database
+
+CREATE DATABASE shop_db;
+
+
+-- Using the database
+
+USE shop_db;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -29,9 +38,6 @@ SET
 --
 -- Table structure for table `cart`
 --
-CREATE DATABASE shop_db;
-
-USE DATABASE shop_db;
 
 CREATE TABLE
   `cart` (
