@@ -40,7 +40,6 @@ SET
 -- Creating tables
 --
 -- --------------------------------------------------------
-
 -- --------------------------------------------------------
 -- Table structure for table `users`
 -- --------------------------------------------------------
@@ -128,10 +127,38 @@ CREATE TABLE
 
 -- --------------------------------------------------------
 --
+-- Adding Foreign Keys
+--
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+-- Constraints for table `cart`
+-- --------------------------------------------------------
+ALTER TABLE `cart` ADD CONSTRAINT `fk_cart_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
+ADD CONSTRAINT `fk_cart_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+-- --------------------------------------------------------
+-- Constraints for table `messages`
+-- --------------------------------------------------------
+ALTER TABLE `messages` ADD CONSTRAINT `fk_messages_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+-- --------------------------------------------------------
+-- Constraints for table `orders`
+-- --------------------------------------------------------
+ALTER TABLE `orders` ADD CONSTRAINT `fk_orders_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+-- --------------------------------------------------------
+-- Constraints for table `wishlist`
+-- --------------------------------------------------------
+ALTER TABLE `wishlist` ADD CONSTRAINT `fk_wishlist_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
+ADD CONSTRAINT `fk_wishlist_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+COMMIT;
+
+-- --------------------------------------------------------
+--
 -- Inserting data to the tables
 --
 -- --------------------------------------------------------
-
 -- --------------------------------------------------------
 -- Table `users`
 -- --------------------------------------------------------
@@ -212,29 +239,6 @@ VALUES
     'dabi.png'
   );
 
--- --------------------------------------------------------
--- Constraints for table `cart`
--- --------------------------------------------------------
-ALTER TABLE `cart` ADD CONSTRAINT `fk_cart_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
-ADD CONSTRAINT `fk_cart_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
--- --------------------------------------------------------
--- Constraints for table `messages`
--- --------------------------------------------------------
-ALTER TABLE `messages` ADD CONSTRAINT `fk_messages_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
--- --------------------------------------------------------
--- Constraints for table `orders`
--- --------------------------------------------------------
-ALTER TABLE `orders` ADD CONSTRAINT `fk_orders_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
--- --------------------------------------------------------
--- Constraints for table `wishlist`
--- --------------------------------------------------------
-ALTER TABLE `wishlist` ADD CONSTRAINT `fk_wishlist_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
-ADD CONSTRAINT `fk_wishlist_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
