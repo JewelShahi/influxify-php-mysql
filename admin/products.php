@@ -87,21 +87,16 @@ if (isset($_GET['delete'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
-
+  <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
   <link rel="stylesheet" href="../css/admin_style.css">
-
 </head>
 
 <body>
 
   <?php include '../components/admin_header.php'; ?>
-
   <section class="add-products">
-
     <h1 class="heading">Add A Product</h1>
-
     <form action="" method="post" enctype="multipart/form-data">
       <div class="flex">
         <div class="inputBox">
@@ -132,15 +127,10 @@ if (isset($_GET['delete'])) {
 
       <input type="submit" value="add product" class="btn" name="add_product">
     </form>
-
   </section>
-
   <section class="show-products">
-
     <h1 class="heading">Added Products</h1>
-
     <div class="box-container">
-
       <?php
       $select_products = $conn->prepare("SELECT * FROM `products`");
       $select_products->execute();
@@ -163,20 +153,9 @@ if (isset($_GET['delete'])) {
         echo '<p class="empty">No Products Added Yet!</p>';
       }
       ?>
-
     </div>
-
   </section>
-
-
-
-
-
-
-
-
   <script src="../js/admin_script.js"></script>
-
 </body>
 
 </html>

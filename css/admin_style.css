@@ -43,13 +43,19 @@ html {
 
 body {
   background-color: var(--light-bg);
-  /* padding-bottom: 10rem; */
 }
 
 section {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
 }
 
 .heading {

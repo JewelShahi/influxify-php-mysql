@@ -93,21 +93,15 @@ if (isset($_POST['update'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Update Products</title>
-
+  <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
   <link rel="stylesheet" href="../css/admin_style.css">
-
 </head>
 
 <body>
-
   <?php include '../components/admin_header.php'; ?>
-
   <section class="update-product">
-
     <h1 class="heading">Update Products</h1>
-
     <?php
     $update_id = $_GET['update'];
     $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
@@ -147,17 +141,14 @@ if (isset($_POST['update'])) {
             <a href="products.php" class="option-btn">Go Back</a>
           </div>
         </form>
-
     <?php
       }
     } else {
       echo '<p class="empty">No Product Found!</p>';
     }
     ?>
-
   </section>
   <script src="../js/admin_script.js"></script>
-
 </body>
 
 </html>
