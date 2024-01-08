@@ -1,3 +1,12 @@
+-- Creating the database
+
+CREATE DATABASE shop_db;
+
+
+-- Using the database
+
+USE shop_db;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -25,47 +34,44 @@ SET
 --
 -- Database: `shop_db`
 --
+
 -- --------------------------------------------------------
 --
--- Table structure for table `cart`
+-- Creating tables
 --
-CREATE DATABASE shop_db;
-
-USE DATABASE shop_db;
-
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+-- Table structure for table `users`
+-- --------------------------------------------------------
 CREATE TABLE
-  `cart` (
+  `users` (
     `id` int (100) NOT NULL,
-    `user_id` int (100) NOT NULL,
-    `pid` int (100) NOT NULL,
-    `name` varchar(100) NOT NULL,
-    `price` double (8, 2) NOT NULL DEFAULT 0.00,
-    `quantity` int (10) NOT NULL,
-    `image` text NOT NULL
+    `name` varchar(20) NOT NULL,
+    `email` varchar(50) NOT NULL,
+    `password` varchar(50) NOT NULL,
+    `isAdmin` int (1) NOT NULL DEFAULT 0
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- --------------------------------------------------------
---
--- Table structure for table `messages`
---
+-- Table structure for table `products`
+-- --------------------------------------------------------
 CREATE TABLE
-  `messages` (
-    `id` int (100) NOT NULL,
-    `user_id` int (100) NOT NULL,
+  `products` (
+    `id` int (100) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` varchar(100) NOT NULL,
-    `email` varchar(100) NOT NULL,
-    `number` char(10) NOT NULL,
-    `message` text NOT NULL,
-    `isResolved` int (1) NOT NULL DEFAULT 0
+    `details` varchar(255) DEFAULT NULL,
+    `price` double (8, 2) DEFAULT NULL,
+    `image_01` text NOT NULL,
+    `image_02` text NOT NULL,
+    `image_03` text NOT NULL
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- --------------------------------------------------------
---
 -- Table structure for table `orders`
---
+-- --------------------------------------------------------
 CREATE TABLE
   `orders` (
-    `id` int (100) NOT NULL,
+    `id` int (100) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `user_id` int (100) NOT NULL,
     `name` varchar(20) NOT NULL,
     `number` varchar(10) NOT NULL,
@@ -79,60 +85,83 @@ CREATE TABLE
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- --------------------------------------------------------
---
--- Table structure for table `products`
---
+-- Table structure for table `cart`
+-- --------------------------------------------------------
 CREATE TABLE
-  `products` (
-    `id` int (100) NOT NULL,
+  `cart` (
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `user_id` int NOT NULL,
+    `pid` int NOT NULL,
     `name` varchar(100) NOT NULL,
-    `details` varchar(255) DEFAULT NULL,
-    `price` double (8, 2) DEFAULT NULL,
-    `image_01` text NOT NULL,
-    `image_02` text NOT NULL,
-    `image_03` text NOT NULL
+    `price` double (8, 2) NOT NULL DEFAULT 0.00,
+    `quantity` int (10) NOT NULL,
+    `image` text NOT NULL
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
-INSERT INTO
-  `products` (
-    `id`,
-    `name`,
-    `details`,
-    `price`,
-    `image_01`,
-    `image_02`,
-    `image_03`
-  )
-VALUES
-  (
-    2,
-    'Anime',
-    'Anime avatars',
-    420.00,
-    'aichigo.jpg',
-    'gojo colorfull.jpg',
-    'dabi.png'
-  );
+-- --------------------------------------------------------
+-- Table structure for table `messages`
+-- --------------------------------------------------------
+CREATE TABLE
+  `messages` (
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `user_id` int NOT NULL,
+    `name` varchar(100) NOT NULL,
+    `email` varchar(100) NOT NULL,
+    `number` char(10) NOT NULL,
+    `message` text NOT NULL,
+    `isResolved` int (1) NOT NULL DEFAULT 0
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Table structure for table `wishlist`
+-- --------------------------------------------------------
+CREATE TABLE
+  `wishlist` (
+    `id` int (100) NOT NULL,
+    `user_id` int (100) NOT NULL,
+    `pid` int (100) NOT NULL,
+    `name` varchar(100) NOT NULL,
+    `price` int (100) NOT NULL,
+    `image` varchar(100) NOT NULL
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 --
--- Table structure for table `users`
+-- Adding Foreign Keys
 --
-CREATE TABLE
-  `users` (
-    `id` int (100) NOT NULL,
-    `name` varchar(20) NOT NULL,
-    `email` varchar(50) NOT NULL,
-    `password` varchar(50) NOT NULL,
-    `isAdmin` int (1) NOT NULL DEFAULT 0
-  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+-- Constraints for table `cart`
+-- --------------------------------------------------------
+ALTER TABLE `cart` ADD CONSTRAINT `fk_cart_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
+ADD CONSTRAINT `fk_cart_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
+-- --------------------------------------------------------
+-- Constraints for table `messages`
+-- --------------------------------------------------------
+ALTER TABLE `messages` ADD CONSTRAINT `fk_messages_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+-- --------------------------------------------------------
+-- Constraints for table `orders`
+-- --------------------------------------------------------
+ALTER TABLE `orders` ADD CONSTRAINT `fk_orders_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+-- --------------------------------------------------------
+-- Constraints for table `wishlist`
+-- --------------------------------------------------------
+ALTER TABLE `wishlist` ADD CONSTRAINT `fk_wishlist_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
+ADD CONSTRAINT `fk_wishlist_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+COMMIT;
+
+-- --------------------------------------------------------
 --
--- Dumping data for table `users`
+-- Inserting data to the tables
 --
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+-- Table `users`
+-- --------------------------------------------------------
 INSERT INTO
   `users` (`id`, `name`, `email`, `password`, `isAdmin`)
 VALUES
@@ -187,122 +216,29 @@ VALUES
   );
 
 -- --------------------------------------------------------
---
--- Table structure for table `wishlist`
---
-CREATE TABLE
-  `wishlist` (
-    `id` int (100) NOT NULL,
-    `user_id` int (100) NOT NULL,
-    `pid` int (100) NOT NULL,
-    `name` varchar(100) NOT NULL,
-    `price` int (100) NOT NULL,
-    `image` varchar(100) NOT NULL
-  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+-- Table `products`
+-- --------------------------------------------------------
+INSERT INTO
+  `products` (
+    `id`,
+    `name`,
+    `details`,
+    `price`,
+    `image_01`,
+    `image_02`,
+    `image_03`
+  )
+VALUES
+  (
+    2,
+    'Anime',
+    'Anime avatars',
+    420.00,
+    'aichigo.jpg',
+    'gojo colorfull.jpg',
+    'dabi.png'
+  );
 
---
--- Indexes for dumped tables
---
---
--- Indexes for table `cart`
---
-ALTER TABLE `cart` ADD PRIMARY KEY (`id`),
-ADD KEY `fk_cart_user_id` (`user_id`),
-ADD KEY `fk_cart_pid` (`pid`);
-
---
--- Indexes for table `messages`
---
-ALTER TABLE `messages` ADD PRIMARY KEY (`id`),
-ADD KEY `fk_messages_user_id` (`user_id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders` ADD PRIMARY KEY (`id`),
-ADD KEY `fk_orders_user_id` (`user_id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products` ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users` ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `wishlist`
---
-ALTER TABLE `wishlist` ADD PRIMARY KEY (`id`),
-ADD KEY `fk_wishlist_user_id` (`user_id`),
-ADD KEY `fk_wishlist_pid` (`pid`);
-
---
--- AUTO_INCREMENT for dumped tables
---
---
--- AUTO_INCREMENT for table `cart`
---
-ALTER TABLE `cart` MODIFY `id` int (100) NOT NULL AUTO_INCREMENT,
-AUTO_INCREMENT = 4;
-
---
--- AUTO_INCREMENT for table `messages`
---
-ALTER TABLE `messages` MODIFY `id` int (100) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders` MODIFY `id` int (100) NOT NULL AUTO_INCREMENT,
-AUTO_INCREMENT = 2;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products` MODIFY `id` int (100) NOT NULL AUTO_INCREMENT,
-AUTO_INCREMENT = 3;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users` MODIFY `id` int (100) NOT NULL AUTO_INCREMENT,
-AUTO_INCREMENT = 9;
-
---
--- AUTO_INCREMENT for table `wishlist`
---
-ALTER TABLE `wishlist` MODIFY `id` int (100) NOT NULL AUTO_INCREMENT,
-AUTO_INCREMENT = 2;
-
---
--- Constraints for dumped tables
---
---
--- Constraints for table `cart`
---
-ALTER TABLE `cart` ADD CONSTRAINT `fk_cart_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
-ADD CONSTRAINT `fk_cart_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `messages`
---
-ALTER TABLE `messages` ADD CONSTRAINT `fk_messages_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders` ADD CONSTRAINT `fk_orders_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `wishlist`
---
-ALTER TABLE `wishlist` ADD CONSTRAINT `fk_wishlist_pid` FOREIGN KEY (`pid`) REFERENCES `products` (`id`),
-ADD CONSTRAINT `fk_wishlist_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
