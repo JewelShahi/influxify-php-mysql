@@ -13,7 +13,10 @@ if (isset($message)) {
 
 <header class="header">
   <section class="flex">
-    <a href="home.php" class="logo">Shopie<span>.</span></a>
+    <div class="logo">
+      <img src="images/influxify-logo.ico" alt="logo" style="width: 30px;">
+      <a href="../home.php">Influfxi<span>fy</span></a>
+    </div>
 
     <nav class="navbar">
       <a href="home.php">home</a>

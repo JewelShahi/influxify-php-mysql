@@ -51,6 +51,14 @@ section {
   margin: 0 auto;
 }
 
+span {
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none !important;
+}
+
 .logo {
   display: flex;
   flex-direction: row;
