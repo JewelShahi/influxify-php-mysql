@@ -1,0 +1,5 @@
+{
+    "editor.fontSize": 20,
+    "diffEditor.hideUnchangedRegions.contextLineCount": 3,
+    "editor.tabSize": 2
+}
