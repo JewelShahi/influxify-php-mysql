@@ -186,14 +186,9 @@ include 'components/wishlist_cart.php';
     </div>
 
   </section>
-
-
-
-
-
-
-
-
+  
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 
   <?php include 'components/footer.php'; ?>
 

@@ -69,23 +69,11 @@ if (isset($_POST['send'])) {
     </form>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
   <script src="js/script.js"></script>
-
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>

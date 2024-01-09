@@ -74,23 +74,11 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
   <script src="js/script.js"></script>
-
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>

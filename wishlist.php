@@ -39,7 +39,7 @@ if (isset($_GET['delete_all'])) {
 	<!-- font awesome cdn link  -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<!-- custom css file link  -->
-  <link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/global.css">
 
 	<link rel="stylesheet" href="css/user_style.css">
 </head>
@@ -93,23 +93,11 @@ if (isset($_GET['delete_all'])) {
 		</div>
 
 	</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<?php include 'components/footer.php'; ?>
 
 	<script src="js/script.js"></script>
-
+	<?php include 'components/scroll_up.php'; ?>
+	<script src="js/scrollUp.js"></script>
 </body>
 
 </html>

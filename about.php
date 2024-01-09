@@ -169,7 +169,8 @@ if (isset($_SESSION['user_id'])) {
       },
     });
   </script>
-
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>

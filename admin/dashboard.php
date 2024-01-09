@@ -135,7 +135,8 @@ if (!isset($admin_id)) {
 
   </section>
   <script src="../js/admin_script.js"></script>
-
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>
