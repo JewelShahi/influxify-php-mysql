@@ -41,7 +41,7 @@ if (isset($_GET['delete_all'])) {
 	<!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
 
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
