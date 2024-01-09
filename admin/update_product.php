@@ -96,6 +96,8 @@ if (isset($_POST['update'])) {
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="stylesheet" href="../css/admin_style.css">
+  <link rel="stylesheet" href="../css/global.css">
+
 </head>
 
 <body>
