@@ -28,7 +28,6 @@ if (isset($_POST['submit'])) {
     $message[] = "<span style='color: black;'>Incorrect <span style='color:red;'>username</span> or <span style='color:red;'>password</span>!</span>";
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +52,6 @@ if (isset($_POST['submit'])) {
   <?php include 'components/user_header.php'; ?>
 
   <section class="form-container">
-
     <form action="" method="post">
       <h3>LogIn now</h3>
       <input type="email" name="email" required placeholder="enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
@@ -62,11 +60,8 @@ if (isset($_POST['submit'])) {
       <p>Don't have an account?</p>
       <a href="user_register.php" class="option-btn">Register now</a>
     </form>
-
   </section>
-
   <?php include 'components/footer.php'; ?>
-
   <script src="js/script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>

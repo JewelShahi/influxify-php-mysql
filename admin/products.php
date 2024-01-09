@@ -41,7 +41,7 @@ if (isset($_POST['add_product'])) {
   $select_products->execute([$name]);
 
   if ($select_products->rowCount() > 0) {
-    $message[] = 'Product Name Already Exist!';
+    $message[] = 'Product name already exist!';
   } else {
 
     $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03) VALUES(?,?,?,?,?,?)");
@@ -66,9 +66,9 @@ if (isset($_GET['delete'])) {
   $delete_product_image = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
   $delete_product_image->execute([$delete_id]);
   $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
-  unlink('../uploaded_img/' . $fetch_delete_image['image_01']);
-  unlink('../uploaded_img/' . $fetch_delete_image['image_02']);
-  unlink('../uploaded_img/' . $fetch_delete_image['image_03']);
+  unlink('../uploaded_img/products/' . $fetch_delete_image['image_01']);
+  unlink('../uploaded_img/products/' . $fetch_delete_image['image_02']);
+  unlink('../uploaded_img/products/' . $fetch_delete_image['image_03']);
   $delete_product = $conn->prepare("DELETE FROM `products` WHERE id = ?");
   $delete_product->execute([$delete_id]);
   $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE pid = ?");
@@ -102,32 +102,32 @@ if (isset($_GET['delete'])) {
     <form action="" method="post" enctype="multipart/form-data">
       <div class="flex">
         <div class="inputBox">
-          <span>Product Name <span style="color: red;">(required)<span></span>
+          <span>Product Name <span style="color: red;">*<span></span>
               <input type="text" class="box" required maxlength="100" placeholder="Enter product name" name="name">
         </div>
         <div class="inputBox">
-          <span>Product Price <span style="color: red;">(required)<span></span>
+          <span>Product Price <span style="color: red;">*<span></span>
               <input type="number" min="0.00" step="0.01" class="box" required placeholder="Enter product price" onkeypress="if(this.value.length == 10) return false;" name="price">
         </div>
         <div class="inputBox">
-          <span>Image-01 <span style="color: red;">(required)<span></span>
+          <span>Image-01 <span style="color: red;">*<span></span>
               <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
         <div class="inputBox">
-          <span>Image-02 <span style="color: red;">(required)<span></span>
+          <span>Image-02 <span style="color: red;">*<span></span>
               <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
         <div class="inputBox">
-          <span>Image-03 <span style="color: red;">(required)<span></span>
+          <span>Image-03 <span style="color: red;">*<span></span>
               <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
         <div class="inputBox">
-          <span>Product Details <span style="color: red;">(required)<span></span>
+          <span>Product Details <span style="color: red;">*<span></span>
               <textarea name="details" placeholder="Enter product details" class="box" required maxlength="500" cols="30" rows="10"></textarea>
         </div>
       </div>
 
-      <input type="submit" value="add product" class="btn" name="add_product">
+      <input type="submit" value="Add product" class="btn" name="add_product">
     </form>
   </section>
   <section class="show-products">
@@ -145,8 +145,8 @@ if (isset($_GET['delete'])) {
             <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
             <div class="details"><span><?= $fetch_products['details']; ?></span></div>
             <div class="flex-btn">
-              <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
-              <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
+              <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn"><i class="far fa-edit"></i></a>
+              <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('Delete this product?');"><i class="fas fa-trash"></i></a>
             </div>
           </div>
       <?php
