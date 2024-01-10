@@ -26,7 +26,7 @@ if (isset($_GET['delete'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Accounts</title>
+  <title>Admin accounts</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="stylesheet" href="../css/admin_style.css">
@@ -44,8 +44,8 @@ if (isset($_GET['delete'])) {
     <div class="box-container">
 
       <div class="box">
-        <p>Add New Admin</p>
-        <a href="register_admin.php" class="option-btn">Register An Admin</a>
+        <p>Add a new admin</p>
+        <a href="register_admin.php" class="option-btn">Register an admin</a>
       </div>
 
       <div class="info">
@@ -56,13 +56,13 @@ if (isset($_GET['delete'])) {
           while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <div class="box">
-              <p> Admin id : <span><?= $fetch_accounts['id']; ?></span> </p>
+              <p> Admin ID : <span><?= $fetch_accounts['id']; ?></span> </p>
               <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
               <div class="flex-btn">
                 <a href="admin_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('delete this account?')" class="delete-btn">delete</a>
                 <?php
                 if ($fetch_accounts['id'] == $admin_id) {
-                  echo '<a href="update_profile.php" class="option-btn">update</a>';
+                  echo '<a href="update_profile.php" class="option-btn">Update</a>';
                 }
                 ?>
               </div>
@@ -70,7 +70,7 @@ if (isset($_GET['delete'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">no accounts available!</p>';
+          echo '<p class="empty">There are currently no available accounts</p>';
         }
         ?>
       </div>

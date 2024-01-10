@@ -13,26 +13,26 @@ if (!isset($admin_id)) {
 if (isset($_POST['add_product'])) {
 
   $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $price = $_POST['price'];
-  $price = filter_var($price, FILTER_SANITIZE_STRING);
+  $price = filter_var($price, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $details = $_POST['details'];
-  $details = filter_var($details, FILTER_SANITIZE_STRING);
+  $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $image_01 = $_FILES['image_01']['name'];
-  $image_01 = filter_var($image_01, FILTER_SANITIZE_STRING);
+  $image_01 = filter_var($image_01, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_01 = $_FILES['image_01']['size'];
   $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
   $image_folder_01 = '../uploaded_img/' . $image_01;
 
   $image_02 = $_FILES['image_02']['name'];
-  $image_02 = filter_var($image_02, FILTER_SANITIZE_STRING);
+  $image_02 = filter_var($image_02, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_02 = $_FILES['image_02']['size'];
   $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
   $image_folder_02 = '../uploaded_img/' . $image_02;
 
   $image_03 = $_FILES['image_03']['name'];
-  $image_03 = filter_var($image_03, FILTER_SANITIZE_STRING);
+  $image_03 = filter_var($image_03, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_03 = $_FILES['image_03']['size'];
   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
   $image_folder_03 = '../uploaded_img/' . $image_03;
@@ -98,31 +98,31 @@ if (isset($_GET['delete'])) {
 
   <?php include '../components/admin_header.php'; ?>
   <section class="add-products">
-    <h1 class="heading">Add A Product</h1>
+    <h1 class="heading">Add a product</h1>
     <form action="" method="post" enctype="multipart/form-data">
       <div class="flex">
         <div class="inputBox">
-          <span>Product Name <span style="color: red;">*<span></span>
+          <span>Product name <span style="color: red;">*<span></span>
               <input type="text" class="box" required maxlength="100" placeholder="Enter product name" name="name">
         </div>
         <div class="inputBox">
-          <span>Product Price <span style="color: red;">*<span></span>
+          <span>Product price <span style="color: red;">*<span></span>
               <input type="number" min="0.00" step="0.01" class="box" required placeholder="Enter product price" onkeypress="if(this.value.length == 10) return false;" name="price">
         </div>
         <div class="inputBox">
-          <span>Image-01 <span style="color: red;">*<span></span>
+          <span>Image1 <span style="color: red;">*<span></span>
               <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
         <div class="inputBox">
-          <span>Image-02 <span style="color: red;">*<span></span>
+          <span>Image2 <span style="color: red;">*<span></span>
               <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
         <div class="inputBox">
-          <span>Image-03 <span style="color: red;">*<span></span>
+          <span>Image3 <span style="color: red;">*<span></span>
               <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
         <div class="inputBox">
-          <span>Product Details <span style="color: red;">*<span></span>
+          <span>Product details <span style="color: red;">*<span></span>
               <textarea name="details" placeholder="Enter product details" class="box" required maxlength="500" cols="30" rows="10"></textarea>
         </div>
       </div>

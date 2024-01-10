@@ -40,7 +40,7 @@ if (isset($_GET['delete'])) {
 
   <section class="contacts">
 
-    <h1 class="heading">Messages</h1>
+    <h1 class="heading">Services</h1>
 
     <div class="box-container">
 
@@ -55,13 +55,13 @@ if (isset($_GET['delete'])) {
             <p> Name : <span><?= $fetch_message['name']; ?></span></p>
             <p> E-mail : <span><?= $fetch_message['email']; ?></span></p>
             <p> Phone Number : <span><?= $fetch_message['number']; ?></span></p>
-            <p> Message : <span><?= $fetch_message['message']; ?></span></p>
-            <a href="messages.php??delete=<?= $fetch_message['id']; ?>" onclick="return confirm('Delete his message?');" class="delete-btn">Delete</a>
+            <p> Description : <span><?= $fetch_message['message']; ?></span></p>
+            <a href="messages.php??delete=<?= $fetch_message['id']; ?>" onclick="return confirm('Delete this message?');" class="delete-btn">Delete</a>
           </div>
       <?php
         }
       } else {
-        echo '<p class="empty">You Have No Messages</p>';
+        echo '<p class="empty">At present, no services are available</p>';
       }
       ?>
 

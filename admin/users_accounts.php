@@ -45,7 +45,7 @@ if (isset($_GET['delete'])) {
 <body>
   <?php include '../components/admin_header.php'; ?>
   <section class="accounts">
-    <h1 class="heading">user accounts</h1>
+    <h1 class="heading">User accounts</h1>
     <div class="box-container">
       <?php
       $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 0");
@@ -62,7 +62,7 @@ if (isset($_GET['delete'])) {
       <?php
         }
       } else {
-        echo '<p class="empty">No Accounts Available!</p>';
+        echo '<p class="empty">There are currently no accounts available</p>';
       }
       ?>
     </div>

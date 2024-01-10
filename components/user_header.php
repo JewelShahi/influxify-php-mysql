@@ -11,16 +11,6 @@ if (isset($message)) {
 }
 ?>
 
-<!-- <?php
-      include 'components/connect.php';
-      session_start();
-      if (isset($_SESSION['user_id'])) {
-        $user_id = $_SESSION['user_id'];
-      } else {
-        $user_id = '';
-      };
-      ?> -->
-
 <header class="header">
   <section class="flex">
     <div class="logo">
@@ -29,11 +19,11 @@ if (isset($message)) {
     </div>
 
     <nav class="navbar">
-      <a href="home.php">home</a>
-      <a href="about.php">about</a>
-      <a href="orders.php">orders</a>
-      <a href="shop.php">shop</a>
-      <a href="contact.php">contact</a>
+      <a href="home.php">Home</a>
+      <a href="about.php">About</a>
+      <a href="orders.php">Orders</a>
+      <a href="shop.php">Shop</a>
+      <a href="contact.php">Contact</a>
     </nav>
 
     <div class="icons">
@@ -56,15 +46,14 @@ if (isset($message)) {
         $user_image = $avatar_result;
       } else {
         // If not logged in or avatar is empty, no background image
-        $user_image = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png";
+        $user_image = "uploaded_img/user_avatar/default.png";
       }
       ?>
       <div id="menu-btn" class="fas fa-bars"></div>
       <a href="search_page.php"><i class="fas fa-search"></i></a>
-      <a href="wishlist.php"><i class="fas fa-heart"></i><span>(<?= $total_wishlist_counts; ?>)</span></a>
-      <a href="cart.php"><i class="fas fa-shopping-cart"></i><span>(<?= $total_cart_counts; ?>)</span></a>
-      <!-- <div id="user-btn" class="fas fa-user"></div> -->
-      <div id="user-btn" style="margin: 0; display: inline-block; width: 40px; height: 40px; border-radius: 50%; background-image: url('<?= $user_image ?>'); background-size: cover; "></div>
+      <a href="wishlist.php"><i class="fas fa-heart"></i><sup><?= $total_wishlist_counts; ?></sup></a>
+      <a href="cart.php"><i class="fas fa-shopping-cart"></i><sup><?= $total_cart_counts; ?></sup></a>
+      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 40px; height: 40px; border-radius: 50%; background-image: url('<?= $user_image ?>'); background-size: cover; "></div>
 
     </div>
 
@@ -78,10 +67,6 @@ if (isset($message)) {
       ?>
         <p><?= $fetch_profile["name"]; ?></p>
         <a href="update_user.php" class="btn">Update Profile</a>
-        <div class="flex-btn">
-          <a href="user_register.php" class="option-btn">Register</a>
-          <a href="user_login.php" class="option-btn">Login</a>
-        </div>
         <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">logout</a>
       <?php
       } else {
