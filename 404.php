@@ -7,6 +7,7 @@
   <title>Page Not Found - 404</title>
   <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/404.css">
+  <link rel="stylesheet" href="css/global.css">
 </head>
 
 <body>
