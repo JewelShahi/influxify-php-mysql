@@ -14,7 +14,7 @@ let homeSwiper = new Swiper(".home-slider", {
 
 const nextBtn = document.querySelector(".swiper-button-next");
 nextBtn.style.color = "white";
-nextBtn.style.fontWeight = 'bold';
+nextBtn.style.fontWeight = "bold";
 
 nextBtn.addEventListener("mouseover", () => {
   nextBtn.style.color = "rgba(256, 256, 256, 0.6)";
@@ -26,7 +26,7 @@ nextBtn.addEventListener("mouseout", () => {
 
 const prevBtn = document.querySelector(".swiper-button-prev");
 prevBtn.style.color = "white";
-prevBtn.style.fontWeight = 'bold';
+prevBtn.style.fontWeight = "bold";
 
 prevBtn.addEventListener("mouseover", () => {
   prevBtn.style.color = "rgba(256, 256, 256, 0.6)";
