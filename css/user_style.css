@@ -362,15 +362,28 @@
   margin-right: auto;
 }
 
-.form-container form {
+.form-container {
+  margin: 10px auto;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  border: 1px solid gray;
   background-color: var(--white);
-  padding: 2rem;
-  border-radius: 0.5rem;
-  border: var(--border);
-  box-shadow: var(--box-shadow);
+  box-shadow: 0 0 10px black;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--white);
   text-align: center;
   margin: 0 auto;
-  max-width: 50rem;
+  padding: 10px;
+  height: inherit;
+  width: 50%;
 }
 
 .form-container form h3 {
@@ -769,6 +782,14 @@
 
   .home-bg .home .slide .content h3 {
     font-size: 3rem;
+  }
+
+  .form-container {
+    flex-direction: row;
+  }
+  
+  .form-container form {
+    width: 100%;
   }
 }
 

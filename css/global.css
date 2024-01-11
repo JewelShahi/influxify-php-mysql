@@ -6,6 +6,7 @@
 :root {
   --black: #333;
   --border: 0.2rem solid var(--black);
+  --border-radius: 10px;
   --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   --cyan-blue: #0c85b9;
   --light-bg: #eee;
@@ -163,13 +164,15 @@ span {
   display: block;
   width: 100%;
   margin-top: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 20px 20px 20px 20px;
   padding: 1rem 3rem;
   font-size: 1.7rem;
   text-transform: capitalize;
   color: var(--white);
   cursor: pointer;
   text-align: center;
+  transition: 200ms !important;
+  transition-delay: 100ms;
 }
 
 .btn:hover,

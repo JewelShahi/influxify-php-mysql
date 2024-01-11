@@ -14,6 +14,7 @@ if (isset($_POST['submit'])) {
 
   $name = $_POST['name'];
   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $select_user = 
   $email = $_POST['email'];
   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -28,40 +29,6 @@ if (isset($_POST['submit'])) {
   $new_pass = filter_var($new_pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $cpass = sha1($_POST['cpass']);
   $cpass = filter_var($cpass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  $avatar = $_FILES['avatar']['name'];
-  $avatar = filter_var($avatar, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $avatar_size = $_FILES['avatar']['size'];
-  $avatar_tmp_name = $_FILES['avatar']['tmp_name'];
-  $image_folder = 'uploaded_img/user_avatar/' . $avatar;
-
-  if (!empty($avatar)) {
-    if ($avatar_size > 2000000) {
-      $message[] = 'Image size is too large!';
-    } else {
-      // Prepare and execute the update query to save the avatar filename in the database
-      $update_avatar = $conn->prepare("UPDATE `users` SET avatar = ? WHERE id = ?");
-      $update_avatar->execute([$avatar, $user_id]);
-
-      // Create the directory if it doesn't exist
-      if (!file_exists('../uploaded_img/user_avatar/')) {
-        // mkdir('uploaded_img/user_avatar/', 0777, true);
-      }
-
-      // Move the uploaded file to the destination directory
-      move_uploaded_file($avatar_tmp_name, $image_folder);
-
-      // Check if $old_avatar is defined before unlinking
-      if (isset($old_avatar) && !empty($old_avatar)) {
-        // Unlink the old avatar file
-        unlink('uploaded_img/user_avatar/' . $old_avatar);
-        $message[] = 'Old avatar has been deleted.';
-      }
-
-      $message[] = 'Avatar has been updated successfully!';
-    }
-  }
-
 
   if ($old_pass == $empty_pass) {
     $message[] = 'please enter old password!';
@@ -103,19 +70,20 @@ if (isset($_POST['submit'])) {
   <?php include 'components/user_header.php'; ?>
 
   <section class="form-container">
-
     <form action="" method="post" enctype="multipart/form-data">
-      <h3>Update now</h3>
+      <h3>Update Profile</h3>
       <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
       <input type="text" name="name" required placeholder="enter your username" maxlength="20" class="box" value="<?= $fetch_profile["name"]; ?>">
       <input type="email" name="email" required placeholder="enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
       <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="file" name="avatar">
-      <input type="submit" value="update now" class="btn" name="submit">
+      <input type="submit" value="save changes" class="btn" name="submit">
     </form>
-
+    <form action="">
+      <img src="" alt="" class="">
+      <input type="submit" value="update avatar" class="btn" name="update_avatar">
+    </form>
   </section>
   <?php include 'components/footer.php'; ?>
 

@@ -26,19 +26,19 @@ if (isset($_POST['submit'])) {
   $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
   if ($select_user->rowCount() > 0) {
-    $message[] = 'User with '.$email.' already exists!';
+    $message[] = 'User with ' . $email . ' already exists!';
   } else {
     if ($pass != $cpass) {
       $message[] = 'Confirm password not matched!';
     } else {
-      $insert_user = $conn->prepare("INSERT INTO `users`(name, email, password) VALUES(?,?,?)");
-      $insert_user->execute([$name, $email, $cpass]);
-      $message[] = 'Registered successfully! Please LogIn!';
+      $avatar = 'uploaded_img/user_avatar/logedin.png';
+      $insert_user = $conn->prepare("INSERT INTO `users` (name, email, password, avatar) VALUES (?, ?, ?)");
+      $insert_user->execute([$name, $email, $pass, $avatar]);
     }
   }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -46,14 +46,14 @@ if (isset($message)) {
         $user_image = $avatar_result;
       } else {
         // If not logged in or avatar is empty, no background image
-        $user_image = "uploaded_img/user_avatar/default.png";
+        $user_image = "default.png";
       }
       ?>
       <div id="menu-btn" class="fas fa-bars"></div>
       <a href="search_page.php"><i class="fas fa-search"></i></a>
       <a href="wishlist.php"><i class="fas fa-heart"></i><sup><?= $total_wishlist_counts; ?></sup></a>
       <a href="cart.php"><i class="fas fa-shopping-cart"></i><sup><?= $total_cart_counts; ?></sup></a>
-      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 40px; height: 40px; border-radius: 50%; background-image: url('<?= $user_image ?>'); background-size: cover; "></div>
+      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 40px; height: 40px; border-radius: 50%; background-image: url('uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
 
     </div>
 
