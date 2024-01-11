@@ -77,7 +77,7 @@ include 'components/wishlist_cart.php';
   </section>
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/script.js"></script>
+  <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
 </body>

@@ -146,7 +146,7 @@ if (isset($_SESSION['user_id'])) {
 
   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
-  <script src="js/script.js"></script>
+  <script src="js/user_script.js"></script>
 
   <script>
     var swiper = new Swiper(".reviews-slider", {

@@ -183,11 +183,9 @@ include 'components/wishlist_cart.php';
   <script src="js/scrollUp.js"></script>
 
   <?php include 'components/footer.php'; ?>
-
-  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
   <script src="js/script.js"></script>
-
+  
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
   <script src="js/swiper.js"></script>
 
 </body>
