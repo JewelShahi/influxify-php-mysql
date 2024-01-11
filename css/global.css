@@ -1,16 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap");
 
 :root {
+  --primary: #159535;
+  --light-green: #149a38;
   --black: #333;
+  --cyan-blue: #0c85b9;
+  --gray: #605c5c;
+  --light: #eceef2;
+  --light-blue: #4682b4;
+  --purple: #6f42c1;
+  --red: #ff4e4e;
+  --white: #fff;
   --border: 0.2rem solid var(--black);
   --border-radius: 10px;
   --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  --cyan-blue: #0c85b9;
-  --light-bg: #eee;
-  --light-blue: #4682b4;
-  --main-color: #27853e;
-  --red: #e74c3c;
-  --white: #fff;
 }
 
 * {
@@ -31,9 +34,10 @@ html {
 }
 
 body {
-  background-color: var(--light-bg);
+  background-color: var(--light);
 }
 
+/*----- scroll bar -----*/
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -45,13 +49,15 @@ body {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: #636363;
+  background: #878787;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #515151;
+  background: #6a6a6a;
 }
+/*------------*/
 
+/*------ up button ------*/
 #goUpBtn {
   display: none;
   width: 50px;
@@ -85,12 +91,48 @@ body {
 #goUpBtn:active {
   transform: scale(0.9);
 }
+/*------------*/
 
+/*----- headers (h1, h2, h3) ------*/
+.heading {
+  font-size: 4rem;
+  color: var(--black);
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: capitalize;
+}
+/*----------*/
+
+/*------ nav bar whole-------*/
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+}
+
+.header .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/*logo -> img + header*/
 .logo {
   display: flex;
   flex-direction: row;
   gap: 5px;
   align-items: center;
+}
+
+.header .flex .logo {
+  font-size: 2.5rem;
+  color: var(--black);
+  user-select: none;
 }
 
 .logo a {
@@ -100,16 +142,70 @@ body {
 }
 
 .logo img {
-  width: 40px;
+  width: 30px;
 }
 
-.heading {
-  font-size: 4rem;
-  color: var(--black);
-  margin-bottom: 2rem;
-  text-align: center;
-  text-transform: uppercase;
+.header .flex .logo span {
+  color: var(--primary);
 }
+
+/* the text components in the center */
+.header .flex .navbar a {
+  margin: 0 1rem;
+  font-size: 2rem;
+  color: var(--black);
+  text-decoration: none !important;
+  padding: 1rem 0;
+  height: 100%;
+  position: relative;
+  transition: 300ms;
+}
+
+.header .flex .navbar a:hover {
+  color: var(--primary);
+}
+
+.header .flex .navbar a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: auto;
+  border-radius: var(--border-radius);
+  background-color: var(--primary);
+  transition: width 400ms ease-in-out;
+}
+
+.header .flex .navbar a:hover::after {
+  width: 100%;
+  height: 4px;
+}
+
+/* icon section -> all the icons */
+.header .flex .icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 2rem;
+  border-radius: var(--border-radius);
+}
+
+.header .flex .icons > * {
+  width: 30px;
+  height: 30px;
+  margin-left: 1rem;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: var(--black);
+}
+
+.header .flex .icons > *:hover {
+  color: var(--primary);
+}
+/*-------*/
 
 .btn,
 .delete-btn,
@@ -124,22 +220,23 @@ body {
   color: var(--white);
   cursor: pointer;
   text-align: center;
-  transition: 200ms !important;
-  transition-delay: 100ms;
+  transition: 300ms !important;
 }
 
 .btn:hover,
 .delete-btn:hover,
 .option-btn:hover {
   background-color: var(--black);
+  box-shadow: 0 0 5px var(--gray), 0 0 8px var(--gray), 0 0 10px var(--gray);
+  transform: scale(1.02);
 }
 
 .btn {
-  background-color: var(--main-color);
+  background-color: var(--light-green);
 }
 
 .option-btn {
-  background-color: var(--cyan-blue);
+  background-color: #1d7ecd;
 }
 
 .delete-btn {
@@ -156,7 +253,7 @@ body {
   top: 0;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: var(--light-bg);
+  background-color: var(--light);
   padding: 2rem;
   display: flex;
   align-items: center;

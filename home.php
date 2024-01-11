@@ -35,52 +35,44 @@ include 'components/wishlist_cart.php';
 <body>
 
   <?php include 'components/user_header.php'; ?>
-
   <div class="home-bg">
-
     <section class="home">
-
       <div class="swiper home-slider">
-
         <div class="swiper-wrapper">
+          <?php
+          $displayPhones = array(
+            "Samsung Galaxy s23 FE" => "The Samsung Galaxy s23 FE is a flagship smartphone featuring a powerful camera system, high-end performance, and a stunning display.",
+            "Google Pixel 6 Pro" => "The Google Pixel 6 Pro is known for its exceptional camera capabilities, seamless integration with Google services, and sleek design.",
+            "iPhone 13 Pro Max" => "The iPhone 13 Pro Max is Apple's top-of-the-line smartphone, offering cutting-edge performance, a pro-grade camera system, and a large Super Retina XDR display.",
+            "Xiaomi Mi 11 Ultra" => "The Xiaomi Mi 11 Ultra boasts an impressive camera setup, powerful specifications, and a unique secondary display on the back for notifications and customization.",
+            "OnePlus 9 Pro" => "The OnePlus 9 Pro is a flagship killer with top-notch performance, a high-refresh-rate display, and a versatile camera system developed in collaboration with Hasselblad."
+          );
 
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="images/home-img-1.png" alt="">
-            </div>
-            <div class="content">
-              <span>upto 50% off</span>
-              <h3>latest smartphones</h3>
-              <a href="shop.php" class="btn">shop now</a>
-            </div>
-          </div>
+          $displayPhoneNames = array_keys($displayPhones);
+          $numSmartphones = count($displayPhoneNames);
+          ?>
 
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="images/home-img-2.png" alt="">
+          <?php for ($i = 0; $i < 5; $i++) { ?>
+            <?php
+            $name = $displayPhoneNames[$i];
+            $description = $displayPhones[$name];
+            ?>
+            <div class="swiper-slide slide">
+              <div class="image">
+                <img src="images/slider/display-img-<?php echo $i + 1; ?>.png" alt="display-img-<?php echo $i; ?>.png">
+              </div>
+              <div class="content">
+                <h3><?php echo $name; ?></h3>
+                <p><?php echo $description; ?></p>
+                <br>
+                <a href="shop.php" class="btn">Shop now</a>
+              </div>
             </div>
-            <div class="content">
-              <span>upto 50% off</span>
-              <h3>latest watches</h3>
-              <a href="shop.php" class="btn">shop now</a>
-            </div>
-          </div>
-
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="images/home-img-3.png" alt="">
-            </div>
-            <div class="content">
-              <span>upto 50% off</span>
-              <h3>latest headsets</h3>
-              <a href="shop.php" class="btn">shop now</a>
-            </div>
-          </div>
-
+          <?php } ?>
         </div>
-
         <div class="swiper-pagination"></div>
-
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
 
     </section>
@@ -145,7 +137,7 @@ include 'components/wishlist_cart.php';
 
   <section class="home-products">
 
-    <h1 class="heading">latest products</h1>
+    <h1 class="heading">Latest products</h1>
 
     <div class="swiper products-slider">
 
@@ -186,7 +178,7 @@ include 'components/wishlist_cart.php';
     </div>
 
   </section>
-  
+
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
 
@@ -197,16 +189,47 @@ include 'components/wishlist_cart.php';
   <script src="js/script.js"></script>
 
   <script>
-    var swiper = new Swiper(".home-slider", {
+    /****** Swiper Display product *******/
+    let homeSwiper = new Swiper(".home-slider", {
       loop: true,
       spaceBetween: 20,
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
       },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
     });
 
-    var swiper = new Swiper(".category-slider", {
+    const nextBtn = document.querySelector(".swiper-button-next");
+    nextBtn.style.color = "white";
+    nextBtn.style.fontWeight = 'bold';
+
+    nextBtn.addEventListener("mouseover", () => {
+      nextBtn.style.color = "rgba(256, 256, 256, 0.6)";
+    });
+
+    nextBtn.addEventListener("mouseout", () => {
+      nextBtn.style.color = "white";
+    });
+
+    const prevBtn = document.querySelector(".swiper-button-prev");
+    prevBtn.style.color = "white";
+    prevBtn.style.fontWeight = 'bold';
+
+    prevBtn.addEventListener("mouseover", () => {
+      prevBtn.style.color = "rgba(256, 256, 256, 0.6)";
+    });
+
+    prevBtn.addEventListener("mouseout", () => {
+      prevBtn.style.color = "white";
+    });
+    /************************************/
+
+    /****** Brand Swiper *******/
+    let categorySwiper = new Swiper(".category-slider", {
       loop: true,
       spaceBetween: 20,
       pagination: {
@@ -229,7 +252,8 @@ include 'components/wishlist_cart.php';
       },
     });
 
-    var swiper = new Swiper(".products-slider", {
+    /************ Product Swiper *****************/
+    let productsSwiper = new Swiper(".products-slider", {
       loop: true,
       spaceBetween: 20,
       pagination: {
@@ -248,6 +272,7 @@ include 'components/wishlist_cart.php';
         },
       },
     });
+    /************************************/
   </script>
 
 </body>
