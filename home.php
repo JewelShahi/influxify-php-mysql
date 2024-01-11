@@ -65,7 +65,7 @@ include 'components/wishlist_cart.php';
                 <h3><?php echo $name; ?></h3>
                 <p><?php echo $description; ?></p>
                 <br>
-                <a href="shop.php" class="btn" id="shop-now-btn">Shop now <i class="fa-solid fa-arrow-right" style="font-size: 16px;"></i></a>
+                <a href="shop.php" class="btn shop-now-btn">Shop now <i class="fa-solid fa-arrow-right" style="font-size: 16px;"></i></a>
               </div>
             </div>
           <?php } ?>
@@ -184,9 +184,6 @@ include 'components/wishlist_cart.php';
 
   <?php include 'components/footer.php'; ?>
   <script src="js/user_script.js.js"></script>
-
-  <script src="js/icon_translate.js"></script>
-
 
   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
   <script src="js/swiper.js"></script>

@@ -212,13 +212,23 @@ span {
   width: auto;
 }
 
+.home-bg .home .slide .content .btn:hover i {
+  transform: translateX(15px);
+  transition: transform 0.3s ease; /* Add a transition for a smoother effect */
+}
+
+.home-bg .home .slide .content .btn i {
+  transform: translateX(0);
+  transition: transform 0.3s ease; /* Add a transition for a smoother effect */
+}
+
 .swiper-pagination-bullet-active {
   background-color: var(--primary);
 }
 
 .swiper-container .swiper-button-next,
 .swiper-container .swiper-button-prev {
-    color: white;
+  color: white;
 }
 
 .category .slide {
