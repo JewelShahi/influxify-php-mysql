@@ -75,6 +75,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: 300ms;
+  z-index: 99999;
 }
 
 #goUpBtn i {

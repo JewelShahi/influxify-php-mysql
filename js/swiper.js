@@ -1,7 +1,12 @@
 /****** Swiper Display product *******/
 let homeSwiper = new Swiper(".home-slider", {
   loop: true,
+  effect: "slide",
+  speed: 400,
   spaceBetween: 20,
+  autoplay: {
+    delay: 3000,
+  },
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
@@ -9,6 +14,10 @@ let homeSwiper = new Swiper(".home-slider", {
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
+  },
+  keyboard: {
+    enabled: true,
+    onlyInViewport: false,
   },
 });
 

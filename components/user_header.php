@@ -49,7 +49,6 @@ if (isset($message)) {
         $user_image = "default.png";
       }
       ?>
-      <div id="menu-btn" class="fas fa-bars"></div>
       <a href="search_page.php"><i class="fas fa-search"></i></a>
       <a href="wishlist.php" class="icon-link">
         <i class="fas fa-heart"></i>
@@ -59,8 +58,9 @@ if (isset($message)) {
         <i class="fas fa-shopping-cart"></i>
         <sup class="sup"><?= $total_cart_counts; ?></sup>
       </a>
-      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 40px; height: 40px; border-radius: 50%; background-image: url('uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
+      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 30px; height: 30px; border-radius: 50%; background-image: url('uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
 
+      <div id="menu-btn" class="fas fa-bars"></div>
     </div>
 
     <div class="profile">
