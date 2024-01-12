@@ -19,7 +19,7 @@ if (isset($message)) {
     </div>
 
     <nav class="navbar">
-      <a href="../admin/dashboard.php">Home</a>
+      <a href="../admin/dashboard.php">Sashboard</a>
       <a href="../admin/products.php">Products</a>
       <a href="../admin/placed_orders.php">Orders</a>
       <a href="../admin/admin_accounts.php">Admins</a>
@@ -43,7 +43,7 @@ if (isset($message)) {
       }
       ?>
       <div id="menu-btn" class="fas fa-bars"></div>
-      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 40px; height: 40px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
+      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
     </div>
 
     <div class="profile">
