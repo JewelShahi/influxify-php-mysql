@@ -65,7 +65,7 @@ include 'components/wishlist_cart.php';
 								<h3><?php echo $name; ?></h3>
 								<p><?php echo $description; ?></p>
 								<br>
-								<a href="shop.php" class="btn shop-now-btn">Shop now <i class="fa-solid fa-arrow-right" style="font-size: 16px;"></i></a>
+								<a href="shop.php" class="btn shop-now-btn"><span>Shop now <span><i class="fa-solid fa-arrow-right"></i></a>
 							</div>
 						</div>
 					<?php } ?>

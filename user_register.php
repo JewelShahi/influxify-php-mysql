@@ -39,7 +39,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,25 +56,27 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 
-<body>
+<body class="no-overflow">
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="form-container">
-
-    <form action="" method="post">
-      <h3>Register now</h3>
-      <input type="text" name="name" required placeholder="enter your username" maxlength="20" class="box">
-      <input type="email" name="email" required placeholder="enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" required placeholder="enter your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="cpass" required placeholder="confirm your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="register now" class="btn" name="submit">
-      <p>Already have an account?</p>
-      <a href="user_login.php" class="option-btn">Login now</a>
-    </form>
-
+  <section class="user-register">
+    <div>
+      <form action="" method="post">
+        <h3>Register</h3>
+        <input type="text" name="name" required placeholder="Enter your username" maxlength="20" class="input box">
+        <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <div class="passwords">
+          <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+          <input type="password" name="cpass" required placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        </div>
+        <input type="submit" value="Register" class="btn" name="submit">
+        <p>Already have an account?<br>Then just log in and pick up where you left off!</p>
+        <a href="user_login.php" class="option-btn">Log In</a>
+      </form>
+    </div>
   </section>
-  <?php include 'components/footer.php'; ?>
+  <!-- <?php include 'components/footer.php'; ?> -->
 
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>

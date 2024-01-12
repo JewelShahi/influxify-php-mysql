@@ -47,21 +47,23 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 
-<body>
+<body class="no-overflow">
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="form-container">
-    <form action="" method="post">
-      <h3>LogIn now</h3>
-      <input type="email" name="email" required placeholder="enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" required placeholder="enter your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="login now" class="btn" name="submit">
-      <p>Don't have an account?</p>
-      <a href="user_register.php" class="option-btn">Register now</a>
-    </form>
+  <section class="user-login">
+    <div>
+      <form action="" method="post">
+        <h3>Log In</h3>
+        <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="submit" value="Log In" class="btn" name="submit">
+        <p>Don't have an account?<br>Well just create an account for free!</p>
+        <a href="user_register.php" class="option-btn">Register</a>
+      </form>
+    </div>
   </section>
-  <?php include 'components/footer.php'; ?>
+  <!-- <?php include 'components/footer.php'; ?> -->
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>

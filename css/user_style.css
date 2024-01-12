@@ -212,9 +212,18 @@ span {
 }
 
 .home-bg .home .slide .content .btn {
-  display: inline-block;
+  display: inline-flex;
+  font-size: 17px;
+  align-items: center;
   width: auto;
   text-align: center;
+  transform: scale(1);
+}
+
+.home-bg .home .slide .content .btn i {
+  font-size: 18px;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in;
 }
 
 .home-bg .home .slide .content .btn:hover i {
@@ -222,10 +231,6 @@ span {
   transition: transform 0.3s ease-out;
 }
 
-.home-bg .home .slide .content .btn i {
-  transform: translateX(0);
-  transition: transform 0.3s ease-in;
-}
 
 .swiper-pagination-bullet-active {
   background-color: var(--primary);
@@ -537,6 +542,143 @@ span {
   font-size: 2rem;
   color: var(--red);
   margin-right: auto;
+}
+
+/******** user login ********/
+.user-login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: url(../images/login-bg.png) center/cover no-repeat;
+  padding: 0;
+}
+
+.user-login div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(145, 255, 156, 0.4);
+  backdrop-filter: blur(10px);
+  margin: 0;
+}
+
+.user-login form {
+  position: relative;
+  top: -5%;
+  background-color: rgba(50, 50, 50, 0.8);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid rgba(70, 70, 70, 0.6);
+  box-shadow: 0 0 25px rgb(39, 39, 40);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 70rem;
+  color: var(--white);
+}
+
+.user-login form h3 {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.user-login form p {
+  font-size: 2rem;
+  color: var(--light-color);
+  margin: 1.5rem 0;
+}
+
+.user-login form .box {
+  margin: 1rem 0;
+  background-color: var(--light);
+  padding: 1.4rem;
+  color: var(--black);
+  width: 100%;
+}
+/***********/
+
+/******** user register ********/
+.user-register {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: url(../images/register-bg.png) center/cover no-repeat;
+  padding: 0;
+}
+
+.user-register div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(145, 255, 156, 0.4);
+  backdrop-filter: blur(10px);
+  margin: 0;
+}
+
+.user-register form {
+  position: relative;
+  top: -5%;
+  background-color: rgba(50, 50, 50, 0.8);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid rgba(70, 70, 70, 0.6);
+  box-shadow: 0 0 25px rgb(39, 39, 40);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 70rem;
+  min-height: 50rem;
+  color: var(--white);
+}
+
+.user-register form h3 {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.user-register form p {
+  font-size: 2rem;
+  color: var(--light-color);
+  margin: 1.5rem 0;
+}
+
+.user-register form .box {
+  margin: 1rem 0;
+  background-color: var(--light);
+  padding: 1.4rem;
+  color: var(--black);
+  width: 100%;
+}
+
+.user-register form .passwords {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  background: 0;
+  width: 100%;
+}
+/***********/
+
+.form-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-container form {

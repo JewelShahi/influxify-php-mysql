@@ -23,7 +23,7 @@ if (isset($message)) {
       <a href="about.php">About</a>
       <a href="orders.php">Orders</a>
       <a href="shop.php">Shop</a>
-      <a href="contact.php">Contact</a>
+      <a href="contact.php">Service</a>
     </nav>
 
     <div class="icons">
@@ -79,8 +79,8 @@ if (isset($message)) {
       ?>
         <p>Please LogIn or Register first!</p>
         <div class="flex-btn">
-          <a href="user_register.php" class="option-btn">Register</a>
           <a href="user_login.php" class="option-btn">LogIn</a>
+          <a href="user_register.php" class="option-btn">Register</a>
         </div>
       <?php
       }

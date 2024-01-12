@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="form-container">
+  <section class="user-update form-container">
     <form action="" method="post" enctype="multipart/form-data">
       <h3>Update Profile</h3>
       <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">

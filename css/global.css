@@ -31,10 +31,12 @@
 html {
   font-size: 62.5%;
   overflow-x: hidden;
+  height: 100%;
 }
 
 body {
   background-color: var(--light);
+  height: 100%;
 }
 
 /*----- scroll bar -----*/
@@ -56,6 +58,29 @@ body {
   background: #6a6a6a;
 }
 /*------------*/
+
+/**** hidden overflow ****/
+.no-overflow {
+  overflow-y: hidden;
+}
+/**********/
+
+/****** input ******/
+.input {
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 15px;
+  outline: none;
+}
+
+.input:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.input:focus {
+  box-shadow: 0 0 10px rgba(97, 255, 173, 0.7);
+}
+/**********************/
 
 /*------ up button ------*/
 #goUpBtn {
