@@ -1,4 +1,4 @@
-section {
+/* section {
   padding: 2rem;
   min-width: 100%;
   margin: 0 auto;
@@ -12,10 +12,10 @@ span {
   pointer-events: none;
   user-select: none;
   opacity: 0.5;
-}
+} */
 
 /*----- Navbar ----*/
-.header {
+/* .header {
   position: sticky;
   top: 0;
   left: 0;
@@ -65,7 +65,8 @@ span {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px;
+  height: 0.35rem;
+  border-radius: var(--border-radius);
   background-color: var(--primary);
   transition: width 0.3s ease;
 }
@@ -91,6 +92,10 @@ span {
   color: var(--black);
 }
 
+.header .flex .icons > *:hover {
+  color: var(--primary);
+} */
+
 .header .flex .icons a.icon-link {
   position: relative;
   display: inline-block;
@@ -112,10 +117,6 @@ span {
   font-weight: 700;
   font-size: 12px;
   padding: 5px;
-}
-
-.header .flex .icons > *:hover {
-  color: var(--primary);
 }
 /*------------*/
 

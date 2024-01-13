@@ -132,7 +132,7 @@ if (!isset($admin_id)) {
       </div>
 
     </div>
-
+    
   </section>
   <script src="../js/admin_script.js"></script>
   <?php include '../components/scroll_up.php'; ?>

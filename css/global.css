@@ -130,23 +130,25 @@ body {
 }
 /*----------*/
 
-/*------ nav bar whole-------*/
-.header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--white);
-  box-shadow: var(--box-shadow);
-  z-index: 1000;
+/**** section ***/
+section {
+  padding: 2rem;
+  min-width: 100%;
+  margin: 0 auto;
 }
 
-.header .flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
+span {
+  font-weight: 900;
 }
+
+.disabled {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+}
+/******/
+
+/*------ nav bar whole-------*/
 
 /*logo -> img + header*/
 .logo {
@@ -154,12 +156,6 @@ body {
   flex-direction: row;
   gap: 5px;
   align-items: center;
-}
-
-.header .flex .logo {
-  font-size: 2.5rem;
-  color: var(--black);
-  user-select: none;
 }
 
 .logo a {
@@ -172,20 +168,43 @@ body {
   width: 30px;
 }
 
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+}
+
+.header .flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.header .flex .logo {
+  font-size: 2.5rem;
+  color: var(--black);
+  user-select: none;
+}
+
 .header .flex .logo span {
   color: var(--primary);
 }
 
-/* the text components in the center */
 .header .flex .navbar a {
   margin: 0 1rem;
   font-size: 2rem;
   color: var(--black);
-  text-decoration: none !important;
+  text-decoration: none;
   padding: 1rem 0;
   height: 100%;
   position: relative;
-  transition: 300ms;
 }
 
 .header .flex .navbar a:hover {
@@ -199,24 +218,22 @@ body {
   bottom: 0;
   left: 0;
   width: 0;
-  height: auto;
+  height: 0.35rem;
   border-radius: var(--border-radius);
   background-color: var(--primary);
-  transition: width 400ms ease-in-out;
+  transition: width 0.3s ease;
 }
 
 .header .flex .navbar a:hover::after {
   width: 100%;
-  height: 4px;
 }
 
-/* icon section -> all the icons */
 .header .flex .icons {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
-  font-size: 2rem;
+  font-size: 30px;
   border-radius: var(--border-radius);
 }
 
@@ -224,7 +241,6 @@ body {
   width: 30px;
   height: 30px;
   margin-left: 1rem;
-  font-size: 2.5rem;
   cursor: pointer;
   color: var(--black);
 }
@@ -232,6 +248,7 @@ body {
 .header .flex .icons > *:hover {
   color: var(--primary);
 }
+
 /*-------*/
 
 .btn,
