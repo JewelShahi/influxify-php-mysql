@@ -28,7 +28,6 @@ if (isset($_POST['submit'])) {
     $message[] = "<span style='color: black;'>Incorrect <span style='color:red;'>username</span> or <span style='color:red;'>password</span>!</span>";
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -43,30 +42,31 @@ if (isset($_POST['submit'])) {
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+
+  <link rel="stylesheet" href="css/user_style.css">
 </head>
 
-<body>
+<body class="no-overflow">
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="form-container">
-
-    <form action="" method="post">
-      <h3>LogIn now</h3>
-      <input type="email" name="email" required placeholder="enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" required placeholder="enter your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="login now" class="btn" name="submit">
-      <p>Don't have an account?</p>
-      <a href="user_register.php" class="option-btn">Register now</a>
-    </form>
-
+  <section class="user-login">
+    <div>
+      <form action="" method="post">
+        <h3>Log In</h3>
+        <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="submit" value="Log In" class="btn" name="submit">
+        <p>Don't have an account?<br>Go ahead and create one for free!</p>
+        <a href="user_register.php" class="option-btn">Register</a>
+      </form>
+    </div>
   </section>
-
-  <?php include 'components/footer.php'; ?>
-
-  <script src="js/script.js"></script>
-
+  <!-- <?php include 'components/footer.php'; ?> -->
+  <script src="js/user_script.js"></script>
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>
