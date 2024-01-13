@@ -31,12 +31,11 @@
 html {
   font-size: 62.5%;
   overflow-x: hidden;
-  height: 100%;
 }
 
 body {
   background-color: var(--light);
-  height: 100%;
+  height: 100vh;
 }
 
 /*----- scroll bar -----*/
@@ -71,6 +70,8 @@ body {
   font-weight: 600;
   border-radius: 15px;
   outline: none;
+  color: var(--black);
+  background-color: var(--white);
 }
 
 .input:hover {

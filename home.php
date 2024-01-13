@@ -15,7 +15,7 @@ include 'components/wishlist_cart.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: auto;">
 
 <head>
 	<meta charset="UTF-8">
@@ -32,7 +32,7 @@ include 'components/wishlist_cart.php';
 	<link rel="stylesheet" href="css/user_style.css">
 </head>
 
-<body>
+<body style="height: auto;">
 
 	<?php include 'components/user_header.php'; ?>
 	<div class="home-bg">

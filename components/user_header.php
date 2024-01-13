@@ -64,27 +64,29 @@ if (isset($message)) {
     </div>
 
     <div class="profile">
-      <?php
-      $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-      $select_profile->execute([$user_id]);
+      <div class="profile-background">
+        <?php
+        $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+        $select_profile->execute([$user_id]);
 
-      if ($select_profile->rowCount() > 0) {
-        $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
-      ?>
-        <p><?= $fetch_profile["name"]; ?></p>
-        <a href="update_user.php" class="btn">Update Profile</a>
-        <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">logout</a>
-      <?php
-      } else {
-      ?>
-        <p>Please LogIn or Register first!</p>
-        <div class="flex-btn">
-          <a href="user_login.php" class="option-btn">LogIn</a>
-          <a href="user_register.php" class="option-btn">Register</a>
-        </div>
-      <?php
-      }
-      ?>
+        if ($select_profile->rowCount() > 0) {
+          $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+        ?>
+          <p><?= $fetch_profile["name"]; ?></p>
+          <a href="update_user.php" class="btn">Update Profile</a>
+          <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">logout</a>
+        <?php
+        } else {
+        ?>
+          <p>Please Log In or Register first!</p>
+          <div class="flex-btn">
+            <a href="user_login.php" class="option-btn">Log In</a>
+            <a href="user_register.php" class="option-btn">Register</a>
+          </div>
+        <?php
+        }
+        ?>
+      </div>
     </div>
   </section>
 </header>

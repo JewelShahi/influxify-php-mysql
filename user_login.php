@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
         <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
         <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
         <input type="submit" value="Log In" class="btn" name="submit">
-        <p>Don't have an account?<br>Well just create an account for free!</p>
+        <p>Don't have an account?<br>Go ahead and create one for free!</p>
         <a href="user_register.php" class="option-btn">Register</a>
       </form>
     </div>
