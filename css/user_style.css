@@ -21,69 +21,7 @@
   font-size: 12px;
   padding: 5px;
 }
-/*------------*/
-
-/*------- nav login/register------*/
-.header .flex .profile-background {
-  background-color: rgba(213, 251, 233, 0.8);
-  backdrop-filter: blur(10px);
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  padding-top: 1.2rem;
-}
-
-.header .flex .profile {
-  position: absolute;
-  top: 105%;
-  right: 0.5%;
-  width: 30rem;
-  display: none;
-  box-shadow: 0 0 15px var(--black);
-}
-
-@keyframes fadeIn {
-  0% {
-    transform: translateY(1rem);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.header .flex .profile.active {
-  display: inline-block;
-  animation: fadeIn 0.2s linear;
-}
-
-.header .flex .profile:not(.active) {
-  animation: fadeOut 0.2s linear;
-}
-
-@keyframes fadeOut {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(1rem);
-    opacity: 0;
-  }
-}
-
-.header .flex .profile p {
-  text-align: center;
-  color: var(--black);
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-/*when the width is < 750 the navbar items shows in the bars*/
-#menu-btn {
-  display: none;
-}
-/*---------------*/
+/*-------------------------*/
 
 .home-bg {
   background: url(../images/podium.png) no-repeat;

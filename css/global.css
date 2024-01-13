@@ -249,6 +249,67 @@ span {
 .header .flex .icons > *:hover {
   color: var(--primary);
 }
+
+/* HEADER CLICKED IMAGE - POP UP PROFILE DIV */
+.header .flex .profile-background {
+  background-color: rgba(213, 251, 233, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  padding-top: 1.2rem;
+}
+
+.header .flex .profile {
+  position: absolute;
+  top: 105%;
+  right: 0.5%;
+  width: 30rem;
+  display: none;
+  box-shadow: 0 0 15px var(--black);
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header .flex .profile.active {
+  display: inline-block;
+  animation: fadeIn 0.2s linear;
+}
+
+.header .flex .profile:not(.active) {
+  animation: fadeOut 0.2s linear;
+}
+
+@keyframes fadeOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+.header .flex .profile p {
+  text-align: center;
+  color: var(--black);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* PROFILE POP UP (CENTER TEXT OF NAV IN A HAMBURGER MENU) */
+#menu-btn {
+  display: none;
+}
 /*------------------------------*/
 
 /*------------ ALL BUTTON UI ------------ */
@@ -293,8 +354,13 @@ span {
 /* DIV FOR PROFILE BUTTONS */
 .flex-btn {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: auto;
   gap: 1rem;
 }
+
 /*--------------------------- */
 
 /*------------ ALL MESSAGE (WARNING, INFO, ALERT) UI ------------ */
@@ -348,12 +414,6 @@ span {
   user-select: none;
   opacity: 0.5;
 }
-
-/*------------ PROFILE POP UP ------------ */
-#menu-btn {
-  display: none;
-}
-/*--------------------------- */
 
 /*------------ ALL MEDIA ------------ */
 @media (max-width: 991px) {

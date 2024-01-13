@@ -47,15 +47,17 @@ if (isset($message)) {
     </div>
 
     <div class="profile">
-      <?php
-      $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ? AND isAdmin = 1");
-      $select_profile->execute([$admin_id]);
-      $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
-      ?>
-      <p><?= $fetch_profile['name']; ?></p>
-      <a href="../admin/update_profile.php" class="btn">
-        Update Profile</a>
-      <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">Logout</a>
+      <div class="profile-background">
+        <?php
+        $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ? AND isAdmin = 1");
+        $select_profile->execute([$admin_id]);
+        $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <p><?= $fetch_profile['name']; ?></p>
+        <a href="../admin/update_profile.php" class="btn">
+          Update Profile</a>
+        <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">Logout</a>
+      </div>
     </div>
 
   </section>
