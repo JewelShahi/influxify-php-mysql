@@ -1,9 +1,3 @@
-@keyframes fadeIn {
-  0% {
-    transform: translateY(1rem);
-  }
-}
-
 .form-container {
   min-height: 100vh;
   display: flex;
