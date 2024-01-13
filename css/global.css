@@ -148,26 +148,8 @@ span {
 }
 /******/
 
-/*------ nav bar whole-------*/
-
-/*logo -> img + header*/
-.logo {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-}
-
-.logo a {
-  color: var(--black);
-  font-weight: 700;
-  text-decoration: none !important;
-}
-
-.logo img {
-  width: 30px;
-}
-
+/*------ WHOLE NAVBAR -------*/
+/* HEADER */
 .header {
   position: sticky;
   top: 0;
@@ -178,6 +160,7 @@ span {
   z-index: 1000;
 }
 
+/* HEADER DIV FOR ALL COMPONENTS */
 .header .flex {
   display: flex;
   flex-direction: row;
@@ -187,15 +170,32 @@ span {
   position: relative;
 }
 
+/* DIV FOR LOGO (logo -> img + header) (LEFT) */
 .header .flex .logo {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
   font-size: 2.5rem;
   color: var(--black);
   user-select: none;
 }
 
+.header .flex .logo a {
+  color: var(--black);
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.header .flex .logo img {
+  width: 30px;
+}
+
 .header .flex .logo span {
   color: var(--primary);
 }
+
+/* DIV FOR ALL TEXT ELEMENTS (CENTER) */
 
 .header .flex .navbar a {
   margin: 0 1rem;
@@ -228,6 +228,7 @@ span {
   width: 100%;
 }
 
+/* DIV FOR ALL ICONS (LEFT) */
 .header .flex .icons {
   display: flex;
   flex-direction: row;
@@ -248,9 +249,9 @@ span {
 .header .flex .icons > *:hover {
   color: var(--primary);
 }
+/*------------------------------*/
 
-/*-------*/
-
+/*------------ ALL BUTTON UI ------------ */
 .btn,
 .delete-btn,
 .option-btn {
@@ -275,6 +276,7 @@ span {
   transform: scale(1.02);
 }
 
+/*  */
 .btn {
   background-color: var(--light-green);
 }
@@ -283,15 +285,20 @@ span {
   background-color: #1d7ecd;
 }
 
+/* DELETE/LOGOUT BUTTON UI */
 .delete-btn {
   background-color: var(--red);
 }
 
+/* DIV FOR PROFILE BUTTONS */
 .flex-btn {
   display: flex;
   gap: 1rem;
 }
+/*--------------------------- */
 
+/*------------ ALL MESSAGE (WARNING, INFO, ALERT) UI ------------ */
+/* MESSAGE UI */
 .message {
   position: sticky;
   top: 0;
@@ -320,7 +327,9 @@ span {
 .message i:hover {
   color: var(--black);
 }
+/*--------------------------- */
 
+/*------------ EMPTY BUTTON/NO INFO FROM DB UI ------------ */
 .empty {
   padding: 1.5rem;
   background-color: var(--white);
@@ -332,6 +341,7 @@ span {
   font-size: 2rem;
   text-transform: capitalize;
 }
+/*--------------------------------- */
 
 .disabled {
   pointer-events: none;
@@ -339,10 +349,13 @@ span {
   opacity: 0.5;
 }
 
+/*------------ PROFILE POP UP ------------ */
 #menu-btn {
   display: none;
 }
+/*--------------------------- */
 
+/*------------ ALL MEDIA ------------ */
 @media (max-width: 991px) {
   html {
     font-size: 55%;
@@ -361,3 +374,4 @@ span {
     gap: 0;
   }
 }
+/*------------------------------- */
