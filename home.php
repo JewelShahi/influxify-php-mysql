@@ -40,6 +40,10 @@ include 'components/wishlist_cart.php';
 			<div class="swiper home-slider">
 				<div class="swiper-wrapper">
 					<?php
+					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products`");
+					$select_products->execute();
+					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);
+
 					$displayPhones = array(
 						"Samsung Galaxy s23 FE" => "The Samsung Galaxy s23 FE is a flagship smartphone featuring a powerful camera system, high-end performance, and a stunning display.",
 						"Google Pixel 8 Pro" => "The Google Pixel 8 Pro is known for its exceptional camera capabilities, seamless integration with Google services, and sleek design.",
@@ -52,18 +56,19 @@ include 'components/wishlist_cart.php';
 					$numSmartphones = count($displayPhoneNames);
 					?>
 
-					<?php for ($i = 0; $i < 5; $i++) { ?>
+					<?php for ($i = 0; $i < count($productData); $i++) { ?>
 						<?php
-						$name = $displayPhoneNames[$i];
-						$description = $displayPhones[$name];
+						$name = $productData[$i]['name'];
+						$details = $productData[$i]['details'];
+						$image_01 = $productData[$i]['image_01'];
 						?>
 						<div class="swiper-slide slide">
 							<div class="image">
-								<img src="images/slider/display-img-<?php echo $i + 1; ?>.png" alt="display-img-<?php echo $i; ?>.png">
+								<img style="border-radius: 10px; filter: brightness(0.9);" src="uploaded_img/products/<?php echo $image_01; ?>" alt="<?php echo $image_01; ?>">
 							</div>
 							<div class="content">
 								<h3><?php echo $name; ?></h3>
-								<p><?php echo $description; ?></p>
+								<p><?php echo $details; ?></p>
 								<br>
 								<a href="shop.php" class="btn shop-now-btn"><span>Shop now <span><i class="fa-solid fa-arrow-right"></i></a>
 							</div>
@@ -154,7 +159,7 @@ include 'components/wishlist_cart.php';
 							<input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
 							<button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
 							<a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-							<img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
+							<img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
 							<div class="name"><?= $fetch_product['name']; ?></div>
 							<div class="flex">
 								<div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>

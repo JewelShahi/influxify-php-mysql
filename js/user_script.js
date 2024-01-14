@@ -11,11 +11,6 @@ document.querySelector("#user-btn").onclick = () => {
   navbar.classList.remove("active");
 };
 
-window.onscroll = () => {
-  navbar.classList.remove("active");
-  profile.classList.remove("active");
-};
-
 let mainImage = document.querySelector(
   ".quick-view .box .row .image-container .main-image img"
 );
