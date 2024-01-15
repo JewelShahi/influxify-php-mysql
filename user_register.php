@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     if ($pass != $cpass) {
       $message[] = 'Confirm password not matched!';
     } else {
-      $avatar = 'uploaded_img/user_avatar/logedin.png';
+      $avatar = 'logedin.png';
       $insert_user = $conn->prepare("INSERT INTO `users` (name, email, password, avatar) VALUES (?, ?, ?)");
       $insert_user->execute([$name, $email, $pass, $avatar]);
     }

@@ -30,8 +30,8 @@ if (isset($_POST['submit'])) {
     if ($pass != $cpass) {
       $message[] = 'Confirm password not matched!';
     } else {
-      $insert_admin = $conn->prepare("INSERT INTO `users`(name, password, isAdmin) VALUES(?,?, 1)");
-      $insert_admin->execute([$name, $cpass]);
+      $insert_admin = $conn->prepare("INSERT INTO `users`(name, email, password, isAdmin) VALUES(?,?,?, 1)");
+      $insert_admin->execute([$name, $email, $pass]);
       $message[] = 'New administrator registration was successful. Welcome aboard!';
     }
   }
@@ -59,9 +59,10 @@ if (isset($_POST['submit'])) {
   <section class="form-container">
     <form action="" method="post">
       <h3>Register</h3>
-      <input type="text" name="name" required placeholder="enter your username" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" required placeholder="enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="cpass" required placeholder="confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="text" name="name" required placeholder="Enter your name" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="email" name="email" required placeholder="Enter your e-mail" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="cpass" required placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="Register" class="btn" name="submit">
     </form>
   </section>
