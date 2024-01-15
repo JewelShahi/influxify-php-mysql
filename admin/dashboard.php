@@ -1,15 +1,10 @@
 <?php
-
 include '../components/connect.php';
-
 session_start();
-
 $admin_id = $_SESSION['admin_id'];
-
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +17,8 @@ if (!isset($admin_id)) {
   <title>Admin Dashboard</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
   <link rel="stylesheet" href="../css/admin_style.css">
+  <link rel="stylesheet" href="../css/global.css">
 
 </head>
 
@@ -55,8 +50,8 @@ if (!isset($admin_id)) {
         }
         ?>
         <h3><span>$</span><?= $total_pendings; ?><span>/-</span></h3>
-        <p>Total Pendings</p>
-        <a href="placed_orders.php" class="btn">See All Orders</a>
+        <p>Total pending orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
       </div>
 
       <div class="box">
@@ -71,8 +66,8 @@ if (!isset($admin_id)) {
         }
         ?>
         <h3><span>$</span><?= $total_completes; ?><span>/-</span></h3>
-        <p>Completed Orders</p>
-        <a href="placed_orders.php" class="btn">See All Orders</a>
+        <p>Total completed orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
       </div>
 
       <div class="box">
@@ -82,8 +77,8 @@ if (!isset($admin_id)) {
         $number_of_orders = $select_orders->rowCount()
         ?>
         <h3><?= $number_of_orders; ?></h3>
-        <p>Orders Placed</p>
-        <a href="placed_orders.php" class="btn">See All Orders</a>
+        <p>Total orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
       </div>
 
       <div class="box">
@@ -93,8 +88,8 @@ if (!isset($admin_id)) {
         $number_of_products = $select_products->rowCount()
         ?>
         <h3><?= $number_of_products; ?></h3>
-        <p>Products Added</p>
-        <a href="products.php" class="btn">See All Products</a>
+        <p>Total products</p>
+        <a href="products.php" class="btn">See all products</a>
       </div>
 
       <div class="box">
@@ -105,7 +100,7 @@ if (!isset($admin_id)) {
         ?>
         <h3><?= $number_of_users; ?></h3>
         <p>Users</p>
-        <a href="users_accounts.php" class="btn">See All Users</a>
+        <a href="users_accounts.php" class="btn">See all users</a>
       </div>
 
       <div class="box">
@@ -116,25 +111,26 @@ if (!isset($admin_id)) {
         ?>
         <h3><?= $number_of_admins; ?></h3>
         <p>Admins</p>
-        <a href="admin_accounts.php" class="btn">See All Admins</a>
+        <a href="admin_accounts.php" class="btn">See all admins</a>
       </div>
 
       <div class="box">
         <?php
-        $select_messages = $conn->prepare("SELECT * FROM `messages`");
-        $select_messages->execute();
-        $number_of_messages = $select_messages->rowCount()
+        $select_services = $conn->prepare("SELECT * FROM `services`");
+        $select_services->execute();
+        $number_of_services = $select_services->rowCount()
         ?>
-        <h3><?= $number_of_messages; ?></h3>
-        <p>New Messages</p>
-        <a href="messagess.php" class="btn">See All Messages</a>
+        <h3><?= $number_of_services; ?></h3>
+        <p>Total services</p>
+        <a href="services.php" class="btn">See all services</a>
       </div>
 
     </div>
-
+    
   </section>
   <script src="../js/admin_script.js"></script>
-
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>
