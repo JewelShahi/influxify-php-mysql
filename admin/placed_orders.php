@@ -1,15 +1,10 @@
 <?php
-
 include '../components/connect.php';
-
 session_start();
-
 $admin_id = $_SESSION['admin_id'];
-
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
-
 if (isset($_POST['update_payment'])) {
   $order_id = $_POST['order_id'];
   $payment_status = $_POST['payment_status'];
@@ -84,7 +79,7 @@ if (isset($_GET['delete'])) {
               <select name="order_status" class="select">
                 <option selected disabled><?= $fetch_orders['order_status']; ?></option>
                 <option value="processing">Processing</option>
-                <option value="shipped">Shipped</option>
+                <option value="shipped">Shipping</option>
                 <option value="delivered">Delivered</option>
               </select>
 

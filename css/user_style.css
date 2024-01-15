@@ -55,6 +55,7 @@
 .home-bg .home .slide .image img {
   height: 40rem;
   width: 100%;
+  border-radius: 5%;
   object-fit: contain;
   object-position: center;
 }

@@ -1,15 +1,11 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
-
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
 };
-
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About</title>
+  <title>About Us</title>
   <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
   <!-- font awesome cdn link  -->
@@ -36,12 +32,6 @@ if (isset($_SESSION['user_id'])) {
 
       <div class="image">
         <img src="images/about-img.svg" alt="">
-      </div>
-
-      <div class="content">
-        <h3>why choose us?</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam veritatis minus et similique doloribus? Harum molestias tenetur eaque illum quas? Obcaecati nulla in itaque modi magnam ipsa molestiae ullam consequuntur.</p>
-        <a href="contact.php" class="btn">contact us</a>
       </div>
 
     </div>

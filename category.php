@@ -1,17 +1,12 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
-
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
 };
-
 include 'components/wishlist_cart.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +34,7 @@ include 'components/wishlist_cart.php';
 
   <section class="products">
 
-    <h1 class="heading">category</h1>
+    <h1 class="heading">Category</h1>
 
     <div class="box-container">
 
@@ -63,12 +58,12 @@ include 'components/wishlist_cart.php';
               <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
               <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
             </div>
-            <input type="submit" value="add to cart" class="btn" name="add_to_cart">
+            <input type="submit" value="Add to cart" class="btn" name="add_to_cart">
           </form>
       <?php
         }
       } else {
-        echo '<p class="empty">no products found!</p>';
+        echo '<p class="empty">No products found</p>';
       }
       ?>
 

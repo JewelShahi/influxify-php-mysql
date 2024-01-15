@@ -64,7 +64,7 @@ include 'components/wishlist_cart.php';
 						?>
 						<div class="swiper-slide slide">
 							<div class="image">
-								<img style="border-radius: 10px; filter: brightness(0.9);" src="uploaded_img/products/<?php echo $image_01; ?>" alt="<?php echo $image_01; ?>">
+								<img src="uploaded_img/products/<?php echo $image_01; ?>" alt="<?php echo $image_01; ?>">
 							</div>
 							<div class="content">
 								<h3><?php echo $name; ?></h3>

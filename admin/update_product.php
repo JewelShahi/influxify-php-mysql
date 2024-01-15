@@ -1,17 +1,11 @@
 <?php
-
 include '../components/connect.php';
-
 session_start();
-
 $admin_id = $_SESSION['admin_id'];
-
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
-
 if (isset($_POST['update'])) {
-
   $pid = $_POST['pid'];
   $name = $_POST['name'];
   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -34,13 +28,13 @@ if (isset($_POST['update'])) {
 
   if (!empty($image_01)) {
     if ($image_size_01 > 2000000) {
-      $message[] = 'Image size is too large!';
+      $message[] = 'Image-1\'s size is too large!';
     } else {
       $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
       $update_image_01->execute([$image_01, $pid]);
       move_uploaded_file($image_tmp_name_01, $image_folder_01);
       unlink('../uploaded_img/products/' . $old_image_01);
-      $message[] = 'Image-01 has been updated successfully!';
+      $message[] = 'Image-1 has been updated successfully!';
     }
   }
 
@@ -53,13 +47,13 @@ if (isset($_POST['update'])) {
 
   if (!empty($image_02)) {
     if ($image_size_02 > 2000000) {
-      $message[] = 'Image size is too large!';
+      $message[] = 'Image-2\'s size is too large!';
     } else {
       $update_image_02 = $conn->prepare("UPDATE `products` SET image_02 = ? WHERE id = ?");
       $update_image_02->execute([$image_02, $pid]);
       move_uploaded_file($image_tmp_name_02, $image_folder_02);
       unlink('../uploaded_img/products/' . $old_image_02);
-      $message[] = 'Image-02 has been updated successfully!';
+      $message[] = 'Image-2 has been updated successfully!';
     }
   }
 
@@ -72,13 +66,13 @@ if (isset($_POST['update'])) {
 
   if (!empty($image_03)) {
     if ($image_size_03 > 2000000) {
-      $message[] = 'Image size is too large!';
+      $message[] = 'Image-3\'s size is too large!';
     } else {
       $update_image_03 = $conn->prepare("UPDATE `products` SET image_03 = ? WHERE id = ?");
       $update_image_03->execute([$image_03, $pid]);
       move_uploaded_file($image_tmp_name_03, $image_folder_03);
       unlink('../uploaded_img/products/' . $old_image_03);
-      $message[] = 'Image-03 has been updated successfully!';
+      $message[] = 'Image-3 has been updated successfully!';
     }
   }
 }
@@ -118,12 +112,12 @@ if (isset($_POST['update'])) {
           <input type="hidden" name="old_image_03" value="<?= $fetch_products['image_03']; ?>">
           <div class="image-container">
             <div class="main-image">
-              <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="">
+              <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="img-1">
             </div>
             <div class="sub-image">
-              <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="">
-              <img src="../uploaded_img/products/<?= $fetch_products['image_02']; ?>" alt="">
-              <img src="../uploaded_img/products/<?= $fetch_products['image_03']; ?>" alt="">
+              <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="new-img-1">
+              <img src="../uploaded_img/products/<?= $fetch_products['image_02']; ?>" alt="new-img-2">
+              <img src="../uploaded_img/products/<?= $fetch_products['image_03']; ?>" alt="new-img-3">
             </div>
           </div>
           <span>Update Name</span>
@@ -132,11 +126,11 @@ if (isset($_POST['update'])) {
           <input type="number" name="price" required class="box" min="0.00" step="0.01" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>">
           <span>Update Details</span>
           <textarea name="details" class="box" required cols="30" rows="10"><?= $fetch_products['details']; ?></textarea>
-          <span>Update Image-01</span>
+          <span>Update Image-1</span>
           <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
-          <span>Update Image-02</span>
+          <span>Update Image-2</span>
           <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
-          <span>Update Image-03</span>
+          <span>Update Image-3</span>
           <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
           <div class="flex-btn">
             <input type="submit" name="update" class="btn" value="update">
@@ -146,7 +140,7 @@ if (isset($_POST['update'])) {
     <?php
       }
     } else {
-      echo '<p class="empty">No Product Found!</p>';
+      echo '<p class="empty">No Products Found!</p>';
     }
     ?>
   </section>

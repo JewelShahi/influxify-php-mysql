@@ -1,28 +1,29 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
-
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
   header('location:user_login.php');
 };
-
 if (isset($_POST['order'])) {
 
   $name = $_POST['name'];
   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $number = $_POST['number'];
   $number = filter_var($number, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $email = $_POST['email'];
   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $method = $_POST['method'];
   $method = filter_var($method, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $address = 'flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code'];
   $address = filter_var($address, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $total_products = $_POST['total_products'];
   $total_price = $_POST['total_price'];
 
@@ -37,9 +38,9 @@ if (isset($_POST['order'])) {
     $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
     $delete_cart->execute([$user_id]);
 
-    $message[] = 'order placed successfully!';
+    $message[] = 'Order placed successfully!';
   } else {
-    $message[] = 'your cart is empty';
+    $message[] = 'Your cart is empty';
   }
 }
 
@@ -70,7 +71,7 @@ if (isset($_POST['order'])) {
 
     <form action="" method="POST">
 
-      <h3>your orders</h3>
+      <h3>Your orders</h3>
 
       <div class="display-orders">
         <?php
@@ -88,65 +89,64 @@ if (isset($_POST['order'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">your cart is empty!</p>';
+          echo '<p class="empty">Your cart is empty!</p>';
         }
         ?>
         <input type="hidden" name="total_products" value="<?= $total_products; ?>">
         <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
-        <div class="grand-total">grand total : <span>$<?= $grand_total; ?>/-</span></div>
+        <div class="grand-total">Grand total : <span>$<?= $grand_total; ?>/-</span></div>
       </div>
 
-      <h3>place your orders</h3>
+      <h3>Place your shipping info</h3>
 
       <div class="flex">
         <div class="inputBox">
-          <span>your name :</span>
-          <input type="text" name="name" placeholder="enter your name" class="box" maxlength="20" required>
+          <span>Your name :</span>
+          <input type="text" name="name" placeholder="Enter your name" class="box" maxlength="20" required>
         </div>
         <div class="inputBox">
-          <span>your number :</span>
-          <input type="number" name="number" placeholder="enter your number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
+          <span>Your phonr number :</span>
+          <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
         </div>
         <div class="inputBox">
-          <span>your email :</span>
-          <input type="email" name="email" placeholder="enter your email" class="box" maxlength="50" required>
+          <span>Your email :</span>
+          <input type="email" name="email" placeholder="Enter your email" class="box" maxlength="50" required>
         </div>
         <div class="inputBox">
-          <span>payment method :</span>
+          <span>Payment method :</span>
           <select name="method" class="box" required>
             <option value="cash on delivery">cash on delivery</option>
             <option value="credit card">credit card</option>
-            <option value="paytm">paytm</option>
             <option value="paypal">paypal</option>
           </select>
         </div>
         <div class="inputBox">
-          <span>address line 01 :</span>
-          <input type="text" name="flat" placeholder="e.g. flat number" class="box" maxlength="50" required>
+          <span>Address line 01 :</span>
+          <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
         </div>
         <div class="inputBox">
-          <span>address line 02 :</span>
-          <input type="text" name="street" placeholder="e.g. street name" class="box" maxlength="50" required>
+          <span>Address line 02 :</span>
+          <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
         </div>
         <div class="inputBox">
-          <span>city :</span>
-          <input type="text" name="city" placeholder="e.g. mumbai" class="box" maxlength="50" required>
+          <span>City :</span>
+          <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
         </div>
         <div class="inputBox">
-          <span>state :</span>
-          <input type="text" name="state" placeholder="e.g. maharashtra" class="box" maxlength="50" required>
+          <span>State :</span>
+          <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
         </div>
         <div class="inputBox">
-          <span>country :</span>
-          <input type="text" name="country" placeholder="e.g. India" class="box" maxlength="50" required>
+          <span>Country :</span>
+          <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
         </div>
         <div class="inputBox">
-          <span>pin code :</span>
-          <input type="number" min="0" name="pin_code" placeholder="e.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+          <span>Pin code :</span>
+          <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
         </div>
       </div>
 
-      <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="place order">
+      <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="Place order">
 
     </form>
 

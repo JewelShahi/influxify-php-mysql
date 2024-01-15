@@ -1,22 +1,16 @@
 <?php
-
 include '../components/connect.php';
-
 session_start();
-
 $admin_id = $_SESSION['admin_id'];
-
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 };
-
 if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
-  $delete_message = $conn->prepare("DELETE FROM `messages` WHERE id = ?");
-  $delete_message->execute([$delete_id]);
-  header('location:messages.php');
+  $delete_service = $conn->prepare("DELETE FROM `services` WHERE id = ?");
+  $delete_service->execute([$delete_id]);
+  header('location:services.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -45,18 +39,18 @@ if (isset($_GET['delete'])) {
     <div class="box-container">
 
       <?php
-      $select_messages = $conn->prepare("SELECT * FROM `messages`");
-      $select_messages->execute();
-      if ($select_messages->rowCount() > 0) {
-        while ($fetch_message = $select_messages->fetch(PDO::FETCH_ASSOC)) {
+      $select_services = $conn->prepare("SELECT * FROM `services`");
+      $select_services->execute();
+      if ($select_services->rowCount() > 0) {
+        while ($fetch_service = $select_services->fetch(PDO::FETCH_ASSOC)) {
       ?>
           <div class="box">
-            <p> User ID : <span><?= $fetch_message['user_id']; ?></span></p>
-            <p> Name : <span><?= $fetch_message['name']; ?></span></p>
-            <p> E-mail : <span><?= $fetch_message['email']; ?></span></p>
-            <p> Phone Number : <span><?= $fetch_message['number']; ?></span></p>
-            <p> Description : <span><?= $fetch_message['message']; ?></span></p>
-            <a href="messages.php??delete=<?= $fetch_message['id']; ?>" onclick="return confirm('Delete this message?');" class="delete-btn">Delete</a>
+            <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
+            <p> Name : <span><?= $fetch_service['name']; ?></span></p>
+            <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
+            <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
+            <p> Description : <span><?= $fetch_service['description']; ?></span></p>
+            <a href="services.php??delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn">Delete</a>
           </div>
       <?php
         }

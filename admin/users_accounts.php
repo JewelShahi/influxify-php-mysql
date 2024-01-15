@@ -1,30 +1,30 @@
 <?php
-
 include '../components/connect.php';
-
 session_start();
-
 $admin_id = $_SESSION['admin_id'];
-
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
-
 if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
+
   $delete_user = $conn->prepare("DELETE FROM `users` WHERE id = ?");
   $delete_user->execute([$delete_id]);
+
   $delete_orders = $conn->prepare("DELETE FROM `orders` WHERE user_id = ?");
   $delete_orders->execute([$delete_id]);
-  $delete_messages = $conn->prepare("DELETE FROM `messages` WHERE user_id = ?");
-  $delete_messages->execute([$delete_id]);
+  
+  $delete_services = $conn->prepare("DELETE FROM `services` WHERE user_id = ?");
+  $delete_services->execute([$delete_id]);
+
   $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
   $delete_cart->execute([$delete_id]);
+
   $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE user_id = ?");
   $delete_wishlist->execute([$delete_id]);
+
   header('location:users_accounts.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -55,14 +55,14 @@ if (isset($_GET['delete'])) {
       ?>
           <div class="box">
             <p> User ID : <span><?= $fetch_accounts['id']; ?></span> </p>
-            <p> Username : <span><?= $fetch_accounts['name']; ?></span> </p>
+            <p> Name : <span><?= $fetch_accounts['name']; ?></span> </p>
             <p> E-mail : <span><?= $fetch_accounts['email']; ?></span> </p>
-            <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account? The user related information will also be deleted!')" class="delete-btn">Delete</a>
+            <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account? User related information will also be deleted!')" class="delete-btn">Delete</a>
           </div>
       <?php
         }
       } else {
-        echo '<p class="empty">There are currently no accounts available</p>';
+        echo '<p class="empty">There are currently no available user accounts</p>';
       }
       ?>
     </div>

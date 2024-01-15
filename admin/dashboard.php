@@ -1,15 +1,10 @@
 <?php
-
 include '../components/connect.php';
-
 session_start();
-
 $admin_id = $_SESSION['admin_id'];
-
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +17,6 @@ if (!isset($admin_id)) {
   <title>Admin Dashboard</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 
@@ -122,13 +116,13 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $select_messages = $conn->prepare("SELECT * FROM `messages`");
-        $select_messages->execute();
-        $number_of_messages = $select_messages->rowCount()
+        $select_services = $conn->prepare("SELECT * FROM `services`");
+        $select_services->execute();
+        $number_of_services = $select_services->rowCount()
         ?>
-        <h3><?= $number_of_messages; ?></h3>
+        <h3><?= $number_of_services; ?></h3>
         <p>Total services</p>
-        <a href="messagess.php" class="btn">See all services</a>
+        <a href="services.php" class="btn">See all services</a>
       </div>
 
     </div>

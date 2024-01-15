@@ -1,16 +1,12 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
-
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
   header('location:user_login.php');
 };
-
 if (isset($_POST['delete'])) {
   $cart_id = $_POST['cart_id'];
   $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE id = ?");
@@ -29,7 +25,7 @@ if (isset($_POST['update_qty'])) {
   $qty = filter_var($qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
   $update_qty->execute([$qty, $cart_id]);
-  $message[] = 'cart quantity updated';
+  $message[] = 'Cart quantity updated';
 }
 
 ?>
@@ -77,23 +73,23 @@ if (isset($_POST['update_qty'])) {
               <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
               <button type="submit" class="fas fa-edit" name="update_qty"></button>
             </div>
-            <div class="sub-total"> sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</span> </div>
-            <input type="submit" value="delete item" onclick="return confirm('delete this from cart?');" class="delete-btn" name="delete">
+            <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</span> </div>
+            <input type="submit" value="Remove" onclick="return confirm('Remove this product from cart?');" class="delete-btn" name="delete">
           </form>
       <?php
           $grand_total += $sub_total;
         }
       } else {
-        echo '<p class="empty">your cart is empty</p>';
+        echo '<p class="empty">Your cart is empty</p>';
       }
       ?>
     </div>
 
     <div class="cart-total">
-      <p>grand total : <span>$<?= $grand_total; ?>/-</span></p>
+      <p>Grand total : <span>$<?= $grand_total; ?>/-</span></p>
       <a href="shop.php" class="option-btn">continue shopping</a>
-      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('delete all from cart?');">delete all item</a>
-      <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">proceed to checkout</a>
+      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">Remove all products</a>
+      <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">Proceed to checkout</a>
     </div>
 
   </section>
