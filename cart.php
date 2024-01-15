@@ -52,7 +52,7 @@ if (isset($_POST['update_qty'])) {
 
   <section class="products shopping-cart">
 
-    <h3 class="heading">shopping cart</h3>
+    <h3 class="heading">Shopping cart</h3>
 
     <div class="box-container">
 

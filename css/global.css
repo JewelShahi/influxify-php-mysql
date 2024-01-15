@@ -111,8 +111,7 @@ body {
 }
 
 #goUpBtn:hover {
-  background-color: rgba(48, 144, 247, 0.9);
-  transform: scale(1.1);
+  background-color: rgba(0, 122, 253, 0.9);
 }
 
 #goUpBtn:active {

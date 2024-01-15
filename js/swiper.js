@@ -5,7 +5,7 @@ let homeSwiper = new Swiper(".home-slider", {
   speed: 400,
   spaceBetween: 20,
   autoplay: {
-    delay: 4000,
+    delay: 7000,
   },
   pagination: {
     el: ".swiper-pagination",

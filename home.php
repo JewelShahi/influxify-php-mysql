@@ -11,6 +11,7 @@ if (isset($_SESSION['user_id'])) {
 };
 
 include 'components/wishlist_cart.php';
+include 'components/insert_cart.php';
 
 ?>
 
@@ -43,17 +44,6 @@ include 'components/wishlist_cart.php';
 					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products`");
 					$select_products->execute();
 					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);
-
-					$displayPhones = array(
-						"Samsung Galaxy s23 FE" => "The Samsung Galaxy s23 FE is a flagship smartphone featuring a powerful camera system, high-end performance, and a stunning display.",
-						"Google Pixel 8 Pro" => "The Google Pixel 8 Pro is known for its exceptional camera capabilities, seamless integration with Google services, and sleek design.",
-						"iPhone 15 Pro Max" => "The iPhone 15 Pro Max is Apple's top-of-the-line smartphone, offering cutting-edge performance, a pro-grade camera system, and a large Super Retina XDR display.",
-						"Xiaomi 13T Pro" => "The Xiaomi 13T Pro boasts an impressive camera setup, powerful specifications, and a unique secondary display on the back for notifications and customization.",
-						"OnePlus Open" => "The OnePlus Open is a flagship killer with top-notch performance, a high-refresh-rate display, and a versatile camera system developed in collaboration with Hasselblad."
-					);
-
-					$displayPhoneNames = array_keys($displayPhones);
-					$numSmartphones = count($displayPhoneNames);
 					?>
 
 					<?php for ($i = 0; $i < count($productData); $i++) { ?>
@@ -84,7 +74,7 @@ include 'components/wishlist_cart.php';
 
 	<section class="category">
 
-		<h1 class="heading">shop by category</h1>
+		<h1 class="heading">Shop by category</h1>
 
 		<div class="swiper category-slider">
 
@@ -162,15 +152,15 @@ include 'components/wishlist_cart.php';
 							<img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
 							<div class="name"><?= $fetch_product['name']; ?></div>
 							<div class="flex">
-								<div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
+								<div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
 								<input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
 							</div>
-							<input type="submit" value="add to cart" class="btn" name="add_to_cart">
+							<input type="submit" value="Add to cart" class="btn" name="add_to_cart">
 						</form>
 				<?php
 					}
 				} else {
-					echo '<p class="empty">no products added yet!</p>';
+					echo '<p class="empty">No products added yet!</p>';
 				}
 				?>
 
