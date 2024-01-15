@@ -13,13 +13,13 @@ if (isset($_SESSION['user_id'])) {
 if (isset($_POST['send'])) {
 
   $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $email = $_POST['email'];
-  $email = filter_var($email, FILTER_SANITIZE_STRING);
+  $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $number = $_POST['number'];
-  $number = filter_var($number, FILTER_SANITIZE_STRING);
+  $number = filter_var($number, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $msg = $_POST['msg'];
-  $msg = filter_var($msg, FILTER_SANITIZE_STRING);
+  $msg = filter_var($msg, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $select_message = $conn->prepare("SELECT * FROM `messages` WHERE name = ? AND email = ? AND number = ? AND message = ?");
   $select_message->execute([$name, $email, $number, $msg]);
@@ -48,7 +48,9 @@ if (isset($_POST['send'])) {
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+
+  <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
@@ -67,23 +69,11 @@ if (isset($_POST['send'])) {
     </form>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/script.js"></script>
-
+  <script src="js/user_script.js"></script>
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>

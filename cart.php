@@ -26,7 +26,7 @@ if (isset($_GET['delete_all'])) {
 if (isset($_POST['update_qty'])) {
   $cart_id = $_POST['cart_id'];
   $qty = $_POST['qty'];
-  $qty = filter_var($qty, FILTER_SANITIZE_STRING);
+  $qty = filter_var($qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
   $update_qty->execute([$qty, $cart_id]);
   $message[] = 'cart quantity updated';
@@ -46,7 +46,8 @@ if (isset($_POST['update_qty'])) {
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
@@ -69,7 +70,7 @@ if (isset($_POST['update_qty'])) {
           <form action="" method="post" class="box">
             <input type="hidden" name="cart_id" value="<?= $fetch_cart['id']; ?>">
             <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
-            <img src="uploaded_img/<?= $fetch_cart['image']; ?>" alt="">
+            <img src="uploaded_img/products/<?= $fetch_cart['image']; ?>" alt="">
             <div class="name"><?= $fetch_cart['name']; ?></div>
             <div class="flex">
               <div class="price">$<?= $fetch_cart['price']; ?>/-</div>
@@ -96,23 +97,11 @@ if (isset($_POST['update_qty'])) {
     </div>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/script.js"></script>
-
+  <script src="js/user_script.js"></script>
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>
