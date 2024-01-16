@@ -1,17 +1,12 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
-
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
 };
-
 include 'components/wishlist_cart.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +32,7 @@ include 'components/wishlist_cart.php';
 
   <section class="quick-view">
 
-    <h1 class="heading">quick view</h1>
+    <h1 class="heading">Quick view</h1>
 
     <?php
     $pid = $_GET['pid'];
@@ -63,15 +58,30 @@ include 'components/wishlist_cart.php';
               </div>
             </div>
             <div class="content">
-              <div class="name"><?= $fetch_product['name']; ?></div>
+              <div class="name">Name: <?= $fetch_product['name']; ?></div>
+              <div class="details"><?= $fetch_product['details']; ?></div>
+              <div class="name">Brand: <?= $fetch_product['brand']; ?></div>
+              <div class="name">Release date: <?= $fetch_product['released']; ?></div>
+              <div class="name">Quantity: <?= $fetch_product['qty']; ?></div>
+              <div class="name">CPU: <?= $fetch_product['cpu']; ?></div>
+              <div class="name">Storage: <?= $fetch_product['storage']; ?></div>
+              <div class="name">RAM: <?= $fetch_product['ram']; ?></div>
+              <div class="name">Camera count: <?= $fetch_product['camera_count']; ?></div>
+              <div class="name">Camera resolution<?= $fetch_product['camera_resolution']; ?></div>
+              <div class="name">Size(display): <?= $fetch_product['size']; ?></div>
+              <div class="name">Battery: <?= $fetch_product['battery']; ?></div>
+              <div class="name">Color: <?= $fetch_product['color']; ?></div>
               <div class="flex">
-                <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
+                <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
                 <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
               </div>
-              <div class="details"><?= $fetch_product['details']; ?></div>
               <div class="flex-btn">
-                <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-                <input class="option-btn" type="submit" name="add_to_wishlist" value="add to wishlist">
+                <button type="submit" class="btn" name="add_to_cart">
+                  <i class="fas fa-plus"></i> Add to cart
+                </button>
+                <button class="option-btn" type="submit" name="add_to_wishlist">
+                  <i class="fas fa-heart"></i> Add to wishlist
+                </button>
               </div>
             </div>
           </div>
@@ -79,7 +89,7 @@ include 'components/wishlist_cart.php';
     <?php
       }
     } else {
-      echo '<p class="empty">no products added yet!</p>';
+      echo '<p class="empty">No products added yet!</p>';
     }
     ?>
 

@@ -8,6 +8,7 @@
   <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/404.css">
   <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 
 <body>
@@ -18,7 +19,9 @@
   <h5>
     The page you are looking for doesn't exist or another error has occurred.
   </h5>
-  <a href="home.php">Go Back</a>
+  <a href="home.php" class="btn" style="width: 200px;">
+    <i class="fas fa-arrow-left"></i>  Go Back
+  </a>
 </body>
 
 </html>

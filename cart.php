@@ -71,10 +71,12 @@ if (isset($_POST['update_qty'])) {
             <div class="flex">
               <div class="price">$<?= $fetch_cart['price']; ?>/-</div>
               <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
-              <button type="submit" class="fas fa-edit" name="update_qty"></button>
+              <button type="submit" class="fas fa-edit fa-plus fa-2x" name="update_qty"></button>
             </div>
             <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</span> </div>
-            <input type="submit" value="Remove" onclick="return confirm('Remove this product from cart?');" class="delete-btn" name="delete">
+            <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Remove this product from cart?');">
+              <i class="fas fa-minus-circle"></i> Remove
+            </button>
           </form>
       <?php
           $grand_total += $sub_total;
@@ -87,15 +89,22 @@ if (isset($_POST['update_qty'])) {
 
     <div class="cart-total">
       <p>Grand total : <span>$<?= $grand_total; ?>/-</span></p>
-      <a href="shop.php" class="option-btn">continue shopping</a>
-      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">Remove all products</a>
-      <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">Proceed to checkout</a>
+      <a href="shop.php" class="option-btn">
+        <i class="fas fa-arrow-left"></i> Continue shopping
+      </a>
+      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">
+        <i class="fas fa-trash-alt"></i> Remove all products
+      </a>
+      <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">
+        <i class="fa-solid fa-wallet"></i> Proceed to checkout
+      </a>
     </div>
 
   </section>
   <?php include 'components/footer.php'; ?>
 
   <script src="js/user_script.js"></script>
+
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
 </body>

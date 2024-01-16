@@ -14,30 +14,40 @@ if (isset($_POST['submit'])) {
 
   $name = $_POST['name'];
   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $email = $_POST['email'];
   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $pass = sha1($_POST['pass']);
   $pass = filter_var($pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $cpass = sha1($_POST['cpass']);
   $cpass = filter_var($cpass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
-  $select_user->execute([$email]);
-  $row = $select_user->fetch(PDO::FETCH_ASSOC);
-
-  if ($select_user->rowCount() > 0) {
-    $message[] = 'User with ' . $email . ' already exists!';
+  if ($pass != $cpass) {
+    $message[] = 'Confirm password not matched!';
   } else {
-    if ($pass != $cpass) {
-      $message[] = 'Confirm password not matched!';
-    } else {
-      $avatar = 'logedin.png';
-      $insert_user = $conn->prepare("INSERT INTO `users` (name, email, password, avatar) VALUES (?, ?, ?)");
-      $insert_user->execute([$name, $email, $pass, $avatar]);
+    try {
+      $insert_user = $conn->prepare("INSERT INTO `users` (name, email, password, avatar) VALUES (?, ?, ?, 'logedin.png')");
+      $insert_user->execute([$name, $email, $pass]);
+
+      // Check if any rows were affected
+      if ($insert_user->rowCount() > 0) {
+        $message[] = 'User registered successfully!';
+      } else {
+        $message[] = 'Error registering user. Please try again.';
+      }
+    } catch (PDOException $e) {
+      if ($e->errorInfo[1] == 1062) { // 1062 is the MySQL error code for duplicate entry
+        $message[] = 'User with ' . $email . ' already exists!';
+      } else {
+        $message[] = 'Error: ' . $e->getMessage();
+      }
     }
   }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

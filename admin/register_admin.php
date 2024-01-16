@@ -1,10 +1,12 @@
 <?php
+
 include '../components/connect.php';
 session_start();
 $admin_id = $_SESSION['admin_id'];
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
+
 if (isset($_POST['submit'])) {
 
   $name = $_POST['name'];
@@ -19,23 +21,26 @@ if (isset($_POST['submit'])) {
   $cpass = sha1($_POST['cpass']);
   $cpass = filter_var($cpass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $select_admin = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
-  $select_admin->execute([$email]);
-
-  if ($select_admin->rowCount() > 0) {
-    $message[] = 'User with '.$email.' already exist!';
+  // Check if the password matches the confirm password
+  if ($pass != $cpass) {
+    $message[] = 'Confirm password not matched!';
   } else {
-    if ($pass != $cpass) {
-      $message[] = 'Confirm password not matched!';
-    } else {
-      $insert_admin = $conn->prepare("INSERT INTO `users`(name, email, password, isAdmin, avatar) VALUES(?,?,?, 1, 'logeding.png')");
+    try {
+      $insert_admin = $conn->prepare("INSERT INTO `users` (name, email, password, isAdmin, avatar) VALUES (?, ?, ?, 1, 'logedin.png')");
       $insert_admin->execute([$name, $email, $pass]);
       $message[] = 'Admin registration was successful. Welcome aboard!';
+    } catch (PDOException $e) {
+      if ($e->errorInfo[1] == 1062) { // 1062 is the MySQL error code for duplicate entry
+        $message[] = 'User with ' . $email . ' already exists!';
+      } else {
+        $message[] = 'Error: ' . $e->getMessage();
+      }
     }
   }
 }
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -66,28 +66,30 @@ if (isset($_POST['add_product'])) {
   $image_size_03 = $_FILES['image_03']['size'];
   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
   $image_folder_03 = '../uploaded_img/products/' . $image_03;
-
-  /* set products name as unique */
-  $select_products = $conn->prepare("SELECT * FROM `products` WHERE name = ?");
-  $select_products->execute([$name]);
-
-  if ($select_products->rowCount() > 0) {
-    $message[] = 'Product name already exist!';
-  } else {
-
+  
+  try {
     $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_01, $image_02, $image_03]);
 
     if ($insert_products) {
       if ($image_size_01 > 2000000 or $image_size_02 > 2000000 or $image_size_03 > 2000000) {
-        $message[] = 'Image size is too large!';
-      } else {
-        move_uploaded_file($image_tmp_name_01, $image_folder_01);
-        move_uploaded_file($image_tmp_name_02, $image_folder_02);
-        move_uploaded_file($image_tmp_name_03, $image_folder_03);
-        $message[] = 'New product added successfully!';
+        throw new Exception('Image size is too large!');
       }
+
+      move_uploaded_file($image_tmp_name_01, $image_folder_01);
+      move_uploaded_file($image_tmp_name_02, $image_folder_02);
+      move_uploaded_file($image_tmp_name_03, $image_folder_03);
+
+      $message[] = 'New product added successfully!';
     }
+  } catch (PDOException $e) {
+    if ($e->errorInfo[1] == 1062) {
+      $message[] = 'Product with '. $name .' already exists!';
+    } else {
+      $message[] = 'Error: ' . $e->getMessage();
+    }
+  } catch (Exception $e) {
+    $message[] = $e->getMessage();
   }
 };
 

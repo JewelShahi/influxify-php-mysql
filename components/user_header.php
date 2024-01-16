@@ -61,6 +61,7 @@ if (isset($message)) {
       <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 30px; height: 30px; border-radius: 50%; background-image: url('uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
 
       <div id="menu-btn" class="fas fa-bars"></div>
+
     </div>
 
     <div class="profile">
@@ -73,8 +74,12 @@ if (isset($message)) {
           $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
         ?>
           <p><?= $fetch_profile["name"]; ?></p>
-          <a href="update_user.php" class="btn">Update Profile</a>
-          <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">logout</a>
+          <a href="update_user.php" class="btn">
+            <i class="fas fa-user-edit"></i> Update Profile
+          </a>
+          <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
         <?php
         } else {
         ?>

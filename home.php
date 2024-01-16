@@ -11,7 +11,6 @@ if (isset($_SESSION['user_id'])) {
 };
 
 include 'components/wishlist_cart.php';
-include 'components/insert_cart.php';
 
 ?>
 
@@ -155,7 +154,10 @@ include 'components/insert_cart.php';
 								<div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
 								<input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
 							</div>
-							<input type="submit" value="Add to cart" class="btn" name="add_to_cart">
+							<!-- <input type="submit" value="Add to cart" class="btn" name="add_to_cart"> -->
+							<button type="submit" class="btn" name="add_to_cart">
+								<i class="fas fa-plus"></i> Add to cart
+							</button>
 						</form>
 				<?php
 					}

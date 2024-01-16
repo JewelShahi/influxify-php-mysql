@@ -7,6 +7,7 @@ if (isset($_SESSION['user_id'])) {
   $user_id = '';
   header('location:user_login.php');
 };
+
 if (isset($_POST['order'])) {
 
   $name = $_POST['name'];

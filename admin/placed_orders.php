@@ -5,17 +5,28 @@ $admin_id = $_SESSION['admin_id'];
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
+
 if (isset($_POST['update_payment'])) {
   $order_id = $_POST['order_id'];
-  $payment_status = $_POST['payment_status'];
-  $order_status = $_POST['order_status'];
 
-  $payment_status = filter_var($payment_status, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $order_status = filter_var($order_status, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  if (isset($_POST['payment_status'])) {
+    $payment_status = $_POST['payment_status'];
+    $payment_status = filter_var($payment_status, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $update_payment = $conn->prepare("UPDATE `orders` SET payment_status = ?, order_status = ? WHERE id = ?");
-  $update_payment->execute([$payment_status, $order_status, $order_id]);
-  $message[] = 'Payment status and order status updated!';
+    $update_payment_status = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
+    $update_payment_status->execute([$payment_status, $order_id]);
+
+    $message[] = 'Payment status updated!';
+  }
+
+  if (isset($_POST['order_status'])) {
+    $order_status = $_POST['order_status'];
+    $order_status = filter_var($order_status, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+    $update_order_status = $conn->prepare("UPDATE `orders` SET order_status = ? WHERE id = ?");
+    $update_order_status->execute([$order_status, $order_id]);
+    $message[] = 'Order status updated!';
+  }
 }
 
 if (isset($_GET['delete'])) {
@@ -69,17 +80,18 @@ if (isset($_GET['delete'])) {
 
             <form action="" method="post">
               <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
-              <p>Payment status :</p>
-              <select name="payment_status" class="select">
+              <p id="paymentStatusLabel">Payment status :</p>
+              <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
                 <option selected disabled><?= $fetch_orders['payment_status']; ?></option>
                 <option value="pending">Pending</option>
                 <option value="completed">Completed</option>
               </select>
-              <p>Order status :</p>
-              <select name="order_status" class="select">
+
+              <p id="orderStatusLabel">Order status :</p>
+              <select name="order_status" class="select" aria-labelledby="orderStatusLabel">
                 <option selected disabled><?= $fetch_orders['order_status']; ?></option>
                 <option value="processing">Processing</option>
-                <option value="shipped">Shipping</option>
+                <option value="shipping">Shipping</option>
                 <option value="delivered">Delivered</option>
               </select>
 

@@ -40,44 +40,67 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $total_pendings = 0;
-        $select_pendings = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-        $select_pendings->execute(['pending']);
-        if ($select_pendings->rowCount() > 0) {
-          while ($fetch_pendings = $select_pendings->fetch(PDO::FETCH_ASSOC)) {
-            $total_pendings += $fetch_pendings['total_price'];
-          }
-        }
-        ?>
-        <h3><span>$</span><?= $total_pendings; ?><span>/-</span></h3>
-        <p>Total pending orders</p>
-        <a href="placed_orders.php" class="btn">See all orders</a>
-      </div>
-
-      <div class="box">
-        <?php
-        $total_completes = 0;
-        $select_completes = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-        $select_completes->execute(['completed']);
-        if ($select_completes->rowCount() > 0) {
-          while ($fetch_completes = $select_completes->fetch(PDO::FETCH_ASSOC)) {
-            $total_completes += $fetch_completes['total_price'];
-          }
-        }
-        ?>
-        <h3><span>$</span><?= $total_completes; ?><span>/-</span></h3>
-        <p>Total completed orders</p>
-        <a href="placed_orders.php" class="btn">See all orders</a>
-      </div>
-
-      <div class="box">
-        <?php
         $select_orders = $conn->prepare("SELECT * FROM `orders`");
         $select_orders->execute();
-        $number_of_orders = $select_orders->rowCount()
+        $number_of_orders = $select_orders->rowCount();
         ?>
         <h3><?= $number_of_orders; ?></h3>
         <p>Total orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_order_status_processing = $conn->prepare("SELECT * FROM `orders` WHERE order_status = ?");
+        $select_order_status_processing->execute(['processing']);
+        $number_of_order_status_processing = $select_order_status_processing->rowCount()
+        ?>
+        <h3><?= $number_of_order_status_processing; ?></h3>
+        <p>Total order status processing orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_order_status_shipping = $conn->prepare("SELECT * FROM `orders` WHERE order_status = ?");
+        $select_order_status_shipping->execute(['shipping']);
+        $number_of_order_status_shipping = $select_order_status_shipping->rowCount()
+        ?>
+        <h3><?= $number_of_order_status_shipping; ?></h3>
+        <p>Total order status shipping orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_order_status_delivered = $conn->prepare("SELECT * FROM `orders` WHERE order_status = ?");
+        $select_order_status_delivered->execute(['delivered']);
+        $number_of_order_status_delivered = $select_order_status_delivered->rowCount()
+        ?>
+        <h3><?= $number_of_order_status_delivered; ?></h3>
+        <p>Total order status delivered orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_payment_status_pendings = $conn->prepare("SELECT * FROM `orders` WHERE order_status = ?");
+        $select_payment_status_pendings->execute(['pending']);
+        $number_of_payment_status_pendings = $select_payment_status_pendings->rowCount()
+        ?>
+        <h3><?= $number_of_payment_status_pendings; ?></h3>
+        <p>Total payment status pending orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_payment_status_completed = $conn->prepare("SELECT * FROM `orders` WHERE order_status = ?");
+        $select_payment_status_completed->execute(['completed']);
+        $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
+        ?>
+        <h3><?= $number_of_payment_status_completed; ?></h3>
+        <p>Total payment status completed orders</p>
         <a href="placed_orders.php" class="btn">See all orders</a>
       </div>
 
@@ -126,7 +149,7 @@ if (!isset($admin_id)) {
       </div>
 
     </div>
-    
+
   </section>
   <script src="../js/admin_script.js"></script>
   <?php include '../components/scroll_up.php'; ?>

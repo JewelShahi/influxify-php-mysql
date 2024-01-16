@@ -40,9 +40,9 @@ if (isset($_POST['submit'])) {
     if ($new_pass != $empty_pass) {
       $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
       $update_admin_pass->execute([$cpass, $user_id]);
-      $message[] = 'password updated successfully!';
+      $message[] = 'Password updated successfully!';
     } else {
-      $message[] = 'please enter a new password!';
+      $message[] = 'Please enter a new password!';
     }
   }
 }

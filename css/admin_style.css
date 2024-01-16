@@ -58,7 +58,15 @@
   box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
   background-color: var(--white);
-  /* background-color: red; */
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.dashboard .box-container .box > * {
+  width: 100%;
 }
 
 .dashboard .box-container .box h3 {
