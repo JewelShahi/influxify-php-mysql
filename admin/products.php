@@ -255,6 +255,7 @@ if (isset($_GET['delete'])) {
       <input type="submit" value="Add product" class="btn" name="add_product">
     </form>
   </section>
+  
   <section class="show-products">
     <h1 class="heading">Added Products</h1>
     <div class="box-container">

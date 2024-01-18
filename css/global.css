@@ -2,6 +2,7 @@
 
 :root {
   --primary: #159535;
+  --body: #e8f4e8;
   --light-green: #149a38;
   --black: #333;
   --cyan-blue: #0c85b9;
@@ -264,6 +265,7 @@ span {
   right: 0.5%;
   width: 30rem;
   display: none;
+  border-radius: var(--border-radius);
   box-shadow: 0 0 15px var(--black);
 }
 
@@ -365,7 +367,7 @@ span {
 /*------------ ALL MESSAGE (WARNING, INFO, ALERT) UI ------------ */
 /* MESSAGE UI */
 .message {
-  position: sticky;
+  position: relative;
   top: 0;
   max-width: 1200px;
   margin: 0 auto;
