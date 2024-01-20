@@ -44,7 +44,24 @@ if (isset($_SESSION['user_id'])) {
       if ($user_id == '') {
         echo '<p class="empty">Please LogIn to see your order(s)</p>';
       } else {
-        $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE user_id = ?");
+        $select_orders = $conn->prepare("
+      SELECT
+        o.id,
+        o.name,
+        o.email,
+        o.placed_on,
+        GROUP_CONCAT(p.name) AS ordered_products,
+        SUM(o.total_price) AS total_product_price
+    FROM
+        orders o
+    JOIN
+        products p ON o.pid = p.id
+    WHERE
+        o.user_id = ?
+    GROUP BY
+        o.id
+    ORDER BY
+        o.placed_on DESC");
         $select_orders->execute([$user_id]);
         if ($select_orders->rowCount() > 0) {
           while ($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)) {
