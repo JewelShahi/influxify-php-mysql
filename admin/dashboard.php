@@ -40,6 +40,17 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
+        $select_orders = $conn->prepare("SELECT SUM(total_price) AS total_income FROM orders WHERE payment_status = 'completed'");
+        $select_orders->execute();
+        $income = $select_orders->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income['total_income'], 2, '.', ','); ?></h3>
+        <p>Total income</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
         $select_orders = $conn->prepare("SELECT id FROM orders GROUP BY id");
         $select_orders->execute();
         $number_of_orders = $select_orders->rowCount();
@@ -51,8 +62,8 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $select_order_status_processing = $conn->prepare("SELECT id FROM orders where order_status = ? GROUP BY id");
-        $select_order_status_processing->execute(['processing']);
+        $select_order_status_processing = $conn->prepare("SELECT id FROM orders WHERE order_status = 'processing' GROUP BY id");
+        $select_order_status_processing->execute();
         $number_of_order_status_processing = $select_order_status_processing->rowCount()
         ?>
         <h3><?= $number_of_order_status_processing; ?></h3>
@@ -62,8 +73,8 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $select_order_status_shipping = $conn->prepare("SELECT id FROM orders where order_status = ? GROUP BY id");
-        $select_order_status_shipping->execute(['shipping']);
+        $select_order_status_shipping = $conn->prepare("SELECT id FROM orders WHERE order_status = 'shipping' GROUP BY id");
+        $select_order_status_shipping->execute();
         $number_of_order_status_shipping = $select_order_status_shipping->rowCount()
         ?>
         <h3><?= $number_of_order_status_shipping; ?></h3>
@@ -73,8 +84,8 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $select_order_status_delivered = $conn->prepare("SELECT id FROM orders where order_status = ? GROUP BY id");
-        $select_order_status_delivered->execute(['delivered']);
+        $select_order_status_delivered = $conn->prepare("SELECT id FROM orders WHERE order_status = 'delivered' GROUP BY id");
+        $select_order_status_delivered->execute();
         $number_of_order_status_delivered = $select_order_status_delivered->rowCount()
         ?>
         <h3><?= $number_of_order_status_delivered; ?></h3>
@@ -84,8 +95,8 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $select_payment_status_pendings = $conn->prepare("SELECT id FROM orders where payment_status = ? GROUP BY id");
-        $select_payment_status_pendings->execute(['pending']);
+        $select_payment_status_pendings = $conn->prepare("SELECT id FROM orders WHERE payment_status = 'pending' GROUP BY id");
+        $select_payment_status_pendings->execute();
         $number_of_payment_status_pendings = $select_payment_status_pendings->rowCount()
         ?>
         <h3><?= $number_of_payment_status_pendings; ?></h3>
@@ -95,8 +106,8 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $select_payment_status_completed = $conn->prepare("SELECT id FROM orders where payment_status = ? GROUP BY id");
-        $select_payment_status_completed->execute(['completed']);
+        $select_payment_status_completed = $conn->prepare("SELECT id FROM orders WHERE payment_status = 'completed' GROUP BY id");
+        $select_payment_status_completed->execute();
         $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
         ?>
         <h3><?= $number_of_payment_status_completed; ?></h3>
