@@ -14,9 +14,10 @@ include 'components/wishlist_cart.php';
 
 // Handle filter submissions
 $filter_price = isset($_POST['price']) ? $_POST['price'] : '';
-$filter_brand = isset($_POST['brand']) ? $_POST['brand'] : '';
-$filter_ram = isset($_POST['ram']) ? $_POST['ram'] : '';
-$filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
+$filter_brand = isset($_POST['brand']) ? strtoupper($_POST['brand']) : '';
+$filter_ram = isset($_POST['ram']) ? strtoupper($_POST['ram']) : '';
+$filter_storage = isset($_POST['storage']) ? strtoupper($_POST['storage']) : '';
+$search_query = isset($_GET['search']) ? $_GET['search'] : '';
 
 ?>
 
@@ -36,6 +37,31 @@ $filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
 
   <link rel="stylesheet" href="css/user_style.css">
 
+  <style>
+    /* Add your custom styles for real-time search here */
+    #search-results {
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 5px;
+      position: absolute;
+      width: 100%;
+      background-color: #fff;
+    }
+
+    #search-results a {
+      display: block;
+      padding: 5px;
+      text-decoration: none;
+      color: #333;
+      transition: background-color 0.3s;
+    }
+
+    #search-results a:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -45,6 +71,13 @@ $filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
   <section class="products">
 
     <h1 class="heading">latest products</h1>
+
+    <!-- Search bar -->
+    <form method="get" class="search-bar">
+      <label for="search">Search:</label>
+      <input type="text" id="search" name="search" placeholder="Enter product name" value="<?= $search_query ?>">
+      <button type="submit">Search</button>
+    </form>
 
     <!-- Filter options -->
     <form method="post" class="filter-options">
@@ -70,6 +103,7 @@ $filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
         <option value="6GB" <?= ($filter_ram == '6GB') ? 'selected' : '' ?>>6GB</option>
         <option value="8GB" <?= ($filter_ram == '8GB') ? 'selected' : '' ?>>8GB</option>
         <option value="12GB" <?= ($filter_ram == '12GB') ? 'selected' : '' ?>>12GB</option>
+        <option value="16GB" <?= ($filter_ram == '16GB') ? 'selected' : '' ?>>16GB</option>
       </select>
 
       <label for="storage">Filter by Storage:</label>
@@ -88,7 +122,7 @@ $filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
 
     <div class="box-container">
       <?php
-      // Adjust your SQL query based on filter values
+      // Adjust your SQL query based on filter values and search query
       $sql = "SELECT * FROM `products` WHERE 1 ";
       if (!empty($filter_price)) {
         $sql .= " AND `price` <= :price";
@@ -101,6 +135,9 @@ $filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
       }
       if (!empty($filter_storage)) {
         $sql .= " AND `storage` = :storage";
+      }
+      if (!empty($search_query)) {
+        $sql .= " AND `name` LIKE :search_query";
       }
 
       $select_products = $conn->prepare($sql);
@@ -116,6 +153,10 @@ $filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
       }
       if (!empty($filter_storage)) {
         $select_products->bindParam(':storage', $filter_storage, PDO::PARAM_STR);
+      }
+      if (!empty($search_query)) {
+        $search_query = '%' . $search_query . '%';
+        $select_products->bindParam(':search_query', $search_query, PDO::PARAM_STR);
       }
 
       $select_products->execute();
@@ -154,6 +195,8 @@ $filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
+
+  <script src="js/user_search.js"></script>
 </body>
 
 </html>
