@@ -52,7 +52,7 @@ if (isset($_POST['send'])) {
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="contact">
+  <section class="contact" style="min-height: 100%;">
 
     <h1 class="heading">Placed Services</h1>
 

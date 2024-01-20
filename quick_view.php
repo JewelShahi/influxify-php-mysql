@@ -67,7 +67,7 @@ include 'components/wishlist_cart.php';
               <div class="name">Storage: <?= $fetch_product['storage']; ?></div>
               <div class="name">RAM: <?= $fetch_product['ram']; ?></div>
               <div class="name">Camera count: <?= $fetch_product['camera_count']; ?></div>
-              <div class="name">Camera resolution<?= $fetch_product['camera_resolution']; ?></div>
+              <div class="name">Camera resolution: <?= $fetch_product['camera_resolution']; ?></div>
               <div class="name">Size(display): <?= $fetch_product['size']; ?></div>
               <div class="name">Battery: <?= $fetch_product['battery']; ?></div>
               <div class="name">Color: <?= $fetch_product['color']; ?></div>

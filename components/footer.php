@@ -18,11 +18,15 @@
     </div>
 
     <div class="box">
-      <h3>service us</h3>
-      <a href="tel:1234567890"><i class="fas fa-phone"></i> +8775643461</a>
-      <a href="mailto:shaikh@gmail.com"><i class="fas fa-envelope"></i> joeimportant1020@gmail.com</a>
-      <a href="https://www.google.com/myplace"><i class="fas fa-map-marker-alt"></i> Sofia, Bulgaria - 1000</a>
+      <h3>Contact us</h3>
+      <a href="#"><i class="fas fa-phone"></i> +359 877564341</a>
+      <a href="mailto:joeimportant1020@gmail.com"><i class="fas fa-envelope"></i> joeimportant1020@gmail.com</a>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Sofia, Bulgaria - 1000</a>
     </div>
   </section>
-  <div>&copy; copyright @ <?= date('Y'); ?> by <span>mr. web designer</span> | all rights reserved!</div>
+  <div class="copyright">
+    <p>&copy; <?= date('Y'); ?> Influxify Technologies Inc. All rights reserved. | Trademarks are the property of their respective owners. </p>
+    <p>Unauthorized reproduction or distribution of this website's content is prohibited. Use for commercial purposes requires explicit written permission. </p>
+    <p>By accessing this website, you agree to comply with these terms and conditions. Influxify Technologies Inc. reserves the right to modify these terms without notice.</p>
+  </div>
 </footer>

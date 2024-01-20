@@ -1,5 +1,68 @@
+.admin-login {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: url("../images/admin-login.png") center/cover no-repeat;
+}
+
+.admin-login .admin-login-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(121, 211, 130, 0.4);
+  backdrop-filter: blur(10px);
+  margin: 0;
+}
+
+.admin-login .admin-login-bg .admin-login-form {
+  background-color: rgba(50, 50, 50, 0.8);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid rgba(70, 70, 70, 0.6);
+  box-shadow: 0 0 25px rgb(39, 39, 40);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 50rem;
+  color: var(--white);
+}
+
+.admin-login .admin-login-bg .admin-login-form h3 {
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
+
+.admin-login .admin-login-bg .admin-login-form p {
+  font-size: 1.8rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.admin-login .admin-login-bg .admin-login-form span {
+  color: rgb(96, 162, 255);
+}
+
+.admin-login .admin-login-bg .admin-login-form .box {
+  margin: 1rem 0;
+  background-color: var(--light);
+  padding: 1.4rem;
+  color: var(--black);
+  width: 100%;
+}
+
+/*---------------------------------------------------*/
 .form-container {
-  min-height: 100vh;
+  min-height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

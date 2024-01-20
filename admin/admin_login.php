@@ -4,7 +4,7 @@ session_start();
 if (isset($_POST['submit'])) {
   $email = $_POST['email'];
   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  
+
   $pass = sha1($_POST['pass']);
   $pass = filter_var($pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -51,15 +51,16 @@ if (isset($_POST['submit'])) {
   }
   ?>
 
-  <section class="form-container">
-
-    <form action="" method="post">
-      <h3>Log In</h3>
-      <p>Email = <span>admin@admin.com</span> and Password = <span>admin</span></p>
-      <input type="email" name="email" required placeholder="Enter your email" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="Log In" class="btn" name="submit">
-    </form>
+  <section class="admin-login">
+    <div class="admin-login-bg">
+      <form action="" method="post" class="admin-login-form">
+        <h3>Admin Log In</h3>
+        <p>Email = <span>admin@admin.com</span> and Password = <span>admin</span></p>
+        <input type="email" name="email" required placeholder="Enter your email" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="submit" value="Log In" class="btn" name="submit">
+      </form>
+    </div>
 
   </section>
 

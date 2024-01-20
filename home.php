@@ -129,14 +129,15 @@ include 'components/wishlist_cart.php';
 
 	<section class="home-products">
 
-		<h1 class="heading">Latest products</h1>
+		<h1 class="heading">Recently added to our collection</h1>
 
 		<div class="swiper products-slider">
 
 			<div class="swiper-wrapper">
 
 				<?php
-				$select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6");
+				$select_products = $conn->prepare("SELECT * FROM `products` ORDER BY id DESC LIMIT 6;
+				");
 				$select_products->execute();
 				if ($select_products->rowCount() > 0) {
 					while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
