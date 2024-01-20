@@ -33,13 +33,34 @@ if (isset($_POST['order'])) {
 
   if ($check_cart->rowCount() > 0) {
 
-    $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?)");
-    $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price]);
+    // Increment the order
+    $get_last_order_id = $conn->query("SELECT MAX(id) AS last_order_id FROM `orders`")->fetch();
+    $order_id = ($get_last_order_id['last_order_id'] !== null) ? $get_last_order_id['last_order_id'] + 1 : 1;
 
-    $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
-    $delete_cart->execute([$user_id]);
+    try {
 
-    $message[] = 'Order placed successfully!';
+      $get_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+      $get_cart_items->execute([$user_id]);
+
+      while ($cart_item = $get_cart_items->fetch()) {
+
+        $product_total_price = $cart_item['price'] * $cart_item['quantity'];
+
+        // Insert each product along with overall order details into the orders table
+        $insert_order_item = $conn->prepare("INSERT INTO `orders`(
+          id, user_id, pid, qty, name, number, email, method, address, total_price, payment_status, order_status
+        ) VALUES(?,?,?,?,?,?,?,?,?,?,'pending', 'processing')");
+        $insert_order_item->execute([$order_id, $user_id, $cart_item['pid'], $cart_item['quantity'], $name, $number, $email, $method, $address, $product_total_price]);
+      }
+
+      // Delete items from the cart
+      $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
+      $delete_cart->execute([$user_id]);
+
+      $message[] = 'Order placed successfully!';
+    } catch (Exception $e) {
+      $message[] = 'Error placing order. Please try again.';
+    }
   } else {
     $message[] = 'Your cart is empty';
   }

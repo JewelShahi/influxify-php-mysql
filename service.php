@@ -58,7 +58,7 @@ if (isset($_POST['send'])) {
 
     <?php
     if ($user_id == '') {
-      echo '<p class="empty">Please Log In to see your orders</p>';
+      echo '<p class="empty">Please Log In add or see service(s).</p>';
     } else {
     ?>
       <form action="" method="post">
@@ -88,7 +88,7 @@ if (isset($_POST['send'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">No placed services yet.</p>';
+          echo '<p class="empty">No placed service(s) yet.</p>';
         }
         ?>
       </div>
