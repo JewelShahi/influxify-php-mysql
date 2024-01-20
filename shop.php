@@ -12,6 +12,12 @@ if (isset($_SESSION['user_id'])) {
 
 include 'components/wishlist_cart.php';
 
+// Handle filter submissions
+$filter_price = isset($_POST['price']) ? $_POST['price'] : '';
+$filter_brand = isset($_POST['brand']) ? $_POST['brand'] : '';
+$filter_ram = isset($_POST['ram']) ? $_POST['ram'] : '';
+$filter_storage = isset($_POST['storage']) ? $_POST['storage'] : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -40,11 +46,80 @@ include 'components/wishlist_cart.php';
 
     <h1 class="heading">latest products</h1>
 
-    <div class="box-container">
+    <!-- Filter options -->
+    <form method="post" class="filter-options">
+      <label for="price">Filter by Price:</label>
+      <input type="text" id="price" name="price" placeholder="Enter Price" value="<?= $filter_price ?>">
 
+      <label for="brand">Filter by Brand:</label>
+      <select id="brand" name="brand">
+        <option value="" <?= ($filter_brand == '') ? 'selected' : '' ?>>-- All Brands --</option>
+        <option value="Samsung" <?= ($filter_brand == 'Samsung') ? 'selected' : '' ?>>Samsung</option>
+        <option value="Apple" <?= ($filter_brand == 'Apple') ? 'selected' : '' ?>>Apple</option>
+        <option value="Google" <?= ($filter_brand == 'Google') ? 'selected' : '' ?>>Google</option>
+        <option value="OnePlus" <?= ($filter_brand == 'OnePlus') ? 'selected' : '' ?>>OnePlus</option>
+        <option value="Lenovo" <?= ($filter_brand == 'Lenovo') ? 'selected' : '' ?>>Lenovo</option>
+        <option value="Xiaomi" <?= ($filter_brand == 'Xiaomi') ? 'selected' : '' ?>>Xiaomi</option>
+      </select>
+
+      <label for="ram">Filter by RAM:</label>
+      <select id="ram" name="ram">
+        <option value="" <?= ($filter_ram == '') ? 'selected' : '' ?>>-- All RAM --</option>
+        <option value="2GB" <?= ($filter_ram == '2GB') ? 'selected' : '' ?>>2GB</option>
+        <option value="4GB" <?= ($filter_ram == '4GB') ? 'selected' : '' ?>>4GB</option>
+        <option value="6GB" <?= ($filter_ram == '6GB') ? 'selected' : '' ?>>6GB</option>
+        <option value="8GB" <?= ($filter_ram == '8GB') ? 'selected' : '' ?>>8GB</option>
+        <option value="12GB" <?= ($filter_ram == '12GB') ? 'selected' : '' ?>>12GB</option>
+      </select>
+
+      <label for="storage">Filter by Storage:</label>
+      <select id="storage" name="storage">
+        <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- All Storage --</option>
+        <option value="32GB" <?= ($filter_storage == '32GB') ? 'selected' : '' ?>>32GB</option>
+        <option value="64GB" <?= ($filter_storage == '64GB') ? 'selected' : '' ?>>64GB</option>
+        <option value="128GB" <?= ($filter_storage == '128GB') ? 'selected' : '' ?>>128GB</option>
+        <option value="256GB" <?= ($filter_storage == '256GB') ? 'selected' : '' ?>>256GB</option>
+        <option value="512GB" <?= ($filter_storage == '512GB') ? 'selected' : '' ?>>512GB</option>
+        <option value="1TB" <?= ($filter_storage == '1TB') ? 'selected' : '' ?>>1TB</option>
+      </select>
+
+      <button type="submit">Apply Filters</button>
+    </form>
+
+    <div class="box-container">
       <?php
-      $select_products = $conn->prepare("SELECT * FROM `products`");
+      // Adjust your SQL query based on filter values
+      $sql = "SELECT * FROM `products` WHERE 1 ";
+      if (!empty($filter_price)) {
+        $sql .= " AND `price` <= :price";
+      }
+      if (!empty($filter_brand)) {
+        $sql .= " AND `brand` = :brand";
+      }
+      if (!empty($filter_ram)) {
+        $sql .= " AND `ram` = :ram";
+      }
+      if (!empty($filter_storage)) {
+        $sql .= " AND `storage` = :storage";
+      }
+
+      $select_products = $conn->prepare($sql);
+
+      if (!empty($filter_price)) {
+        $select_products->bindParam(':price', $filter_price, PDO::PARAM_INT);
+      }
+      if (!empty($filter_brand)) {
+        $select_products->bindParam(':brand', $filter_brand, PDO::PARAM_STR);
+      }
+      if (!empty($filter_ram)) {
+        $select_products->bindParam(':ram', $filter_ram, PDO::PARAM_STR);
+      }
+      if (!empty($filter_storage)) {
+        $select_products->bindParam(':storage', $filter_storage, PDO::PARAM_STR);
+      }
+
       $select_products->execute();
+
       if ($select_products->rowCount() > 0) {
         while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
       ?>
@@ -68,12 +143,10 @@ include 'components/wishlist_cart.php';
       <?php
         }
       } else {
-        echo '<p class="Empty">No products found!</p>';
+        echo '<div class="Empty">No products found!</div>';
       }
       ?>
-
     </div>
-
   </section>
 
   <?php include 'components/footer.php'; ?>

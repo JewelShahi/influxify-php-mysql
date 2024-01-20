@@ -1,10 +1,12 @@
 <?php
-include '../components/connect.php';
 session_start();
+include '../components/connect.php';
+
 $admin_id = $_SESSION['admin_id'];
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 };
+
 if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
   $delete_service = $conn->prepare("DELETE FROM `services` WHERE id = ?");
@@ -52,7 +54,7 @@ if (isset($_GET['delete'])) {
             <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
             <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
             <p> Problem : <span><?= $fetch_service['description']; ?></span></p>
-            <a href="services.php??delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn">Delete</a>
+            <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn">Delete</a>
           </div>
       <?php
         }

@@ -64,18 +64,42 @@ if (isset($_GET['delete'])) {
     <div class="box-container">
 
       <?php
-      $select_orders = $conn->prepare("SELECT * FROM `orders`");
+      $select_orders = $conn->prepare("
+          SELECT
+              o.id,
+              o.name,
+              o.number,
+              o.email,
+              o.method,
+              o.address,
+              o.payment_status,
+              o.order_status,
+              o.placed_on,
+              GROUP_CONCAT(CONCAT(p.name, ' (x', o.qty, ')') ORDER BY o.pid SEPARATOR ', ') AS ordered_products,
+              SUM(o.total_price) AS total_product_price
+          FROM
+              orders o
+          JOIN
+              products p ON o.pid = p.id
+          GROUP BY
+              o.id
+          ORDER BY
+              o.id ASC;
+      ");
+
       $select_orders->execute();
+
       if ($select_orders->rowCount() > 0) {
         while ($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)) {
       ?>
           <div class="box">
+            <p> Order ID : <span><?= $fetch_orders['id']; ?></span> </p>
             <p> Placed on : <span><?= $fetch_orders['placed_on']; ?></span> </p>
             <p> Name : <span><?= $fetch_orders['name']; ?></span> </p>
             <p> Phone number : <span><?= $fetch_orders['number']; ?></span> </p>
             <p> Address : <span><?= $fetch_orders['address']; ?></span> </p>
-            <p> Total products : <span><?= $fetch_orders['total_products']; ?></span> </p>
-            <p> Total price : <span>$<?= $fetch_orders['total_price']; ?>/-</span> </p>
+            <p> Total products : <span><?= $fetch_orders['ordered_products']; ?></span> </p>
+            <p> Total price : <span>$<?= $fetch_orders['total_product_price']; ?>/-</span> </p>
             <p> Payment method : <span><?= $fetch_orders['method']; ?></span> </p>
 
             <form action="" method="post">

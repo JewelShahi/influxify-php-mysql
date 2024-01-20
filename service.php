@@ -44,7 +44,6 @@ if (isset($_POST['send'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
-
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 
@@ -70,6 +69,7 @@ if (isset($_POST['send'])) {
         <textarea name="description" class="box" placeholder="Enter description" cols="30" rows="10"></textarea>
         <input type="submit" value="Add service ticket" name="send" class="btn">
       </form>
+
       <div class="box-container">
         <?php
         $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ?");
