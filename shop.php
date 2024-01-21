@@ -82,7 +82,11 @@ $search_query = isset($_GET['search']) ? $_GET['search'] : '';
     <!-- Filter options -->
     <form method="post" class="filter-options">
       <label for="price">Filter by Price:</label>
-      <input type="text" id="price" name="price" placeholder="Enter Price" value="<?= $filter_price ?>">
+      <select id="price" name="price_order">
+        <option value="asc" <?= ($filter_price == 'asc') ? 'selected' : '' ?>>Ascending</option>
+        <option value="desc" <?= ($filter_price == 'desc') ? 'selected' : '' ?>>Descending</option>
+      </select>
+      <!-- <input type="text" id="price" name="price" placeholder="Enter Price" value="<?= $filter_price ?>"> -->
 
       <label for="brand">Filter by Brand:</label>
       <select id="brand" name="brand">
