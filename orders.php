@@ -45,28 +45,29 @@ if (isset($_SESSION['user_id'])) {
         echo '<p class="empty">Please LogIn to see your order(s)</p>';
       } else {
         $select_orders = $conn->prepare("
-          SELECT
-            o.id,
-            o.name,
-            o.number,
-            o.email,
-            o.method,
-            o.address,
-            o.payment_status,
-            o.order_status,
-            o.placed_on,
-            GROUP_CONCAT(CONCAT(p.name, ' (x', o.qty, ')') ORDER BY o.pid SEPARATOR ', ') AS ordered_products,
-            SUM(o.total_price) AS total_product_price
-          FROM
-            orders o
-          JOIN
-            products p ON o.pid = p.id
-          WHERE
-            o.user_id = ?
-          GROUP BY
-            o.id
-          ORDER BY
-            o.placed_on DESC;
+        SELECT
+        o.id,
+        o.name,
+        o.number,
+        o.email,
+        o.method,
+        o.address,
+        o.payment_status,
+        o.order_status,
+        o.placed_on,
+        SUM(o.price * o.qty) AS total_product_price,
+        GROUP_CONCAT(CONCAT(p.name, ' (x', o.qty, ')') ORDER BY o.pid SEPARATOR ', ') AS ordered_products
+    FROM
+        orders o
+    JOIN
+        products p ON o.pid = p.id
+    WHERE
+        o.user_id = ?
+    GROUP BY
+        o.id
+    ORDER BY
+        o.placed_on DESC;
+
         ");
         $select_orders->execute([$user_id]);
 
@@ -74,6 +75,7 @@ if (isset($_SESSION['user_id'])) {
           while ($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)) {
       ?>
             <div class="box">
+              <p>Order ID : <span><?= $fetch_orders['id']; ?></span></p>
               <p>Placed on : <span><?= $fetch_orders['placed_on']; ?></span></p>
               <p>Name : <span><?= $fetch_orders['name']; ?></span></p>
               <p>E-mail : <span><?= $fetch_orders['email']; ?></span></p>

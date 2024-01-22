@@ -40,7 +40,7 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $select_orders = $conn->prepare("SELECT SUM(total_price) AS total_income FROM orders WHERE payment_status = 'completed'");
+        $select_orders = $conn->prepare("SELECT SUM(price * qty) AS total_income FROM orders WHERE payment_status = 'completed'");
         $select_orders->execute();
         $income = $select_orders->fetch(PDO::FETCH_ASSOC);
         ?>

@@ -44,13 +44,13 @@ if (isset($_POST['order'])) {
 
       while ($cart_item = $get_cart_items->fetch()) {
 
-        $product_total_price = $cart_item['price'] * $cart_item['quantity'];
+        $products_price = $cart_item['price'];
 
         // Insert each product along with overall order details into the orders table
         $insert_order_item = $conn->prepare("INSERT INTO `orders`(
-          id, user_id, pid, qty, name, number, email, method, address, total_price, payment_status, order_status
+          id, user_id, pid, qty, name, number, email, method, address, price, payment_status, order_status
         ) VALUES(?,?,?,?,?,?,?,?,?,?,'pending', 'processing')");
-        $insert_order_item->execute([$order_id, $user_id, $cart_item['pid'], $cart_item['quantity'], $name, $number, $email, $method, $address, $product_total_price]);
+        $insert_order_item->execute([$order_id, $user_id, $cart_item['pid'], $cart_item['quantity'], $name, $number, $email, $method, $address, $products_price]);
       }
 
       // Delete items from the cart
