@@ -1,263 +1,45 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap");
-
-:root {
-  /* --main-color: #2980b9; */
-  --main-color: #27853e;
-  --cyan-blue: #0c85b9;
-  --red: #e74c3c;
-  --black: #333;
-  --white: #fff;
-  --light-color: #666;
-  --light-bg: #eee;
-  --border: 0.2rem solid var(--black);
-  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-}
-
-* {
-  font-family: "Nunito", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-  text-decoration: none;
-  transition: 200ms !important;
-}
-
-::-webkit-scrollbar {
-  height: 0.5rem;
-  width: 1rem;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--main-color);
-}
-
-html {
-  font-size: 62.5%;
-  overflow-x: hidden;
-}
-
-body {
-  background-color: var(--light-bg);
-}
-
-section {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-span {
-  font-weight: 900;
-}
-
-.logo {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-}
-
-.logo a {
-  color: var(--black);
-  font-weight: 700;
-  text-decoration: none !important;
-}
-
-.heading {
-  font-size: 4rem;
-  color: var(--black);
-  margin-bottom: 2rem;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.btn,
-.delete-btn,
-.option-btn {
-  display: block;
-  width: 100%;
-  margin-top: 1rem;
-  border-radius: 0.5rem;
-  padding: 1rem 3rem;
-  font-size: 1.7rem;
-  text-transform: capitalize;
-  color: var(--white);
-  cursor: pointer;
-  text-align: center;
-}
-
-.btn:hover,
-.delete-btn:hover,
-.option-btn:hover {
-  background-color: var(--black);
-}
-
-.btn {
-  background-color: var(--main-color);
-}
-
-.option-btn {
-  background-color: var(--cyan-blue);
-}
-
-.delete-btn {
-  background-color: var(--red);
-}
-
-.flex-btn {
-  display: flex;
-  gap: 1rem;
-}
-
-.message {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  margin: 0 auto;
-  background-color: lightsteelblue;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  z-index: 1100;
-}
-
-.message span {
-  font-size: 2.3rem;
-  color: var(--black);
-}
-
-.message i {
-  cursor: pointer;
-  color: var(--red);
-  font-size: 2.5rem;
-}
-
-.message i:hover {
-  color: var(--black);
-}
-
-.empty {
-  padding: 1.5rem;
-  background-color: var(--white);
-  border: var(--border);
-  box-shadow: var(--box-shadow);
-  text-align: center;
-  color: var(--red);
-  border-radius: 0.5rem;
-  font-size: 2rem;
-  text-transform: capitalize;
-}
-
-.disabled {
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.5;
-}
-
-@keyframes fadeIn {
-  0% {
-    transform: translateY(1rem);
-  }
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--white);
-  box-shadow: var(--box-shadow);
-  z-index: 1000;
-}
-
-.header .flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/******** nav special icons *******/
+.header .flex .icons a.icon-link {
   position: relative;
-}
-
-.header .flex .logo {
-  font-size: 2.5rem;
-  color: var(--black);
-}
-
-.header .flex .logo span {
-  color: var(--main-color);
-}
-
-.header .flex .navbar a {
-  margin: 0 1rem;
-  font-size: 2rem;
-  color: var(--black);
-}
-
-.header .flex .navbar a:hover {
-  color: var(--main-color);
-  text-decoration: underline;
-}
-
-.header .flex .icons > * {
-  margin-left: 1rem;
-  font-size: 2.5rem;
-  cursor: pointer;
-  color: var(--black);
-}
-
-.header .flex .icons > *:hover {
-  color: var(--main-color);
-}
-
-.header .flex .icons a span {
-  font-size: 2rem;
-}
-
-.header .flex .profile {
-  position: absolute;
-  top: 120%;
-  right: 2rem;
-  background-color: var(--white);
-  border-radius: 0.5rem;
-  box-shadow: var(--box-shadow);
-  border: var(--border);
-  padding: 2rem;
-  width: 30rem;
-  padding-top: 1.2rem;
-  display: none;
-  animation: fadeIn 0.2s linear;
-}
-
-.header .flex .profile.active {
   display: inline-block;
+  margin-right: 10px;
 }
 
-.header .flex .profile p {
-  text-align: center;
-  color: var(--black);
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.header .flex .icons sup {
+  position: absolute;
+  right: -7px;
+  top: -4px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--cyan-blue);
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 5px;
 }
+/*-------------------------*/
 
-#menu-btn {
-  display: none;
+.home-bg {
+  background: url(../images/podium.png) no-repeat;
+  background-size: cover;
+  background-position: left center; /* Adjusted to position the background to the right */
+  height: 100vh;
 }
 
 .home-bg {
-  background: url(../images/home-bg.png) no-repeat;
-  background-size: cover;
-  background-position: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-bg .home .slide {
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -267,22 +49,30 @@ span {
 }
 
 .home-bg .home .slide .image {
-  flex: 1 1 40rem;
+  flex: 1 1 50rem;
+  display: flex;
+  justify-content: center;
 }
 
 .home-bg .home .slide .image img {
   height: 40rem;
-  width: 100%;
+  border-radius: var(--border-radius);
   object-fit: contain;
+  object-position: center;
 }
 
 .home-bg .home .slide .content {
-  flex: 1 1 40rem;
+  flex: 1 1 30rem;
 }
 
-.home-bg .home .slide .content span {
+.home-bg .home .slide .content p {
+  width: 70%;
+  height: 120px;
+  display: flex;
   font-size: 2rem;
+  padding-top: 8px;
   color: var(--white);
+  overflow-y: auto;
 }
 
 .home-bg .home .slide .content h3 {
@@ -293,12 +83,32 @@ span {
 }
 
 .home-bg .home .slide .content .btn {
-  display: inline-block;
+  display: inline-flex;
+  font-size: 17px;
+  align-items: center;
   width: auto;
+  text-align: center;
+  transform: scale(1);
+}
+
+.home-bg .home .slide .content .btn i {
+  font-size: 18px;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in;
+}
+
+.home-bg .home .slide .content .btn:hover i {
+  transform: translateX(15px);
+  transition: transform 0.3s ease-out;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: var(--main-color);
+  background-color: var(--primary);
+}
+
+.swiper-container .swiper-button-next,
+.swiper-container .swiper-button-prev {
+  color: white;
 }
 
 .category .slide {
@@ -604,6 +414,141 @@ span {
   margin-right: auto;
 }
 
+/******** user login ********/
+.user-login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: url(../images/login-bg.png) center/cover no-repeat;
+  padding: 0;
+}
+
+.user-login div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(126, 212, 133, 0.4);
+  backdrop-filter: blur(10px);
+  margin: 0;
+}
+
+.user-login form {
+  position: relative;
+  top: -5%;
+  background-color: rgba(50, 50, 50, 0.8);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid rgba(70, 70, 70, 0.6);
+  box-shadow: 0 0 25px rgb(39, 39, 40);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 70rem;
+  color: var(--white);
+}
+
+.user-login form h3 {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.user-login form p {
+  font-size: 2rem;
+  color: var(--light-color);
+  margin: 1.5rem 0;
+}
+
+.user-login form .box {
+  margin: 1rem 0;
+  background-color: var(--light);
+  padding: 1.4rem;
+  color: var(--black);
+  width: 100%;
+}
+/***********/
+
+/******** user register ********/
+.user-register {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: url(../images/register-bg.png) center/cover no-repeat;
+  padding: 0;
+}
+
+.user-register div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(169, 255, 177, 0.4);
+  backdrop-filter: blur(10px);
+  margin: 0;
+}
+
+.user-register form {
+  position: relative;
+  top: -5%;
+  background-color: rgba(50, 50, 50, 0.8);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid rgba(70, 70, 70, 0.6);
+  box-shadow: 0 0 25px rgb(39, 39, 40);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 70rem;
+  min-height: 50rem;
+  color: var(--white);
+}
+
+.user-register form h3 {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.user-register form p {
+  font-size: 2rem;
+  color: var(--light-color);
+  margin: 1.5rem 0;
+}
+
+.user-register form .box {
+  margin: 1rem 0;
+  padding: 1.4rem;
+  width: 100%;
+}
+
+.user-register form .passwords {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  background: 0;
+  width: 100%;
+}
+/***********/
+
+.form-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-container form {
   background-color: var(--white);
   padding: 2rem;
@@ -629,7 +574,7 @@ span {
 
 .form-container form .box {
   margin: 1rem 0;
-  background-color: var(--light-bg);
+  background-color: var(--light);
   padding: 1.4rem;
   font-size: 1.8rem;
   color: var(--black);
@@ -701,7 +646,7 @@ span {
 .reviews .slide .stars {
   display: inline-block;
   margin-bottom: 1rem;
-  background-color: var(--light-bg);
+  background-color: var(--light);
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
 }
@@ -738,7 +683,7 @@ span {
 .contact form .box {
   margin: 1rem 0;
   width: 100%;
-  background-color: var(--light-bg);
+  background-color: var(--light);
   padding: 1.4rem;
   font-size: 1.8rem;
   color: var(--black);
@@ -770,7 +715,7 @@ span {
   font-size: 2.5rem;
   height: 5.5rem;
   line-height: 5.5rem;
-  background-color: var(--main-color);
+  background-color: var(--primary);
   cursor: pointer;
   color: var(--white);
   border-radius: 0.5rem;
@@ -918,7 +863,7 @@ span {
   color: var(--black);
   padding: 1.2rem 1.4rem;
   margin: 1rem 0;
-  background-color: var(--light-bg);
+  background-color: var(--light);
 }
 
 .checkout-orders form .flex .inputBox span {
@@ -950,12 +895,15 @@ span {
 }
 
 .orders .box-container .box p span {
-  color: var(--main-color);
+  color: var(--primary);
 }
 
 .footer {
-  background-color: var(--white);
-  /* padding-bottom: 7rem; */
+  background-color: #30314a;
+  color: var(--white);
+  position: relative;
+  bottom: 0;
+  left: 0;
 }
 
 .footer .grid {
@@ -967,7 +915,7 @@ span {
 
 .footer .grid .box h3 {
   font-size: 2rem;
-  color: var(--black);
+  color: var(--white);
   margin-bottom: 2rem;
   text-transform: capitalize;
 }
@@ -981,28 +929,25 @@ span {
 
 .footer .grid .box a i {
   padding-right: 1rem;
-  color: var(--main-color);
+  color: var(--primary);
   transition: 0.2s linear;
 }
 
 .footer .grid .box a:hover {
-  color: var(--main-color);
+  color: var(--primary);
 }
 
 .footer .grid .box a:hover i {
   padding-right: 2rem;
 }
 
-.footer .credit {
-  text-align: center;
-  padding: 2.5rem 2rem;
-  border-top: var(--border);
-  font-size: 2rem;
-  color: var(--black);
-}
-
-.footer .credit span {
-  color: var(--main-color);
+.footer .copyright {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+  color: var(--white);
 }
 
 @media (max-width: 991px) {
@@ -1041,6 +986,15 @@ span {
     text-align: center;
   }
 
+  .home-bg .home .slide .content p {
+    padding: 0 60px;
+    padding-top: 15px;
+    width: 100%;
+    height: 100px;
+    justify-content: center;
+    align-content: center;
+  }
+
   .home-bg .home .slide .content h3 {
     font-size: 3rem;
   }
@@ -1066,5 +1020,31 @@ span {
 
   .checkout-orders form .flex .inputBox {
     width: 100%;
+  }
+
+  .home-bg .home .slide .content {
+    height: 100%;
+  }
+
+  .home-bg .home .slide .content p {
+    padding: 0 10px;
+    padding-top: 25px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 365px) {
+  .header .flex {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .header .flex .profile {
+    width: 100%;
+    top: 100%;
+    right: 0;
   }
 }
