@@ -7,17 +7,53 @@ if (!isset($admin_id)) {
 }
 if (isset($_POST['update'])) {
   $pid = $_POST['pid'];
+
   $name = $_POST['name'];
   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $price = $_POST['price'];
   $price = filter_var($price, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $details = $_POST['details'];
   $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? WHERE id = ?");
-  $update_product->execute([$name, $price, $details, $pid]);
+  $brand = $_POST['brand'];
+  $brand = filter_var($brand, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $message[] = 'Product Updated Successfully!';
+  $released = $_POST['released'];
+  $released = filter_var($released, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $qty = $_POST['qty'];
+  $qty = filter_var($qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $cpu = $_POST['cpu'];
+  $cpu = filter_var($cpu, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $storage = $_POST['storage'];
+  $storage = filter_var($storage, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $ram = $_POST['ram'];
+  $ram = filter_var($ram, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $camera_count = $_POST['camera_count'];
+  $camera_count = filter_var($camera_count, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $camera_resolution = $_POST['camera_resolution'];
+  $camera_resolution = filter_var($camera_resolution, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $size = $_POST['size'];
+  $size = filter_var($size, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $battery = $_POST['battery'];
+  $battery = filter_var($battery, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $color = $_POST['color'];
+  $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
+  $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
+
+  $message[] = 'Product updated successfully!';
 
   $old_image_01 = $_POST['old_image_01'];
   $image_01 = $_FILES['image_01']['name'];
@@ -110,28 +146,85 @@ if (isset($_POST['update'])) {
           <input type="hidden" name="old_image_01" value="<?= $fetch_products['image_01']; ?>">
           <input type="hidden" name="old_image_02" value="<?= $fetch_products['image_02']; ?>">
           <input type="hidden" name="old_image_03" value="<?= $fetch_products['image_03']; ?>">
+
           <div class="image-container">
             <div class="main-image">
               <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="img-1">
             </div>
+
             <div class="sub-image">
               <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="new-img-1">
               <img src="../uploaded_img/products/<?= $fetch_products['image_02']; ?>" alt="new-img-2">
               <img src="../uploaded_img/products/<?= $fetch_products['image_03']; ?>" alt="new-img-3">
             </div>
+
           </div>
-          <span>Update Name</span>
-          <input type="text" name="name" required class="box" maxlength="100" placeholder="enter product name" value="<?= $fetch_products['name']; ?>">
-          <span>Update Price</span>
-          <input type="number" name="price" required class="box" min="0.00" step="0.01" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>">
-          <span>Update Details</span>
-          <textarea name="details" class="box" required cols="30" rows="10"><?= $fetch_products['details']; ?></textarea>
+
+          <span>Update name</span>
+          <input type="text" name="name" class="box" maxlength="100" placeholder="Product name" value="<?= $fetch_products['name']; ?>" required>
+
+          <span>Update price</span>
+          <input type="number" name="price" class="box" min="0.00" step="0.01" placeholder="Product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>" required>
+
+          <span>Update details</span>
+          <textarea name="details" class="box" cols="30" rows="10" required><?= $fetch_products['details']; ?></textarea>
+
+          <span id="brandLabel">Update brand</span>
+          <select name="brand" class="box" aria-labelledby="brandLabel" required>
+            <?php
+            if (isset($fetch_products['brand'])) {
+              echo '<option selected disabled>' . $fetch_products['brand'] . '</option>';
+            }
+            ?>
+            <option value="Samsung">Samsung</option>
+            <option value="Apple">Apple</option>
+            <option value="Google">Google</option>
+            <option value="Xiaomi">Xiaomi</option>
+            <option value="OnePlus">OnePlus</option>
+            <option value="Lenovo">Lenovo</option>
+            <option value="Motorola">Motorola</option>
+            <option value="Oppo">Oppo</option>
+          </select>
+
+          <span>Update released date</span>
+          <input type="text" name="released" placeholder="Released date (00/00/0000)" pattern="^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$" class="box" value="<?= $fetch_products['released']; ?>">
+
+          <span>Update quantity</span>
+          <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" value="<?= $fetch_products['qty']; ?>" required>
+
+          <span>Update CPU</span>
+          <input type="text" name="cpu" placeholder="CPU" class="box" value="<?= $fetch_products['cpu']; ?>" required>
+
+          <span>Update storage</span>
+          <input type="text" name="storage" placeholder="Storage" class="box" value="<?= $fetch_products['storage']; ?>" required>
+
+          <span>Update RAM</span>
+          <input type="text" name="ram" placeholder="RAM" class="box" value="<?= $fetch_products['ram']; ?>" required>
+
+          <span>Update camera count</span>
+          <input type="number" name="camera_count" placeholder="Camera count" class="box" min="0" step="1" value="<?= $fetch_products['camera_count']; ?>" required>
+
+          <span>Camera resolution</span>
+          <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" value="<?= $fetch_products['camera_resolution']; ?>" required>
+
+          <span>Phone Size</span>
+          <input type="text" name="size" placeholder="Phone size" class="box" value="<?= $fetch_products['size']; ?>" required>
+
+          <span>Battery</span>
+          <input type="text" name="battery" placeholder="Battery" class="box" value="<?= $fetch_products['battery']; ?>" required>
+
+          <span>Phone color</span>
+          <input type="text" name="color" placeholder="Color" class="box" value="<?= $fetch_products['color']; ?>" required>
+
           <span>Update Image-1</span>
           <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
+
           <span>Update Image-2</span>
           <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
+
           <span>Update Image-3</span>
           <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
+
           <div class="flex-btn">
             <input type="submit" name="update" class="btn" value="update">
             <a href="products.php" class="option-btn">Go Back</a>
@@ -140,7 +233,7 @@ if (isset($_POST['update'])) {
     <?php
       }
     } else {
-      echo '<p class="empty">No Products Found!</p>';
+      echo '<p class="empty">No products found!</p>';
     }
     ?>
   </section>

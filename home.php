@@ -79,44 +79,44 @@ include 'components/wishlist_cart.php';
 
 			<div class="swiper-wrapper">
 
-				<a href="brand.php?brand=laptop" class="swiper-slide slide">
+				<a href="brand.php?brand=Samsung" class="swiper-slide slide">
 					<img src="images/brands/samsung.png" alt="samsung brand">
 					<h3>Samsung</h3>
 				</a>
 
-				<a href="brand.php?brand=tv" class="swiper-slide slide">
-					<img src="images/icon-2.png" alt="">
-					<h3>tv</h3>
+				<a href="brand.php?brand=Apple" class="swiper-slide slide">
+					<img src="images/brands/apple.png" alt="apple brand">
+					<h3>Apple</h3>
 				</a>
 
-				<a href="brand.php?brand=camera" class="swiper-slide slide">
-					<img src="images/icon-3.png" alt="">
-					<h3>camera</h3>
+				<a href="brand.php?brand=Google" class="swiper-slide slide">
+					<img src="images/brands/google.png" alt="google brand">
+					<h3>Google</h3>
 				</a>
 
-				<a href="brand.php?brand=mouse" class="swiper-slide slide">
-					<img src="images/icon-4.png" alt="">
-					<h3>mouse</h3>
+				<a href="brand.php?brand=Xiaomi" class="swiper-slide slide">
+					<img src="images/brands/xiaomi.png" alt="xiaomi brand">
+					<h3>Xiaomi</h3>
 				</a>
 
-				<a href="brand.php?brand=fridge" class="swiper-slide slide">
-					<img src="images/icon-5.png" alt="">
-					<h3>fridge</h3>
+				<a href="brand.php?brand=OnePlus" class="swiper-slide slide">
+					<img src="images/brands/oneplus.png" alt="one-plus brand">
+					<h3>OnePlus</h3>
 				</a>
 
-				<a href="brand.php?brand=washing" class="swiper-slide slide">
-					<img src="images/icon-6.png" alt="">
-					<h3>washing machine</h3>
+				<a href="brand.php?brand=Lenovo" class="swiper-slide slide">
+					<img src="images/brands/lenovo.png" alt="lenovo brand">
+					<h3>Lenovo</h3>
 				</a>
 
-				<a href="brand.php?brand=smartphone" class="swiper-slide slide">
-					<img src="images/icon-7.png" alt="">
-					<h3>smartphone</h3>
+				<a href="brand.php?brand=Motorola" class="swiper-slide slide">
+					<img src="images/brands/motorola.png" alt="motorola brand">
+					<h3>Motorola</h3>
 				</a>
 
-				<a href="brand.php?brand=watch" class="swiper-slide slide">
-					<img src="images/icon-8.png" alt="">
-					<h3>watch</h3>
+				<a href="brand.php?brand=Oppo" class="swiper-slide slide">
+					<img src="images/brands/oppo.png" alt="oppo brand">
+					<h3>Oppo</h3>
 				</a>
 
 			</div>

@@ -49,6 +49,7 @@ prevBtn.addEventListener("mouseout", () => {
 /****** Brand Swiper *******/
 let brandSwiper = new Swiper(".brand-slider", {
   loop: true,
+  effect: "slide",
   spaceBetween: 20,
   pagination: {
     el: ".swiper-pagination",
@@ -60,13 +61,19 @@ let brandSwiper = new Swiper(".brand-slider", {
   },
   breakpoints: {
     0: {
+      slidesPerView: 1,
+    },
+    450: {
       slidesPerView: 2,
     },
-    650: {
+    700: {
       slidesPerView: 3,
     },
-    768: {
+    950: {
       slidesPerView: 4,
+    },
+    1024: {
+      slidesPerView: 5,
     },
   },
 });

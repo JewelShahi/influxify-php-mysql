@@ -66,7 +66,7 @@ if (isset($_POST['add_product'])) {
   $image_size_03 = $_FILES['image_03']['size'];
   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
   $image_folder_03 = '../uploaded_img/products/' . $image_03;
-  
+
   try {
     $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_01, $image_02, $image_03]);
@@ -84,7 +84,7 @@ if (isset($_POST['add_product'])) {
     }
   } catch (PDOException $e) {
     if ($e->errorInfo[1] == 1062) {
-      $message[] = 'Product with '. $name .' already exists!';
+      $message[] = 'Product with ' . $name . ' already exists!';
     } else {
       $message[] = 'Error: ' . $e->getMessage();
     }
@@ -101,9 +101,6 @@ if (isset($_GET['delete'])) {
   $delete_product_image->execute([$delete_id]);
   $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
   $baseImagePath = '../uploaded_img/products/';
-  // unlink($baseImagePath . $fetch_delete_image['image_01']);
-  // unlink($baseImagePath . $fetch_delete_image['image_02']);
-  // unlink($baseImagePath . $fetch_delete_image['image_03']);
   if (file_exists($baseImagePath . $fetch_delete_image['image_01'])) {
     unlink($baseImagePath . $fetch_delete_image['image_01']);
   } else {
@@ -159,95 +156,98 @@ if (isset($_GET['delete'])) {
       <div class="flex">
 
         <div class="inputBox">
-          <span>Product name <span style="color: red;">*<span></span>
-              <input type="text" name="name" placeholder="Product name" class="box" required>
+          <span>Product name <span style="color: red;">*</span></span>
+          <input type="text" name="name" placeholder="Product name" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Product details <span style="color: red;">*<span></span>
-              <textarea name="details" placeholder="Product details" class="box" maxlength="500" cols="30" rows="10" required></textarea>
+          <span>Product details <span style="color: red;">*</span></span>
+          <textarea name="details" placeholder="Product details" class="box" maxlength="500" cols="30" rows="10" required></textarea>
         </div>
 
         <div class="inputBox">
           <span id="brandLabel">Product brand <span style="color: red;">*</span></span>
           <select name="brand" class="box" aria-labelledby="brandLabel" required>
+            <option value="N/A" selected disabled>Add a brand</option>
             <option value="Samsung">Samsung</option>
             <option value="Apple">Apple</option>
             <option value="Google">Google</option>
             <option value="Xiaomi">Xiaomi</option>
             <option value="OnePlus">OnePlus</option>
             <option value="Lenovo">Lenovo</option>
+            <option value="Motorola">Motorola</option>
+            <option value="Oppo">Oppo</option>
           </select>
         </div>
 
         <div class="inputBox">
-          <span>Released date <span style="color: red;">*<span></span>
-              <input type="text" name="released" placeholder="Released date (00/00/0000)" pattern="^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$" class="box" required>
+          <span>Released date <span style="color: red;">*</span></span>
+          <input type="text" name="released" placeholder="Released date (00/00/0000)" pattern="^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Product quantity <span style="color: red;">*<span></span>
-              <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1">
+          <span>Product quantity <span style="color: red;">*</span></span>
+          <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" required>
         </div>
 
         <div class="inputBox">
-          <span>CPU <span style="color: red;">*<span></span>
-              <input type="text" name="cpu" placeholder="CPU" class="box" required>
+          <span>CPU <span style="color: red;">*</span></span>
+          <input type="text" name="cpu" placeholder="CPU" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Storage <span style="color: red;">*<span></span>
-              <input type="text" name="storage" placeholder="Storage" class="box" required>
+          <span>Storage <span style="color: red;">*</span></span>
+          <input type="text" name="storage" placeholder="Storage" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>RAM <span style="color: red;">*<span></span>
-              <input type="text" name="ram" placeholder="RAM" class="box" required>
+          <span>RAM <span style="color: red;">*</span></span>
+          <input type="text" name="ram" placeholder="RAM" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Camera count <span style="color: red;">*<span></span>
-              <input type="number" name="camera_count" placeholder="Camera count" class="box" min="0" step="1">
+          <span>Camera count <span style="color: red;">*</span></span>
+          <input type="number" name="camera_count" placeholder="Camera count" class="box" min="0" step="1" required>
         </div>
 
         <div class="inputBox">
-          <span>Camera resolution <span style="color: red;">*<span></span>
-              <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" required>
+          <span>Camera resolution <span style="color: red;">*</span></span>
+          <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Size <span style="color: red;">*<span></span>
-              <input type="text" name="size" placeholder="Size" class="box" required>
+          <span>Phone Size<span style="color: red;">*</span></span>
+          <input type="text" name="size" placeholder="Phone size" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Battery <span style="color: red;">*<span></span>
-              <input type="text" name="battery" placeholder="Battery" class="box" required>
+          <span>Battery <span style="color: red;">*</span></span>
+          <input type="text" name="battery" placeholder="Battery" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Color <span style="color: red;">*<span></span>
-              <input type="text" name="color" placeholder="Color" class="box" required>
+          <span>Phone color <span style="color: red;">*</span></span>
+          <input type="text" name="color" placeholder="Color" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Product price <span style="color: red;">*<span></span>
-              <input type="number" name="price" min="0.00" step="0.01" class="box" required placeholder="Product price" onkeypress="if(this.value.length == 8) return false;">
+          <span>Product price <span style="color: red;">*</span></span>
+          <input type="number" name="price" min="0.00" step="0.01" class="box" required placeholder="Product price" onkeypress="if(this.value.length == 8) return false;">
         </div>
 
         <div class="inputBox">
-          <span>Image-1 <span style="color: red;">*<span></span>
-              <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+          <span>Image-1 <span style="color: red;">*</span></span>
+          <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Image-2 <span style="color: red;">*<span></span>
-              <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+          <span>Image-2 <span style="color: red;">*</span></span>
+          <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
 
         <div class="inputBox">
-          <span>Image-3 <span style="color: red;">*<span></span>
-              <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+          <span>Image-3 <span style="color: red;">*</span></span>
+          <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
         </div>
 
       </div>
@@ -255,7 +255,7 @@ if (isset($_GET['delete'])) {
       <input type="submit" value="Add product" class="btn" name="add_product">
     </form>
   </section>
-  
+
   <section class="show-products">
     <h1 class="heading">Added Products</h1>
     <div class="box-container">
@@ -266,9 +266,9 @@ if (isset($_GET['delete'])) {
         while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
       ?>
           <div class="box">
-            <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="">
+            <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="<?= $fetch_products['image_01']; ?>">
             <div class="name"><?= $fetch_products['name']; ?></div>
-            <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
+            <div class="price">$<span><?= $fetch_products['price']; ?></span></div>
             <div class="details"><span><?= $fetch_products['details']; ?></span></div>
             <div class="flex-btn">
               <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn"><i class="far fa-edit"></i></a>

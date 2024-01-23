@@ -99,7 +99,7 @@
 
 .home-bg .home .slide .content .btn:hover i {
   transform: translateX(15px);
-  transition: transform 0.3s ease-out;
+  transition: transform 300ms ease-out;
 }
 
 .swiper-pagination-bullet-active {
@@ -120,8 +120,9 @@
   background: var(--white);
   border-radius: var(--border-radius);
   overflow: hidden;
-  height: 300px;
-  transition: 300ms;
+  width: 100%;
+  max-width: 400px;
+  height: 300px; 
 }
 
 .brand .slide img {
@@ -129,6 +130,7 @@
   height: 100%;
   object-fit: cover;
   user-select: none;
+  transition: 300ms ease-in;
 }
 
 .brand .slide h3 {
@@ -142,7 +144,7 @@
   user-select: none;
   z-index: 1;
   opacity: 0;
-  transition: 300ms;
+  transition: 300ms ease-in-out;
 }
 
 .brand .slide:hover {
@@ -154,7 +156,7 @@
 }
 
 .brand .slide:hover h3 {
-  opacity: 1; /* Show on hover */
+  opacity: 1;
   color: var(--white);
 }
 

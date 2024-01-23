@@ -268,14 +268,11 @@
 }
 
 .show-products .box-container .box .details {
-  padding-top: 2rem;
   font-size: 1.5rem;
   color: var(--light-color);
   line-height: 2;
-  height: 130px;
+  height: 200px;
   overflow-y: auto;
-  display: flex;
-  align-items: center;
 }
 
 .show-products .box-container .box .flex-btn {
