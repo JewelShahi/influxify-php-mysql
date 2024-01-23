@@ -111,40 +111,51 @@
   color: white;
 }
 
-.category .slide {
+.brand .slide {
+  position: relative;
   margin-bottom: 5rem;
-  box-shadow: var(--box-shadow);
-  border: var(--border);
+  box-shadow: 0 0 10px var(--black);
+  border: none;
   text-align: center;
-  padding: 2rem;
   background: var(--white);
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  height: 300px;
+  transition: 300ms;
 }
 
-.category .slide:hover {
-  background-color: var(--black);
-}
-
-.category .slide:hover img {
-  filter: invert();
-}
-
-.category .slide:hover h3 {
-  color: var(--white);
-}
-
-.category .slide img {
-  height: 7rem;
+.brand .slide img {
   width: 100%;
-  object-fit: contain;
-  margin-bottom: 1rem;
+  height: 100%;
+  object-fit: cover;
   user-select: none;
 }
 
-.category .slide h3 {
-  font-size: 2rem;
+.brand .slide h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 23px;
+  text-transform: uppercase;
   color: var(--black);
   user-select: none;
+  z-index: 1;
+  opacity: 0;
+  transition: 300ms;
+}
+
+.brand .slide:hover {
+  background-color: rgb(91, 91, 91);
+}
+
+.brand .slide:hover img {
+  filter: brightness(50%);
+}
+
+.brand .slide:hover h3 {
+  opacity: 1; /* Show on hover */
+  color: var(--white);
 }
 
 .home-products .slide {

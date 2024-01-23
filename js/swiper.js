@@ -47,12 +47,16 @@ prevBtn.addEventListener("mouseout", () => {
 /************************************/
 
 /****** Brand Swiper *******/
-let categorySwiper = new Swiper(".category-slider", {
+let brandSwiper = new Swiper(".brand-slider", {
   loop: true,
   spaceBetween: 20,
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
   breakpoints: {
     0: {
@@ -64,10 +68,31 @@ let categorySwiper = new Swiper(".category-slider", {
     768: {
       slidesPerView: 4,
     },
-    1024: {
-      slidesPerView: 5,
-    },
   },
+});
+
+const nextBtnBrand = document.getElementById("brand-next");
+nextBtnBrand.style.color = "white";
+nextBtnBrand.style.fontWeight = "bold";
+
+nextBtnBrand.addEventListener("mouseover", () => {
+  nextBtnBrand.style.color = "rgba(256, 256, 256, 0.6)";
+});
+
+nextBtnBrand.addEventListener("mouseout", () => {
+  nextBtnBrand.style.color = "white";
+});
+
+const prevBtnBrand = document.getElementById("brand-prev");
+prevBtnBrand.style.color = "white";
+prevBtnBrand.style.fontWeight = "bold";
+
+prevBtnBrand.addEventListener("mouseover", () => {
+  prevBtnBrand.style.color = "rgba(256, 256, 256, 0.6)";
+});
+
+prevBtnBrand.addEventListener("mouseout", () => {
+  prevBtnBrand.style.color = "white";
 });
 
 /************ Product Swiper *****************/
