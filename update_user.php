@@ -14,8 +14,8 @@ if (isset($_POST['submit'])) {
 
   $name = $_POST['name'];
   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $select_user = 
-  $email = $_POST['email'];
+  $select_user =
+    $email = $_POST['email'];
   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
@@ -33,9 +33,9 @@ if (isset($_POST['submit'])) {
   if ($old_pass == $empty_pass) {
     $message[] = 'please enter old password!';
   } elseif ($old_pass != $prev_pass) {
-    $message[] = 'old password not matched!';
+    $message[] = 'Old password not matched!';
   } elseif ($new_pass != $cpass) {
-    $message[] = 'confirm password not matched!';
+    $message[] = 'Confirm password not matched!';
   } else {
     if ($new_pass != $empty_pass) {
       $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
@@ -78,10 +78,13 @@ if (isset($_POST['submit'])) {
       <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="save changes" class="btn" name="submit">
+      <input type="submit" value="Save changes" class="btn" name="submit">
     </form>
     <form action="">
-      <img src="" alt="" class="">
+      <img src="gg" alt="main" id="main-avatar">
+      <div>
+        <img src="" alt="" class="">
+      </div>
       <input type="submit" value="update avatar" class="btn" name="update_avatar">
     </form>
   </section>

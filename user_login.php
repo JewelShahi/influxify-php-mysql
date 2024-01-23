@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     $_SESSION['user_id'] = $row['id'];
     header('location:home.php');
   } else {
-    $message[] = "<span style='color: black;'>Incorrect <span style='color:red;'>username</span> or <span style='color:red;'>password</span>!</span>";
+    $message[] = "<span style='color: black;'>Incorrect username or password!</span>";
   }
 }
 ?>
