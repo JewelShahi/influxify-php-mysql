@@ -56,7 +56,12 @@ if (isset($_GET['delete_all'])) {
 
 			<?php
 			$grand_total = 0;
-			$select_wishlist = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
+			$select_wishlist = $conn->prepare("
+				SELECT w.id, w.user_id, w.pid, w.name, w.price, p.image_01 as image 
+				FROM wishlist w
+				JOIN products p ON w.pid = p.id 
+				WHERE user_id = ?
+			");
 			$select_wishlist->execute([$user_id]);
 			if ($select_wishlist->rowCount() > 0) {
 				while ($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)) {

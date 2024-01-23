@@ -58,8 +58,14 @@ if (isset($_POST['update_qty'])) {
 
       <?php
       $grand_total = 0;
-      $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+      $select_cart = $conn->prepare("
+        SELECT c.id, c.user_id, c.pid, c.name, c.price, c.quantity, p.image_01 as image 
+        FROM cart c
+        JOIN products p ON c.pid = p.id 
+        WHERE user_id = ?
+       ");
       $select_cart->execute([$user_id]);
+
       if ($select_cart->rowCount() > 0) {
         while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
       ?>
@@ -86,6 +92,8 @@ if (isset($_POST['update_qty'])) {
       }
       ?>
     </div>
+
+
 
     <div class="cart-total">
       <p>Grand total : <span>$<?= $grand_total; ?>/-</span></p>

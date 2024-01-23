@@ -134,9 +134,9 @@ include 'components/wishlist_cart.php';
 		<div class="swiper products-slider">
 
 			<div class="swiper-wrapper">
-
 				<?php
-				$select_products = $conn->prepare("SELECT * FROM `products` ORDER BY id DESC LIMIT 6;
+				$select_products = $conn->prepare("
+					SELECT * FROM `products` ORDER BY id DESC LIMIT 6;
 				");
 				$select_products->execute();
 				if ($select_products->rowCount() > 0) {
