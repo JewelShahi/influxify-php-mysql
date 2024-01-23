@@ -162,7 +162,7 @@ if (isset($_GET['delete'])) {
 
         <div class="inputBox">
           <span>Product details <span style="color: red;">*</span></span>
-          <textarea name="details" placeholder="Product details" class="box" maxlength="500" cols="30" rows="10" required></textarea>
+          <textarea name="details" placeholder="Product details" class="box" required></textarea>
         </div>
 
         <div class="inputBox">
@@ -182,7 +182,7 @@ if (isset($_GET['delete'])) {
 
         <div class="inputBox">
           <span>Released date <span style="color: red;">*</span></span>
-          <input type="text" name="released" placeholder="Released date (00/00/0000)" pattern="^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$" class="box" required>
+          <input type="text" name="released" placeholder="Released date (00/00/0000)" class="box" required>
         </div>
 
         <div class="inputBox">

@@ -34,14 +34,23 @@ include 'components/wishlist_cart.php';
 
   <section class="products">
 
+    <?php
+    $brand = $_GET['brand'];
+    $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand LIKE ?");
+    $select_products->execute(["$brand"]);
+    ?>
     <h1 class="heading">Category</h1>
+    <?php
+    if ($select_products->rowCount() > 0) {
+    ?>
+      <h3 class="heading" style="font-size: 3rem;">Products from brand - <?= $brand; ?></h3>
+    <?php
+    }
+    ?>
 
     <div class="box-container">
 
       <?php
-      $brand = $_GET['brand'];
-      $select_products = $conn->prepare("SELECT * FROM `products` WHERE name LIKE '%{$brand}%'");
-      $select_products->execute();
       if ($select_products->rowCount() > 0) {
         while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
       ?>
@@ -52,7 +61,7 @@ include 'components/wishlist_cart.php';
             <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
             <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
             <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-            <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
+            <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
               <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>

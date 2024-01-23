@@ -167,7 +167,7 @@ if (isset($_POST['update'])) {
           <input type="number" name="price" class="box" min="0.00" step="0.01" placeholder="Product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>" required>
 
           <span>Update details</span>
-          <textarea name="details" class="box" cols="30" rows="10" required><?= $fetch_products['details']; ?></textarea>
+          <textarea name="details" class="box" required><?= $fetch_products['details']; ?></textarea>
 
           <span id="brandLabel">Update brand</span>
           <select name="brand" class="box" aria-labelledby="brandLabel" required>
