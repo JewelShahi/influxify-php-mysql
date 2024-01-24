@@ -14,9 +14,9 @@ if (isset($_SESSION['user_id'])) {
 include 'components/wishlist_cart.php';
 
 if (isset($_POST['delete'])) {
-	$wishlist_id = $_POST['wishlist_id'];
-	$delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE id = ?");
-	$delete_wishlist_item->execute([$wishlist_id]);
+	$pid = $_POST['pid'];
+	$delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE user_id = ? AND pid = ?");
+	$delete_wishlist_item->execute([$user_id, $pid]);
 }
 
 if (isset($_GET['delete_all'])) {
@@ -50,14 +50,14 @@ if (isset($_GET['delete_all'])) {
 
 	<section class="products">
 
-		<h3 class="heading">your wishlist</h3>
+		<h3 class="heading">Your wishlist</h3>
 
 		<div class="box-container">
 
 			<?php
 			$grand_total = 0;
 			$select_wishlist = $conn->prepare("
-				SELECT w.id, w.user_id, w.pid, w.name, w.price, p.image_01 as image 
+				SELECT w.user_id, w.pid, w.name, w.price, p.image_01 as image 
 				FROM wishlist w
 				JOIN products p ON w.pid = p.id 
 				WHERE user_id = ?
@@ -69,7 +69,6 @@ if (isset($_GET['delete_all'])) {
 			?>
 					<form action="" method="post" class="box">
 						<input type="hidden" name="pid" value="<?= $fetch_wishlist['pid']; ?>">
-						<input type="hidden" name="wishlist_id" value="<?= $fetch_wishlist['id']; ?>">
 						<input type="hidden" name="name" value="<?= $fetch_wishlist['name']; ?>">
 						<input type="hidden" name="price" value="<?= $fetch_wishlist['price']; ?>">
 						<input type="hidden" name="image" value="<?= $fetch_wishlist['image']; ?>">

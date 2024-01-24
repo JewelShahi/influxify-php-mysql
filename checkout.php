@@ -22,7 +22,7 @@ if (isset($_POST['order'])) {
   $method = $_POST['method'];
   $method = filter_var($method, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $address = 'flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code'];
+  $address = 'Flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code'];
   $address = filter_var($address, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $total_products = $_POST['total_products'];

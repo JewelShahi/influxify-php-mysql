@@ -1,30 +1,37 @@
 <?php
 include 'components/connect.php';
 session_start();
+
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
   header('location:user_login.php');
 };
+
 if (isset($_POST['delete'])) {
-  $cart_id = $_POST['cart_id'];
-  $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE id = ?");
-  $delete_cart_item->execute([$cart_id]);
+  $pid = $_POST['pid'];
+
+  $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE user_id = ? AND pid = ?");
+  $delete_cart_item->execute([$user_id, $pid]);
 }
 
 if (isset($_GET['delete_all'])) {
-  $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
-  $delete_cart_item->execute([$user_id]);
-  header('location:cart.php');
+  $delete_all_cart_items = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
+  $delete_all_cart_items->execute([$user_id]);
+  header('location: cart.php');
+  exit(); // Ensure that you stop the script after redirecting
 }
 
 if (isset($_POST['update_qty'])) {
-  $cart_id = $_POST['cart_id'];
+  $pid = $_POST['pid'];
+
   $qty = $_POST['qty'];
   $qty = filter_var($qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
-  $update_qty->execute([$qty, $cart_id]);
+
+  $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE user_id = ? AND pid = ?");
+  $update_qty->execute([$qty, $user_id, $pid]);
+
   $message[] = 'Cart quantity updated';
 }
 
@@ -59,7 +66,7 @@ if (isset($_POST['update_qty'])) {
       <?php
       $grand_total = 0;
       $select_cart = $conn->prepare("
-        SELECT c.id, c.user_id, c.pid, c.name, c.price, c.quantity, p.image_01 as image 
+        SELECT c.user_id, c.pid, c.name, c.price, c.quantity, p.image_01 as image 
         FROM cart c
         JOIN products p ON c.pid = p.id 
         WHERE user_id = ?
@@ -70,7 +77,7 @@ if (isset($_POST['update_qty'])) {
         while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
       ?>
           <form action="" method="post" class="box">
-            <input type="hidden" name="cart_id" value="<?= $fetch_cart['id']; ?>">
+            <input type="hidden" name="pid" value="<?= $fetch_cart['pid']; ?>">
             <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
             <img src="uploaded_img/products/<?= $fetch_cart['image']; ?>" alt="">
             <div class="name"><?= $fetch_cart['name']; ?></div>

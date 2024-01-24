@@ -34,6 +34,7 @@ if (isset($_POST['submit'])) {
       // Check if any rows were affected
       if ($insert_user->rowCount() > 0) {
         $message[] = 'User registered successfully!';
+        header("location:user_login.php");
       } else {
         $message[] = 'Error registering user. Please try again.';
       }
