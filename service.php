@@ -1,11 +1,13 @@
 <?php
 include 'components/connect.php';
+
 session_start();
+
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-};
+}
 
 if (isset($_POST['send'])) {
 
@@ -28,7 +30,11 @@ if (isset($_POST['send'])) {
   $insert_service->execute([$user_id, $name, $email, $number, $brand, $description]);
 
   $message[] = 'Service ticket sent successfully!';
+
+  // Redirect to a different page to prevent form resubmission
+  header('location:service.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +59,7 @@ if (isset($_POST['send'])) {
 
   <section class="contact" style="min-height: 100%;">
 
-    <h1 class="heading">Placed Services</h1>
+    <h1 class="heading">Placed services</h1>
 
     <?php
     if ($user_id == '') {
@@ -67,7 +73,7 @@ if (isset($_POST['send'])) {
         <input type="number" name="number" min="0" max="9999999999" placeholder="Enter your phone number" required onkeypress="if(this.value.length == 10) return false;" class="box">
         <input type="text" name="brand" placeholder="Enter phone brand" required class="box">
         <textarea name="description" class="box" placeholder="Enter description" cols="30" rows="10"></textarea>
-        <input type="submit" value="Add service ticket" name="send" class="btn">
+        <button type="submit" name="send" class="btn">Add service ticket</button>
       </form>
 
       <div class="box-container">

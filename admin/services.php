@@ -41,7 +41,7 @@ if (isset($_GET['delete'])) {
     <div class="box-container">
 
       <?php
-      $select_services = $conn->prepare("SELECT * FROM `services`");
+      $select_services = $conn->prepare("SELECT * FROM `services` ORDER BY `placed_on` DESC");
       $select_services->execute();
       if ($select_services->rowCount() > 0) {
         while ($fetch_service = $select_services->fetch(PDO::FETCH_ASSOC)) {

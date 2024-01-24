@@ -65,24 +65,26 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
   <section class="products">
 
-    <h1 class="heading">latest products</h1>
+    <h1 class="heading">Latest products</h1>
 
     <!-- Search bar -->
     <form method="post" class="search-bar">
       <label for="search">Search:</label>
       <input type="text" id="search" name="search" placeholder="Enter product name" value="<?= $search_query ?>">
-      <button type="submit">Search</button>
+      <button type="submit">
+        <i class="fas fa-search"></i>
+      </button>
     </form>
 
     <!-- Filter options -->
     <form method="get" class="filter-options">
-      <label for="price">Filter by Price:</label>
+      <label for="price">Filter by price:</label>
       <select id="price" name="price">
         <option value="asc" <?= ($filter_price == 'asc') ? 'selected' : '' ?>>ASC</option>
         <option value="desc" <?= ($filter_price == 'desc') ? 'selected' : '' ?>>DESC</option>
       </select>
 
-      <label for="brand">Filter by Brand:</label>
+      <label for="brand">Filter by brand:</label>
       <select id="brand" name="brand">
         <option value="" <?= ($filter_brand == '') ? 'selected' : '' ?>>-- All Brands --</option>
         <option value="Samsung" <?= ($filter_brand == 'Samsung') ? 'selected' : '' ?>>Samsung</option>
@@ -104,7 +106,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="16GB" <?= ($filter_ram == '16GB') ? 'selected' : '' ?>>16GB</option>
       </select>
 
-      <label for="storage">Filter by Storage:</label>
+      <label for="storage">Filter by storage:</label>
       <select id="storage" name="storage">
         <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- All Storage --</option>
         <option value="32GB" <?= ($filter_storage == '32GB') ? 'selected' : '' ?>>32GB</option>
@@ -115,7 +117,9 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="1TB" <?= ($filter_storage == '1TB') ? 'selected' : '' ?>>1TB</option>
       </select>
 
-      <button type="submit">Apply Filters</button>
+      <button type="submit">
+        <i class="fas fa-filter"></i> Apply Filters
+      </button>
     </form>
 
     <div class="box-container">
