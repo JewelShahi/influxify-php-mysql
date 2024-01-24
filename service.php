@@ -24,7 +24,7 @@ if (isset($_POST['send'])) {
   $description = $_POST['description'];
   $description = filter_var($description, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $insert_service = $conn->prepare("INSERT INTO `services`(user_id, name, email, number, brand, description) VALUES(?,?,?,?,?,?)");
+  $insert_service = $conn->prepare("INSERT INTO `services` (user_id, name, email, number, brand, description) VALUES(?,?,?,?,?,?)");
   $insert_service->execute([$user_id, $name, $email, $number, $brand, $description]);
 
   $message[] = 'Service ticket sent successfully!';
