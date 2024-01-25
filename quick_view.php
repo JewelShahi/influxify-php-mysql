@@ -1,17 +1,12 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
-
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
 };
-
 include 'components/wishlist_cart.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +21,9 @@ include 'components/wishlist_cart.php';
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+
+  <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
@@ -35,7 +32,7 @@ include 'components/wishlist_cart.php';
 
   <section class="quick-view">
 
-    <h1 class="heading">quick view</h1>
+    <h1 class="heading">Quick view</h1>
 
     <?php
     $pid = $_GET['pid'];
@@ -52,24 +49,39 @@ include 'components/wishlist_cart.php';
           <div class="row">
             <div class="image-container">
               <div class="main-image">
-                <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
               </div>
               <div class="sub-image">
-                <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
-                <img src="uploaded_img/<?= $fetch_product['image_02']; ?>" alt="">
-                <img src="uploaded_img/<?= $fetch_product['image_03']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_02']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_03']; ?>" alt="">
               </div>
             </div>
             <div class="content">
-              <div class="name"><?= $fetch_product['name']; ?></div>
+              <div class="name">Name: <?= $fetch_product['name']; ?></div>
+              <div class="details"><?= $fetch_product['details']; ?></div>
+              <div class="name">Brand: <?= $fetch_product['brand']; ?></div>
+              <div class="name">Release date: <?= $fetch_product['released']; ?></div>
+              <div class="name">Quantity: <?= $fetch_product['qty']; ?></div>
+              <div class="name">CPU: <?= $fetch_product['cpu']; ?></div>
+              <div class="name">Storage: <?= $fetch_product['storage']; ?></div>
+              <div class="name">RAM: <?= $fetch_product['ram']; ?></div>
+              <div class="name">Camera count: <?= $fetch_product['camera_count']; ?></div>
+              <div class="name">Camera resolution: <?= $fetch_product['camera_resolution']; ?></div>
+              <div class="name">Size(display): <?= $fetch_product['size']; ?></div>
+              <div class="name">Battery: <?= $fetch_product['battery']; ?></div>
+              <div class="name">Color: <?= $fetch_product['color']; ?></div>
               <div class="flex">
-                <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
+                <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
                 <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
               </div>
-              <div class="details"><?= $fetch_product['details']; ?></div>
               <div class="flex-btn">
-                <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-                <input class="option-btn" type="submit" name="add_to_wishlist" value="add to wishlist">
+                <button type="submit" class="btn" name="add_to_cart">
+                  <i class="fas fa-plus"></i> Add to cart
+                </button>
+                <button class="option-btn" type="submit" name="add_to_wishlist">
+                  <i class="fas fa-heart"></i> Add to wishlist
+                </button>
               </div>
             </div>
           </div>
@@ -77,28 +89,16 @@ include 'components/wishlist_cart.php';
     <?php
       }
     } else {
-      echo '<p class="empty">no products added yet!</p>';
+      echo '<p class="empty">No products added yet!</p>';
     }
     ?>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/script.js"></script>
-
+  <script src="js/user_script.js"></script>
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>
