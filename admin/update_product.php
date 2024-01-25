@@ -18,7 +18,7 @@ if (isset($_POST['update'])) {
   $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $brand = $_POST['brand'];
-  $brand = filter_var($brand, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  // $brand = filter_var($brand, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $released = $_POST['released'];
   $released = filter_var($released, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -53,62 +53,83 @@ if (isset($_POST['update'])) {
   $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
   $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
 
-  $message[] = 'Product updated successfully!';
+  $baseImagePath = '../uploaded_img/products/';
 
+  // Image-1
   $old_image_01 = $_POST['old_image_01'];
   $image_01 = $_FILES['image_01']['name'];
-  $image_01 = filter_var($image_01, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_01 = $_FILES['image_01']['size'];
   $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
   $image_folder_01 = '../uploaded_img/products/' . $image_01;
 
-  if (!empty($image_01)) {
+  if (!empty($image_01) && is_uploaded_file($image_tmp_name_01)) {
     if ($image_size_01 > 2000000) {
       $message[] = 'Image-1\'s size is too large!';
     } else {
       $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
       $update_image_01->execute([$image_01, $pid]);
-      move_uploaded_file($image_tmp_name_01, $image_folder_01);
-      unlink('../uploaded_img/products/' . $old_image_01);
-      $message[] = 'Image-1 has been updated successfully!';
+
+      // Check if the file was moved successfully
+      if (move_uploaded_file($image_tmp_name_01, $image_folder_01)) {
+        if (file_exists($baseImagePath . $old_image_01)) {
+          unlink('../uploaded_img/products/' . $old_image_01);
+        }
+        $message[] = 'Image-1 has been updated successfully!';
+      } else {
+        $message[] = 'Failed to move Image-1 to the destination folder!';
+      }
     }
   }
 
+  // Image-2
   $old_image_02 = $_POST['old_image_02'];
   $image_02 = $_FILES['image_02']['name'];
-  $image_02 = filter_var($image_02, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_02 = $_FILES['image_02']['size'];
   $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
   $image_folder_02 = '../uploaded_img/products/' . $image_02;
 
-  if (!empty($image_02)) {
+  if (!empty($image_02) && is_uploaded_file($image_tmp_name_02)) {
     if ($image_size_02 > 2000000) {
       $message[] = 'Image-2\'s size is too large!';
     } else {
       $update_image_02 = $conn->prepare("UPDATE `products` SET image_02 = ? WHERE id = ?");
       $update_image_02->execute([$image_02, $pid]);
-      move_uploaded_file($image_tmp_name_02, $image_folder_02);
-      unlink('../uploaded_img/products/' . $old_image_02);
-      $message[] = 'Image-2 has been updated successfully!';
+
+      // Check if the file was moved successfully
+      if (move_uploaded_file($image_tmp_name_02, $image_folder_02)) {
+        if (file_exists($baseImagePath . $old_image_02)) {
+          unlink('../uploaded_img/products/' . $old_image_02);
+        }
+        $message[] = 'Image-2 has been updated successfully!';
+      } else {
+        $message[] = 'Failed to move Image-2 to the destination folder!';
+      }
     }
   }
 
+  // Image-3
   $old_image_03 = $_POST['old_image_03'];
   $image_03 = $_FILES['image_03']['name'];
-  $image_03 = filter_var($image_03, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_03 = $_FILES['image_03']['size'];
   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
   $image_folder_03 = '../uploaded_img/products/' . $image_03;
 
-  if (!empty($image_03)) {
+  if (!empty($image_03) && is_uploaded_file($image_tmp_name_03)) {
     if ($image_size_03 > 2000000) {
       $message[] = 'Image-3\'s size is too large!';
     } else {
       $update_image_03 = $conn->prepare("UPDATE `products` SET image_03 = ? WHERE id = ?");
       $update_image_03->execute([$image_03, $pid]);
-      move_uploaded_file($image_tmp_name_03, $image_folder_03);
-      unlink('../uploaded_img/products/' . $old_image_03);
-      $message[] = 'Image-3 has been updated successfully!';
+
+      // Check if the file was moved successfully
+      if (move_uploaded_file($image_tmp_name_03, $image_folder_03)) {
+        if (file_exists($baseImagePath . $old_image_03)) {
+          unlink('../uploaded_img/products/' . $old_image_03);
+        }
+        $message[] = 'Image-3 has been updated successfully!';
+      } else {
+        $message[] = 'Failed to move Image-3 to the destination folder!';
+      }
     }
   }
 }
@@ -172,18 +193,13 @@ if (isset($_POST['update'])) {
           <span id="brandLabel">Update brand</span>
           <select name="brand" class="box" aria-labelledby="brandLabel" required>
             <?php
-            if (isset($fetch_products['brand'])) {
-              echo '<option selected disabled>' . $fetch_products['brand'] . '</option>';
+            $selectedBrand = $fetch_products['brand'];
+            $brands = array("Samsung", "Apple", "Google", "Xiaomi", "OnePlus", "Lenovo", "Motorola", "Oppo");
+
+            foreach ($brands as $brandOption) {
+              echo '<option value="' . $brandOption . '" ' . ($brandOption == $selectedBrand ? 'selected' : '') . '>' . $brandOption . '</option>';
             }
             ?>
-            <option value="Samsung">Samsung</option>
-            <option value="Apple">Apple</option>
-            <option value="Google">Google</option>
-            <option value="Xiaomi">Xiaomi</option>
-            <option value="OnePlus">OnePlus</option>
-            <option value="Lenovo">Lenovo</option>
-            <option value="Motorola">Motorola</option>
-            <option value="Oppo">Oppo</option>
           </select>
 
           <span>Update released date</span>

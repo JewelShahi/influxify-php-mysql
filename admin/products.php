@@ -168,7 +168,7 @@ if (isset($_GET['delete'])) {
         <div class="inputBox">
           <span id="brandLabel">Product brand <span style="color: red;">*</span></span>
           <select name="brand" class="box" aria-labelledby="brandLabel" required>
-            <option value="N/A" selected disabled>Add a brand</option>
+          <option value="N/A" selected disabled>Add a brand</option>
             <option value="Samsung">Samsung</option>
             <option value="Apple">Apple</option>
             <option value="Google">Google</option>
@@ -182,7 +182,7 @@ if (isset($_GET['delete'])) {
 
         <div class="inputBox">
           <span>Released date <span style="color: red;">*</span></span>
-          <input type="text" name="released" placeholder="Released date (00/00/0000)" class="box" required>
+          <input type="text" name="released" placeholder="Released date (00/00/0000)" class="box" >
         </div>
 
         <div class="inputBox">
