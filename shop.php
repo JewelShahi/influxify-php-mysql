@@ -70,10 +70,12 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
     <!-- Search bar -->
     <form method="post" class="search-bar">
       <label for="search">Search:</label>
-      <input type="text" id="search" name="search" placeholder="Enter product name" value="<?= $search_query ?>">
-      <button type="submit">
-        <i class="fas fa-search"></i>
-      </button>
+      <div>
+        <input class="input" type="text" id="search" name="search" placeholder="Enter product name" value="<?= $search_query ?>">
+        <button type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
     </form>
 
     <!-- Filter options -->
