@@ -19,32 +19,48 @@ if (isset($message)) {
     </div>
 
     <nav class="navbar">
-      <a href="../admin/dashboard.php">home</a>
-      <a href="../admin/products.php">products</a>
-      <a href="../admin/placed_orders.php">orders</a>
-      <a href="../admin/admin_accounts.php">admins</a>
-      <a href="../admin/users_accounts.php">users</a>
-      <a href="../admin/messages.php">messages</a>
+      <a href="../admin/dashboard.php">Dashboard</a>
+      <a href="../admin/products.php">Products</a>
+      <a href="../admin/placed_orders.php">Orders</a>
+      <a href="../admin/admin_accounts.php">Admins</a>
+      <a href="../admin/users_accounts.php">Users</a>
+      <a href="../admin/services.php">Services</a>
     </nav>
 
     <div class="icons">
+      <?php
+      $admin_avatar = $conn->prepare("SELECT `avatar` FROM `users` WHERE id = ?");
+      $admin_avatar->execute([$admin_id]);
+      $avatar_result = $admin_avatar->fetchColumn();
+
+      // Check if there is a logged-in user
+      if ($admin_id && !empty($avatar_result)) {
+        // If logged in and avatar is not empty, set background image
+        $user_image = $avatar_result;
+      } else {
+        // If not logged in or avatar is empty, no background image
+        $user_image = "default.png";
+      }
+      ?>
+      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
       <div id="menu-btn" class="fas fa-bars"></div>
-      <div id="user-btn" class="fas fa-user"></div>
     </div>
 
     <div class="profile">
-      <?php
-      $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ? AND isAdmin = 1");
-      $select_profile->execute([$admin_id]);
-      $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
-      ?>
-      <p><?= $fetch_profile['name']; ?></p>
-      <a href="../admin/update_profile.php" class="btn">update profile</a>
-      <div class="flex-btn">
-        <a href="../admin/register_admin.php" class="option-btn">register</a>
-        <a href="../admin/admin_login.php" class="option-btn">login</a>
+      <div class="profile-background">
+        <?php
+        $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ? AND isAdmin = 1");
+        $select_profile->execute([$admin_id]);
+        $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <p><?= $fetch_profile['name']; ?></p>
+        <a href="../admin/update_profile.php" class="btn">
+          <i class="fas fa-user-edit"></i> Update Profile
+        </a>
+        <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
+        <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
       </div>
-      <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a>
     </div>
 
   </section>

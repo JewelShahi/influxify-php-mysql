@@ -26,7 +26,9 @@ include 'components/wishlist_cart.php';
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+
+  <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
@@ -59,7 +61,7 @@ include 'components/wishlist_cart.php';
               <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
               <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
               <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-              <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
+              <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
               <div class="name"><?= $fetch_product['name']; ?></div>
               <div class="flex">
                 <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
@@ -78,22 +80,11 @@ include 'components/wishlist_cart.php';
     </div>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/script.js"></script>
-
+  <script src="js/user_script.js"></script>
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>
