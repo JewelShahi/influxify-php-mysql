@@ -161,6 +161,10 @@
   color: var(--white);
 }
 
+.home-products {
+  background-color: var(--body);
+}
+
 .home-products .slide {
   position: relative;
   padding: 2rem;
@@ -659,6 +663,10 @@
 /***********/
 
 .form-container {
+  background-color: var(--body);
+}
+
+.form-container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -780,7 +788,11 @@
   color: var(--black);
 }
 
-.contact form {
+.service {
+  background-color: var(--body);
+}
+
+.service form {
   padding: 2rem;
   text-align: center;
   background-color: var(--white);
@@ -791,14 +803,14 @@
   margin: 0 auto;
 }
 
-.contact form h3 {
+.service form h3 {
   margin-bottom: 1rem;
   text-transform: capitalize;
   font-size: 2.5rem;
   color: var(--black);
 }
 
-.contact form .box {
+.service form .box {
   margin: 1rem 0;
   width: 100%;
   background-color: var(--light);
@@ -808,7 +820,7 @@
   border-radius: 0.5rem;
 }
 
-.contact form textarea {
+.service form textarea {
   height: 15rem;
   resize: none;
 }
@@ -987,6 +999,10 @@
 .checkout-orders form .flex .inputBox span {
   font-size: 1.8rem;
   color: var(--light-color);
+}
+
+.orders {
+  background-color: var(--body);
 }
 
 .orders .box-container {
