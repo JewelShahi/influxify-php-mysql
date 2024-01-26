@@ -25,8 +25,6 @@
     </div>
   </section>
   <div class="copyright">
-    <p>&copy; <?= date('Y'); ?> Influxify Technologies Inc. All rights reserved. | Trademarks are the property of their respective owners. </p>
-    <p>Unauthorized reproduction or distribution of this website's content is prohibited. Use for commercial purposes requires explicit written permission. </p>
-    <p>By accessing this website, you agree to comply with these terms and conditions. Influxify Technologies Inc. reserves the right to modify these terms without notice.</p>
+    <p>&copy; <?= date('Y'); ?> Influxify Technologies Inc. All rights reserved. Trademarks are the property of their respective owners. Unauthorized reproduction or distribution of this website's content is prohibited. <br> Use for commercial purposes requires explicit written permission. By accessing this website, you agree to comply with these terms and conditions. Influxify Technologies Inc. reserves the right to modify these terms without notice.</p>
   </div>
 </footer>

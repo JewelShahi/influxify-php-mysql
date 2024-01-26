@@ -66,15 +66,21 @@ if (isset($_POST['send'])) {
       echo '<p class="empty">Please Log In add or see service(s).</p>';
     } else {
     ?>
-      <form action="" method="post">
-        <h3>Add a service ticket</h3>
-        <input type="text" name="name" placeholder="Enter your name" required class="box">
-        <input type="email" name="email" placeholder="Enter your email" required class="box">
-        <input type="number" name="number" min="0" max="9999999999" placeholder="Enter your phone number" required onkeypress="if(this.value.length == 10) return false;" class="box">
-        <input type="text" name="brand" placeholder="Enter phone brand" required class="box">
-        <textarea name="description" class="box" placeholder="Enter description" cols="30" rows="10"></textarea>
-        <button type="submit" name="send" class="btn">Add service ticket</button>
-      </form>
+      <div class="add-ticket">
+        <form action="" method="post">
+          <h3>Add a service ticket</h3>
+          <input type="text" name="name" placeholder="Enter your name" required class="box">
+          <input type="email" name="email" placeholder="Enter your email" required class="box">
+          <input type="number" name="number" min="0" max="9999999999" placeholder="Enter your phone number" required onkeypress="if(this.value.length == 10) return false;" class="box">
+          <input type="text" name="brand" placeholder="Enter phone brand" required class="box">
+          <textarea name="description" class="box" placeholder="Enter description" cols="30" rows="10"></textarea>
+          <button type="submit" name="send" class="btn">Add service ticket</button>
+        </form>
+        <div class="map">
+          <h3>Our location</h3>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.568532981854!2d23.361773000000003!3d42.6704979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa8587e5b96129%3A0xbbf46b29a556f55d!2z0KHQn9CT0JUg4oCe0JTQttC-0L0g0JDRgtCw0L3QsNGB0L7QsuKAnA!5e0!3m2!1sbg!2sbg!4v1706308694525!5m2!1sbg!2sbg" width="600" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
 
       <?php
       $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ?");
