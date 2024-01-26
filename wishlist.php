@@ -76,7 +76,7 @@ if (isset($_GET['delete_all'])) {
 						<img src="uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="">
 						<div class="name"><?= $fetch_wishlist['name']; ?></div>
 						<div class="flex">
-							<div class="price">$<?= $fetch_wishlist['price']; ?>/-</div>
+							<div class="price">$<?= $fetch_wishlist['price']; ?></div>
 							<input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
 						</div>
 						<button type="submit" class="btn" name="add_to_cart">
@@ -93,18 +93,16 @@ if (isset($_GET['delete_all'])) {
 			}
 			?>
 		</div>
-
-		<div class="wishlist-total">
-			<p>Drand total : <span>$<?= $grand_total; ?>/-</span></p>
-			<a href="shop.php" class="option-btn">
-				<i class="fas fa-arrow-left"></i> Continue shopping
-			</a>
-			<a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Delete all from wishlist?');">
-				<i class="fas fa-trash-alt"></i> Remove all item
-			</a>
-		</div>
-
 	</section>
+	<div class="wishlist-total">
+			<p>Grand total : <span>$<?= $grand_total; ?></span></p>
+				<a href="shop.php" class="option-btn">
+					<i class="fas fa-arrow-left"></i> Continue shopping
+				</a>
+				<a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Delete all from wishlist?');">
+					<i class="fas fa-trash-alt"></i> Remove all items
+				</a>
+		</div>
 	<?php include 'components/footer.php'; ?>
 
 	<script src="js/user_script.js"></script>

@@ -65,11 +65,10 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
   <section class="products">
 
-    <h1 class="heading">Latest products</h1>
+    <h1 class="heading">Products we offer</h1>
 
     <!-- Search bar -->
     <form method="post" class="search-bar">
-      <label for="search">Search:</label>
       <div>
         <input class="input" type="text" id="search" name="search" placeholder="Enter product name" value="<?= $search_query ?>">
         <button type="submit">
@@ -172,7 +171,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
             <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
-              <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
+              <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
               <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
             </div>
             <button type="submit" class="btn" name="add_to_cart">

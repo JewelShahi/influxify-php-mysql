@@ -53,13 +53,13 @@ if (isset($_POST['send'])) {
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 
-<body>
+<body style="height: 100%;">
 
   <?php include 'components/user_header.php'; ?>
 
   <section class="service" style="min-height: 100%;">
 
-    <h1 class="heading">Placed services</h1>
+    <h1 class="heading">Services</h1>
 
     <?php
     if ($user_id == '') {
@@ -76,20 +76,25 @@ if (isset($_POST['send'])) {
         <button type="submit" name="send" class="btn">Add service ticket</button>
       </form>
 
-      <div class="box-container">
-        <?php
-        $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ?");
-        $select_services->execute([$user_id]);
-        if ($select_services->rowCount() > 0) {
+      <?php
+      $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ?");
+      $select_services->execute([$user_id]);
+      if ($select_services->rowCount() > 0) {
+      ?>
+        <h3 class="heading-2">Placed services</h3>
+        <div class="service-box-container">
+          <?php
           while ($fetch_orders = $select_services->fetch(PDO::FETCH_ASSOC)) {
-        ?>
-            <div class="box">
-              <p>Placed on: <span><?= $fetch_orders['placed_on']; ?></span></p>
-              <p>Name: <span><?= $fetch_orders['name']; ?></span></p>
-              <p>E-mail: <span><?= $fetch_orders['email']; ?></span></p>
-              <p>Phone number: <span><?= $fetch_orders['number']; ?></span></p>
-              <p>Phone brand: <span><?= $fetch_orders['brand']; ?></span></p>
-              <p>Problem: <span><?= $fetch_orders['description']; ?></span></p>
+          ?>
+            <div class="service-box">
+              <div>
+                <p>Placed on: <span><?= $fetch_orders['placed_on']; ?></span></p>
+                <p>Name: <span><?= $fetch_orders['name']; ?></span></p>
+                <p>E-mail: <span><?= $fetch_orders['email']; ?></span></p>
+                <p>Phone number: <span><?= $fetch_orders['number']; ?></span></p>
+                <p>Phone brand: <span><?= $fetch_orders['brand']; ?></span></p>
+                <p>Problem: <span><?= $fetch_orders['description']; ?></span></p>
+              </div>
             </div>
         <?php
           }
@@ -97,10 +102,10 @@ if (isset($_POST['send'])) {
           echo '<p class="empty">No placed service(s) yet.</p>';
         }
         ?>
-      </div>
-    <?php
+        </div>
+      <?php
     }
-    ?>
+      ?>
   </section>
 
 
