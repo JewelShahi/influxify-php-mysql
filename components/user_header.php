@@ -23,7 +23,7 @@ if (isset($message)) {
       <a href="orders.php"><i class="fa-solid fa-clipboard-list"></i> Orders</a>
       <a href="contact.php"><i class="fas fa-phone"></i> Contact</a>
       <a href="shop.php"><i class="fas fa-shopping-bag"></i> Shop</a>
-      <a href="service.php"><i class="fas fa-cogs"></i> Service</a>
+      <a href="service.php"><i class="fa-solid fa-wrench"></i> Service</a>
     </nav>
 
     <div class="icons">

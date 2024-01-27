@@ -403,13 +403,11 @@ span {
 .empty {
   padding: 1.5rem;
   background-color: var(--white);
-  border: var(--border);
-  box-shadow: var(--box-shadow);
+  box-shadow: 0 0 10px var(--black);
   text-align: center;
   color: var(--red);
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
   font-size: 2rem;
-  text-transform: capitalize;
 }
 /*--------------------------------- */
 
