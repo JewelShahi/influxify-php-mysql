@@ -40,7 +40,7 @@ include 'components/wishlist_cart.php';
 			<div class="swiper home-slider">
 				<div class="swiper-wrapper">
 					<?php
-					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products`");
+					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products` ORDER BY RAND()");
 					$select_products->execute();
 					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);
 					?>
@@ -57,7 +57,7 @@ include 'components/wishlist_cart.php';
 							</div>
 							<div class="content">
 								<h3><?php echo $name; ?></h3>
-								<p><?php echo $details; ?></p>
+								<p style="padding: 0 5px;"><?php echo $details; ?></p>
 								<br>
 								<a href="shop.php" class="btn shop-now-btn"><span>Shop now <span><i class="fa-solid fa-arrow-right"></i></a>
 							</div>
