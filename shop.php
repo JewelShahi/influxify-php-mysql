@@ -92,8 +92,10 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="Apple" <?= ($filter_brand == 'Apple') ? 'selected' : '' ?>>Apple</option>
         <option value="Google" <?= ($filter_brand == 'Google') ? 'selected' : '' ?>>Google</option>
         <option value="OnePlus" <?= ($filter_brand == 'OnePlus') ? 'selected' : '' ?>>OnePlus</option>
-        <option value="Lenovo" <?= ($filter_brand == 'Lenovo') ? 'selected' : '' ?>>Lenovo</option>
         <option value="Xiaomi" <?= ($filter_brand == 'Xiaomi') ? 'selected' : '' ?>>Xiaomi</option>
+        <option value="Motorola" <?= ($filter_brand == 'Motorola') ? 'selected' : '' ?>>Motorola</option>
+        <option value="Oppo" <?= ($filter_brand == 'Oppo') ? 'selected' : '' ?>>Oppo</option>
+        <option value="Realme" <?= ($filter_brand == 'Realme') ? 'selected' : '' ?>>Realme</option>
       </select>
 
       <label for="ram">Filter by RAM:</label>

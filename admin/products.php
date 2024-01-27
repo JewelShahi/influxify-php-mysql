@@ -174,9 +174,9 @@ if (isset($_GET['delete'])) {
             <option value="Google">Google</option>
             <option value="Xiaomi">Xiaomi</option>
             <option value="OnePlus">OnePlus</option>
-            <option value="Lenovo">Lenovo</option>
             <option value="Motorola">Motorola</option>
             <option value="Oppo">Oppo</option>
+            <option value="Realme">Realme</option>
           </select>
         </div>
 

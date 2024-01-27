@@ -104,11 +104,6 @@ include 'components/wishlist_cart.php';
 					<h3>OnePlus</h3>
 				</a>
 
-				<a href="brand.php?brand=Lenovo" class="swiper-slide slide">
-					<img src="images/brands/lenovo.png" alt="lenovo brand">
-					<h3>Lenovo</h3>
-				</a>
-
 				<a href="brand.php?brand=Motorola" class="swiper-slide slide">
 					<img src="images/brands/motorola.png" alt="motorola brand">
 					<h3>Motorola</h3>
@@ -117,6 +112,11 @@ include 'components/wishlist_cart.php';
 				<a href="brand.php?brand=Oppo" class="swiper-slide slide">
 					<img src="images/brands/oppo.png" alt="oppo brand">
 					<h3>Oppo</h3>
+				</a>
+
+				<a href="brand.php?brand=Realme" class="swiper-slide slide">
+					<img src="images/brands/realme.png" alt="realme brand">
+					<h3>Realme</h3>
 				</a>
 
 			</div>
