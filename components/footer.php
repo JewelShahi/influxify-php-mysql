@@ -3,10 +3,10 @@
 
     <div class="box">
       <h3>Quick links</h3>
-      <a href="home.php"> <i class="fas fa-angle-right"></i> Home</a>
-      <a href="about.php"> <i class="fas fa-angle-right"></i> About</a>
-      <a href="shop.php"> <i class="fas fa-angle-right"></i> Shop</a>
-      <a href="service.php"> <i class="fas fa-angle-right"></i> Service</a>
+      <a href="home.php"><i class="fas fa-angle-right"></i> Home</a>
+      <a href="contact.php"><i class="fas fa-angle-right"></i> Contact</a>
+      <a href="shop.php"><i class="fas fa-angle-right"></i> Shop</a>
+      <a href="service.php"><i class="fas fa-angle-right"></i> Service</a>
     </div>
 
     <div class="box">
