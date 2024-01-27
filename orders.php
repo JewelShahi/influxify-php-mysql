@@ -74,17 +74,19 @@ if (isset($_SESSION['user_id'])) {
           while ($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)) {
       ?>
             <div class="box">
-              <p>Order ID : <span><?= $fetch_orders['id']; ?></span></p>
-              <p>Placed on : <span><?= $fetch_orders['placed_on']; ?></span></p>
-              <p>Name : <span><?= $fetch_orders['name']; ?></span></p>
-              <p>E-mail : <span><?= $fetch_orders['email']; ?></span></p>
-              <p>Phone number : <span><?= $fetch_orders['number']; ?></span></p>
-              <p>Address : <span><?= $fetch_orders['address']; ?></span></p>
-              <p>Payment method : <span><?= $fetch_orders['method']; ?></span></p>
-              <p>Ordered product(s) : <span><?= $fetch_orders['ordered_products']; ?></span></p>
-              <p>Total price : <span>$<?= $fetch_orders['total_product_price']; ?>/-</span></p>
-              <p>Payment status : <span><?= $fetch_orders['payment_status']; ?></span> </p>
-              <p>Order status : <span><?= $fetch_orders['order_status']; ?></span> </p>
+              <div>
+                <p>Order ID : <span><?= $fetch_orders['id']; ?></span></p>
+                <p>Placed on : <span><?= $fetch_orders['placed_on']; ?></span></p>
+                <p>Name : <span><?= $fetch_orders['name']; ?></span></p>
+                <p>E-mail : <span><?= $fetch_orders['email']; ?></span></p>
+                <p>Phone number : <span><?= $fetch_orders['number']; ?></span></p>
+                <p>Address : <span><?= $fetch_orders['address']; ?></span></p>
+                <p>Payment method : <span><?= $fetch_orders['method']; ?></span></p>
+                <p>Ordered product(s) : <span><?= $fetch_orders['ordered_products']; ?></span></p>
+                <p>Total price : <span>$<?= $fetch_orders['total_product_price']; ?>/-</span></p>
+                <p>Payment status : <span><?= $fetch_orders['payment_status']; ?></span> </p>
+                <p>Order status : <span><?= $fetch_orders['order_status']; ?></span> </p>
+              </div>
             </div>
       <?php
           }

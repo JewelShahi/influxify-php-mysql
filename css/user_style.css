@@ -825,7 +825,7 @@
 }
 
 .add-ticket form {
-  width: 50%;
+  width: 100%;
   padding: 2rem;
   text-align: center;
   background-color: var(--white);
@@ -848,25 +848,14 @@
   background-color: var(--light);
   padding: 1.4rem;
   font-size: 1.8rem;
-  color: var(--black);
-  border-radius: 0.5rem;
+  color: rgb(0, 0, 0);
+  border-radius: 15px;
 }
 
 .add-ticket form textarea {
-  width: 100%; /* Take full width */
+  width: 100%;
   height: 15rem;
   resize: none;
-}
-
-.add-ticket .map {
-  background-color: rgba(169, 255, 177, 0.4);
-  flex-grow: 1;
-  width: 50%;
-}
-
-.add-ticket .map iframe {
-  width: 100%;
-  height: 100%;
 }
 
 @media (max-width: 768px) {
@@ -931,6 +920,14 @@
   color: var(--primary-color);
 }
 
+.description-text {
+  padding: 0.5rem;
+  height: auto;
+  display: inline-block;
+  max-height: 100px;
+  overflow-x: auto;
+}
+
 @media (max-width: 400px) {
   .service-box {
     max-width: none;
@@ -988,6 +985,12 @@
 }
 
 .wishlist-total p span {
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: rgb(7, 101, 6);
+}
+
+.products .box-container .box .price {
   font-weight: 900;
   font-size: 2.2rem;
   color: rgb(7, 101, 6);
@@ -1164,10 +1167,8 @@
   height: 100%;
   max-height: 500px;
   overflow-y: auto;
-  padding: 2rem;
-  background: linear-gradient(45deg, #326065, #096838);
+  background: url(../images/order-bg.png) center/cover;
   border-radius: var(--border-radius);
-  /* position: relative; */
   box-shadow: 0 0 15px var(--black);
   transition: 300ms ease;
 }
@@ -1186,7 +1187,13 @@
   z-index: -1;
 }
 
-.orders .box-container .box p {
+.orders .box-container .box div {
+  width: 100%;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.orders .box-container .box div p {
   margin: 0.5rem 0;
   line-height: 1.8;
   font-size: 2rem;
@@ -1194,7 +1201,7 @@
   color: #ffffff;
 }
 
-.orders .box-container .box p span {
+.orders .box-container .box div p span {
   color: #ffffff;
   font-size: large;
 }
