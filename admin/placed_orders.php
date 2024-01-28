@@ -1,7 +1,11 @@
 <?php
+
 include '../components/connect.php';
+
 session_start();
+
 $admin_id = $_SESSION['admin_id'];
+
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
@@ -33,7 +37,7 @@ if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE id = ?");
   $delete_order->execute([$delete_id]);
-  header('location:placed_orders.php');
+  header('location: placed_orders.php');
 }
 
 ?>
@@ -66,7 +70,9 @@ if (isset($_GET['delete'])) {
       <?php
       $select_orders = $conn->prepare("
         SELECT
-          o.id, o.name,
+          o.id,
+          o.user_id,
+          o.name,
           o.number,
           o.email,
           o.method,
@@ -93,8 +99,10 @@ if (isset($_GET['delete'])) {
       ?>
           <div class="box">
             <p> Order ID : <span><?= $fetch_orders['id']; ?></span> </p>
+            <p> User ID : <span><?= $fetch_orders['user_id']; ?></span> </p>
             <p> Placed on : <span><?= $fetch_orders['placed_on']; ?></span> </p>
             <p> Name : <span><?= $fetch_orders['name']; ?></span> </p>
+            <p> E-mail : <span><?= $fetch_orders['email']; ?></span> </p>
             <p> Phone number : <span><?= $fetch_orders['number']; ?></span> </p>
             <p> Address : <span><?= $fetch_orders['address']; ?></span> </p>
             <p> Total products : <span><?= $fetch_orders['ordered_products']; ?></span> </p>

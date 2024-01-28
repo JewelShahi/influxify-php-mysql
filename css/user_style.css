@@ -1050,7 +1050,7 @@
 .cart-total p {
   font-size: 2.5rem;
   color: var(--black);
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .cart-total p span {
