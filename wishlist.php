@@ -57,7 +57,7 @@ if (isset($_GET['delete_all'])) {
 			<?php
 			$grand_total = 0;
 			$select_wishlist = $conn->prepare("
-				SELECT w.user_id, w.pid, w.name, w.price, p.image_01 as image 
+				SELECT w.user_id, w.pid, w.name, w.price, p.qty as product_quantity, p.image_01 as image 
 				FROM wishlist w
 				JOIN products p ON w.pid = p.id 
 				WHERE user_id = ?
@@ -72,11 +72,15 @@ if (isset($_GET['delete_all'])) {
 						<input type="hidden" name="name" value="<?= $fetch_wishlist['name']; ?>">
 						<input type="hidden" name="price" value="<?= $fetch_wishlist['price']; ?>">
 						<input type="hidden" name="image" value="<?= $fetch_wishlist['image']; ?>">
+						<input type="hidden" name="qty" value="1">
 						<a href="quick_view.php?pid=<?= $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
 						<img src="uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="">
 						<div class="name"><?= $fetch_wishlist['name']; ?></div>
 						<div class="price">$<?= $fetch_wishlist['price']; ?></div>
-						<button type="submit" class="btn" name="add_to_cart">
+						<!-- <button type="submit" class="btn" name="add_to_cart">
+							<i class="fas fa-plus"></i> Add to cart
+						</button> -->
+						<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>" <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>>
 							<i class="fas fa-plus"></i> Add to cart
 						</button>
 						<button type="submit" onclick="return confirm('Remove this from wishlist?');" class="delete-btn" name="delete">

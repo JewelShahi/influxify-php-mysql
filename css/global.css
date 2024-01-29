@@ -413,6 +413,7 @@ span {
 .disabled {
   pointer-events: none;
   user-select: none;
+  filter: grayscale(100%);
   opacity: 0.5;
 }
 

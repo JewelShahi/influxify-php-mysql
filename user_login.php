@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 
   $email = $_POST['email'];
   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  
+
   $pass = sha1($_POST['pass']);
   $pass = filter_var($pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -56,8 +56,8 @@ if (isset($_POST['submit'])) {
     <div>
       <form action="" method="post">
         <h3>Log In</h3>
-        <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
-        <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+        <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
         <input type="submit" value="Log In" class="btn" name="submit">
         <p>Don't have an account?<br>Go ahead and create one for free!</p>
         <a href="user_register.php" class="option-btn">Register</a>

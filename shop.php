@@ -31,32 +31,6 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/user_style.css">
-
-  <style>
-    /* Add your custom styles for real-time search here */
-    #search-results {
-      max-height: 200px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      padding: 5px;
-      position: absolute;
-      width: 100%;
-      background-color: #fff;
-    }
-
-    #search-results a {
-      display: block;
-      padding: 5px;
-      text-decoration: none;
-      color: #333;
-      transition: background-color 0.3s;
-    }
-
-    #search-results a:hover {
-      background-color: #f0f0f0;
-    }
-  </style>
-
 </head>
 
 <body>
@@ -174,9 +148,13 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
               <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
-              <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+              <!-- <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1"> -->
+              <input type="number" name="qty" class="qty" min="1" max="<?php echo $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
             </div>
-            <button type="submit" class="btn" name="add_to_cart">
+            <!-- <button type="submit" class="btn" name="add_to_cart">
+              <i class="fas fa-plus"></i> Add to cart
+            </button> -->
+            <button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>" <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>>
               <i class="fas fa-plus"></i> Add to cart
             </button>
           </form>
