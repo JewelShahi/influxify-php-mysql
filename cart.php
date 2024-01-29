@@ -140,9 +140,8 @@ if (isset($_POST['update_qty'])) {
             <div class="name"><?= $fetch_cart['name']; ?></div>
             <div class="flex">
               <div class="price">$<?= $fetch_cart['price']; ?></div>
-              <input type="number" name="qty" class="qty inp" min="1" max="<?php echo max($fetch_cart['qty'], $fetch_cart['quantity']) + 1 ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
-              <!-- <button type="submit" class="fas fa-edit fa-plus fa-2x" name="update_qty"></button> -->
-              <button type="submit" class="fas fa-edit fa-plus fa-2x update-btn" name="update_qty"></button>
+              <input type="number" name="qty" class="qty" min="1" max="<?php echo max($fetch_cart['qty'], $fetch_cart['quantity']) + 1 ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
+              <button type="submit" class="fas fa-edit fa-plus fa-2x" name="update_qty"></button>
             </div>
             <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
             <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Remove this product from cart?');">
@@ -171,19 +170,6 @@ if (isset($_POST['update_qty'])) {
       <i class="fa-solid fa-wallet"></i> Proceed to checkout
     </a>
   </div>
-
-  <!-- <script>
-    let qtyInputValue = document.querySelector('.qty').value;
-    let updateBtn = document.querySelector('.update-btn');
-
-    if (qtyInputValue == <?php echo $fetch_cart['quantity']; ?>) {
-      updateBtn.disabled = true;
-      updateBtn.classList.add('disabled');
-    } else {
-      updateBtn.disabled = false;
-      updateBtn.classList.remove('disabled');
-    }
-  </script> -->
 
   <?php include 'components/footer.php'; ?>
 
