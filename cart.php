@@ -121,6 +121,8 @@ if (isset($_POST['update_qty'])) {
     <div class="box-container">
 
       <?php
+      $counter = 1;
+
       $grand_total = 0;
       $select_cart = $conn->prepare("
         SELECT c.user_id, c.pid, c.name, c.price, c.quantity, p.qty as qty, p.image_01 as image 
@@ -140,8 +142,8 @@ if (isset($_POST['update_qty'])) {
             <div class="name"><?= $fetch_cart['name']; ?></div>
             <div class="flex">
               <div class="price">$<?= $fetch_cart['price']; ?></div>
-              <input type="number" name="qty" class="qty" min="1" max="<?php echo max($fetch_cart['qty'], $fetch_cart['quantity']) + 1 ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
-              <button type="submit" class="fas fa-edit fa-plus fa-2x" name="update_qty"></button>
+              <input type="number" id="q<?= $counter; ?>" name="qty" class="qty" min="1" max="<?php echo max($fetch_cart['qty'], $fetch_cart['quantity']) + 1 ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
+              <button type="submit" id="u<?= $counter; ?>" class="fas fa-edit fa-plus fa-2x" name="update_qty"></button>
             </div>
             <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
             <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Remove this product from cart?');">
@@ -150,6 +152,7 @@ if (isset($_POST['update_qty'])) {
           </form>
       <?php
           $grand_total += $sub_total;
+          $counter++;
         }
       } else {
         echo '<p class="empty">Your cart is empty</p>';
@@ -170,6 +173,42 @@ if (isset($_POST['update_qty'])) {
       <i class="fa-solid fa-wallet"></i> Proceed to checkout
     </a>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      <?php
+      $counter = 1;
+      $cart_product_quantity = $conn->prepare("
+          SELECT c.user_id, c.pid, c.quantity
+          FROM cart c
+          JOIN products p ON c.pid = p.id 
+          WHERE user_id = ?
+        ");
+      $cart_product_quantity->execute([$user_id]);
+      while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
+      ?>
+        let qInp<?= $counter; ?> = document.getElementById('q<?= $counter; ?>');
+        let uBtn<?= $counter; ?> = document.getElementById('u<?= $counter; ?>');
+
+        qInp<?= $counter; ?>.addEventListener('input', () => {
+          updateButtonState<?= $counter; ?>();
+        });
+
+        updateButtonState<?= $counter; ?>();
+
+        function updateButtonState<?= $counter; ?>() {
+          if (qInp<?= $counter; ?>.value == <?= $fetch_cart['quantity'] ?>) {
+            uBtn<?= $counter; ?>.classList.add('disabled');
+          } else {
+            uBtn<?= $counter; ?>.classList.remove('disabled');
+          }
+        }
+      <?php
+        $counter++;
+      }
+      ?>
+    });
+  </script>
 
   <?php include 'components/footer.php'; ?>
 
