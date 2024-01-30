@@ -73,10 +73,11 @@ include 'components/wishlist_cart.php';
               <div class="name">Color: <?= $fetch_product['color']; ?></div>
               <div class="flex">
                 <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
-                <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+                <!-- <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1"> -->
+                <input type="number" name="qty" class="qty input" min="1" max="<?php echo $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
               </div>
               <div class="flex-btn">
-                <button type="submit" class="btn" name="add_to_cart">
+                <button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>" <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>>
                   <i class="fas fa-plus"></i> Add to cart
                 </button>
                 <button class="option-btn" type="submit" name="add_to_wishlist">

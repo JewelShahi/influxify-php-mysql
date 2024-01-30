@@ -15,7 +15,7 @@ if (isset($message)) {
   <section class="flex">
     <div class="logo">
       <img src="images/influxify-logo.ico" alt="logo" style="width: 30px;">
-      <a href="/influxify/home.php">Influfxi<span>fy</span></a>
+      <a href="/influxify/home.php">Influxi<span>fy</span></a>
     </div>
 
     <nav class="navbar">

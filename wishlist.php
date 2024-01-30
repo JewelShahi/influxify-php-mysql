@@ -77,9 +77,6 @@ if (isset($_GET['delete_all'])) {
 						<img src="uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="">
 						<div class="name"><?= $fetch_wishlist['name']; ?></div>
 						<div class="price">$<?= $fetch_wishlist['price']; ?></div>
-						<!-- <button type="submit" class="btn" name="add_to_cart">
-							<i class="fas fa-plus"></i> Add to cart
-						</button> -->
 						<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>" <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>>
 							<i class="fas fa-plus"></i> Add to cart
 						</button>

@@ -73,7 +73,7 @@ if (isset($_POST['send'])) {
           <input type="email" name="email" placeholder="Enter your email" class="box" required>
           <input type="number" name="number" min="0" max="9999999999" placeholder="Enter your phone number" onkeypress="if(this.value.length == 10) return false;" class="box" required>
           <select name="brand" class="box" aria-labelledby="brandLabel" required>
-            <option selected default disabled>--Add a brand--</option>
+            <option selected default disabled>Select a brand</option>
             <?php
             $selectedBrand = $fetch_products['brand'];
             $brands = array("Samsung", "Apple", "Google", "Xiaomi", "OnePlus", "Lenovo", "Motorola", "Oppo");

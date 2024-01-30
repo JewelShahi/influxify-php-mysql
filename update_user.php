@@ -10,44 +10,39 @@ if (isset($_SESSION['user_id'])) {
   $user_id = '';
 };
 
-if (isset($_POST['submit'])) {
+$select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+$select_profile->execute([$user_id]);
+$fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 
-  $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  // $select_user =
-  $email = $_POST['email'];
-  $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+if (isset($_POST['update_password'])) {
+  // Validate and sanitize input
+  $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $old_pass = filter_var($_POST['old_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $new_pass = filter_var($_POST['new_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $cpass = filter_var($_POST['cpass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
-  $update_profile->execute([$name, $email, $user_id]);
+  // Fetch the user's current password
+  $select_password = $conn->prepare("SELECT password FROM `users` WHERE id = ?");
+  $select_password->execute([$user_id]);
+  $current_password = $select_password->fetchColumn();
 
-  $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
-
-  $prev_pass = $_POST['prev_pass'];
-
-  $old_pass = sha1($_POST['old_pass']);
-  $old_pass = filter_var($old_pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  $new_pass = sha1($_POST['new_pass']);
-  $new_pass = filter_var($new_pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  $cpass = sha1($_POST['cpass']);
-  $cpass = filter_var($cpass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  if ($old_pass == $empty_pass) {
-    $message[] = 'please enter old password!';
-  } elseif ($old_pass != $prev_pass) {
-    $message[] = 'Old password not matched!';
-  } elseif ($new_pass != $cpass) {
-    $message[] = 'Confirm password not matched!';
+  // Check if the entered old password matches the current password
+  if (sha1($old_pass) !== $current_password) {
+    $message[] = 'Old password is incorrect';
+  } elseif ($new_pass !== $cpass) {
+    $message[] = 'New password and confirm password do not match';
   } else {
-    if ($new_pass != $empty_pass) {
-      $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
-      $update_admin_pass->execute([$cpass, $user_id]);
+    // Update user profile
+    $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
+    $update_profile->execute([$name, $email, $user_id]);
 
-      $message[] = 'Password updated successfully!';
-    } else {
-      $message[] = 'Please enter a new password!';
+    // Check if a new password is provided
+    if ($new_pass !== '') {
+      // Update password
+      $update_password = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
+      $update_password->execute([sha1($new_pass), $user_id]);
+      $message[] = 'Password updated successfully';
     }
   }
 }
@@ -73,9 +68,8 @@ if (isset($_POST['submit'])) {
 <body>
 
   <?php include 'components/user_header.php'; ?>
-
-  <section class="user-update form-container">
-    <form action="" method="post" enctype="multipart/form-data">
+  <section class="user-update">
+    <form action="" class="user-form" method="post" enctype="multipart/form-data">
       <h3>Update Profile</h3>
       <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
       <input type="text" name="name" placeholder="Enter your username" maxlength="20" class="box" value="<?= $fetch_profile["name"]; ?>" required>
@@ -83,9 +77,11 @@ if (isset($_POST['submit'])) {
       <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
       <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
       <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="submit" value="Save changes" class="btn" name="submit">
+      <button type="submit" class="btn submit-btn" name="update_password">
+        <i class="fas fa-save"></i> Save Changes
+      </button>
     </form>
-    <form action="">
+    <form action="" class="avatar-form">
       <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
       <div>
         <img src="" alt="" class="">
