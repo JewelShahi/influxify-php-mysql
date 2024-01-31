@@ -2,11 +2,11 @@
 if (isset($message)) {
   foreach ($message as $message) {
     echo '
-         <div class="message">
-            <span>' . $message . '</span>
-            <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-         </div>
-         ';
+      <div class="message">
+        <span>' . $message . '</span>
+        <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+      </div>
+    ';
   }
 }
 ?>
@@ -19,12 +19,23 @@ if (isset($message)) {
     </div>
 
     <nav class="navbar">
-      <a href="../admin/dashboard.php">Dashboard</a>
-      <a href="../admin/products.php">Products</a>
-      <a href="../admin/placed_orders.php">Orders</a>
-      <a href="../admin/admin_accounts.php">Admins</a>
-      <a href="../admin/users_accounts.php">Users</a>
-      <a href="../admin/services.php">Services</a>
+      <a href="../admin/dashboard.php">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+      </a>
+      <a href="../admin/products.php">
+        <i class="fas fa-shopping-bag"></i> Products
+      </a>
+      <a href="../admin/placed_orders.php">
+        <i class="fa-solid fa-clipboard-list"></i> Orders</a>
+      <a href="../admin/admin_accounts.php">
+        <i class="fas fa-user-cog"></i> Admins
+      </a>
+      <a href="../admin/users_accounts.php">
+        <i class="fas fa-users"></i> Users
+      </a>
+      <a href="../admin/services.php">
+        <i class="fa-solid fa-wrench"></i> Services
+      </a>
     </nav>
 
     <div class="icons">
@@ -42,8 +53,11 @@ if (isset($message)) {
         $user_image = "default.png";
       }
       ?>
-      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
-      <div id="menu-btn" class="fas fa-bars"></div>
+
+      <div id="admin-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
+
+      <div id="menu-btn-admin" class="fas fa-bars"></div>
+
     </div>
 
     <div class="profile">
@@ -58,11 +72,9 @@ if (isset($message)) {
           <i class="fas fa-user-edit"></i> Update Profile
         </a>
         <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
-        <i class="fas fa-sign-out-alt"></i> Logout
+          <i class="fas fa-sign-out-alt"></i> Logout
         </a>
       </div>
     </div>
-
   </section>
-
 </header>

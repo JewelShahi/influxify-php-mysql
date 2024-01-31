@@ -1,19 +1,14 @@
 let navbar = document.querySelector(".header .flex .navbar");
 let profile = document.querySelector(".header .flex .profile");
 
-document.querySelector("#menu-btn").onclick = () => {
+document.querySelector("#menu-btn-admin").onclick = () => {
   navbar.classList.toggle("active");
   profile.classList.remove("active");
 };
 
-document.querySelector("#user-btn").onclick = () => {
+document.querySelector("#admin-btn").onclick = () => {
   profile.classList.toggle("active");
   navbar.classList.remove("active");
-};
-
-window.onscroll = () => {
-  navbar.classList.remove("active");
-  profile.classList.remove("active");
 };
 
 let mainImage = document.querySelector(

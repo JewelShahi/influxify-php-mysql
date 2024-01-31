@@ -446,18 +446,31 @@
   color: var(--primary);
 }
 
-@media (max-width: 768px) {
-  #menu-btn {
+#menu-btn-admin {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (max-width: 890px) {
+  #menu-btn-admin {
     display: inline-block;
   }
+}
 
+@media (max-width: 890px) {
   .header .flex .navbar {
     position: absolute;
     top: 99%;
     left: 0;
     right: 0;
+    border-radius: 0 0 10px 10px;
     background-color: var(--white);
-    transition: 0.3s linear;
+    transition: 0.2s linear;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   }
 
@@ -480,28 +493,13 @@
     font-size: 3rem;
   }
 
-  .add-products form textarea {
-    height: 15rem;
-  }
-
-  .show-products .box-container {
-    grid-template-columns: 1fr;
-  }
-
-  .orders .box-container {
-    grid-template-columns: 1fr;
-  }
-
-  .accounts .box-container {
-    grid-template-columns: 1fr;
-  }
-
-  .contacts .box-container {
-    grid-template-columns: 1fr;
+  .flex-btn {
+    flex-flow: column;
+    gap: 0;
   }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 365px) {
   .header .flex {
     flex-direction: column;
     width: 100%;
@@ -510,7 +508,7 @@
 
   .header .flex .profile {
     width: 100%;
-    height: auto;
+    top: 100%;
     right: 0;
   }
 }
