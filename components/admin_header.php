@@ -20,7 +20,7 @@ if (isset($message)) {
 
     <nav class="navbar">
       <a href="../admin/dashboard.php">
-        <i class="fas fa-tachometer-alt"></i> Dashboard
+        <i class="fa-solid fa-chart-simple"></i> Dashboard
       </a>
       <a href="../admin/products.php">
         <i class="fas fa-shopping-bag"></i> Products
