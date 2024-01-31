@@ -450,9 +450,9 @@
   display: none;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 996px) {
   html {
-    font-size: 55%;
+    font-size: 55% !important;
   }
 }
 
@@ -501,7 +501,9 @@
 
 @media (max-width: 365px) {
   .header .flex {
-    flex-direction: column;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
     width: 100%;
     gap: 10px;
   }
