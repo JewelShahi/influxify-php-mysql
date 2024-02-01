@@ -337,40 +337,79 @@
   resize: none;
 }
 
+.orders {
+  background-color: var(--body);
+  min-height: 100vh;
+}
+
 .orders .box-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 33rem);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   align-items: flex-start;
-  justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .orders .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .orders .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
 }
 
 .orders .box-container .box {
-  padding: 2rem;
-  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+  background: url(../images/order-bg-admin.png) center/cover;
   border-radius: var(--border-radius);
-  background-color: var(--white);
-  box-shadow: 0 0 10px var(--black);
+  box-shadow: 0 0 15px var(--black);
+  transition: 300ms ease;
 }
 
-.orders .box-container .box p {
-  line-height: 1.5;
-  font-size: 2rem;
-  color: var(--light-color);
-  margin: 1rem 0;
+.orders .box-container .box:hover {
+  transform: scale(1.02);
 }
 
-.orders .box-container .box p span {
-  color: var(--primary);
-}
-
-.orders .box-container .select {
-  margin-bottom: 0.5rem;
+.orders .box-container .box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: var(--light);
+  height: 100%;
+  z-index: -1;
+}
+
+.orders .box-container .box .blur {
+  width: 100%;
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+.orders .box-container .box .blur p {
+  margin: 0.5rem 0;
+  line-height: 1.8;
+  font-size: 2rem;
+  white-space: pre-line;
+  color: #ffffff;
+}
+
+.orders .box-container .box .blur p span {
+  color: #ffffff;
+  font-size: large;
+}
+
+.orders .box-container .box select{
+  width: 100%;
   padding: 1rem;
-  font-size: 1.8rem;
-  color: var(--black);
+  font-size: 1.7rem;
   border-radius: var(--border-radius);
 }
 
