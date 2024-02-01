@@ -34,7 +34,7 @@ if (isset($_GET['delete'])) {
 
   <?php include '../components/admin_header.php'; ?>
 
-  <section class="contacts">
+  <section class="services">
 
     <h1 class="heading">Services</h1>
 
@@ -47,14 +47,16 @@ if (isset($_GET['delete'])) {
         while ($fetch_service = $select_services->fetch(PDO::FETCH_ASSOC)) {
       ?>
           <div class="box">
-            <p>Placed on : <span><?= $fetch_service['placed_on']; ?></span></p>
-            <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
-            <p> Name : <span><?= $fetch_service['name']; ?></span></p>
-            <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
-            <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
-            <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
-            <p> Problem : <span><?= $fetch_service['description']; ?></span></p>
-            <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn">Delete</a>
+            <div class="blur">
+              <p>Placed on : <span><?= $fetch_service['placed_on']; ?></span></p>
+              <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
+              <p> Name : <span><?= $fetch_service['name']; ?></span></p>
+              <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
+              <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
+              <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
+              <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
+              <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn">Delete</a>
+            </div>
           </div>
       <?php
         }

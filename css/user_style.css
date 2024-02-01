@@ -984,7 +984,6 @@
   padding: 5rem 1rem;
   background: url(../images/service-bg.png) center/cover;
   background-color: rgba(126, 212, 133, 0.4);
-  /*https://i.pinimg.com/originals/6f/6c/15/6f6c1538b050072b002dbc06bedaaf90.jpg*/
   border-radius: var(--border-radius);
   width: 100%;
   color: var(--white);
@@ -997,7 +996,7 @@
   overflow-y: auto;
   backdrop-filter: blur(20px);
   width: 80%;
-  height: 250px;
+  height: 280px;
   padding: 2rem;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: var(--border-radius);
@@ -1019,11 +1018,11 @@
 }
 
 .description-text {
-  padding: 0.5rem;
-  height: auto;
   display: inline-block;
-  max-height: 100px;
   overflow-x: auto;
+  padding: 2rem 0;
+  width: 100%;
+  border-radius: var(--border-radius);
 }
 
 @media (max-width: 400px) {

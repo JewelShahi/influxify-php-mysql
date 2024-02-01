@@ -406,7 +406,7 @@
   font-size: large;
 }
 
-.orders .box-container .box select{
+.orders .box-container .box select {
   width: 100%;
   padding: 1rem;
   font-size: 1.7rem;
@@ -458,7 +458,7 @@
   color: var(--primary);
 }
 
-.contacts .box-container {
+/* .services .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, 33rem);
   gap: 1.5rem;
@@ -466,7 +466,7 @@
   justify-content: center;
 }
 
-.contacts .box-container .box {
+.services .box-container .box {
   padding: 2rem;
   padding-top: 1rem;
   border-radius: var(--border-radius);
@@ -474,15 +474,103 @@
   box-shadow: 0 0 10px var(--black);
 }
 
-.contacts .box-container .box p {
+.services .box-container .box p {
   line-height: 1.5;
   font-size: 2rem;
   color: var(--light-color);
   margin: 1rem 0;
 }
 
-.contacts .box-container .box p span {
+.services .box-container .box p span {
   color: var(--primary);
+} */
+
+.services {
+  background-color: var(--body);
+  min-height: 100vh;
+}
+
+.services .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 1200px) {
+  .services .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .services .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+.services .box-container .box {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+  height: 100%;
+  max-height: 380px;
+  overflow-y: auto;
+  background: url(../images/service-bg-admin.png) center/cover;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 15px var(--black);
+  transition: 300ms ease;
+}
+
+.services .box-container .box:hover {
+  transform: scale(1.02);
+}
+
+.services .box-container .box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.services .box-container .box .blur {
+  width: 100%;
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+.services .box-container .box .blur p {
+  margin: 0.5rem 0;
+  line-height: 1.8;
+  font-size: 2rem;
+  white-space: pre-line;
+  color: #ffffff;
+}
+
+.services .box-container .box .blur p span {
+  color: #ffffff;
+  font-size: large;
+}
+
+.long-text {
+  padding: 2rem 0.5rem;
+  height: auto;
+  display: block;
+  max-height: 150px;
+  overflow-x: auto;
+  background: rgba(65, 65, 65, 0.4);
+  text-align: center;
+  border-radius: var(--border-radius);
+}
+
+.services .box-container .box select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.7rem;
+  border-radius: var(--border-radius);
 }
 
 #menu-btn-admin {

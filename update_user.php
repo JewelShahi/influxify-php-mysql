@@ -68,27 +68,34 @@ if (isset($_POST['update_password'])) {
 <body>
 
   <?php include 'components/user_header.php'; ?>
-  <section class="user-update">
-    <form action="" class="user-form" method="post" enctype="multipart/form-data">
-      <h3>Update Profile</h3>
-      <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-      <input type="text" name="name" placeholder="Enter your username" maxlength="20" class="box" value="<?= $fetch_profile["name"]; ?>" required>
-      <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
-      <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <button type="submit" class="btn submit-btn" name="update_password">
-        <i class="fas fa-save"></i> Save Changes
-      </button>
-    </form>
-    <form action="" class="avatar-form">
-      <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
-      <div>
-        <img src="" alt="" class="">
-      </div>
-      <input type="submit" value="update avatar" class="btn" name="update_avatar">
-    </form>
-  </section>
+  <?php if ($user_id == '') {
+    header("location: home.php");
+  } else {
+  ?>
+    <section class="user-update">
+      <form action="" class="user-form" method="post" enctype="multipart/form-data">
+        <h3>Update Profile</h3>
+        <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
+        <input type="text" name="name" placeholder="Enter your username" maxlength="20" class="box" value="<?= $fetch_profile["name"]; ?>" required>
+        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
+        <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <button type="submit" class="btn submit-btn" name="update_password">
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+      </form>
+      <form action="" class="avatar-form">
+        <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
+        <div>
+          <img src="" alt="" class="">
+        </div>
+        <input type="submit" value="update avatar" class="btn" name="update_avatar">
+      </form>
+    </section>
+  <?php
+  }
+  ?>
   <?php include 'components/footer.php'; ?>
 
   <script src="js/user_script.js"></script>
