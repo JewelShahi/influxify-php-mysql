@@ -42,13 +42,14 @@ if (isset($_GET['delete'])) {
 
     <h1 class="heading">Admin accounts</h1>
 
-    <div class="box-container">
-
-      <div class="box">
+    <div class="new-admin-container">
+      <div id="add-new-admin">
         <p>Add a new admin</p>
         <a href="register_admin.php" class="option-btn">Register an admin</a>
       </div>
+    </div>
 
+    <div class="box-container">
       <div class="info">
         <?php
         $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 1");

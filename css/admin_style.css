@@ -421,13 +421,17 @@
 .accounts .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: 10px;
   align-items: flex-start;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1200px) {
   .accounts .box-container {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted the minmax here as well */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(250px, 1fr)
+    );
   }
 }
 
@@ -438,20 +442,32 @@
 }
 
 .accounts .box-container .info {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  width: 90%;
-  gap: 1.5rem;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 .accounts .box-container .info .box {
-  flex: 1 1 200px;
+  margin: 0;
+  flex: 1 1 calc(25% - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  box-sizing: border-box;
 }
 
-.accounts .box-container .box {
+.accounts .box-container .info .box > * {
+  width: 100%;
+}
+
+.accounts .box-container .box,
+#add-new-admin {
   padding: 10px;
   padding-top: 0.5rem;
   border-radius: var(--border-radius);
@@ -460,7 +476,7 @@
   box-shadow: 0 0 10px var(--black);
 }
 
-.accounts .box-container .box p {
+.accounts .box-container .box p{
   font-size: 2rem;
   color: var(--light-color);
   margin: 1rem 0;
@@ -468,6 +484,40 @@
 
 .accounts .box-container .box p span {
   color: var(--primary);
+}
+
+.new-admin-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+#add-new-admin {
+  width: 100%;
+  padding: 8rem 2rem;
+}
+
+#add-new-admin:hover p {
+  transform: scale(1.2);
+}
+
+#add-new-admin p {
+  font-weight: bolder;
+  font-size: 3rem;
+  color: var(--light-color);
+  margin: 2.5rem 0;
+}
+
+#add-new-admin p span {
+  color: var(--primary);
+}
+
+#add-new-admin a {
+  font-size: 2rem;
+  padding: 1.5rem;
 }
 
 .services {
