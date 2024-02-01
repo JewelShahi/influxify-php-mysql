@@ -419,10 +419,22 @@
 }
 
 .accounts .box-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  align-items: center;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 1200px) {
+  .accounts .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted the minmax here as well */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .accounts .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
 }
 
 .accounts .box-container .info {
@@ -458,33 +470,6 @@
   color: var(--primary);
 }
 
-/* .services .box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 33rem);
-  gap: 1.5rem;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.services .box-container .box {
-  padding: 2rem;
-  padding-top: 1rem;
-  border-radius: var(--border-radius);
-  background-color: var(--white);
-  box-shadow: 0 0 10px var(--black);
-}
-
-.services .box-container .box p {
-  line-height: 1.5;
-  font-size: 2rem;
-  color: var(--light-color);
-  margin: 1rem 0;
-}
-
-.services .box-container .box p span {
-  color: var(--primary);
-} */
-
 .services {
   background-color: var(--body);
   min-height: 100vh;
@@ -514,7 +499,7 @@
   flex-direction: column;
   margin: auto 0;
   height: 100%;
-  max-height: 380px;
+  max-height: 460px;
   overflow-y: auto;
   background: url(../images/service-bg-admin.png) center/cover;
   border-radius: var(--border-radius);

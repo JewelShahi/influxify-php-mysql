@@ -13,21 +13,6 @@ if (isset($_GET['delete'])) {
     $_SESSION['user_id'] = "";
   }
 
-  // $delete_orders = $conn->prepare("DELETE FROM `orders` WHERE user_id = ?");
-  // $delete_orders->execute([$delete_id]);
-
-  // $delete_services = $conn->prepare("DELETE FROM `services` WHERE user_id = ?");
-  // $delete_services->execute([$delete_id]);
-
-  // $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
-  // $delete_cart->execute([$delete_id]);
-
-  // $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE user_id = ?");
-  // $delete_wishlist->execute([$delete_id]);
-
-  // $delete_services = $conn->prepare("DELETE FROM `services` WHERE user_id = ?");
-  // $delete_services->execute([$delete_id]);
-
   $delete_user = $conn->prepare("DELETE FROM `users` WHERE id = ?");
   $delete_user->execute([$delete_id]);
 
