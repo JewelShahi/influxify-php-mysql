@@ -1,5 +1,4 @@
 <?php
-
 include '../components/connect.php';
 
 session_start();
@@ -9,7 +8,6 @@ $admin_id = $_SESSION['admin_id'];
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +20,8 @@ if (!isset($admin_id)) {
   <title>Admin Dashboard</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
   <link rel="stylesheet" href="../css/admin_style.css">
-
+  <link rel="stylesheet" href="../css/global.css">
 </head>
 
 <body>
@@ -45,45 +42,79 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
-        $total_pendings = 0;
-        $select_pendings = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-        $select_pendings->execute(['pending']);
-        if ($select_pendings->rowCount() > 0) {
-          while ($fetch_pendings = $select_pendings->fetch(PDO::FETCH_ASSOC)) {
-            $total_pendings += $fetch_pendings['total_price'];
-          }
-        }
-        ?>
-        <h3><span>$</span><?= $total_pendings; ?><span>/-</span></h3>
-        <p>Total Pendings</p>
-        <a href="placed_orders.php" class="btn">See All Orders</a>
-      </div>
-
-      <div class="box">
-        <?php
-        $total_completes = 0;
-        $select_completes = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-        $select_completes->execute(['completed']);
-        if ($select_completes->rowCount() > 0) {
-          while ($fetch_completes = $select_completes->fetch(PDO::FETCH_ASSOC)) {
-            $total_completes += $fetch_completes['total_price'];
-          }
-        }
-        ?>
-        <h3><span>$</span><?= $total_completes; ?><span>/-</span></h3>
-        <p>Completed Orders</p>
-        <a href="placed_orders.php" class="btn">See All Orders</a>
-      </div>
-
-      <div class="box">
-        <?php
-        $select_orders = $conn->prepare("SELECT * FROM `orders`");
+        $select_orders = $conn->prepare("SELECT SUM(price * qty) AS total_income FROM orders WHERE payment_status = 'completed'");
         $select_orders->execute();
-        $number_of_orders = $select_orders->rowCount()
+        $income = $select_orders->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income['total_income'], 2, '.', ','); ?></h3>
+        <p>Total income</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_orders = $conn->prepare("SELECT id FROM orders GROUP BY id");
+        $select_orders->execute();
+        $number_of_orders = $select_orders->rowCount();
         ?>
         <h3><?= $number_of_orders; ?></h3>
-        <p>Orders Placed</p>
-        <a href="placed_orders.php" class="btn">See All Orders</a>
+        <p>Total orders</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_order_status_processing = $conn->prepare("SELECT id FROM orders WHERE order_status = 'processing' GROUP BY id");
+        $select_order_status_processing->execute();
+        $number_of_order_status_processing = $select_order_status_processing->rowCount()
+        ?>
+        <h3><?= $number_of_order_status_processing; ?></h3>
+        <p>Total processing order status</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_order_status_shipping = $conn->prepare("SELECT id FROM orders WHERE order_status = 'shipping' GROUP BY id");
+        $select_order_status_shipping->execute();
+        $number_of_order_status_shipping = $select_order_status_shipping->rowCount()
+        ?>
+        <h3><?= $number_of_order_status_shipping; ?></h3>
+        <p>Total shipping order status</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_order_status_delivered = $conn->prepare("SELECT id FROM orders WHERE order_status = 'delivered' GROUP BY id");
+        $select_order_status_delivered->execute();
+        $number_of_order_status_delivered = $select_order_status_delivered->rowCount()
+        ?>
+        <h3><?= $number_of_order_status_delivered; ?></h3>
+        <p>Total delivered order status</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_payment_status_pendings = $conn->prepare("SELECT id FROM orders WHERE payment_status = 'pending' GROUP BY id");
+        $select_payment_status_pendings->execute();
+        $number_of_payment_status_pendings = $select_payment_status_pendings->rowCount()
+        ?>
+        <h3><?= $number_of_payment_status_pendings; ?></h3>
+        <p>Total pending payment status</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_payment_status_completed = $conn->prepare("SELECT id FROM orders WHERE payment_status = 'completed' GROUP BY id");
+        $select_payment_status_completed->execute();
+        $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
+        ?>
+        <h3><?= $number_of_payment_status_completed; ?></h3>
+        <p>Total completed payment status</p>
+        <a href="placed_orders.php" class="btn">See all orders</a>
       </div>
 
       <div class="box">
@@ -93,8 +124,8 @@ if (!isset($admin_id)) {
         $number_of_products = $select_products->rowCount()
         ?>
         <h3><?= $number_of_products; ?></h3>
-        <p>Products Added</p>
-        <a href="products.php" class="btn">See All Products</a>
+        <p>Total products</p>
+        <a href="products.php" class="btn">See all products</a>
       </div>
 
       <div class="box">
@@ -104,8 +135,8 @@ if (!isset($admin_id)) {
         $number_of_users = $select_users->rowCount()
         ?>
         <h3><?= $number_of_users; ?></h3>
-        <p>Users</p>
-        <a href="users_accounts.php" class="btn">See All Users</a>
+        <p>Total users</p>
+        <a href="users_accounts.php" class="btn">See all users</a>
       </div>
 
       <div class="box">
@@ -115,26 +146,27 @@ if (!isset($admin_id)) {
         $number_of_admins = $select_admins->rowCount()
         ?>
         <h3><?= $number_of_admins; ?></h3>
-        <p>Admins</p>
-        <a href="admin_accounts.php" class="btn">See All Admins</a>
+        <p>Total admins</p>
+        <a href="admin_accounts.php" class="btn">See all admins</a>
       </div>
 
       <div class="box">
         <?php
-        $select_messages = $conn->prepare("SELECT * FROM `messages`");
-        $select_messages->execute();
-        $number_of_messages = $select_messages->rowCount()
+        $select_services = $conn->prepare("SELECT * FROM `services`");
+        $select_services->execute();
+        $number_of_services = $select_services->rowCount()
         ?>
-        <h3><?= $number_of_messages; ?></h3>
-        <p>New Messages</p>
-        <a href="messagess.php" class="btn">See All Messages</a>
+        <h3><?= $number_of_services; ?></h3>
+        <p>Total services</p>
+        <a href="services.php" class="btn">See all services</a>
       </div>
 
     </div>
 
   </section>
   <script src="../js/admin_script.js"></script>
-
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>
