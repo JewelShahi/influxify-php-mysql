@@ -1,6 +1,8 @@
 <?php
 include '../components/connect.php';
+
 session_start();
+
 if (isset($_POST['submit'])) {
   $email = $_POST['email'];
   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -13,7 +15,9 @@ if (isset($_POST['submit'])) {
   $row = $select_admin->fetch(PDO::FETCH_ASSOC);
 
   if ($select_admin->rowCount() > 0) {
+
     $_SESSION['admin_id'] = $row['id'];
+    
     header('location:dashboard.php');
   } else {
     $message[] = 'Incorrect username or password!';

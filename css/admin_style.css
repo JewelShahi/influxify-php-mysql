@@ -608,6 +608,12 @@
   border-radius: var(--border-radius);
 }
 
+.services .box-container .box .blur p input{
+  font-size: 1.8rem;
+  padding: 1.4rem;
+  border-radius: var(--border-radius);
+}
+
 #menu-btn-admin {
   display: none;
 }
