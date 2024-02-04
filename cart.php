@@ -1,27 +1,14 @@
 <?php
 include 'components/connect.php';
+session_name('user_session');
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-  $user_id = $_SESSION['user_id'];
+if (isset($_SESSION['user']['user_id'])) {
+  $user_id = $_SESSION['user']['user_id'];
 } else {
   $user_id = '';
   header('location:user_login.php');
 };
-
-// if (isset($_POST['delete'])) {
-//   $pid = $_POST['pid'];
-
-//   $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE user_id = ? AND pid = ?");
-//   $delete_cart_item->execute([$user_id, $pid]);
-// }
-
-// if (isset($_GET['delete_all'])) {
-//   $delete_all_cart_items = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
-//   $delete_all_cart_items->execute([$user_id]);
-//   header('location: cart.php');
-//   exit();
-// }
 
 if (isset($_POST['delete'])) {
   $pid = $_POST['pid'];

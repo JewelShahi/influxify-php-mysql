@@ -1,9 +1,10 @@
 <?php
 include '../components/connect.php';
 
+session_name('admin_session');
 session_start();
 
-$admin_id = $_SESSION['admin_id'];
+$admin_id = $_SESSION['admin']['admin_id'];
 
 if (!isset($admin_id)) {
   header('location:admin_login.php');
@@ -12,8 +13,8 @@ if (isset($_GET['delete'])) {
 
   $delete_id = $_GET['delete'];
 
-  if ($_SESSION['admin_id'] == $delete_id) {
-    $_SESSION['admin_id'] = "";
+  if ($_SESSION['admin']['admin_id'] == $delete_id) {
+    $_SESSION['admin']['admin_id'] = "";
   }
 
   $delete_admins = $conn->prepare("DELETE FROM `users` WHERE id = ? AND isAdmin = 1");
@@ -69,7 +70,11 @@ if (isset($_GET['delete'])) {
                   echo '<a href="update_profile.php" class="option-btn">Update</a>';
                 }
                 ?>
-                <a href="admin_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account?')" class="delete-btn">Delete</a>
+                <?php
+                if ($fetch_accounts['id'] != $admin_id && $fetch_accounts['id'] != 2) {
+                  echo '<a href="admin_accounts.php?delete=' . $fetch_accounts['id'] . '" onclick="return confirm(\'Delete this account?\')" class="delete-btn">Delete</a>';
+                }
+                ?>
               </div>
             </div>
         <?php

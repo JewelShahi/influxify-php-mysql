@@ -1,7 +1,9 @@
 <?php
 include '../components/connect.php';
+session_name('admin_session');
 session_start();
-$admin_id = $_SESSION['admin_id'];
+$admin_id = $_SESSION['admin']['admin_id'];
+
 if (!isset($admin_id)) {
   header('location:admin_login.php');
 };

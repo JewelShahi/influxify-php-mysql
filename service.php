@@ -1,12 +1,13 @@
 <?php
 include 'components/connect.php';
-
+session_name('user_session');
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-  $user_id = $_SESSION['user_id'];
+if (isset($_SESSION['user']['user_id'])) {
+  $user_id = $_SESSION['user']['user_id'];
 } else {
   $user_id = '';
+  header("location:user_login.php");
 }
 
 if (isset($_POST['send'])) {
@@ -32,6 +33,14 @@ if (isset($_POST['send'])) {
   $message[] = 'Service ticket sent successfully!';
 
   // Redirect to a different page to prevent form resubmission
+  header('location:service.php');
+}
+
+if (isset($_GET['delete'])) {
+  $delete_id = $_GET['delete'];
+  $delete_service = $conn->prepare("DELETE FROM `services` WHERE id = ?");
+  $delete_service->execute([$delete_id]);
+
   header('location:service.php');
 }
 
@@ -83,7 +92,6 @@ if (isset($_POST['send'])) {
             }
             ?>
           </select>
-          <!-- <input type="text" name="brand" placeholder="Enter phone brand" class="box" required> -->
           <textarea name="description" class="box" placeholder="Enter description" cols="30" rows="10" required></textarea>
           <button type="submit" name="send" class="btn">Add service ticket</button>
         </form>
@@ -97,18 +105,25 @@ if (isset($_POST['send'])) {
         <h3 class="heading-2">Placed services</h3>
         <div class="service-box-container">
           <?php
-          while ($fetch_orders = $select_services->fetch(PDO::FETCH_ASSOC)) {
+          while ($fetch_services = $select_services->fetch(PDO::FETCH_ASSOC)) {
           ?>
-            <div class="service-box">
+            <form action="" method="post" class="service-box">
               <div>
-                <p>Placed on: <span><?= $fetch_orders['placed_on']; ?></span></p>
-                <p>Name: <span><?= $fetch_orders['name']; ?></span></p>
-                <p>E-mail: <span><?= $fetch_orders['email']; ?></span></p>
-                <p>Phone number: <span><?= $fetch_orders['number']; ?></span></p>
-                <p>Phone brand: <span><?= $fetch_orders['brand']; ?></span></p>
-                <p>Problem: <br><span class="description-text"><?= $fetch_orders['description']; ?></span></p>
+                <p>Placed on: <span><?= $fetch_services['placed_on']; ?></span></p>
+                <p>Name: <span><?= $fetch_services['name']; ?></span></p>
+                <p>E-mail: <span><?= $fetch_services['email']; ?></span></p>
+                <p>Phone number: <span><?= $fetch_services['number']; ?></span></p>
+                <p>Phone brand: <span><?= $fetch_services['brand']; ?></span></p>
+                <p>Problem: <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
+                <?php
+                if ($fetch_services['price'] > 0) {
+                  echo '<p>Price: <br><span>' . $fetch_services['price'] . '</span></p>';
+                  echo '<a href="home.php" class="option-btn">Pay for the service</a>';
+                  echo '<a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm(\'Decline this order?\');">Decline service</a>';
+                }
+                ?>
               </div>
-            </div>
+            </form>
         <?php
           }
         } else {

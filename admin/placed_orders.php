@@ -2,9 +2,10 @@
 
 include '../components/connect.php';
 
+session_name('admin_session');
 session_start();
 
-$admin_id = $_SESSION['admin_id'];
+$admin_id = $_SESSION['admin']['admin_id'];
 
 if (!isset($admin_id)) {
   header('location:admin_login.php');
@@ -29,6 +30,7 @@ if (isset($_POST['update_payment'])) {
 
     $update_order_status = $conn->prepare("UPDATE `orders` SET order_status = ? WHERE id = ?");
     $update_order_status->execute([$order_status, $order_id]);
+    
     $message[] = 'Order status updated!';
   }
 }
@@ -37,6 +39,7 @@ if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE id = ?");
   $delete_order->execute([$delete_id]);
+
   header('location: placed_orders.php');
 }
 

@@ -1,22 +1,16 @@
 <?php
 
-// include 'connect.php';
-
-// session_start();
-// session_unset();
-// session_destroy();
-
-// header('location:../admin/admin_login.php');
-
 include 'connect.php';
 
+session_name('admin_session');
 session_start();
 
 // Unset the specific admin session variable
-unset($_SESSION['admin_id']);
+unset($_SESSION['admin']['admin_id']);
 
-// Destroy the entire session
 session_destroy();
+
+session_regenerate_id(true);
 
 header('location:../admin/admin_login.php');
 
