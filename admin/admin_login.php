@@ -5,20 +5,20 @@ session_name('admin_session');
 session_start();
 
 if (isset($_POST['submit'])) {
-  $email = $_POST['email'];
-  $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  
+  $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $pass = sha1($_POST['pass']);
-  $pass = filter_var($pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $pass = filter_var($_POST['pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $hash_pass = sha1($pass);
 
   $select_admin = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ? AND isAdmin = 1");
-  $select_admin->execute([$email, $pass]);
+  $select_admin->execute([$email, $hash_pass]);
   $row = $select_admin->fetch(PDO::FETCH_ASSOC);
 
   if ($select_admin->rowCount() > 0) {
 
     $_SESSION['admin']['admin_id'] = $row['id'];
-    
+
     header('location:dashboard.php');
   } else {
     $message[] = 'Incorrect username or password!';
@@ -66,7 +66,6 @@ if (isset($_POST['submit'])) {
         <input type="submit" value="Log In" class="btn" name="submit">
       </form>
     </div>
-
   </section>
 
 </body>

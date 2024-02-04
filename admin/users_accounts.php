@@ -1,5 +1,6 @@
 <?php
 include '../components/connect.php';
+
 session_name('admin_session');
 session_start();
 $admin_id = $_SESSION['admin']['admin_id'];
