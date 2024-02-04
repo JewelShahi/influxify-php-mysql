@@ -78,8 +78,8 @@ if (isset($_POST['submit'])) {
   <section class="form-container">
     <form action="" method="post">
       <h3>Register Admin</h3>
-      <input type="text" name="name" placeholder="Enter your name" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="email" name="email" placeholder="Enter your e-mail" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+      <input type="text" name="name" placeholder="Enter your name" maxlength="100" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+      <input type="email" name="email" placeholder="Enter your e-mail" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
       <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
       <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
       <input type="submit" value="Register" class="btn" name="submit">

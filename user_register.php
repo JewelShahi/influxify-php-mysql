@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
     <div>
       <form action="" method="post">
         <h3>Register</h3>
-        <input type="text" name="name" required placeholder="Enter your username" maxlength="20" class="input box">
+        <input type="text" name="name" required placeholder="Enter your username" maxlength="100" class="input box">
         <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
         <div class="passwords">
           <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">

@@ -16,23 +16,37 @@ $select_profile->execute([$user_id]);
 $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 
 if (isset($_POST['update_password'])) {
+
   // Validate and sanitize input
   $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
+
   $old_pass = filter_var($_POST['old_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $hash_old_pass = sha1($old_pass);
+
   $new_pass = filter_var($_POST['new_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $hash_new_pass = sha1($new_pass);
+
   $cpass = filter_var($_POST['cpass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $hash_cpass = sha1($cpass);
 
   // Fetch the user's current password
   $select_password = $conn->prepare("SELECT password FROM `users` WHERE id = ?");
   $select_password->execute([$user_id]);
   $current_password = $select_password->fetchColumn();
 
-  // Check if the entered old password matches the current password
-  if (sha1($old_pass) !== $current_password) {
-    $message[] = 'Old password is incorrect';
-  } elseif ($new_pass !== $cpass) {
-    $message[] = 'New password and confirm password do not match';
+  if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/', $new_pass)) {
+    $message[] = 'Password must be at least 8 characters and contain at least one uppercase letter, lowercase letter and a digit!';
+  } elseif ($hash_old_pass == $empty_pass) {
+    $message[] = 'Please enter old password!';
+  } elseif ($hash_old_pass != $current_password) {
+    $message[] = 'Old password not matched!';
+  } elseif ($hash_new_pass == $hash_old_pass) {
+    $message[] = 'New password must be different from the old password!';
+  } elseif ($hash_new_pass !== $hash_cpass) {
+    $message[] = 'Confirm password not matched!';
   } else {
     // Update user profile
     $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
@@ -77,7 +91,7 @@ if (isset($_POST['update_password'])) {
       <form action="" class="user-form" method="post" enctype="multipart/form-data">
         <h3>Update Profile</h3>
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-        <input type="text" name="name" placeholder="Enter your username" maxlength="20" class="box" value="<?= $fetch_profile["name"]; ?>" required>
+        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required>
         <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
         <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
         <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>

@@ -126,11 +126,11 @@ if (isset($_POST['order'])) {
       <div class="flex">
         <div class="inputBox">
           <span>Your name :</span>
-          <input type="text" name="name" placeholder="Enter your name" class="box" maxlength="20" required>
+          <input type="text" name="name" placeholder="Enter your name" class="box" maxlength="100" required>
         </div>
         <div class="inputBox">
-          <span>Your phonr number :</span>
-          <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
+          <span>Your phone number :</span>
+          <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="999999999999999" onkeypress="if(this.value.length < 10 || this.value.length > 15) return false;" required>
         </div>
         <div class="inputBox">
           <span>Your email :</span>

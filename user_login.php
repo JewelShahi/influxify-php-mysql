@@ -57,17 +57,22 @@ if (isset($_POST['submit'])) {
       <form action="" method="post">
         <h3>Log In</h3>
         <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
-        <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <!-- <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required> -->
+        <div class="password-container">
+          <input type="password" name="pass" id="passwordInput" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword()"></span>
+        </div>
         <input type="submit" value="Log In" class="btn" name="submit">
         <p>Don't have an account?<br>Go ahead and create one for free!</p>
         <a href="user_register.php" class="option-btn">Register</a>
       </form>
     </div>
   </section>
-  <!-- <?php include 'components/footer.php'; ?> -->
+
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
+  <script src="js/toggle_password.js"></script>
 </body>
 
 </html>

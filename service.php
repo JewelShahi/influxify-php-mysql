@@ -78,18 +78,20 @@ if (isset($_GET['delete'])) {
       <div class="add-ticket">
         <form action="" method="post">
           <h3>Add a service ticket</h3>
-          <input type="text" name="name" placeholder="Enter your full name" class="box" required>
-          <input type="email" name="email" placeholder="Enter your email" class="box" required>
-          <input type="number" name="number" min="0" max="9999999999" placeholder="Enter your phone number" onkeypress="if(this.value.length == 10) return false;" class="box" required>
+          <input type="text" name="name" placeholder="Enter your full name" maxlength="100" class="box" required>
+          <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" required>
+          <input type="number" name="number" min="0" max="999999999999999" placeholder="Enter your phone number" onkeypress="if(this.value.length < 10 || this.value.length > 15) return false;" class="box" required>
           <select name="brand" class="box" aria-labelledby="brandLabel" required>
             <option selected default disabled>Select a brand</option>
             <?php
+
             $selectedBrand = $fetch_products['brand'];
             $brands = array("Samsung", "Apple", "Google", "Xiaomi", "OnePlus", "Lenovo", "Motorola", "Oppo");
 
             foreach ($brands as $brandOption) {
               echo '<option value="' . $brandOption . '" ' . ($brandOption == $selectedBrand ? 'selected' : '') . '>' . $brandOption . '</option>';
             }
+
             ?>
           </select>
           <textarea name="description" class="box" placeholder="Enter description" cols="30" rows="10" required></textarea>
@@ -98,8 +100,10 @@ if (isset($_GET['delete'])) {
       </div>
 
       <?php
+
       $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ? ORDER BY placed_on DESC");
       $select_services->execute([$user_id]);
+      
       if ($select_services->rowCount() > 0) {
       ?>
         <h3 class="heading-2">Placed services</h3>

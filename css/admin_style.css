@@ -670,15 +670,15 @@
 @media (max-width: 365px) {
   .header .flex {
     flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100%;
-    gap: 10px;
+    /* align-items: center !important;
+    justify-content: center !important; */
+    width: 100% !important;
+    gap: 10px !important;
   }
 
   .header .flex .profile {
-    width: 100%;
-    top: 100%;
-    right: 0;
+    width: 100% !important;
+    top: 100% !important;
+    right: 0 !important;
   }
 }
