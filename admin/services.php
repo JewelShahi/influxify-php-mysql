@@ -96,7 +96,7 @@ if (isset($_GET['delete'])) {
               </select>
               <div class="flex-btn">
                 <button type="submit" name="update_service" class="option-btn">Update</button>
-                <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn">Delete</a>
+                <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn" style="<?= ($fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Delete</a>
               </div>
             </div>
           </form>

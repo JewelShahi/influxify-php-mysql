@@ -27,13 +27,22 @@ if (isset($_POST['send'])) {
   $description = $_POST['description'];
   $description = filter_var($description, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $insert_service = $conn->prepare("INSERT INTO `services` (user_id, name, email, number, brand, description) VALUES(?,?,?,?,?,?)");
-  $insert_service->execute([$user_id, $name, $email, $number, $brand, $description]);
+  if (!preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/", $email)) {
+    $message[] = 'Invalid email format!';
+  } else {
+    try {
+      $insert_service = $conn->prepare("INSERT INTO `services` (user_id, name, email, number, brand, description) VALUES(?,?,?,?,?,?)");
+      $insert_service->execute([$user_id, $name, $email, $number, $brand, $description]);
 
-  $message[] = 'Service ticket sent successfully!';
+      $message[] = 'Service ticket sent successfully!';
 
-  // Redirect to a different page to prevent form resubmission
-  header('location:service.php');
+      // Redirect to a different page to prevent form resubmission
+      header('location:service.php');
+    } catch (PDOException $e) {
+      // Handle the exception - display an error message or log the error
+      $message[] = 'Error: ' . $e->getMessage();
+    }
+  }
 }
 
 if (isset($_GET['delete'])) {
@@ -76,7 +85,7 @@ if (isset($_GET['delete'])) {
     } else {
     ?>
       <div class="add-ticket">
-        <form action="" method="post">
+        <form action="service_checkout.php" method="post">
           <h3>Add a service ticket</h3>
           <input type="text" name="name" placeholder="Enter your full name" maxlength="100" class="box" required>
           <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" required>
@@ -114,19 +123,17 @@ if (isset($_GET['delete'])) {
             <form action="service_checkout.php" method="POST" class="service-box">
               <div>
                 <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
-                <input type="hidden" name="service_name" value="<?= $fetch_services["name"]; ?>">
-                <input type="hidden" name="service_email" value="<?= $fetch_services["email"]; ?>">
-                <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
                 <input type="hidden" name="service_price" value="<?= $fetch_services["price"]; ?>">
-                <p>Placed on: <span><?= $fetch_services['placed_on']; ?></span></p>
-                <p>Name: <span><?= $fetch_services['name']; ?></span></p>
-                <p>E-mail: <span><?= $fetch_services['email']; ?></span></p>
-                <p>Phone number: <span><?= $fetch_services['number']; ?></span></p>
-                <p>Phone brand: <span><?= $fetch_services['brand']; ?></span></p>
-                <p>Problem: <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
-                <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price: <br><span><?= $fetch_services['price']; ?></span></p>
-                <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Pay for the service</button>
-                <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Decline service</a>
+                <p>Placed on : <span><?= $fetch_services['placed_on']; ?></span></p>
+                <p>Name : <span><?= $fetch_services['name']; ?></span></p>
+                <p>E-mail : <span><?= $fetch_services['email']; ?></span></p>
+                <p>Phone number : <span><?= $fetch_services['number']; ?></span></p>
+                <p>Phone brand : <span><?= $fetch_services['brand']; ?></span></p>
+                <p>Problem : <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
+                <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_services['delivery']; ?></span></p>
+                <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price (with delivery if included): <br><span><?= $fetch_services['price']; ?></span></p>
+                <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Pay for the service</button>
+                <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Decline service</a>
               </div>
             </form>
         <?php
