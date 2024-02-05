@@ -93,9 +93,18 @@ if (isset($_POST['update_password'])) {
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
         <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required>
         <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
-        <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <div class="password-container">
+          <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+        </div>
+        <div class="password-container">
+          <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+        </div>
+        <div class="password-container">
+          <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+        </div>
         <button type="submit" class="btn submit-btn" name="update_password">
           <i class="fas fa-save"></i> Save Changes
         </button>
@@ -116,6 +125,8 @@ if (isset($_POST['update_password'])) {
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
+  <script src="js/toggle_password.js"></script>
+
 </body>
 
 </html>

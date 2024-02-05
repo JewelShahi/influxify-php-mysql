@@ -103,7 +103,7 @@ if (isset($_GET['delete'])) {
 
       $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ? ORDER BY placed_on DESC");
       $select_services->execute([$user_id]);
-      
+
       if ($select_services->rowCount() > 0) {
       ?>
         <h3 class="heading-2">Placed services</h3>
@@ -111,21 +111,22 @@ if (isset($_GET['delete'])) {
           <?php
           while ($fetch_services = $select_services->fetch(PDO::FETCH_ASSOC)) {
           ?>
-            <form action="" method="post" class="service-box">
+            <form action="service_checkout.php" method="POST" class="service-box">
               <div>
+                <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
+                <input type="hidden" name="service_name" value="<?= $fetch_services["name"]; ?>">
+                <input type="hidden" name="service_email" value="<?= $fetch_services["email"]; ?>">
+                <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
+                <input type="hidden" name="service_price" value="<?= $fetch_services["price"]; ?>">
                 <p>Placed on: <span><?= $fetch_services['placed_on']; ?></span></p>
                 <p>Name: <span><?= $fetch_services['name']; ?></span></p>
                 <p>E-mail: <span><?= $fetch_services['email']; ?></span></p>
                 <p>Phone number: <span><?= $fetch_services['number']; ?></span></p>
                 <p>Phone brand: <span><?= $fetch_services['brand']; ?></span></p>
                 <p>Problem: <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
-                <?php
-                if ($fetch_services['price'] > 0) {
-                  echo '<p>Price: <br><span>' . $fetch_services['price'] . '</span></p>';
-                  echo '<a href="home.php" class="option-btn">Pay for the service</a>';
-                  echo '<a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm(\'Decline this order?\');">Decline service</a>';
-                }
-                ?>
+                <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price: <br><span><?= $fetch_services['price']; ?></span></p>
+                <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Pay for the service</button>
+                <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Decline service</a>
               </div>
             </form>
         <?php

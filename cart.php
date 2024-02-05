@@ -153,10 +153,10 @@ if (isset($_POST['update_qty'])) {
     <a href="shop.php" class="option-btn">
       <i class="fas fa-arrow-left"></i> Continue shopping
     </a>
-    <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">
+    <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">
       <i class="fas fa-trash-alt"></i> Remove all products
     </a>
-    <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">
+    <a href="checkout.php" class="btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>">
       <i class="fa-solid fa-wallet"></i> Proceed to checkout
     </a>
   </div>

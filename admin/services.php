@@ -9,7 +9,7 @@ if (!isset($admin_id)) {
 };
 
 if (isset($_POST['update_service'])) {
-  
+
   $service_id = $_POST['service_id'];
   $estimated_price = $_POST['estimated_price'];
 
@@ -65,7 +65,7 @@ if (isset($_GET['delete'])) {
     <div class="box-container">
 
       <?php
-      $select_services = $conn->prepare("SELECT * FROM `services` ORDER BY `placed_on` DESC");
+      $select_services = $conn->prepare("SELECT * FROM `services` ORDER BY `isResolved` ASC, `placed_on` DESC");
       $select_services->execute();
       if ($select_services->rowCount() > 0) {
         while ($fetch_service = $select_services->fetch(PDO::FETCH_ASSOC)) {
@@ -81,7 +81,7 @@ if (isset($_GET['delete'])) {
               <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
               <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
               <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
-              <p> Estimated price (with delivery if included) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>"></p>
+              <p> Estimated price (with delivery if included) :  <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'disabled' : ''; ?>></p>
               <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
               <p id="paymentStatusLabel">Payment status :</p>
               <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
