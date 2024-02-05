@@ -46,7 +46,6 @@ if (isset($_POST['submit'])) {
       } else {
         $message[] = 'Error registering user. Please try again.';
       }
-      
     } catch (PDOException $e) {
       if ($e->errorInfo[1] == 1062) { // 1062 is the MySQL error code for duplicate entry
         $message[] = 'User with ' . $email . ' already exists!';
@@ -83,11 +82,17 @@ if (isset($_POST['submit'])) {
     <div>
       <form action="" method="post">
         <h3>Register</h3>
-        <input type="text" name="name" required placeholder="Enter your username" maxlength="100" class="input box">
-        <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="input box" required>
+        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
         <div class="passwords">
-          <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
-          <input type="password" name="cpass" required placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+          <div class="password-container">
+            <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+            <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+          </div>
+          <div class="password-container">
+            <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+            <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+          </div>
         </div>
         <input type="submit" value="Register" class="btn" name="submit">
         <p>Already have an account?<br>Then just log in and pick up where you left off!</p>
@@ -99,6 +104,7 @@ if (isset($_POST['submit'])) {
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
+  <script src="js/toggle_password.js"></script>
 </body>
 
 </html>
