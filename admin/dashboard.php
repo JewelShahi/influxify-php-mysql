@@ -43,13 +43,47 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
+        $select_users = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 0");
+        $select_users->execute();
+        $number_of_users = $select_users->rowCount()
+        ?>
+        <h3><?= $number_of_users; ?></h3>
+        <p>Total users</p>
+        <a href="users_accounts.php" class="btn">See all users</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_admins = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 1");
+        $select_admins->execute();
+        $number_of_admins = $select_admins->rowCount()
+        ?>
+        <h3><?= $number_of_admins; ?></h3>
+        <p>Total admins</p>
+        <a href="admin_accounts.php" class="btn">See all admins</a>
+      </div>
+
+      <div class="box">
+        <?php
+        // Prepare and execute SQL query to get the total income from completed orders
         $select_orders = $conn->prepare("SELECT SUM(price * qty) AS total_income FROM orders WHERE payment_status = 'completed'");
         $select_orders->execute();
-        $income = $select_orders->fetch(PDO::FETCH_ASSOC);
+        $orders_income = $select_orders->fetch(PDO::FETCH_ASSOC);
+
+        // Prepare and execute SQL query to get the total income from services
+        $select_services = $conn->prepare("SELECT SUM(price) AS total_income FROM services WHERE payment_status = 'completed'");
+        $select_services->execute();
+        $services_income = $select_services->fetch(PDO::FETCH_ASSOC);
+
+        // Extract the total income from orders and services
+        $orders_total_income = isset($orders_income['total_income']) ? $orders_income['total_income'] : 0;
+        $services_total_income = isset($services_income['total_income']) ? $services_income['total_income'] : 0;
+
+        // Calculate the total income by summing income from both orders and services
+        $income = $orders_total_income + $services_total_income;
         ?>
-        <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income['total_income'], 2, '.', ','); ?></h3>
+        <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income, 2, '.', ','); ?></h3>
         <p>Total income</p>
-        <a href="placed_orders.php" class="btn">See all orders</a>
       </div>
 
       <div class="box">
@@ -60,7 +94,7 @@ if (!isset($admin_id)) {
         ?>
         <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income['service_income'], 2, '.', ','); ?></h3>
         <p>Total service income</p>
-        <a href="services.php" class="btn">See all srvices</a>
+        <a href="services.php" class="btn">See all services</a>
       </div>
 
       <div class="box">
@@ -114,7 +148,7 @@ if (!isset($admin_id)) {
         $number_of_payment_status_pendings = $select_payment_status_pendings->rowCount()
         ?>
         <h3><?= $number_of_payment_status_pendings; ?></h3>
-        <p>Total pending payment status</p>
+        <p>Total pending payment status orders</p>
         <a href="placed_orders.php" class="btn">See all orders</a>
       </div>
 
@@ -125,8 +159,52 @@ if (!isset($admin_id)) {
         $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
         ?>
         <h3><?= $number_of_payment_status_completed; ?></h3>
-        <p>Total completed payment status</p>
+        <p>Total completed payment status orders</p>
         <a href="placed_orders.php" class="btn">See all orders</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_services = $conn->prepare("SELECT id FROM `services`");
+        $select_services->execute();
+        $number_of_services = $select_services->rowCount()
+        ?>
+        <h3><?= $number_of_services; ?></h3>
+        <p>Total services</p>
+        <a href="services.php" class="btn">See all services</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_payment_status_pendings = $conn->prepare("SELECT id FROM services WHERE payment_status = 'pending'");
+        $select_payment_status_pendings->execute();
+        $number_of_payment_status_pendings = $select_payment_status_pendings->rowCount()
+        ?>
+        <h3><?= $number_of_payment_status_pendings; ?></h3>
+        <p>Total pending payment status services</p>
+        <a href="services.php" class="btn">See all services</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_payment_status_completed = $conn->prepare("SELECT id FROM services WHERE payment_status = 'completed'");
+        $select_payment_status_completed->execute();
+        $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
+        ?>
+        <h3><?= $number_of_payment_status_completed; ?></h3>
+        <p>Total completed payment status orders services</p>
+        <a href="services.php" class="btn">See all services</a>
+      </div>
+
+      <div class="box">
+        <?php
+        $select_resolved_services = $conn->prepare("SELECT id FROM services WHERE is_resolved = 1");
+        $select_resolved_services->execute();
+        $number_of_resolved_services= $select_resolved_services->rowCount()
+        ?>
+        <h3><?= $number_of_resolved_services; ?></h3>
+        <p>Total resolved services</p>
+        <a href="services.php" class="btn">See all services</a>
       </div>
 
       <div class="box">
@@ -138,39 +216,6 @@ if (!isset($admin_id)) {
         <h3><?= $number_of_products; ?></h3>
         <p>Total products</p>
         <a href="products.php" class="btn">See all products</a>
-      </div>
-
-      <div class="box">
-        <?php
-        $select_users = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 0");
-        $select_users->execute();
-        $number_of_users = $select_users->rowCount()
-        ?>
-        <h3><?= $number_of_users; ?></h3>
-        <p>Total users</p>
-        <a href="users_accounts.php" class="btn">See all users</a>
-      </div>
-
-      <div class="box">
-        <?php
-        $select_admins = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 1");
-        $select_admins->execute();
-        $number_of_admins = $select_admins->rowCount()
-        ?>
-        <h3><?= $number_of_admins; ?></h3>
-        <p>Total admins</p>
-        <a href="admin_accounts.php" class="btn">See all admins</a>
-      </div>
-
-      <div class="box">
-        <?php
-        $select_services = $conn->prepare("SELECT * FROM `services`");
-        $select_services->execute();
-        $number_of_services = $select_services->rowCount()
-        ?>
-        <h3><?= $number_of_services; ?></h3>
-        <p>Total services</p>
-        <a href="services.php" class="btn">See all services</a>
       </div>
 
     </div>

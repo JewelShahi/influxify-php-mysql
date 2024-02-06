@@ -110,7 +110,7 @@ if (isset($_GET['delete'])) {
 
       <?php
 
-      $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ? ORDER BY placed_on DESC");
+      $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ? ORDER BY is_resolved ASC, placed_on DESC");
       $select_services->execute([$user_id]);
 
       if ($select_services->rowCount() > 0) {
@@ -120,7 +120,7 @@ if (isset($_GET['delete'])) {
           <?php
           while ($fetch_services = $select_services->fetch(PDO::FETCH_ASSOC)) {
           ?>
-            <form action="service_checkout.php" method="POST" class="service-box">
+            <form action="service_checkout.php" method="POST" id="serviceForm<?= $fetch_services['id']; ?>" class="service-box" style="<?= $fetch_services['is_resolved'] > 0 ? 'background-image: url(images/resolved-service-bg.png);' : ''; ?>">
               <div>
                 <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
                 <input type="hidden" name="service_price" value="<?= $fetch_services["price"]; ?>">
@@ -156,6 +156,7 @@ if (isset($_GET['delete'])) {
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
+
 </body>
 
 </html>
