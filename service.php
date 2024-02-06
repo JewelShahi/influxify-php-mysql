@@ -85,11 +85,11 @@ if (isset($_GET['delete'])) {
     } else {
     ?>
       <div class="add-ticket">
-        <form action="service_checkout.php" method="post">
+        <form action="" method="post">
           <h3>Add a service ticket</h3>
           <input type="text" name="name" placeholder="Enter your full name" maxlength="100" class="box" required>
           <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" required>
-          <input type="number" name="number" min="0" max="999999999999999" placeholder="Enter your phone number" onkeypress="if(this.value.length < 10 || this.value.length > 15) return false;" class="box" required>
+          <input type="number" name="number" min="0" max="999999999999999" placeholder="Enter your phone number" onkeypress="if(this.value.length > 15) return false;" class="box" required>
           <select name="brand" class="box" aria-labelledby="brandLabel" required>
             <option selected default disabled>Select a brand</option>
             <?php
@@ -133,7 +133,7 @@ if (isset($_GET['delete'])) {
                 <p>Problem : <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
                 <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_services['delivery']; ?></span></p>
                 <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Payment method : <span><?= $fetch_services['payment_method']; ?></span></p>
-                <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price (with delivery <em>if included</em>): <br><span><?= $fetch_services['price']; ?></span></p>
+                <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price <?= (($fetch_services['delivery'] == 'yes') && ($fetch_services['payment_method'] != null)) ? '(with delivery) ' : '' ?>: <br><span><?= $fetch_services['price']; ?></span></p>
                 <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Pay for the service</button>
                 <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Decline service</a>
               </div>

@@ -14,6 +14,7 @@ if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
 
   if ($_SESSION['user']['user_id'] == $delete_id) {
+    unset($_SESSION['user']['user_id']);
     $_SESSION['user']['user_id'] = "";
   }
 

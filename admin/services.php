@@ -86,13 +86,13 @@ if (isset($_GET['delete'])) {
               <p id="paymentStatusLabel">Payment status :</p>
               <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
                 <option selected disabled><?= $fetch_service['payment_status']; ?></option>
-                <option value="pending">Pending</option>
-                <option value="completed">Completed</option>
+                <option value="pending">pending</option>
+                <option value="completed">completed</option>
               </select>
               <p id="isResolvedLabel">Is resolved :</p>
               <select name="is_resolved" class="select" aria-labelledby="isResolvedLabel">
-                <option value="1" <?php echo $fetch_service['is_resolved'] == 1 ? 'selected' : ''; ?>>Yes</option>
-                <option value="0" <?php echo $fetch_service['is_resolved'] == 0 ? 'selected' : ''; ?>>No</option>
+                <option value="1" <?php echo $fetch_service['is_resolved'] == 1 ? 'selected' : ''; ?>>yes</option>
+                <option value="0" <?php echo $fetch_service['is_resolved'] == 0 ? 'selected' : ''; ?>>no</option>
               </select>
               <div class="flex-btn">
                 <button type="submit" name="update_service" class="option-btn">Update</button>
