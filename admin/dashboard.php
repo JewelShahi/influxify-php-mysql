@@ -54,6 +54,17 @@ if (!isset($admin_id)) {
 
       <div class="box">
         <?php
+        $select_orders = $conn->prepare("SELECT SUM(price) AS service_income FROM services WHERE payment_status = 'completed'");
+        $select_orders->execute();
+        $income = $select_orders->fetch(PDO::FETCH_ASSOC);
+        ?>
+        <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income['service_income'], 2, '.', ','); ?></h3>
+        <p>Total service income</p>
+        <a href="services.php" class="btn">See all srvices</a>
+      </div>
+
+      <div class="box">
+        <?php
         $select_orders = $conn->prepare("SELECT id FROM orders GROUP BY id");
         $select_orders->execute();
         $number_of_orders = $select_orders->rowCount();

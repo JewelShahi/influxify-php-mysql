@@ -25,7 +25,7 @@ if (isset($_POST['update_service'])) {
   if (isset($_POST['is_resolved'])) {
     $is_resolved = $_POST['is_resolved'];
 
-    $update_service = $conn->prepare("UPDATE `services` SET price = ?, isResolved = ? WHERE id = ?");
+    $update_service = $conn->prepare("UPDATE `services` SET price = ?, is_resolved = ? WHERE id = ?");
     $update_service->execute([$estimated_price, $is_resolved, $service_id]);
   }
   header('location:services.php');
@@ -65,7 +65,7 @@ if (isset($_GET['delete'])) {
     <div class="box-container">
 
       <?php
-      $select_services = $conn->prepare("SELECT * FROM `services` ORDER BY `isResolved` ASC, `placed_on` DESC");
+      $select_services = $conn->prepare("SELECT * FROM `services` ORDER BY `is_resolved` ASC, `placed_on` DESC");
       $select_services->execute();
       if ($select_services->rowCount() > 0) {
         while ($fetch_service = $select_services->fetch(PDO::FETCH_ASSOC)) {
@@ -81,7 +81,7 @@ if (isset($_GET['delete'])) {
               <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
               <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
               <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
-              <p> Estimated price (with delivery if included) :  <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'disabled' : ''; ?>></p>
+              <p> Estimated price (with delivery <em>if included</em>) :  <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'disabled' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
               <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
               <p id="paymentStatusLabel">Payment status :</p>
               <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
@@ -91,8 +91,8 @@ if (isset($_GET['delete'])) {
               </select>
               <p id="isResolvedLabel">Is resolved :</p>
               <select name="is_resolved" class="select" aria-labelledby="isResolvedLabel">
-                <option value="1" <?php echo $fetch_service['isResolved'] == 1 ? 'selected' : ''; ?>>Yes</option>
-                <option value="0" <?php echo $fetch_service['isResolved'] == 0 ? 'selected' : ''; ?>>No</option>
+                <option value="1" <?php echo $fetch_service['is_resolved'] == 1 ? 'selected' : ''; ?>>Yes</option>
+                <option value="0" <?php echo $fetch_service['is_resolved'] == 0 ? 'selected' : ''; ?>>No</option>
               </select>
               <div class="flex-btn">
                 <button type="submit" name="update_service" class="option-btn">Update</button>

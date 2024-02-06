@@ -124,6 +124,7 @@ if (isset($_GET['delete'])) {
               <div>
                 <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
                 <input type="hidden" name="service_price" value="<?= $fetch_services["price"]; ?>">
+                <p>Is resolved : <span><?= $fetch_services['is_resolved'] ? 'Yes' : 'No'; ?></span></p>
                 <p>Placed on : <span><?= $fetch_services['placed_on']; ?></span></p>
                 <p>Name : <span><?= $fetch_services['name']; ?></span></p>
                 <p>E-mail : <span><?= $fetch_services['email']; ?></span></p>
@@ -131,7 +132,8 @@ if (isset($_GET['delete'])) {
                 <p>Phone brand : <span><?= $fetch_services['brand']; ?></span></p>
                 <p>Problem : <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
                 <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_services['delivery']; ?></span></p>
-                <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price (with delivery if included): <br><span><?= $fetch_services['price']; ?></span></p>
+                <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Payment method : <span><?= $fetch_services['payment_method']; ?></span></p>
+                <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price (with delivery <em>if included</em>): <br><span><?= $fetch_services['price']; ?></span></p>
                 <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Pay for the service</button>
                 <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Decline service</a>
               </div>

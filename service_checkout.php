@@ -10,35 +10,48 @@ if (isset($_SESSION['user']['user_id'])) {
   header('location:user_login.php');
 }
 
-if (isset($_POST['service_checkout'])) {
+// If the service checkout data is posted, retrieve the service price from the form
+if (isset($_POST['service_checkout_data'])) {
+  // Retrieve service details from the form
+  $service_id = $_POST['id'];
+  $service_price = $_POST['price'];
+} elseif (isset($_POST['service_checkout'])) {
+  // If service checkout data is not posted, check if service details are posted from another form
   $service_id = $_POST['service_id'];
   $service_price = $_POST['service_price'];
 }
 
+// Default delivery option and price
 $delivery_option = 'no';
-$price = $service_price;
 $deliveryPrice = 0.00;
 
 if (isset($_POST['service_checkout_data'])) {
+  // If service checkout data is posted, update delivery option and price accordingly
   $id = $_POST['id'];
   $method = filter_var($_POST['method'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $address = 'Flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code'];
-  $address = filter_var($address, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  // Concatenate address components
+  $address = trim($_POST['flat']) . ', ' . trim($_POST['street']) . ', ' . trim($_POST['city']) . ', ' . trim($_POST['state']) . ', ' . trim($_POST['country']) . ' - ' . trim($_POST['pin_code']);
+  // If the concatenated address contains only commas (',') or is empty, set it to "-"
+  $address = (strpos($address, ',') === false || trim($address, ', ') === '') ? "-" : filter_var($address, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $delivery_option = $_POST['delivery'];
-  $deliveryPrice = ($delivery_option === 'yes') ? 15.99 : 0.00;
+  // Check if delivery option is set, otherwise default to 'no'
+  $delivery_option = isset($_POST['delivery']) ? $_POST['delivery'] : 'no';
+  $deliveryPrice = ($delivery_option === 'yes') ? 9.99 : 0.00;
 
-  $price += $deliveryPrice;
+  // Calculate total price
+  $price = $service_price + $deliveryPrice;
 
-  $updateOrder = $conn->prepare("UPDATE services SET price = ?, address = ?, payment_method = ? WHERE id = ?");
-  $updateOrder->execute([$price, $address, $method, $id]);
+  // Update order details in the database
+  $updateOrder = $conn->prepare("UPDATE services SET price = ?, delivery = ?, address = ?, payment_method = ? WHERE id = ?");
+  $updateOrder->execute([$price, $delivery_option, $address, $method, $id]);
 
+  // Redirect to service page after successful payment
   $message[] = 'Successfully paid for the service!';
-
   header('location:service.php');
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,9 +94,9 @@ if (isset($_POST['service_checkout_data'])) {
           </select>
         </div>
         <div class="inputBox">
-          <span>Include delivery : ($15.99)</span>
+          <span>Include delivery : ($9.99)</span>
           <select name="delivery" id="deliveryOption" class="box" required onchange="toggleAddressFields()">
-            <option value="no" selected <?= ($delivery_option === 'no') ? 'selected' : ''; ?>>No</option>
+            <option value="no" <?= ($delivery_option === 'no') ? 'selected' : ''; ?>>No</option>
             <option value="yes" <?= ($delivery_option === 'yes') ? 'selected' : ''; ?>>Yes</option>
           </select>
         </div>
@@ -114,7 +127,7 @@ if (isset($_POST['service_checkout_data'])) {
           </div>
         </div>
       </div>
-      <input type="submit" name="service_checkout_data" class="btn <?= ($price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
+      <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
     </form>
 
   </section>
@@ -152,7 +165,7 @@ if (isset($_POST['service_checkout_data'])) {
       // Retrieve the price from the form
       const priceInput = document.querySelector('input[name="price"]');
       const servicePrice = parseFloat(priceInput.value);
-      const deliveryCost = 15.99;
+      const deliveryCost = 9.99;
 
       const totalPrice = hasDelivery ? servicePrice + deliveryCost : servicePrice;
       grandTotalSpan.textContent = '$' + totalPrice.toFixed(2);
