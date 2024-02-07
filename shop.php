@@ -3,8 +3,8 @@ include 'components/connect.php';
 session_name('user_session');
 session_start();
 
-if (isset($_SESSION['user']['user_id'])) {
-  $user_id = $_SESSION['user']['user_id'];
+if (isset($_SESSION['user_session']['user_id'])) {
+  $user_id = $_SESSION['user_session']['user_id'];
 } else {
   $user_id = '';
 }

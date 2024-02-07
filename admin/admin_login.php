@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 
   if ($select_admin->rowCount() > 0) {
 
-    $_SESSION['admin']['admin_id'] = $row['id'];
+    $_SESSION['admin_session']['admin_id'] = $row['id'];
 
     header('location:dashboard.php');
   } else {

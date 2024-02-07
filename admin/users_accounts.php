@@ -3,7 +3,7 @@ include '../components/connect.php';
 
 session_name('admin_session');
 session_start();
-$admin_id = $_SESSION['admin']['admin_id'];
+$admin_id = $_SESSION['admin_session']['admin_id'];
 
 if (!isset($admin_id)) {
   header('location:admin_login.php');
@@ -12,11 +12,6 @@ if (!isset($admin_id)) {
 if (isset($_GET['delete'])) {
 
   $delete_id = $_GET['delete'];
-
-  if ($_SESSION['user']['user_id'] == $delete_id) {
-    unset($_SESSION['user']['user_id']);
-    $_SESSION['user']['user_id'] = "";
-  }
 
   $delete_user = $conn->prepare("DELETE FROM `users` WHERE id = ?");
   $delete_user->execute([$delete_id]);
