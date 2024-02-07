@@ -1,14 +1,19 @@
 <?php
-include 'components/connect.php';
-session_start();
 
+/* CONNECT TO DB */
+include 'components/connect.php';
+
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
+  header("location:user_login.php");
 }
-
-include 'components/wishlist_cart.php';
 
 // Handle filter submissions
 $filter_price = isset($_GET['price']) ? $_GET['price'] : '';
@@ -16,6 +21,9 @@ $filter_brand = isset($_GET['brand']) ? strtoupper($_GET['brand']) : '';
 $filter_ram = isset($_GET['ram']) ? strtoupper($_GET['ram']) : '';
 $filter_storage = isset($_GET['storage']) ? strtoupper($_GET['storage']) : '';
 $search_query = isset($_POST['search']) ? $_POST['search'] : '';
+
+include 'components/wishlist_cart.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +41,6 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 </head>
 
 <body>
-
   <?php include 'components/user_header.php'; ?>
 
   <section class="products">
@@ -52,12 +59,15 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
     <!-- Filter options -->
     <form method="get" class="filter-options">
+
+    <!-- Filter by price -->
       <label for="price">Filter by price:</label>
       <select id="price" name="price">
         <option value="asc" <?= ($filter_price == 'asc') ? 'selected' : '' ?>>ASC</option>
         <option value="desc" <?= ($filter_price == 'desc') ? 'selected' : '' ?>>DESC</option>
       </select>
 
+      <!-- Filter by brand -->
       <label for="brand">Filter by brand:</label>
       <select id="brand" name="brand">
         <option value="" <?= ($filter_brand == '') ? 'selected' : '' ?>>-- All Brands --</option>
@@ -71,6 +81,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="Realme" <?= ($filter_brand == 'Realme') ? 'selected' : '' ?>>Realme</option>
       </select>
 
+      <!-- Filter by RAM -->
       <label for="ram">Filter by RAM:</label>
       <select id="ram" name="ram">
         <option value="" <?= ($filter_ram == '') ? 'selected' : '' ?>>-- All RAM --</option>
@@ -82,6 +93,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="16GB" <?= ($filter_ram == '16GB') ? 'selected' : '' ?>>16GB</option>
       </select>
 
+      <!-- Filter by storage -->
       <label for="storage">Filter by storage:</label>
       <select id="storage" name="storage">
         <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- All Storage --</option>
@@ -93,6 +105,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="1TB" <?= ($filter_storage == '1TB') ? 'selected' : '' ?>>1TB</option>
       </select>
 
+      <!-- Submit -->
       <button type="submit">
         <i class="fas fa-filter"></i> Apply Filters
       </button>
@@ -167,8 +180,8 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
-
   <script src="js/user_search.js"></script>
+
 </body>
 
 </html>

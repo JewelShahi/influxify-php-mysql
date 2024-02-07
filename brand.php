@@ -1,14 +1,23 @@
 <?php
-include 'components/connect.php';
-session_start();
 
+/* CONNECT TO DB */
+include 'components/connect.php';
+
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-};
+  header("location:user_login.php");
+}
 
+/* PHP FILE FOR WISH_LIST AND CART */
 include 'components/wishlist_cart.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -18,30 +27,26 @@ include 'components/wishlist_cart.php';
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Category</title>
+  <title>Brand</title>
   <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
   <!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
-
   <link rel="stylesheet" href="css/user_style.css">
 
 </head>
 
 <body>
-
   <?php include 'components/user_header.php'; ?>
-
   <section class="products">
 
     <?php
     $brand = $_GET['brand'];
     $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand LIKE ?");
-    $select_products->execute(["$brand"]);
+    $select_products->execute([$brand]);
     ?>
-      <h1 class="heading">Category</h1>
+    <h1 class="heading">Brand</h1>
     <?php
     if ($select_products->rowCount() > 0) {
     ?>
@@ -51,7 +56,6 @@ include 'components/wishlist_cart.php';
     ?>
 
     <div class="box-container">
-
       <?php
       if ($select_products->rowCount() > 0) {
         while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
@@ -77,12 +81,10 @@ include 'components/wishlist_cart.php';
         echo '<p class="empty">No products found</p>';
       }
       ?>
-
     </div>
 
   </section>
   <?php include 'components/footer.php'; ?>
-
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>

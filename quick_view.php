@@ -1,12 +1,20 @@
 <?php
-include 'components/connect.php';
-session_start();
 
+/* CONNECT TO DB */
+include 'components/connect.php';
+
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-};
+  header("location:user_login.php");
+}
+
 include 'components/wishlist_cart.php';
 ?>
 
@@ -32,9 +40,7 @@ include 'components/wishlist_cart.php';
   <?php include 'components/user_header.php'; ?>
 
   <section class="quick-view">
-
     <h1 class="heading">Quick view</h1>
-
     <?php
     $pid = $_GET['pid'];
     $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
@@ -93,13 +99,13 @@ include 'components/wishlist_cart.php';
       echo '<p class="empty">No products added yet!</p>';
     }
     ?>
-
   </section>
+  
   <?php include 'components/footer.php'; ?>
-
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
+
 </body>
 
 </html>

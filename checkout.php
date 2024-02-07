@@ -1,13 +1,19 @@
 <?php
-include 'components/connect.php';
-session_start();
 
+/* CONNECT TO DB */
+include 'components/connect.php';
+
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-  header('location:user_login.php');
-};
+  header("location:user_login.php");
+}
 
 if (isset($_POST['order'])) {
 
@@ -39,12 +45,9 @@ if (isset($_POST['order'])) {
     $order_id = ($get_last_order_id['last_order_id'] !== null) ? $get_last_order_id['last_order_id'] + 1 : 1;
 
     try {
-
       $get_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
       $get_cart_items->execute([$user_id]);
-
       while ($cart_item = $get_cart_items->fetch()) {
-
         $products_price = $cart_item['price'];
 
         // Insert each product along with overall order details into the orders table
@@ -82,20 +85,15 @@ if (isset($_POST['order'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
-
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
-
   <?php include 'components/user_header.php'; ?>
-
   <section class="checkout-orders">
 
     <form action="" method="POST">
-
       <h3>Your orders</h3>
-
       <div class="display-orders">
         <?php
         $grand_total = 0;
@@ -121,7 +119,6 @@ if (isset($_POST['order'])) {
       </div>
 
       <h3>Place your shipping info</h3>
-
       <div class="flex">
         <div class="inputBox">
           <span>Your name :</span>
@@ -168,14 +165,11 @@ if (isset($_POST['order'])) {
           <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
         </div>
       </div>
-
       <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="Place order">
-
     </form>
-
+    
   </section>
   <?php include 'components/footer.php'; ?>
-
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>

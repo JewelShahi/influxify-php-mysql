@@ -1,14 +1,19 @@
 <?php
 
+/* CONNECT TO DB */
 include 'components/connect.php';
-session_start();
 
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
-	$user_id = $_SESSION['user_id'];
+  // Locate to header if the's not a session
+  $user_id = $_SESSION['user_id'];
 } else {
-	$user_id = '';
-	header('location:user_login.php');
-};
+  $user_id = '';
+  header("location:user_login.php");
+}
 
 include 'components/wishlist_cart.php';
 

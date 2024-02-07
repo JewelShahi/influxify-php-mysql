@@ -1,8 +1,14 @@
 <?php
-include 'components/connect.php';
-session_start();
 
+/* CONNECT TO DB */
+include 'components/connect.php';
+
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
@@ -75,15 +81,15 @@ if (isset($_GET['delete'])) {
   <?php include 'components/user_header.php'; ?>
 
   <section class="service" style="min-height: 100%;">
-
     <h1 class="heading">Services</h1>
-
     <?php
     if ($user_id == '') {
       echo '<p class="empty">Please Log In add or see service(s).</p>';
     } else {
     ?>
       <div class="add-ticket">
+
+        <!-- Add a service ticket -->
         <form action="" method="post">
           <h3>Add a service ticket</h3>
           <input type="text" name="name" placeholder="Enter your full name" maxlength="100" class="box" required>
@@ -107,8 +113,8 @@ if (isset($_GET['delete'])) {
         </form>
       </div>
 
+      <!-- See all you placed service tickets -->
       <?php
-
       $select_services = $conn->prepare("SELECT * FROM `services` WHERE user_id = ? ORDER BY is_resolved ASC, placed_on DESC");
       $select_services->execute([$user_id]);
 
@@ -149,9 +155,7 @@ if (isset($_GET['delete'])) {
       ?>
   </section>
 
-
   <?php include 'components/footer.php'; ?>
-
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>

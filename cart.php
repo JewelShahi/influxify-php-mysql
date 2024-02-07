@@ -1,22 +1,23 @@
 <?php
+
+/* CONNECT TO DB */
 include 'components/connect.php';
 
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
 session_start();
-
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
-
-  $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-  $select_profile->execute([$user_id]);
-  if ($select_profile->rowCount() == 0) {
-    header("location:user_login.php");
-  }
 } else {
   $user_id = '';
-  header('location:user_login.php');
-};
+  header("location:user_login.php");
+}
 
 if (isset($_POST['delete'])) {
+
+  // Product ID
   $pid = $_POST['pid'];
 
   // Retrieve the quantity from the cart before deleting
@@ -34,6 +35,7 @@ if (isset($_POST['delete'])) {
 }
 
 if (isset($_GET['delete_all'])) {
+
   // Retrieve all quantities from the cart
   $get_cart_quantities = $conn->prepare("SELECT pid, quantity FROM `cart` WHERE user_id = ?");
   $get_cart_quantities->execute([$user_id]);
@@ -54,8 +56,11 @@ if (isset($_GET['delete_all'])) {
 }
 
 if (isset($_POST['update_qty'])) {
+
+  // Product ID
   $pid = $_POST['pid'];
 
+  // Quantity chnage vars
   $newQty = $_POST['qty'];
   $newQty = filter_var($newQty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -104,37 +109,24 @@ if (isset($_POST['update_qty'])) {
 </head>
 
 <body>
-
   <?php include 'components/user_header.php'; ?>
-
   <section class="products shopping-cart">
-
     <h3 class="heading">Shopping cart</h3>
-
-    <!-- <?php
-          $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-          $select_profile->execute([$user_id]);
-          if ($select_profile->rowCount() == 0) {
-            echo '<p class="empty">Please LogIn to see your order(s)</p>';
-            header("location:user_login.php");
-          } else {
-          ?> -->
     <div class="box-container">
-
       <?php
-            $counter = 1;
+      $counter = 1;
 
-            $grand_total = 0;
-            $select_cart = $conn->prepare("
+      $grand_total = 0;
+      $select_cart = $conn->prepare("
         SELECT c.user_id, c.pid, c.name, c.price, c.quantity, p.qty as qty, p.image_01 as image 
         FROM cart c
         JOIN products p ON c.pid = p.id 
         WHERE user_id = ?
-       ");
-            $select_cart->execute([$user_id]);
+      ");
+      $select_cart->execute([$user_id]);
 
-            if ($select_cart->rowCount() > 0) {
-              while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+      if ($select_cart->rowCount() > 0) {
+        while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
       ?>
           <form action="" method="post" class="box">
             <input type="hidden" name="pid" value="<?= $fetch_cart['pid']; ?>">
@@ -152,12 +144,12 @@ if (isset($_POST['update_qty'])) {
             </button>
           </form>
       <?php
-                $grand_total += $sub_total;
-                $counter++;
-              }
-            } else {
-              echo '<p class="empty">Your cart is empty</p>';
-            }
+          $grand_total += $sub_total;
+          $counter++;
+        }
+      } else {
+        echo '<p class="empty">Your cart is empty</p>';
+      }
       ?>
     </div>
   </section>
@@ -178,15 +170,15 @@ if (isset($_POST['update_qty'])) {
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       <?php
-            $counter = 1;
-            $cart_product_quantity = $conn->prepare("
-          SELECT c.user_id, c.pid, c.quantity
-          FROM cart c
-          JOIN products p ON c.pid = p.id 
-          WHERE user_id = ?
-        ");
-            $cart_product_quantity->execute([$user_id]);
-            while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
+      $counter = 1;
+      $cart_product_quantity = $conn->prepare("
+        SELECT c.user_id, c.pid, c.quantity
+        FROM cart c
+        JOIN products p ON c.pid = p.id 
+        WHERE user_id = ?
+      ");
+      $cart_product_quantity->execute([$user_id]);
+      while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
       ?>
         let qInp<?= $counter; ?> = document.getElementById('q<?= $counter; ?>');
         let uBtn<?= $counter; ?> = document.getElementById('u<?= $counter; ?>');
@@ -205,19 +197,20 @@ if (isset($_POST['update_qty'])) {
           }
         }
       <?php
-              $counter++;
-            }
+        $counter++;
+      }
       ?>
     });
   </script>
-  <!-- <?php
-          }
-        ?> -->
 
+
+  <!-- Footer -->
   <?php include 'components/footer.php'; ?>
 
+  <!-- User script -->
   <script src="js/user_script.js"></script>
 
+  <!-- ScrollUp button -->
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
 </body>

@@ -1,13 +1,19 @@
 <?php
 
+/* CONNECT TO DB */
 include 'components/connect.php';
-session_start();
 
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-};
+  header("location:user_login.php");
+}
 
 if (isset($_POST['submit'])) {
 
@@ -43,7 +49,6 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
-
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 

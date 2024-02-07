@@ -1,13 +1,19 @@
 <?php
 
+/* CONNECT TO DB */
 include 'components/connect.php';
-session_start();
 
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
-	$user_id = $_SESSION['user_id'];
+  // Locate to header if the's not a session
+  $user_id = $_SESSION['user_id'];
 } else {
-	$user_id = '';
-};
+  $user_id = '';
+  header("location:user_login.php");
+}
 
 include 'components/wishlist_cart.php';
 
@@ -27,24 +33,25 @@ include 'components/wishlist_cart.php';
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<!-- custom css file link -->
 	<link rel="stylesheet" href="css/global.css">
-
 	<link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body style="height: auto;">
-
 	<?php include 'components/user_header.php'; ?>
+
 	<div class="home-bg">
 		<section class="home">
 			<div class="swiper home-slider">
 				<div class="swiper-wrapper">
+
 					<?php
 					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products` ORDER BY RAND()");
 					$select_products->execute();
 					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);
 					?>
 
-					<?php for ($i = 0; $i < count($productData); $i++) { ?>
+					<?php for ($i = 0; $i < count($productData); $i++) {
+					?>
 						<?php
 						$name = $productData[$i]['name'];
 						$details = $productData[$i]['details'];
@@ -61,7 +68,9 @@ include 'components/wishlist_cart.php';
 								<a href="shop.php" class="btn shop-now-btn"><span>Shop now <span><i class="fa-solid fa-arrow-right"></i></a>
 							</div>
 						</div>
-					<?php } ?>
+					<?php
+					}
+					?>
 				</div>
 				<div class="swiper-pagination"></div>
 				<div class="swiper-button-next"></div>
@@ -71,11 +80,8 @@ include 'components/wishlist_cart.php';
 	</div>
 
 	<section class="brand">
-
 		<h1 class="heading">Shop by brand</h1>
-
 		<div class="swiper brand-slider">
-
 			<div class="swiper-wrapper">
 
 				<a href="brand.php?brand=Samsung" class="swiper-slide slide">
@@ -119,7 +125,6 @@ include 'components/wishlist_cart.php';
 				</a>
 
 			</div>
-
 			<div class="swiper-pagination"></div>
 			<div class="swiper-button-next" id="brand-next"></div>
 			<div class="swiper-button-prev" id="brand-prev"></div>
@@ -128,11 +133,8 @@ include 'components/wishlist_cart.php';
 	</section>
 
 	<section class="home-products">
-
 		<h1 class="heading">Recently added to our collection</h1>
-
 		<div class="swiper products-slider">
-
 			<div class="swiper-wrapper">
 				<?php
 				$select_products = $conn->prepare("
@@ -165,21 +167,15 @@ include 'components/wishlist_cart.php';
 					echo '<p class="empty">No products added yet!</p>';
 				}
 				?>
-
 			</div>
-
 			<div class="swiper-pagination"></div>
-
 		</div>
-
 	</section>
 
 	<?php include 'components/scroll_up.php'; ?>
 	<script src="js/scrollUp.js"></script>
-
 	<?php include 'components/footer.php'; ?>
 	<script src="js/user_script.js"></script>
-
 	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 	<script src="js/swiper.js"></script>
 

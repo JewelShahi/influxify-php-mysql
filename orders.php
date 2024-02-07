@@ -1,14 +1,19 @@
 <?php
 
+/* CONNECT TO DB */
 include 'components/connect.php';
-session_start();
 
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
   header("location:user_login.php");
-};
+}
 
 ?>
 
@@ -25,20 +30,16 @@ if (isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
-
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
-
   <?php include 'components/user_header.php'; ?>
 
   <section class="orders">
-
     <h1 class="heading">Placed orders</h1>
 
     <div class="box-container">
-
       <?php
       $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
       $select_profile->execute([$user_id]);
@@ -101,8 +102,8 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
   </section>
+  
   <?php include 'components/footer.php'; ?>
-
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>

@@ -1,19 +1,25 @@
 <?php
 
+/* CONNECT TO DB */
 include 'components/connect.php';
-session_start();
 
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
   header("location:user_login.php");
-};
+}
 
 $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
 $select_profile->execute([$user_id]);
 $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 
+/* UPDATE USER PASSWORD */
 if (isset($_POST['update_password'])) {
 
   // Validate and sanitize input
@@ -47,6 +53,7 @@ if (isset($_POST['update_password'])) {
   } elseif ($hash_new_pass !== $hash_cpass) {
     $message[] = 'Confirm password not matched!';
   } else {
+
     // Update user profile
     $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
     $update_profile->execute([$name, $email, $user_id]);
@@ -60,6 +67,7 @@ if (isset($_POST['update_password'])) {
     }
   }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -75,18 +83,19 @@ if (isset($_POST['update_password'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
-
   <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
-
   <?php include 'components/user_header.php'; ?>
+
   <?php if ($user_id == '') {
     header("location: home.php");
   } else {
   ?>
     <section class="user-update">
+
+      <!-- Change user information -->
       <form action="" class="user-form" method="post" enctype="multipart/form-data">
         <h3>Update Profile</h3>
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
@@ -108,6 +117,8 @@ if (isset($_POST['update_password'])) {
           <i class="fas fa-save"></i> Save Changes
         </button>
       </form>
+
+      <!-- Change avatar -->
       <form action="" class="avatar-form">
         <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
         <div>
@@ -115,6 +126,7 @@ if (isset($_POST['update_password'])) {
         </div>
         <input type="submit" value="update avatar" class="btn" name="update_avatar">
       </form>
+
     </section>
   <?php
   }

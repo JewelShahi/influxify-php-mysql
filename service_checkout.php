@@ -1,12 +1,18 @@
 <?php
-include 'components/connect.php';
-session_start();
 
+/* CONNECT TO DB */
+include 'components/connect.php';
+
+/* SESSION CHECK AND SAVING TO A VARIABLE */
+// Start session
+session_start();
+// Check if user is logged in
 if (isset($_SESSION['user_id'])) {
+  // Locate to header if the's not a session
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-  header('location:user_login.php');
+  header("location:user_login.php");
 }
 
 // If the service checkout data is posted, retrieve the service price from the form
@@ -70,11 +76,9 @@ if (isset($_POST['service_checkout_data'])) {
 </head>
 
 <body>
-
   <?php include 'components/user_header.php'; ?>
 
   <section class="checkout-orders">
-
     <form action="" method="POST">
       <input type="hidden" name="id" value="<?= $service_id; ?>">
       <input type="hidden" name="price" value="<?= $service_price; ?>">
@@ -128,15 +132,13 @@ if (isset($_POST['service_checkout_data'])) {
       </div>
       <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
     </form>
-
   </section>
   <?php include 'components/footer.php'; ?>
 
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
-
-  <script>
+  <!-- <script>
     // Function to toggle address fields based on delivery option
     const toggleAddressFields = () => {
       const deliveryOption = document.getElementById('deliveryOption');
@@ -176,7 +178,8 @@ if (isset($_POST['service_checkout_data'])) {
     // Attach the function to the change event of the delivery option select
     const deliveryOption = document.getElementById('deliveryOption');
     deliveryOption.addEventListener('change', toggleAddressFields);
-  </script>
+  </script> -->
+  <script src="js/service_checkout.js"></script>
 
 </body>
 

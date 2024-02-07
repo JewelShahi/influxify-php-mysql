@@ -12,13 +12,6 @@ if (isset($_GET['delete'])) {
 
   $delete_id = $_GET['delete'];
 
-  // if ($_SESSION['user_id'] == $delete_id) {
-  //   session_start();
-  //   unset($_SESSION['user_id']);
-  //   session_destroy();
-  //   $_SESSION['user_id'] = "";
-  // }
-
   $delete_user = $conn->prepare("DELETE FROM `users` WHERE id = ?");
   $delete_user->execute([$delete_id]);
 
