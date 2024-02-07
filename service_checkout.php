@@ -1,10 +1,9 @@
 <?php
 include 'components/connect.php';
-session_name('user_session');
 session_start();
 
-if (isset($_SESSION['user']['user_id'])) {
-  $user_id = $_SESSION['user']['user_id'];
+if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
   header('location:user_login.php');
@@ -136,8 +135,9 @@ if (isset($_POST['service_checkout_data'])) {
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
-
-  <script>
+  <script src="js/service_checkout.js"></script>
+  
+  <!-- <script>
     // Function to toggle address fields based on delivery option
     const toggleAddressFields = () => {
       const deliveryOption = document.getElementById('deliveryOption');
@@ -177,7 +177,7 @@ if (isset($_POST['service_checkout_data'])) {
     // Attach the function to the change event of the delivery option select
     const deliveryOption = document.getElementById('deliveryOption');
     deliveryOption.addEventListener('change', toggleAddressFields);
-  </script>
+  </script> -->
 
 </body>
 

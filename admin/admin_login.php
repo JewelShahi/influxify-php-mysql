@@ -1,7 +1,6 @@
 <?php
 include '../components/connect.php';
 
-session_name('admin_session');
 session_start();
 
 if (isset($_POST['submit'])) {
@@ -17,7 +16,7 @@ if (isset($_POST['submit'])) {
 
   if ($select_admin->rowCount() > 0) {
 
-    $_SESSION['admin']['admin_id'] = $row['id'];
+    $_SESSION['admin_id'] = $row['id'];
 
     header('location:dashboard.php');
   } else {
