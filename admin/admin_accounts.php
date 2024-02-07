@@ -4,11 +4,10 @@
 include '../components/connect.php';
 
 // Start the admin session
-session_name('admin_session');
 session_start();
 
 // Retrieve the admin ID from the session
-$admin_id = $_SESSION['admin_session']['admin_id'];
+$admin_id = $_SESSION['admin_id'];
 
 // If admin ID is not set, redirect to admin login page
 if (!isset($admin_id)) {
@@ -22,8 +21,8 @@ if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
 
   // Check if the current admin is trying to delete their own account
-  if ($_SESSION['user_session']['admin_id'] == $delete_id) {
-    $_SESSION['user_session']['admin_id'] = "";
+  if ($_SESSION['admin_id'] == $delete_id) {
+    $_SESSION['admin_id'] = "";
   }
 
   // Prepare and execute SQL query to delete an admin by ID

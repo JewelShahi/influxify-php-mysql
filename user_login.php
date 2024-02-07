@@ -1,12 +1,10 @@
 <?php
 
 include 'components/connect.php';
-session_name('user_session');
 session_start();
-// session_regenerate_id(true);
 
-if (isset($_SESSION['user_session']['user_id'])) {
-  $user_id = $_SESSION['user_session']['user_id'];
+if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
 };
@@ -24,7 +22,7 @@ if (isset($_POST['submit'])) {
   $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
   if ($select_user->rowCount() > 0) {
-    $_SESSION['user_session']['user_id'] = $row['id'];
+    $_SESSION['user_id'] = $row['id'];
     header('location:home.php');
   } else {
     $message[] = "Incorrect username or password!";
