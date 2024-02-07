@@ -40,9 +40,11 @@ if (isset($_SESSION['user_id'])) {
     <div class="box-container">
 
       <?php
-
-      if ($user_id == '') {
+      $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+      $select_profile->execute([$user_id]);
+      if ($select_profile->rowCount() == 0) {
         echo '<p class="empty">Please LogIn to see your order(s)</p>';
+        header("location:user_login.php");
       } else {
         $select_orders = $conn->prepare("
           SELECT

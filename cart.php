@@ -1,9 +1,16 @@
 <?php
 include 'components/connect.php';
+
 session_start();
 
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
+
+  $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+  $select_profile->execute([$user_id]);
+  if ($select_profile->rowCount() == 0) {
+    header("location:user_login.php");
+  }
 } else {
   $user_id = '';
   header('location:user_login.php');
@@ -104,22 +111,30 @@ if (isset($_POST['update_qty'])) {
 
     <h3 class="heading">Shopping cart</h3>
 
+    <!-- <?php
+          $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+          $select_profile->execute([$user_id]);
+          if ($select_profile->rowCount() == 0) {
+            echo '<p class="empty">Please LogIn to see your order(s)</p>';
+            header("location:user_login.php");
+          } else {
+          ?> -->
     <div class="box-container">
 
       <?php
-      $counter = 1;
+            $counter = 1;
 
-      $grand_total = 0;
-      $select_cart = $conn->prepare("
+            $grand_total = 0;
+            $select_cart = $conn->prepare("
         SELECT c.user_id, c.pid, c.name, c.price, c.quantity, p.qty as qty, p.image_01 as image 
         FROM cart c
         JOIN products p ON c.pid = p.id 
         WHERE user_id = ?
        ");
-      $select_cart->execute([$user_id]);
+            $select_cart->execute([$user_id]);
 
-      if ($select_cart->rowCount() > 0) {
-        while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+            if ($select_cart->rowCount() > 0) {
+              while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
       ?>
           <form action="" method="post" class="box">
             <input type="hidden" name="pid" value="<?= $fetch_cart['pid']; ?>">
@@ -128,7 +143,7 @@ if (isset($_POST['update_qty'])) {
             <div class="name"><?= $fetch_cart['name']; ?></div>
             <div class="flex">
               <div class="price">$<?= $fetch_cart['price']; ?></div>
-              <input type="number" id="q<?= $counter; ?>" name="qty" class="qty" min="1" max="<?php echo $fetch_cart['qty']+$fetch_cart['quantity']?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
+              <input type="number" id="q<?= $counter; ?>" name="qty" class="qty" min="1" max="<?php echo $fetch_cart['qty'] + $fetch_cart['quantity'] ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
               <button type="submit" id="u<?= $counter; ?>" class="update-btn fas fa-edit fa-plus fa-2x" name="update_qty"></button>
             </div>
             <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
@@ -137,12 +152,12 @@ if (isset($_POST['update_qty'])) {
             </button>
           </form>
       <?php
-          $grand_total += $sub_total;
-          $counter++;
-        }
-      } else {
-        echo '<p class="empty">Your cart is empty</p>';
-      }
+                $grand_total += $sub_total;
+                $counter++;
+              }
+            } else {
+              echo '<p class="empty">Your cart is empty</p>';
+            }
       ?>
     </div>
   </section>
@@ -163,15 +178,15 @@ if (isset($_POST['update_qty'])) {
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       <?php
-      $counter = 1;
-      $cart_product_quantity = $conn->prepare("
+            $counter = 1;
+            $cart_product_quantity = $conn->prepare("
           SELECT c.user_id, c.pid, c.quantity
           FROM cart c
           JOIN products p ON c.pid = p.id 
           WHERE user_id = ?
         ");
-      $cart_product_quantity->execute([$user_id]);
-      while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
+            $cart_product_quantity->execute([$user_id]);
+            while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
       ?>
         let qInp<?= $counter; ?> = document.getElementById('q<?= $counter; ?>');
         let uBtn<?= $counter; ?> = document.getElementById('u<?= $counter; ?>');
@@ -190,11 +205,14 @@ if (isset($_POST['update_qty'])) {
           }
         }
       <?php
-        $counter++;
-      }
+              $counter++;
+            }
       ?>
     });
   </script>
+  <!-- <?php
+          }
+        ?> -->
 
   <?php include 'components/footer.php'; ?>
 
