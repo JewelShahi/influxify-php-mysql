@@ -46,60 +46,69 @@ if (isset($_GET['delete_all'])) {
 <body>
 
 	<?php include 'components/user_header.php'; ?>
+	<?php
+	$select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
+	$select_user_exists->execute([$user_id]);
+	if ($select_user_exists->rowCount() == 0) {
+		header("location: user_login.php");
+	} else {
+	?>
+		<section class="products">
 
-	<section class="products">
+			<h3 class="heading">Wishlist</h3>
 
-		<h3 class="heading">Wishlist</h3>
+			<div class="box-container">
 
-		<div class="box-container">
-
-			<?php
-			$grand_total = 0;
-			$select_wishlist = $conn->prepare("
+				<?php
+				$grand_total = 0;
+				$select_wishlist = $conn->prepare("
 				SELECT w.user_id, w.pid, w.name, w.price, p.qty as product_quantity, p.image_01 as image 
 				FROM wishlist w
 				JOIN products p ON w.pid = p.id 
 				WHERE user_id = ?
 			");
-			$select_wishlist->execute([$user_id]);
-			if ($select_wishlist->rowCount() > 0) {
-				while ($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)) {
-					$grand_total += $fetch_wishlist['price'];
-			?>
-					<form action="" method="post" class="box">
-						<input type="hidden" name="pid" value="<?= $fetch_wishlist['pid']; ?>">
-						<input type="hidden" name="name" value="<?= $fetch_wishlist['name']; ?>">
-						<input type="hidden" name="price" value="<?= $fetch_wishlist['price']; ?>">
-						<input type="hidden" name="image" value="<?= $fetch_wishlist['image']; ?>">
-						<input type="hidden" name="qty" value="1">
-						<a href="quick_view.php?pid=<?= $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
-						<img src="uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="">
-						<div class="name"><?= $fetch_wishlist['name']; ?></div>
-						<div class="price">$<?= $fetch_wishlist['price']; ?></div>
-						<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>" <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>>
-							<i class="fas fa-plus"></i> Add to cart
-						</button>
-						<button type="submit" onclick="return confirm('Remove this from wishlist?');" class="delete-btn" name="delete">
-							<i class="fas fa-minus"></i> Remove item
-						</button>
-					</form>
-			<?php
+				$select_wishlist->execute([$user_id]);
+				if ($select_wishlist->rowCount() > 0) {
+					while ($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)) {
+						$grand_total += $fetch_wishlist['price'];
+				?>
+						<form action="" method="post" class="box">
+							<input type="hidden" name="pid" value="<?= $fetch_wishlist['pid']; ?>">
+							<input type="hidden" name="name" value="<?= $fetch_wishlist['name']; ?>">
+							<input type="hidden" name="price" value="<?= $fetch_wishlist['price']; ?>">
+							<input type="hidden" name="image" value="<?= $fetch_wishlist['image']; ?>">
+							<input type="hidden" name="qty" value="1">
+							<a href="quick_view.php?pid=<?= $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
+							<img src="uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="">
+							<div class="name"><?= $fetch_wishlist['name']; ?></div>
+							<div class="price">$<?= $fetch_wishlist['price']; ?></div>
+							<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>" <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>>
+								<i class="fas fa-plus"></i> Add to cart
+							</button>
+							<button type="submit" onclick="return confirm('Remove this from wishlist?');" class="delete-btn" name="delete">
+								<i class="fas fa-minus"></i> Remove item
+							</button>
+						</form>
+				<?php
+					}
+				} else {
+					echo '<p class="empty">Your wishlist is empty.</p>';
 				}
-			} else {
-				echo '<p class="empty">Your wishlist is empty.</p>';
-			}
-			?>
+				?>
+			</div>
+		</section>
+		<div class="wishlist-total">
+			<p>Grand total : <span>$<?= $grand_total; ?></span></p>
+			<a href="shop.php" class="option-btn">
+				<i class="fas fa-arrow-left"></i> Continue shopping
+			</a>
+			<a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Delete all from wishlist?');">
+				<i class="fas fa-trash-alt"></i> Remove all items
+			</a>
 		</div>
-	</section>
-	<div class="wishlist-total">
-		<p>Grand total : <span>$<?= $grand_total; ?></span></p>
-		<a href="shop.php" class="option-btn">
-			<i class="fas fa-arrow-left"></i> Continue shopping
-		</a>
-		<a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Delete all from wishlist?');">
-			<i class="fas fa-trash-alt"></i> Remove all items
-		</a>
-	</div>
+	<?php
+	}
+	?>
 	<?php include 'components/footer.php'; ?>
 
 	<script src="js/user_script.js"></script>

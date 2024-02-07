@@ -12,9 +12,17 @@ if (isset($_GET['delete'])) {
 
   $delete_id = $_GET['delete'];
 
-  if ($_SESSION['user']['user_id'] == $delete_id) {
-    unset($_SESSION['user']['user_id']);
-    $_SESSION['user']['user_id'] = "";
+  $get_cart_products = $conn->prepare("SELECT pid, quantity FROM `cart` WHERE user_id = ?");
+  $get_cart_products->execute([$delete_id]);
+  $cart_products = $get_cart_products->fetchAll();
+
+  // Add the quantities back to the products table
+  foreach ($cart_products as $product) {
+    $pid = $product['pid'];
+    $quantity = $product['quantity'];
+
+    $add_back_quantity = $conn->prepare("UPDATE `products` SET qty = qty + ? WHERE id = ?");
+    $add_back_quantity->execute([$quantity, $pid]);
   }
 
   $delete_user = $conn->prepare("DELETE FROM `users` WHERE id = ?");

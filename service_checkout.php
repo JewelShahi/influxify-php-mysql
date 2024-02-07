@@ -72,71 +72,80 @@ if (isset($_POST['service_checkout_data'])) {
 <body>
 
   <?php include 'components/user_header.php'; ?>
+  <?php
+  $select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
+  $select_user_exists->execute([$user_id]);
+  if ($select_user_exists->rowCount() == 0) {
+    header("location: user_login.php");
+  } else {
+  ?>
+    <section class="checkout-orders">
 
-  <section class="checkout-orders">
+      <form action="" method="POST">
+        <input type="hidden" name="id" value="<?= $service_id; ?>">
+        <input type="hidden" name="price" value="<?= $service_price; ?>">
+        <h3>Service payment</h3>
+        <div class="display-orders">
+          <div class="grand-total">Grand total : <span>$<?= $price; ?></span></div>
+        </div>
+        <h3>Place your info</h3>
+        <div class="flex">
+          <div class="inputBox">
+            <span>Payment method :</span>
+            <select name="method" class="box" required>
+              <option value="cash on delivery">cash on delivery</option>
+              <option value="credit card">credit card</option>
+              <option value="paypal">paypal</option>
+            </select>
+          </div>
+          <div class="inputBox">
+            <span>Include delivery : ($9.99)</span>
+            <select name="delivery" id="deliveryOption" class="box" required onchange="toggleAddressFields()">
+              <option value="no" <?= ($delivery_option === 'no') ? 'selected' : ''; ?>>No</option>
+              <option value="yes" <?= ($delivery_option === 'yes') ? 'selected' : ''; ?>>Yes</option>
+            </select>
+          </div>
+          <div id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
+            <div class="inputBox">
+              <span>Address line 01 :</span>
+              <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
+            </div>
+            <div class="inputBox">
+              <span>Address line 02 :</span>
+              <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
+            </div>
+            <div class="inputBox">
+              <span>City :</span>
+              <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
+            </div>
+            <div class="inputBox">
+              <span>State :</span>
+              <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
+            </div>
+            <div class="inputBox">
+              <span>Country :</span>
+              <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
+            </div>
+            <div class="inputBox">
+              <span>Pin code :</span>
+              <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+            </div>
+          </div>
+        </div>
+        <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
+      </form>
 
-    <form action="" method="POST">
-      <input type="hidden" name="id" value="<?= $service_id; ?>">
-      <input type="hidden" name="price" value="<?= $service_price; ?>">
-      <h3>Service payment</h3>
-      <div class="display-orders">
-        <div class="grand-total">Grand total : <span>$<?= $price; ?></span></div>
-      </div>
-      <h3>Place your info</h3>
-      <div class="flex">
-        <div class="inputBox">
-          <span>Payment method :</span>
-          <select name="method" class="box" required>
-            <option value="cash on delivery">cash on delivery</option>
-            <option value="credit card">credit card</option>
-            <option value="paypal">paypal</option>
-          </select>
-        </div>
-        <div class="inputBox">
-          <span>Include delivery : ($9.99)</span>
-          <select name="delivery" id="deliveryOption" class="box" required onchange="toggleAddressFields()">
-            <option value="no" <?= ($delivery_option === 'no') ? 'selected' : ''; ?>>No</option>
-            <option value="yes" <?= ($delivery_option === 'yes') ? 'selected' : ''; ?>>Yes</option>
-          </select>
-        </div>
-        <div id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-          <div class="inputBox">
-            <span>Address line 01 :</span>
-            <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
-          </div>
-          <div class="inputBox">
-            <span>Address line 02 :</span>
-            <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
-          </div>
-          <div class="inputBox">
-            <span>City :</span>
-            <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
-          </div>
-          <div class="inputBox">
-            <span>State :</span>
-            <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
-          </div>
-          <div class="inputBox">
-            <span>Country :</span>
-            <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
-          </div>
-          <div class="inputBox">
-            <span>Pin code :</span>
-            <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
-          </div>
-        </div>
-      </div>
-      <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
-    </form>
-
-  </section>
+    </section>
+  <?php
+  }
+  ?>
   <?php include 'components/footer.php'; ?>
 
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
   <script src="js/service_checkout.js"></script>
-  
+
   <!-- <script>
     // Function to toggle address fields based on delivery option
     const toggleAddressFields = () => {

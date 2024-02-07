@@ -82,8 +82,11 @@ if (isset($_POST['update_password'])) {
 <body>
 
   <?php include 'components/user_header.php'; ?>
-  <?php if ($user_id == '') {
-    header("location: home.php");
+  <?php
+  $select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
+  $select_user_exists->execute([$user_id]);
+  if ($select_user_exists->rowCount() == 0) {
+    header("location: user_login.php");
   } else {
   ?>
     <section class="user-update">

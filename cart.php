@@ -100,102 +100,112 @@ if (isset($_POST['update_qty'])) {
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="products shopping-cart">
+  <?php
+  $select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
+  $select_user_exists->execute([$user_id]);
+  if ($select_user_exists->rowCount() == 0) {
+    header("location: user_login.php");
+  } else {
+  ?>
 
-    <h3 class="heading">Shopping cart</h3>
+    <section class="products shopping-cart">
 
-    <div class="box-container">
+      <h3 class="heading">Shopping cart</h3>
 
-      <?php
-      $counter = 1;
+      <div class="box-container">
 
-      $grand_total = 0;
-      $select_cart = $conn->prepare("
+        <?php
+        $counter = 1;
+
+        $grand_total = 0;
+        $select_cart = $conn->prepare("
         SELECT c.user_id, c.pid, c.name, c.price, c.quantity, p.qty as qty, p.image_01 as image 
         FROM cart c
         JOIN products p ON c.pid = p.id 
         WHERE user_id = ?
        ");
-      $select_cart->execute([$user_id]);
+        $select_cart->execute([$user_id]);
 
-      if ($select_cart->rowCount() > 0) {
-        while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
-      ?>
-          <form action="" method="post" class="box">
-            <input type="hidden" name="pid" value="<?= $fetch_cart['pid']; ?>">
-            <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
-            <img src="uploaded_img/products/<?= $fetch_cart['image']; ?>" alt="">
-            <div class="name"><?= $fetch_cart['name']; ?></div>
-            <div class="flex">
-              <div class="price">$<?= $fetch_cart['price']; ?></div>
-              <input type="number" id="q<?= $counter; ?>" name="qty" class="qty" min="1" max="<?php echo $fetch_cart['qty']+$fetch_cart['quantity']?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
-              <button type="submit" id="u<?= $counter; ?>" class="update-btn fas fa-edit fa-plus fa-2x" name="update_qty"></button>
-            </div>
-            <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
-            <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Remove this product from cart?');">
-              <i class="fas fa-minus-circle"></i> Remove
-            </button>
-          </form>
-      <?php
-          $grand_total += $sub_total;
-          $counter++;
+        if ($select_cart->rowCount() > 0) {
+          while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <form action="" method="post" class="box">
+              <input type="hidden" name="pid" value="<?= $fetch_cart['pid']; ?>">
+              <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
+              <img src="uploaded_img/products/<?= $fetch_cart['image']; ?>" alt="">
+              <div class="name"><?= $fetch_cart['name']; ?></div>
+              <div class="flex">
+                <div class="price">$<?= $fetch_cart['price']; ?></div>
+                <input type="number" id="q<?= $counter; ?>" name="qty" class="qty" min="1" max="<?php echo $fetch_cart['qty'] + $fetch_cart['quantity'] ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
+                <button type="submit" id="u<?= $counter; ?>" class="update-btn fas fa-edit fa-plus fa-2x" name="update_qty"></button>
+              </div>
+              <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
+              <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Remove this product from cart?');">
+                <i class="fas fa-minus-circle"></i> Remove
+              </button>
+            </form>
+        <?php
+            $grand_total += $sub_total;
+            $counter++;
+          }
+        } else {
+          echo '<p class="empty">Your cart is empty</p>';
         }
-      } else {
-        echo '<p class="empty">Your cart is empty</p>';
-      }
-      ?>
+        ?>
+      </div>
+    </section>
+
+    <div class="cart-total">
+      <p>Grand total : <span>$<?= $grand_total; ?></span></p>
+      <a href="shop.php" class="option-btn">
+        <i class="fas fa-arrow-left"></i> Continue shopping
+      </a>
+      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">
+        <i class="fas fa-trash-alt"></i> Remove all products
+      </a>
+      <a href="checkout.php" class="btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>">
+        <i class="fa-solid fa-wallet"></i> Proceed to checkout
+      </a>
     </div>
-  </section>
 
-  <div class="cart-total">
-    <p>Grand total : <span>$<?= $grand_total; ?></span></p>
-    <a href="shop.php" class="option-btn">
-      <i class="fas fa-arrow-left"></i> Continue shopping
-    </a>
-    <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">
-      <i class="fas fa-trash-alt"></i> Remove all products
-    </a>
-    <a href="checkout.php" class="btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>">
-      <i class="fa-solid fa-wallet"></i> Proceed to checkout
-    </a>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      <?php
-      $counter = 1;
-      $cart_product_quantity = $conn->prepare("
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        <?php
+        $counter = 1;
+        $cart_product_quantity = $conn->prepare("
           SELECT c.user_id, c.pid, c.quantity
           FROM cart c
           JOIN products p ON c.pid = p.id 
           WHERE user_id = ?
         ");
-      $cart_product_quantity->execute([$user_id]);
-      while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
-      ?>
-        let qInp<?= $counter; ?> = document.getElementById('q<?= $counter; ?>');
-        let uBtn<?= $counter; ?> = document.getElementById('u<?= $counter; ?>');
+        $cart_product_quantity->execute([$user_id]);
+        while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+          let qInp<?= $counter; ?> = document.getElementById('q<?= $counter; ?>');
+          let uBtn<?= $counter; ?> = document.getElementById('u<?= $counter; ?>');
 
-        qInp<?= $counter; ?>.addEventListener('input', () => {
+          qInp<?= $counter; ?>.addEventListener('input', () => {
+            updateButtonState<?= $counter; ?>();
+          });
+
           updateButtonState<?= $counter; ?>();
-        });
 
-        updateButtonState<?= $counter; ?>();
-
-        function updateButtonState<?= $counter; ?>() {
-          if (qInp<?= $counter; ?>.value == <?= $fetch_cart['quantity'] ?>) {
-            uBtn<?= $counter; ?>.classList.add('disabled');
-          } else {
-            uBtn<?= $counter; ?>.classList.remove('disabled');
+          function updateButtonState<?= $counter; ?>() {
+            if (qInp<?= $counter; ?>.value == <?= $fetch_cart['quantity'] ?>) {
+              uBtn<?= $counter; ?>.classList.add('disabled');
+            } else {
+              uBtn<?= $counter; ?>.classList.remove('disabled');
+            }
           }
+        <?php
+          $counter++;
         }
-      <?php
-        $counter++;
-      }
-      ?>
-    });
-  </script>
-
+        ?>
+      });
+    </script>
+  <?php
+  }
+  ?>
   <?php include 'components/footer.php'; ?>
 
   <script src="js/user_script.js"></script>

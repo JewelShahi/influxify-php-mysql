@@ -4,10 +4,8 @@ include 'connect.php';
 
 session_start();
 
-// Unset the specific admin session variable
-unset($_SESSION['admin_session']['admin_id']);
-
+// Completely destroy the session data
+session_unset();
 session_destroy();
 
 header('location:../admin/admin_login.php');
-?>

@@ -90,90 +90,100 @@ if (isset($_POST['order'])) {
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="checkout-orders">
+  <?php
+  $select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
+  $select_user_exists->execute([$user_id]);
+  if ($select_user_exists->rowCount() == 0) {
+    header("location: user_login.php");
+  } else {
+  ?>
 
-    <form action="" method="POST">
+    <section class="checkout-orders">
 
-      <h3>Your orders</h3>
+      <form action="" method="POST">
 
-      <div class="display-orders">
-        <?php
-        $grand_total = 0;
-        $cart_items[] = '';
-        $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-        $select_cart->execute([$user_id]);
-        if ($select_cart->rowCount() > 0) {
-          while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
-            $cart_items[] = $fetch_cart['name'] . ' (' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity'] . ') - ';
-            $total_products = implode($cart_items);
-            $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
-        ?>
-            <p> <?= $fetch_cart['name']; ?> <span>(<?= '$' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity']; ?>)</span> </p>
-        <?php
+        <h3>Your orders</h3>
+
+        <div class="display-orders">
+          <?php
+          $grand_total = 0;
+          $cart_items[] = '';
+          $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+          $select_cart->execute([$user_id]);
+          if ($select_cart->rowCount() > 0) {
+            while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+              $cart_items[] = $fetch_cart['name'] . ' (' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity'] . ') - ';
+              $total_products = implode($cart_items);
+              $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
+          ?>
+              <p> <?= $fetch_cart['name']; ?> <span>(<?= '$' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity']; ?>)</span> </p>
+          <?php
+            }
+          } else {
+            echo '<p class="empty">Your cart is empty!</p>';
           }
-        } else {
-          echo '<p class="empty">Your cart is empty!</p>';
-        }
-        ?>
-        <input type="hidden" name="total_products" value="<?= $total_products; ?>">
-        <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
-        <div class="grand-total">Grand total : <span>$<?= $grand_total; ?></span></div>
-      </div>
+          ?>
+          <input type="hidden" name="total_products" value="<?= $total_products; ?>">
+          <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
+          <div class="grand-total">Grand total : <span>$<?= $grand_total; ?></span></div>
+        </div>
 
-      <h3>Place your shipping info</h3>
+        <h3>Place your shipping info</h3>
 
-      <div class="flex">
-        <div class="inputBox">
-          <span>Your name :</span>
-          <input type="text" name="name" placeholder="Enter your name" class="box" maxlength="100" required>
+        <div class="flex">
+          <div class="inputBox">
+            <span>Your name :</span>
+            <input type="text" name="name" placeholder="Enter your name" class="box" maxlength="100" required>
+          </div>
+          <div class="inputBox">
+            <span>Your phone number :</span>
+            <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="999999999999999" onkeypress="if(this.value.length < 10 || this.value.length > 15) return false;" required>
+          </div>
+          <div class="inputBox">
+            <span>Your email :</span>
+            <input type="email" name="email" placeholder="Enter your email" class="box" maxlength="50" required>
+          </div>
+          <div class="inputBox">
+            <span>Payment method :</span>
+            <select name="method" class="box" required>
+              <option value="cash on delivery">cash on delivery</option>
+              <option value="credit card">credit card</option>
+              <option value="paypal">paypal</option>
+            </select>
+          </div>
+          <div class="inputBox">
+            <span>Address line 01 :</span>
+            <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
+          </div>
+          <div class="inputBox">
+            <span>Address line 02 :</span>
+            <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
+          </div>
+          <div class="inputBox">
+            <span>City :</span>
+            <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
+          </div>
+          <div class="inputBox">
+            <span>State :</span>
+            <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
+          </div>
+          <div class="inputBox">
+            <span>Country :</span>
+            <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
+          </div>
+          <div class="inputBox">
+            <span>Pin code :</span>
+            <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+          </div>
         </div>
-        <div class="inputBox">
-          <span>Your phone number :</span>
-          <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="999999999999999" onkeypress="if(this.value.length < 10 || this.value.length > 15) return false;" required>
-        </div>
-        <div class="inputBox">
-          <span>Your email :</span>
-          <input type="email" name="email" placeholder="Enter your email" class="box" maxlength="50" required>
-        </div>
-        <div class="inputBox">
-          <span>Payment method :</span>
-          <select name="method" class="box" required>
-            <option value="cash on delivery">cash on delivery</option>
-            <option value="credit card">credit card</option>
-            <option value="paypal">paypal</option>
-          </select>
-        </div>
-        <div class="inputBox">
-          <span>Address line 01 :</span>
-          <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
-        </div>
-        <div class="inputBox">
-          <span>Address line 02 :</span>
-          <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
-        </div>
-        <div class="inputBox">
-          <span>City :</span>
-          <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
-        </div>
-        <div class="inputBox">
-          <span>State :</span>
-          <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
-        </div>
-        <div class="inputBox">
-          <span>Country :</span>
-          <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
-        </div>
-        <div class="inputBox">
-          <span>Pin code :</span>
-          <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
-        </div>
-      </div>
 
-      <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="Place order">
+        <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="Place order">
 
-    </form>
-
-  </section>
+      </form>
+    </section>
+  <?php
+  }
+  ?>
   <?php include 'components/footer.php'; ?>
 
   <script src="js/user_script.js"></script>
