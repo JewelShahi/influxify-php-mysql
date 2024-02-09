@@ -60,6 +60,17 @@ if (isset($_POST['update_password'])) {
     }
   }
 }
+
+if (isset($_POST['update_avatar'])) {
+  $avatar = $_POST['avatar'];
+
+  // Update user avatar
+  $update_avatar = $conn->prepare("UPDATE `users` SET avatar = ? WHERE id = ?");
+  $update_avatar->execute([$avatar, $user_id]);
+  
+  $message[] = "User avatar updated!";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -111,24 +122,36 @@ if (isset($_POST['update_password'])) {
           <i class="fas fa-save"></i> Save Changes
         </button>
       </form>
-      <form action="" class="avatar-form">
-        <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
-        <div>
-          <img src="" alt="" class="">
+      <form action="" class="avatar-form" method="post">
+        <div class="user-image-avatar">
+          <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
         </div>
-        <input type="submit" value="update avatar" class="btn" name="update_avatar">
+        <div class="image-container">
+          <input type="radio" name="avatar" id="gojo" class="input-hidden" value="gojo-classic.png" />
+          <label for="gojo" onclick="handleRadioButtonClick('gojo')">
+            <div class="avatar-container" style="background-image: url(uploaded_img/user_avatar/gojo-classic.png);"></div>
+          </label>
+          <input type="radio" name="avatar" id="ichigo" class="input-hidden" value="ichigo.png" />
+          <label for="ichigo" onclick="handleRadioButtonClick('ichigo')">
+            <div class="avatar-container" style="background-image: url(uploaded_img/user_avatar/ichigo.png);"></div>
+          </label>
+        </div>
+        <button type="submit" class="btn" name="update_avatar">
+          Update avatar
+        </button>
       </form>
+
     </section>
   <?php
   }
   ?>
-  <?php include 'components/footer.php'; ?>
 
+  <script src="js/user_avatar.js"></script>
+  <?php include 'components/footer.php'; ?>
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
   <script src="js/toggle_password.js"></script>
-
 </body>
 
 </html>
