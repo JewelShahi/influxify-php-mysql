@@ -59,6 +59,132 @@
   width: 100%;
 }
 
+.user-update {
+  background-color: var(--body);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-form,
+.avatar-form {
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  padding: 2rem;
+  box-shadow: 0 0 10px var(--black);
+  text-align: center;
+}
+
+.user-form {
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.avatar-form {
+  width: 50%;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  overflow: auto;
+}
+
+.user-form h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+
+.user-form .box {
+  margin: 1rem 0;
+  background-color: var(--light);
+  padding: 1.4rem;
+  font-size: 1.8rem;
+  color: var(--black);
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+.avatar-form .user-image-avatar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  margin-top: 20px; /* Add margin-top */
+}
+
+.avatar-form .user-image-avatar img {
+  width: 55%;
+  min-width: 175px;
+  border-radius: var(--border-radius);
+}
+
+.avatar-form .image-container {
+  margin-top: 10px;
+  width: 100%;
+  display: flex; /* Change display to flex */
+  flex-wrap: wrap; /* Allow items to wrap onto new line */
+  gap: 5px;
+  justify-content: center; /* Center align items horizontally */
+}
+
+.avatar-form .image-container label {
+  width: 100px; /* Set a fixed width */
+  height: 100px; /* Set a fixed height */
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* Center align content vertically */
+  justify-content: center; /* Center align content horizontally */
+}
+
+.avatar-form .input-hidden {
+  display: none;
+}
+
+.avatar-form .image-container .avatar-container {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center; /* Center the background */
+  border-radius: 50%; /* Make it a circle */
+  transition: filter 300ms ease-in-out;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 375px) {
+  .avatar-form .image-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Add media query for responsiveness */
+@media screen and (max-width: 768px) {
+  .user-update {
+    flex-direction: column; /* Change to column layout for small screens */
+  }
+
+  .user-form,
+  .avatar-form {
+    width: 100%;
+  }
+
+  .user-form {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+
+  .avatar-form {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+}
+
 /*---------------------------------------------------*/
 .form-container {
   min-height: 100%;
@@ -428,10 +554,7 @@
 
 @media screen and (max-width: 1200px) {
   .accounts .box-container {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(250px, 1fr)
-    );
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
@@ -476,7 +599,7 @@
   box-shadow: 0 0 10px var(--black);
 }
 
-.accounts .box-container .box p{
+.accounts .box-container .box p {
   font-size: 2rem;
   color: var(--light-color);
   margin: 1rem 0;
@@ -608,7 +731,7 @@
   border-radius: var(--border-radius);
 }
 
-.services .box-container .box .blur p input{
+.services .box-container .box .blur p input {
   font-size: 1.8rem;
   padding: 1.4rem;
   border-radius: var(--border-radius);

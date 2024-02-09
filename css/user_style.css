@@ -814,13 +814,6 @@
   transition: filter 300ms ease-in-out;
 }
 
-/* .avatar-form .image-container .input-hidden:checked + label .avatar-container {
-  filter: brightness(45%);
-}
-
-.avatar-form .image-container .input-hidden:hover + label .avatar-container {
-  filter: brightness(60%);
-} */
 
 /* Media queries for responsiveness */
 @media screen and (max-width: 375px) {

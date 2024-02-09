@@ -50,6 +50,16 @@ if (isset($_POST['submit'])) {
     }
   }
 }
+
+if (isset($_POST['update_avatar'])) {
+  $avatar = $_POST['avatar'];
+
+  // Update user avatar
+  $update_avatar = $conn->prepare("UPDATE `users` SET avatar = ? WHERE id = ? and isAdmin = 1");
+  $update_avatar->execute([$avatar, $admin_id]);
+
+  $message[] = "Admin avatar updated!";
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,25 +88,67 @@ if (isset($_POST['submit'])) {
     header("location: admin_login.php");
   } else {
   ?>
-
-    <section class="form-container">
-      <form action="" method="post">
-        <h3>Update profile</h3>
-        <input type="hidden" name="prev_pass" value="<?= $fetch_profile['password']; ?>">
-        <input type="text" name="name" value="<?= $fetch_profile['name']; ?>" required placeholder="Enter your name" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+    <section class="user-update">
+      <form action="" class="user-form" method="post" enctype="multipart/form-data">
+        <h3>Update Profile</h3>
+        <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
+        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required>
         <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
-        <input type="password" name="old_pass" placeholder="Enter old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="password" name="new_pass" placeholder="Enter new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="password" name="confirm_pass" placeholder="Confirm new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <button type="submit" class="btn submit-btn" name="submit">
+        <div class="password-container">
+          <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+        </div>
+        <div class="password-container">
+          <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+        </div>
+        <div class="password-container">
+          <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+        </div>
+        <button type="submit" class="btn submit-btn" name="update_password">
           <i class="fas fa-save"></i> Save Changes
         </button>
       </form>
+      <form action="" class="avatar-form" method="post">
+        <div class="user-image-avatar">
+          <img src="<?= '../uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
+        </div>
+        <div class="image-container">
+
+          <input type="radio" name="avatar" id="gojo-classic" class="input-hidden" value="gojo-classic.png" />
+          <label for="gojo-classic" onclick="handleRadioButtonClick('gojo-classic')">
+            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/gojo-classic.png);"></div>
+          </label>
+
+          <input type="radio" name="avatar" id="ichigo" class="input-hidden" value="ichigo.png" />
+          <label for="ichigo" onclick="handleRadioButtonClick('ichigo')">
+            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/ichigo.png);"></div>
+          </label>
+
+          <input type="radio" name="avatar" id="gojo-light-blue" class="input-hidden" value="gojo-light-blue.png" />
+          <label for="gojo-light-blue" onclick="handleRadioButtonClick('gojo-light-blue')">
+            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/gojo-light-blue.png);"></div>
+          </label>
+
+          <input type="radio" name="avatar" id="ichigo-classic" class="input-hidden" value="ichigo-classic.png" />
+          <label for="ichigo-classic" onclick="handleRadioButtonClick('ichigo-classic')">
+            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/ichigo-classic.png);"></div>
+          </label>
+
+        </div>
+        <button type="submit" class="btn" name="update_avatar">
+          <i class="fa-solid fa-image"></i> Update avatar
+        </button>
+      </form>
+
     </section>
 
   <?php
   }
   ?>
+
+  <script src="../js/user_avatar.js"></script>
 
   <script src="../js/admin_script.js"></script>
 </body>
