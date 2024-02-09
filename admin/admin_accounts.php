@@ -1,18 +1,28 @@
 <?php
 
-// Include the database connection file
-include '../components/connect.php';
+// // Include the database connection file
+// include '../components/connect.php';
 
-// Start the admin session
+// // Start the admin session
+// session_start();
+
+// // Retrieve the admin ID from the session
+// $admin_id = $_SESSION['admin_id'];
+
+// // If admin ID is not set, redirect to admin login page
+// if (!isset($admin_id)) {
+//   header('location:admin_login.php');
+// } 
+
+include '../components/connect.php';
 session_start();
 
-// Retrieve the admin ID from the session
-$admin_id = $_SESSION['admin_id'];
-
-// If admin ID is not set, redirect to admin login page
-if (!isset($admin_id)) {
-  header('location:admin_login.php');
-}
+if (isset($_SESSION['admin_id'])) {
+  $admin_id = $_SESSION['admin_id'];
+} else {
+  $admin_id = '';
+  header('location:user_login.php');
+};
 
 // If 'delete' parameter is set in the URL
 if (isset($_GET['delete'])) {
@@ -57,65 +67,74 @@ if (isset($_GET['delete'])) {
   <!-- Include the admin header component -->
   <?php include '../components/admin_header.php'; ?>
 
-  <section class="accounts">
+  <?php
+  $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
+  $select_admin_exists->execute([$admin_id]);
+  if ($select_admin_exists->rowCount() == 0) {
+    header("location: admin_login.php");
+  } else {
+  ?>
+    <section class="accounts">
 
-    <!-- Heading for admin accounts -->
-    <h1 class="heading">Admin accounts</h1>
+      <!-- Heading for admin accounts -->
+      <h1 class="heading">Admin accounts</h1>
 
-    <!-- Container for adding a new admin -->
-    <div class="new-admin-container">
-      <div id="add-new-admin">
-        <p>Add a new admin</p>
-        <a href="register_admin.php" class="option-btn">Register an admin</a>
+      <!-- Container for adding a new admin -->
+      <div class="new-admin-container">
+        <div id="add-new-admin">
+          <p>Add a new admin</p>
+          <a href="register_admin.php" class="option-btn">Register an admin</a>
+        </div>
       </div>
-    </div>
 
-    <!-- Container for displaying admin accounts -->
-    <div class="box-container">
-      <div class="info">
-        <?php
+      <!-- Container for displaying admin accounts -->
+      <div class="box-container">
+        <div class="info">
+          <?php
 
-        // Select all admin accounts from the database
-        $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 1");
-        $select_accounts->execute();
+          // Select all admin accounts from the database
+          $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 1");
+          $select_accounts->execute();
 
-        // Check if there are admin accounts available
-        if ($select_accounts->rowCount() > 0) {
-          // Loop through each admin account
-          while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
-        ?>
-            <!-- Box displaying admin details -->
-            <div class="box">
-              <p> Admin ID : <span><?= $fetch_accounts['id']; ?></span> </p>
-              <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
-              <!-- Buttons for updating and deleting admin accounts -->
-              <div class="flex-btn">
-                <?php
-                // Check if the admin is viewing their own account
-                if ($fetch_accounts['id'] == $admin_id) {
-                  // Display update button
-                  echo '<a href="update_profile.php" class="option-btn">Update</a>';
-                }
-                ?>
-                <?php
-                // Check if the admin is not viewing their own account and it's not the super admin (ID = 2)
-                if ($fetch_accounts['id'] != $admin_id && $fetch_accounts['id'] != 2) {
-                  // Display delete button
-                  echo '<a href="admin_accounts.php?delete=' . $fetch_accounts['id'] . '" onclick="return confirm(\'Delete this account?\')" class="delete-btn">Delete</a>';
-                }
-                ?>
+          // Check if there are admin accounts available
+          if ($select_accounts->rowCount() > 0) {
+            // Loop through each admin account
+            while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
+          ?>
+              <!-- Box displaying admin details -->
+              <div class="box">
+                <p> Admin ID : <span><?= $fetch_accounts['id']; ?></span> </p>
+                <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
+                <!-- Buttons for updating and deleting admin accounts -->
+                <div class="flex-btn">
+                  <?php
+                  // Check if the admin is viewing their own account
+                  if ($fetch_accounts['id'] == $admin_id) {
+                    // Display update button
+                    echo '<a href="update_profile.php" class="option-btn">Update</a>';
+                  }
+                  ?>
+                  <?php
+                  // Check if the admin is not viewing their own account and it's not the super admin (ID = 2)
+                  if ($fetch_accounts['id'] != $admin_id && $fetch_accounts['id'] != 2) {
+                    // Display delete button
+                    echo '<a href="admin_accounts.php?delete=' . $fetch_accounts['id'] . '" onclick="return confirm(\'Delete this account?\')" class="delete-btn">Delete</a>';
+                  }
+                  ?>
+                </div>
               </div>
-            </div>
-        <?php
+          <?php
+            }
+          } else {
+            echo '<p class="empty">There are currently no available admin accounts</p>';
           }
-        } else {
-          echo '<p class="empty">There are currently no available admin accounts</p>';
-        }
-        ?>
+          ?>
+        </div>
       </div>
-    </div>
-  </section>
-
+    </section>
+  <?php
+  }
+  ?>
   <!-- Include the admin script and scroll-up components -->
   <script src="../js/admin_script.js"></script>
   <?php include '../components/scroll_up.php'; ?>

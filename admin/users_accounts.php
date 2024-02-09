@@ -1,12 +1,14 @@
 <?php
+
 include '../components/connect.php';
-
 session_start();
-$admin_id = $_SESSION['admin_id'];
 
-if (!isset($admin_id)) {
-  header('location:admin_login.php');
-}
+if (isset($_SESSION['admin_id'])) {
+  $admin_id = $_SESSION['admin_id'];
+} else {
+  $admin_id = '';
+  header('location:user_login.php');
+};
 
 if (isset($_GET['delete'])) {
 
@@ -48,30 +50,45 @@ if (isset($_GET['delete'])) {
 </head>
 
 <body>
+
   <?php include '../components/admin_header.php'; ?>
-  <section class="accounts">
-    <h1 class="heading">User accounts</h1>
-    <div class="box-container">
-      <?php
-      $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 0");
-      $select_accounts->execute();
-      if ($select_accounts->rowCount() > 0) {
-        while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
-      ?>
-          <div class="box">
-            <p> User ID : <span><?= $fetch_accounts['id']; ?></span> </p>
-            <p> Name : <span><?= $fetch_accounts['name']; ?></span> </p>
-            <p> E-mail : <span><?= $fetch_accounts['email']; ?></span> </p>
-            <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account? User related information will also be deleted!')" class="delete-btn">Delete</a>
-          </div>
-      <?php
+
+  <?php
+  $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
+  $select_admin_exists->execute([$admin_id]);
+  if ($select_admin_exists->rowCount() == 0) {
+    header("location: admin_login.php");
+  } else {
+  ?>
+
+    <section class="accounts">
+      <h1 class="heading">User accounts</h1>
+      <div class="box-container">
+        <?php
+        $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 0");
+        $select_accounts->execute();
+        if ($select_accounts->rowCount() > 0) {
+          while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <div class="box">
+              <p> User ID : <span><?= $fetch_accounts['id']; ?></span> </p>
+              <p> Name : <span><?= $fetch_accounts['name']; ?></span> </p>
+              <p> E-mail : <span><?= $fetch_accounts['email']; ?></span> </p>
+              <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account? User related information will also be deleted!')" class="delete-btn">Delete</a>
+            </div>
+        <?php
+          }
+        } else {
+          echo '<p class="empty">There are currently no available user accounts</p>';
         }
-      } else {
-        echo '<p class="empty">There are currently no available user accounts</p>';
-      }
-      ?>
-    </div>
-  </section>
+        ?>
+      </div>
+    </section>
+
+  <?php
+  }
+  ?>
+
   <script src="../js/admin_script.js"></script>
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>

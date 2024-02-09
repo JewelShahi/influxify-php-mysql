@@ -1,10 +1,13 @@
 <?php
+
 include '../components/connect.php';
 session_start();
 
-$admin_id = $_SESSION['admin_id'];
-if (!isset($admin_id)) {
-  header('location:admin_login.php');
+if (isset($_SESSION['admin_id'])) {
+  $admin_id = $_SESSION['admin_id'];
+} else {
+  $admin_id = '';
+  header('location:user_login.php');
 };
 
 if (isset($_POST['update_service'])) {
@@ -57,58 +60,70 @@ if (isset($_GET['delete'])) {
 
   <?php include '../components/admin_header.php'; ?>
 
-  <section class="services">
+  <?php
+  $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
+  $select_admin_exists->execute([$admin_id]);
+  if ($select_admin_exists->rowCount() == 0) {
+    header("location: admin_login.php");
+  } else {
+  ?>
 
-    <h1 class="heading">Services</h1>
+    <section class="services">
 
-    <div class="box-container">
+      <h1 class="heading">Services</h1>
 
-      <?php
-      $select_services = $conn->prepare("SELECT * FROM `services` ORDER BY `is_resolved` ASC, `placed_on` DESC");
-      $select_services->execute();
-      if ($select_services->rowCount() > 0) {
-        while ($fetch_service = $select_services->fetch(PDO::FETCH_ASSOC)) {
-      ?>
-          <form action="" method="post" class="box">
-            <div class="blur">
-              <input type="hidden" name="service_id" value="<?= $fetch_service['id']; ?>">
-              <p> Service ID : <span><?= $fetch_service['id']; ?></span></p>
-              <p> Placed on : <span><?= $fetch_service['placed_on']; ?></span></p>
-              <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
-              <p> Name : <span><?= $fetch_service['name']; ?></span></p>
-              <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
-              <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
-              <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
-              <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
-              <p> Estimated price (with delivery <em>if included</em>) :  <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
-              <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
-              <p id="paymentStatusLabel">Payment status :</p>
-              <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
-                <option selected disabled><?= $fetch_service['payment_status']; ?></option>
-                <option value="pending">pending</option>
-                <option value="completed">completed</option>
-              </select>
-              <p id="isResolvedLabel">Is resolved :</p>
-              <select name="is_resolved" class="select" aria-labelledby="isResolvedLabel">
-                <option value="1" <?php echo $fetch_service['is_resolved'] == 1 ? 'selected' : ''; ?>>yes</option>
-                <option value="0" <?php echo $fetch_service['is_resolved'] == 0 ? 'selected' : ''; ?>>no</option>
-              </select>
-              <div class="flex-btn">
-                <button type="submit" name="update_service" class="option-btn">Update</button>
-                <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn" style="<?= ($fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Delete</a>
+      <div class="box-container">
+
+        <?php
+        $select_services = $conn->prepare("SELECT * FROM `services` ORDER BY `is_resolved` ASC, `placed_on` DESC");
+        $select_services->execute();
+        if ($select_services->rowCount() > 0) {
+          while ($fetch_service = $select_services->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <form action="" method="post" class="box">
+              <div class="blur">
+                <input type="hidden" name="service_id" value="<?= $fetch_service['id']; ?>">
+                <p> Service ID : <span><?= $fetch_service['id']; ?></span></p>
+                <p> Placed on : <span><?= $fetch_service['placed_on']; ?></span></p>
+                <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
+                <p> Name : <span><?= $fetch_service['name']; ?></span></p>
+                <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
+                <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
+                <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
+                <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
+                <p> Estimated price (with delivery <em>if included</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
+                <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
+                <p id="paymentStatusLabel">Payment status :</p>
+                <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
+                  <option selected disabled><?= $fetch_service['payment_status']; ?></option>
+                  <option value="pending">pending</option>
+                  <option value="completed">completed</option>
+                </select>
+                <p id="isResolvedLabel">Is resolved :</p>
+                <select name="is_resolved" class="select" aria-labelledby="isResolvedLabel">
+                  <option value="1" <?php echo $fetch_service['is_resolved'] == 1 ? 'selected' : ''; ?>>yes</option>
+                  <option value="0" <?php echo $fetch_service['is_resolved'] == 0 ? 'selected' : ''; ?>>no</option>
+                </select>
+                <div class="flex-btn">
+                  <button type="submit" name="update_service" class="option-btn">Update</button>
+                  <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn" style="<?= ($fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Delete</a>
+                </div>
               </div>
-            </div>
-          </form>
-      <?php
+            </form>
+        <?php
+          }
+        } else {
+          echo '<p class="empty">At present, no services are available</p>';
         }
-      } else {
-        echo '<p class="empty">At present, no services are available</p>';
-      }
-      ?>
+        ?>
 
-    </div>
+      </div>
 
-  </section>
+    </section>
+
+  <?php
+  }
+  ?>
 
   <script src="../js/admin_script.js"></script>
   <?php include '../components/scroll_up.php'; ?>

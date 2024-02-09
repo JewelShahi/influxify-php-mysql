@@ -1,11 +1,16 @@
 <?php
+
 include '../components/connect.php';
 session_start();
-$admin_id = $_SESSION['admin_id'];
 
-if (!isset($admin_id)) {
-  header('location:admin_login.php');
+if (isset($_SESSION['admin_id'])) {
+  $admin_id = $_SESSION['admin_id'];
+} else {
+  $admin_id = '';
+  header('location:user_login.php');
 };
+
+
 if (isset($_POST['add_product'])) {
 
   $name = $_POST['name'];
@@ -151,139 +156,153 @@ if (isset($_GET['delete'])) {
 <body>
 
   <?php include '../components/admin_header.php'; ?>
-  <section class="add-products">
-    <h1 class="heading">Add a product</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-      <div class="flex">
 
-        <div class="inputBox">
-          <span>Product name <span style="color: red;">*</span></span>
-          <input type="text" name="name" placeholder="Product name" class="box" required>
-        </div>
+  <?php
+  $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
+  $select_admin_exists->execute([$admin_id]);
+  if ($select_admin_exists->rowCount() == 0) {
+    header("location: admin_login.php");
+  } else {
+  ?>
 
-        <div class="inputBox">
-          <span>Product details <span style="color: red;">*</span></span>
-          <textarea name="details" placeholder="Product details" class="box" required></textarea>
-        </div>
+    <section class="add-products">
+      <h1 class="heading">Add a product</h1>
+      <form action="" method="post" enctype="multipart/form-data">
+        <div class="flex">
 
-        <div class="inputBox">
-          <span id="brandLabel">Product brand <span style="color: red;">*</span></span>
-          <select name="brand" class="box" aria-labelledby="brandLabel" required>
-          <option value="N/A" selected disabled>Add a brand</option>
-            <option value="Samsung">Samsung</option>
-            <option value="Apple">Apple</option>
-            <option value="Google">Google</option>
-            <option value="Xiaomi">Xiaomi</option>
-            <option value="OnePlus">OnePlus</option>
-            <option value="Motorola">Motorola</option>
-            <option value="Oppo">Oppo</option>
-            <option value="Realme">Realme</option>
-          </select>
-        </div>
-
-        <div class="inputBox">
-          <span>Released date <span style="color: red;">*</span></span>
-          <input type="text" name="released" placeholder="Released date (00/00/0000)" class="box" >
-        </div>
-
-        <div class="inputBox">
-          <span>Product quantity <span style="color: red;">*</span></span>
-          <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" required>
-        </div>
-
-        <div class="inputBox">
-          <span>CPU <span style="color: red;">*</span></span>
-          <input type="text" name="cpu" placeholder="CPU" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Storage <span style="color: red;">*</span></span>
-          <input type="text" name="storage" placeholder="Storage" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>RAM <span style="color: red;">*</span></span>
-          <input type="text" name="ram" placeholder="RAM" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Camera count <span style="color: red;">*</span></span>
-          <input type="number" name="camera_count" placeholder="Camera count" class="box" min="0" step="1" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Camera resolution <span style="color: red;">*</span></span>
-          <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Phone Size<span style="color: red;">*</span></span>
-          <input type="text" name="size" placeholder="Phone size" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Battery <span style="color: red;">*</span></span>
-          <input type="text" name="battery" placeholder="Battery" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Phone color <span style="color: red;">*</span></span>
-          <input type="text" name="color" placeholder="Color" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Product price <span style="color: red;">*</span></span>
-          <input type="number" name="price" min="0.00" step="0.01" class="box" required placeholder="Product price" onkeypress="if(this.value.length == 8) return false;">
-        </div>
-
-        <div class="inputBox">
-          <span>Image-1 <span style="color: red;">*</span></span>
-          <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Image-2 <span style="color: red;">*</span></span>
-          <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
-
-        <div class="inputBox">
-          <span>Image-3 <span style="color: red;">*</span></span>
-          <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
-
-      </div>
-
-      <input type="submit" value="Add product" class="btn" name="add_product">
-    </form>
-  </section>
-
-  <section class="show-products">
-    <h1 class="heading">Added Products</h1>
-    <div class="box-container">
-      <?php
-      $select_products = $conn->prepare("SELECT * FROM `products`");
-      $select_products->execute();
-      if ($select_products->rowCount() > 0) {
-        while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
-      ?>
-          <div class="box">
-            <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="<?= $fetch_products['image_01']; ?>">
-            <div class="name"><?= $fetch_products['name']; ?></div>
-            <div class="price">$<span><?= $fetch_products['price']; ?></span></div>
-            <div class="details"><span><?= $fetch_products['details']; ?></span></div>
-            <div class="flex-btn">
-              <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn"><i class="far fa-edit"></i></a>
-              <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('Delete this product?');"><i class="fas fa-trash"></i></a>
-            </div>
+          <div class="inputBox">
+            <span>Product name <span style="color: red;">*</span></span>
+            <input type="text" name="name" placeholder="Product name" class="box" required>
           </div>
-      <?php
+
+          <div class="inputBox">
+            <span>Product details <span style="color: red;">*</span></span>
+            <textarea name="details" placeholder="Product details" class="box" required></textarea>
+          </div>
+
+          <div class="inputBox">
+            <span id="brandLabel">Product brand <span style="color: red;">*</span></span>
+            <select name="brand" class="box" aria-labelledby="brandLabel" required>
+              <option value="N/A" selected disabled>Add a brand</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Apple">Apple</option>
+              <option value="Google">Google</option>
+              <option value="Xiaomi">Xiaomi</option>
+              <option value="OnePlus">OnePlus</option>
+              <option value="Motorola">Motorola</option>
+              <option value="Oppo">Oppo</option>
+              <option value="Realme">Realme</option>
+            </select>
+          </div>
+
+          <div class="inputBox">
+            <span>Released date <span style="color: red;">*</span></span>
+            <input type="text" name="released" placeholder="Released date (00/00/0000)" class="box">
+          </div>
+
+          <div class="inputBox">
+            <span>Product quantity <span style="color: red;">*</span></span>
+            <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" required>
+          </div>
+
+          <div class="inputBox">
+            <span>CPU <span style="color: red;">*</span></span>
+            <input type="text" name="cpu" placeholder="CPU" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Storage <span style="color: red;">*</span></span>
+            <input type="text" name="storage" placeholder="Storage" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>RAM <span style="color: red;">*</span></span>
+            <input type="text" name="ram" placeholder="RAM" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Camera count <span style="color: red;">*</span></span>
+            <input type="number" name="camera_count" placeholder="Camera count" class="box" min="0" step="1" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Camera resolution <span style="color: red;">*</span></span>
+            <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Phone Size<span style="color: red;">*</span></span>
+            <input type="text" name="size" placeholder="Phone size" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Battery <span style="color: red;">*</span></span>
+            <input type="text" name="battery" placeholder="Battery" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Phone color <span style="color: red;">*</span></span>
+            <input type="text" name="color" placeholder="Color" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Product price <span style="color: red;">*</span></span>
+            <input type="number" name="price" min="0.00" step="0.01" class="box" required placeholder="Product price" onkeypress="if(this.value.length == 8) return false;">
+          </div>
+
+          <div class="inputBox">
+            <span>Image-1 <span style="color: red;">*</span></span>
+            <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Image-2 <span style="color: red;">*</span></span>
+            <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+          </div>
+
+          <div class="inputBox">
+            <span>Image-3 <span style="color: red;">*</span></span>
+            <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+          </div>
+
+        </div>
+
+        <input type="submit" value="Add product" class="btn" name="add_product">
+      </form>
+    </section>
+
+    <section class="show-products">
+      <h1 class="heading">Added Products</h1>
+      <div class="box-container">
+        <?php
+        $select_products = $conn->prepare("SELECT * FROM `products`");
+        $select_products->execute();
+        if ($select_products->rowCount() > 0) {
+          while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <div class="box">
+              <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="<?= $fetch_products['image_01']; ?>">
+              <div class="name"><?= $fetch_products['name']; ?></div>
+              <div class="price">$<span><?= $fetch_products['price']; ?></span></div>
+              <div class="details"><span><?= $fetch_products['details']; ?></span></div>
+              <div class="flex-btn">
+                <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn"><i class="far fa-edit"></i></a>
+                <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('Delete this product?');"><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
+        <?php
+          }
+        } else {
+          echo '<p class="empty">No Products Added Yet!</p>';
         }
-      } else {
-        echo '<p class="empty">No Products Added Yet!</p>';
-      }
-      ?>
-    </div>
-  </section>
+        ?>
+      </div>
+    </section>
+
+  <?php
+  }
+  ?>
+
   <script src="../js/admin_script.js"></script>
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>

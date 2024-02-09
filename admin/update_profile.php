@@ -1,12 +1,14 @@
 <?php
+
 include '../components/connect.php';
-
 session_start();
-$admin_id = $_SESSION['admin_id'];
 
-if (!isset($admin_id)) {
-  header('location:admin_login.php');
-}
+if (isset($_SESSION['admin_id'])) {
+  $admin_id = $_SESSION['admin_id'];
+} else {
+  $admin_id = '';
+  header('location:user_login.php');
+};
 
 if (isset($_POST['submit'])) {
 
@@ -66,21 +68,36 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+
   <?php include '../components/admin_header.php'; ?>
-  <section class="form-container">
-    <form action="" method="post">
-      <h3>Update profile</h3>
-      <input type="hidden" name="prev_pass" value="<?= $fetch_profile['password']; ?>">
-      <input type="text" name="name" value="<?= $fetch_profile['name']; ?>" required placeholder="Enter your name" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
-      <input type="password" name="old_pass" placeholder="Enter old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="password" name="new_pass" placeholder="Enter new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="password" name="confirm_pass" placeholder="Confirm new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <button type="submit" class="btn submit-btn" name="submit">
-        <i class="fas fa-save"></i> Save Changes
-      </button>
-    </form>
-  </section>
+
+  <?php
+  $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
+  $select_admin_exists->execute([$admin_id]);
+  if ($select_admin_exists->rowCount() == 0) {
+    header("location: admin_login.php");
+  } else {
+  ?>
+
+    <section class="form-container">
+      <form action="" method="post">
+        <h3>Update profile</h3>
+        <input type="hidden" name="prev_pass" value="<?= $fetch_profile['password']; ?>">
+        <input type="text" name="name" value="<?= $fetch_profile['name']; ?>" required placeholder="Enter your name" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
+        <input type="password" name="old_pass" placeholder="Enter old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="password" name="new_pass" placeholder="Enter new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="password" name="confirm_pass" placeholder="Confirm new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <button type="submit" class="btn submit-btn" name="submit">
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+      </form>
+    </section>
+
+  <?php
+  }
+  ?>
+
   <script src="../js/admin_script.js"></script>
 </body>
 

@@ -1,13 +1,14 @@
 <?php
 
 include '../components/connect.php';
-
 session_start();
-$admin_id = $_SESSION['admin_id'];
 
-if (!isset($admin_id)) {
-  header('location:admin_login.php');
-}
+if (isset($_SESSION['admin_id'])) {
+  $admin_id = $_SESSION['admin_id'];
+} else {
+  $admin_id = '';
+  header('location:user_login.php');
+};
 
 if (isset($_POST['submit'])) {
 
@@ -73,17 +74,30 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+
   <?php include '../components/admin_header.php'; ?>
-  <section class="form-container">
-    <form action="" method="post">
-      <h3>Register Admin</h3>
-      <input type="text" name="name" placeholder="Enter your name" maxlength="100" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="email" name="email" placeholder="Enter your e-mail" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-      <input type="submit" value="Register" class="btn" name="submit">
-    </form>
-  </section>
+
+  <?php
+  $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
+  $select_admin_exists->execute([$admin_id]);
+  if ($select_admin_exists->rowCount() == 0) {
+    header("location: admin_login.php");
+  } else {
+  ?>
+    <section class="form-container">
+      <form action="" method="post">
+        <h3>Register Admin</h3>
+        <input type="text" name="name" placeholder="Enter your name" maxlength="100" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="email" name="email" placeholder="Enter your e-mail" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <input type="submit" value="Register" class="btn" name="submit">
+      </form>
+    </section>
+  <?php
+  }
+  ?>
+  
   <script src="../js/admin_script.js"></script>
 </body>
 
