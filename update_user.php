@@ -107,22 +107,22 @@ if (isset($_POST['update_avatar'])) {
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
         <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required>
         <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
-        
+
         <div class="password-container">
           <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
-        
+
         <div class="password-container">
           <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
-      
+
         <div class="password-container">
           <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
-        
+
         <button type="submit" class="btn submit-btn" name="update_password">
           <i class="fas fa-save"></i> Save Changes
         </button>
@@ -138,7 +138,7 @@ if (isset($_POST['update_avatar'])) {
         </div>
         <div class="image-container">
 
-          <input type="radio" name="avatar" id="gojo-classic" class="input-hidden" value="gojo-classic.png" />
+          <!-- <input type="radio" name="avatar" id="gojo-classic" class="input-hidden" value="gojo-classic.png" />
           <label for="gojo-classic" onclick="handleRadioButtonClick('gojo-classic')">
             <div class="avatar-container" style="background-image: url(uploaded_img/user_avatar/gojo-classic.png);"></div>
           </label>
@@ -156,8 +156,25 @@ if (isset($_POST['update_avatar'])) {
           <input type="radio" name="avatar" id="ichigo-classic" class="input-hidden" value="ichigo-classic.png" />
           <label for="ichigo-classic" onclick="handleRadioButtonClick('ichigo-classic')">
             <div class="avatar-container" style="background-image: url(uploaded_img/user_avatar/ichigo-classic.png);"></div>
-          </label>
+          </label> -->
 
+          <?php
+          $avatarDirectory = 'uploaded_img/user_avatar/';
+          $avatarImages = scandir($avatarDirectory);
+
+          foreach ($avatarImages as $image) {
+            if ($image !== '.' && $image !== '..' && $image !== 'default.png' && $image !== 'logedin.png') {
+              $imageName = $image;
+              $imagePath = $avatarDirectory . $imageName;
+          ?>
+              <input type="radio" name="avatar" id="<?= pathinfo($imageName, PATHINFO_FILENAME); ?>" class="input-hidden" value="<?= $imageName ?>" />
+              <label for="<?= pathinfo($imageName, PATHINFO_FILENAME); ?>" onclick="handleRadioButtonClick('<?= pathinfo($imageName, PATHINFO_FILENAME); ?>')">
+                <div class="avatar-container" style="background-image: url(<?= $imagePath ?>);"></div>
+              </label>
+          <?php
+            }
+          }
+          ?>
         </div>
         <button type="submit" class="btn" name="update_avatar">
           <i class="fa-solid fa-image"></i> Update avatar

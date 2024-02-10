@@ -127,7 +127,7 @@ if (isset($_POST['update_avatar'])) {
         </div>
         <div class="image-container">
 
-          <input type="radio" name="avatar" id="gojo-classic" class="input-hidden" value="gojo-classic.png" />
+          <!-- <input type="radio" name="avatar" id="gojo-classic" class="input-hidden" value="gojo-classic.png" />
           <label for="gojo-classic" onclick="handleRadioButtonClick('gojo-classic')">
             <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/gojo-classic.png);"></div>
           </label>
@@ -145,7 +145,25 @@ if (isset($_POST['update_avatar'])) {
           <input type="radio" name="avatar" id="ichigo-classic" class="input-hidden" value="ichigo-classic.png" />
           <label for="ichigo-classic" onclick="handleRadioButtonClick('ichigo-classic')">
             <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/ichigo-classic.png);"></div>
-          </label>
+          </label> -->
+
+          <?php
+          $avatarDirectory = '../uploaded_img/user_avatar/';
+          $avatarImages = scandir($avatarDirectory);
+
+          foreach ($avatarImages as $image) {
+            if ($image !== '.' && $image !== '..' && $image !== 'default.png' && $image !== 'logedin.png') {
+              $imageName = $image;
+              $imagePath = $avatarDirectory . $imageName;
+          ?>
+              <input type="radio" name="avatar" id="<?= pathinfo($imageName, PATHINFO_FILENAME); ?>" class="input-hidden" value="<?= $imageName ?>" />
+              <label for="<?= pathinfo($imageName, PATHINFO_FILENAME); ?>" onclick="handleRadioButtonClick('<?= pathinfo($imageName, PATHINFO_FILENAME); ?>')">
+                <div class="avatar-container" style="background-image: url(<?= $imagePath ?>);"></div>
+              </label>
+          <?php
+            }
+          }
+          ?>
 
         </div>
         <button type="submit" class="btn" name="update_avatar">
