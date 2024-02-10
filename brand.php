@@ -41,7 +41,7 @@ include 'components/wishlist_cart.php';
     $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand LIKE ?");
     $select_products->execute(["$brand"]);
     ?>
-      <h1 class="heading">Category</h1>
+    <h1 class="heading">Category</h1>
     <?php
     if ($select_products->rowCount() > 0) {
     ?>
@@ -67,9 +67,11 @@ include 'components/wishlist_cart.php';
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
               <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
-              <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+              <input type="number" name="qty" class="qty" min="1" max="<?= $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" value="1">
             </div>
-            <input type="submit" value="Add to cart" class="btn" name="add_to_cart">
+            <button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>">
+              <i class="fas fa-plus"></i> Add to cart
+            </button>
           </form>
       <?php
         }

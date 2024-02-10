@@ -102,27 +102,37 @@ if (isset($_POST['update_avatar'])) {
   ?>
     <section class="user-update">
       <form action="" class="user-form" method="post" enctype="multipart/form-data">
-        <h3>Update Profile</h3>
+        <h3>Update profile</h3>
+
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
         <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required>
         <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
+        
         <div class="password-container">
           <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
+        
         <div class="password-container">
           <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
+      
         <div class="password-container">
           <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
+        
         <button type="submit" class="btn submit-btn" name="update_password">
           <i class="fas fa-save"></i> Save Changes
         </button>
+
       </form>
+
       <form action="" class="avatar-form" method="post">
+
+        <h3>Update avatar</h3>
+
         <div class="user-image-avatar">
           <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
         </div>
@@ -159,8 +169,8 @@ if (isset($_POST['update_avatar'])) {
   }
   ?>
 
-  <script src="js/user_avatar.js"></script>
   <?php include 'components/footer.php'; ?>
+  <script src="js/update_avatar_admin_user.js"></script>
   <script src="js/user_script.js"></script>
   <?php include 'components/scroll_up.php'; ?>
   <script src="js/scrollUp.js"></script>
