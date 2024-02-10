@@ -126,27 +126,7 @@ if (isset($_POST['update_avatar'])) {
           <img src="<?= '../uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
         </div>
         <div class="image-container">
-
-          <!-- <input type="radio" name="avatar" id="gojo-classic" class="input-hidden" value="gojo-classic.png" />
-          <label for="gojo-classic" onclick="handleRadioButtonClick('gojo-classic')">
-            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/gojo-classic.png);"></div>
-          </label>
-
-          <input type="radio" name="avatar" id="ichigo" class="input-hidden" value="ichigo.png" />
-          <label for="ichigo" onclick="handleRadioButtonClick('ichigo')">
-            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/ichigo.png);"></div>
-          </label>
-
-          <input type="radio" name="avatar" id="gojo-light-blue" class="input-hidden" value="gojo-light-blue.png" />
-          <label for="gojo-light-blue" onclick="handleRadioButtonClick('gojo-light-blue')">
-            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/gojo-light-blue.png);"></div>
-          </label>
-
-          <input type="radio" name="avatar" id="ichigo-classic" class="input-hidden" value="ichigo-classic.png" />
-          <label for="ichigo-classic" onclick="handleRadioButtonClick('ichigo-classic')">
-            <div class="avatar-container" style="background-image: url(../uploaded_img/user_avatar/ichigo-classic.png);"></div>
-          </label> -->
-
+          
           <?php
           $avatarDirectory = '../uploaded_img/user_avatar/';
           $avatarImages = scandir($avatarDirectory);
