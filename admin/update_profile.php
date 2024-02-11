@@ -137,7 +137,7 @@ if (isset($_POST['update_avatar'])) {
               $imagePath = $avatarDirectory . $imageName;
           ?>
               <input type="radio" name="avatar" id="<?= pathinfo($imageName, PATHINFO_FILENAME); ?>" class="input-hidden" value="<?= $imageName ?>" />
-              <label for="<?= pathinfo($imageName, PATHINFO_FILENAME); ?>" onclick="handleRadioButtonClick('<?= pathinfo($imageName, PATHINFO_FILENAME); ?>')">
+              <label class="user-image-options" for="<?= pathinfo($imageName, PATHINFO_FILENAME); ?>" onclick="handleRadioButtonClick('<?= pathinfo($imageName, PATHINFO_FILENAME); ?>')">
                 <div class="avatar-container" style="background-image: url(<?= $imagePath ?>);"></div>
               </label>
           <?php

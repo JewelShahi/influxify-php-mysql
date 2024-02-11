@@ -786,7 +786,7 @@
   max-height: 95vh;
   background-color: rgba(137, 236, 130, 0.1);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .avatar-form h3 {
@@ -813,10 +813,10 @@
 .avatar-form .image-container {
   margin-top: 10px;
   width: 100%;
-  overflow-x: auto;
-  display: flex; /* Change display to flex */
-  flex-wrap: wrap; /* Allow items to wrap onto new line */
-  justify-content: center; /* Center align items horizontally */
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2.1rem;
   border-radius: var(--border-radius);
 }
@@ -838,13 +838,23 @@
   display: none;
 }
 
+.avatar-form .image-container .user-image-options {
+  transition: 300ms;
+}
+
 .avatar-form .image-container .avatar-container {
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center; /* Center the background */
   border-radius: 50%; /* Make it a circle */
-  transition: filter 300ms ease-in-out;
+  transition: background-size 1500ms linear;
+  transform: translateZ(0);
+}
+
+.avatar-form .image-container .user-image-options:hover .avatar-container {
+  background-size: 110%;
+  transition: 300ms;
 }
 
 /* Add media query for responsiveness */
