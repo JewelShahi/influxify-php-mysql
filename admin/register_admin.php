@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
 
 </head>
 
-<body>
+<body class="no-overflow">
 
   <?php include '../components/admin_header.php'; ?>
 
@@ -84,20 +84,31 @@ if (isset($_POST['submit'])) {
     header("location: admin_login.php");
   } else {
   ?>
-    <section class="form-container">
-      <form action="" method="post">
-        <h3>Register Admin</h3>
-        <input type="text" name="name" placeholder="Enter your name" maxlength="100" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="email" name="email" placeholder="Enter your e-mail" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
-        <input type="submit" value="Register" class="btn" name="submit">
-      </form>
+    <section class="register-admin">
+      <div class="register-admin-blur">
+        <form action="" method="post">
+          <h3>Register an admin</h3>
+          <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="input box" required>
+          <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <div class="passwords">
+            <div class="password-container">
+              <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+              <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+            </div>
+            <div class="password-container">
+              <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+              <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+            </div>
+          </div>
+          <input type="submit" value="Register" class="btn" name="submit">
+        </form>
+      </div>
     </section>
   <?php
   }
   ?>
-  
+
+  <script src="../js/toggle_password.js"></script>
   <script src="../js/admin_script.js"></script>
 </body>
 

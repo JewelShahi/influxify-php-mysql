@@ -158,7 +158,7 @@ if (isset($_POST['update_avatar'])) {
   ?>
 
   <script src="../js/update_avatar_admin_user.js"></script>
-
+  <script src="../js/toggle_password.js"></script>
   <script src="../js/admin_script.js"></script>
 </body>
 

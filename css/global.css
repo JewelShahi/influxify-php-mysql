@@ -62,7 +62,7 @@ body {
 
 /**** hidden overflow ****/
 .no-overflow {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 /**********/
 
