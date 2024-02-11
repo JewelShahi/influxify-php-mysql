@@ -7,50 +7,70 @@ if (isset($_SESSION['user_id'])) {
 } else {
   $user_id = '';
   header('location:user_login.php');
+  exit(); // Stop further execution
 }
+
+// Check if service details are passed from another page
+if (isset($_POST['service_checkout_data'])) {
+  // Retrieve service details from the form
+  $service_id = $_POST['id'];
+  $service_price = $_POST['price'];
+  $service_name = $_POST['name'];
+  $service_email = $_POST['email'];
+  $service_number = $_POST['number'];
+} elseif (isset($_POST['service_checkout'])) {
+  // If service checkout data is not posted, check if service details are posted from another form
+  $service_id = $_POST['service_id'];
+  $service_price = $_POST['service_price'];
+  $service_name = $_POST['service_name'];
+  $service_email = $_POST['service_email'];
+  $service_number = $_POST['service_number'];
+} else {
+  // If service details are not received, redirect to the appropriate page
+  header('location: service.php');
+  exit(); // Stop further execution
+}
+
+// Initialize variables to prevent undefined variable warnings
+$price = $service_price;
+$delivery_option = 'no';
 
 // If the service checkout data is posted, retrieve the service price from the form
 if (isset($_POST['service_checkout_data'])) {
   // Retrieve service details from the form
   $service_id = $_POST['id'];
   $service_price = $_POST['price'];
-} elseif (isset($_POST['service_checkout'])) {
-  // If service checkout data is not posted, check if service details are posted from another form
-  $service_id = $_POST['service_id'];
-  $service_price = $_POST['service_price'];
-}
 
-// Default delivery option and price
-$delivery_option = 'no';
-$deliveryPrice = 0.00;
-
-if (isset($_POST['service_checkout_data'])) {
-  // If service checkout data is posted, update delivery option and price accordingly
-  $id = $_POST['id'];
+  // Update delivery option and price accordingly
   $method = filter_var($_POST['method'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  // Concatenate address components
-  $address = trim($_POST['flat']) . ', ' . trim($_POST['street']) . ', ' . trim($_POST['city']) . ', ' . trim($_POST['state']) . ', ' . trim($_POST['country']) . ' - ' . trim($_POST['pin_code']);
-  // If the concatenated address contains only commas (',') or is empty, set it to "-"
-  $address = (strpos($address, ',') === false || trim($address, ', ') === '') ? "-" : filter_var($address, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  // Check if delivery option is set, otherwise default to 'no'
   $delivery_option = isset($_POST['delivery']) ? $_POST['delivery'] : 'no';
   $deliveryPrice = ($delivery_option === 'yes') ? 9.99 : 0.00;
 
-  // Calculate total price
+  // Concatenate address components
+  if ($delivery_option === 'yes') {
+    $flat = filter_var($_POST['flat'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $street = filter_var($_POST['street'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $city = filter_var($_POST['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $state = filter_var($_POST['state'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $country = filter_var($_POST['country'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $pin_code = filter_var($_POST['pin_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $address = "Flat no. $flat, $street, $city, $state, $country - $pin_code";
+  } else {
+    $address = '-';
+  }
+
   $price = $service_price + $deliveryPrice;
 
   // Update order details in the database
   $updateOrder = $conn->prepare("UPDATE services SET price = ?, delivery = ?, address = ?, payment_method = ? WHERE id = ?");
-  $updateOrder->execute([$price, $delivery_option, $address, $method, $id]);
+  $updateOrder->execute([$price, $delivery_option, $address, $method, $service_id]);
 
   // Redirect to service page after successful payment
   $message[] = 'Successfully paid for the service!';
   header('location:service.php');
+  exit(); // Stop further execution after redirect
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +86,6 @@ if (isset($_POST['service_checkout_data'])) {
   <!-- custom css file link  -->
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/user_style.css">
-  <!-- JavaScript for dynamic address fields -->
 </head>
 
 <body>
@@ -80,16 +99,31 @@ if (isset($_POST['service_checkout_data'])) {
   } else {
   ?>
     <section class="checkout-orders">
-
       <form action="" method="POST">
         <input type="hidden" name="id" value="<?= $service_id; ?>">
         <input type="hidden" name="price" value="<?= $service_price; ?>">
+        <input type="hidden" name="name" value="<?= $service_name; ?>">
+        <input type="hidden" name="email" value="<?= $service_email; ?>">
+        <input type="hidden" name="number" value="<?= $service_number; ?>">
+        
         <h3>Service payment</h3>
         <div class="display-orders">
           <div class="grand-total">Grand total : <span>$<?= $price; ?></span></div>
         </div>
         <h3>Place your info</h3>
         <div class="flex">
+          <div class="inputBox">
+            <span>Name</span>
+            <input type="text" placeholder="Enter your full name" class="box" maxlength="100" value="<?= $service_name?>" readonly>
+          </div>
+          <div class="inputBox">
+            <span>E-mail</span>
+            <input type="email" placeholder="Enter your email" class="box" maxlength="50" value="<?= $service_email?>" readonly>
+          </div>
+          <div class="inputBox">
+            <span>Phone number</span>
+            <input type="number" placeholder="Enter your phone number" class="box" maxlength="15" value="<?= $service_number?>" readonly>
+          </div>
           <div class="inputBox">
             <span>Payment method :</span>
             <select name="method" class="box" required>
@@ -105,88 +139,61 @@ if (isset($_POST['service_checkout_data'])) {
               <option value="yes" <?= ($delivery_option === 'yes') ? 'selected' : ''; ?>>Yes</option>
             </select>
           </div>
-          <div id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <div class="inputBox">
-              <span>Address line 01 :</span>
-              <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
-            </div>
-            <div class="inputBox">
-              <span>Address line 02 :</span>
-              <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
-            </div>
-            <div class="inputBox">
-              <span>City :</span>
-              <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
-            </div>
-            <div class="inputBox">
-              <span>State :</span>
-              <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
-            </div>
-            <div class="inputBox">
-              <span>Country :</span>
-              <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
-            </div>
-            <div class="inputBox">
-              <span>Pin code :</span>
-              <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
-            </div>
+          <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
+            <span>Address line 01 :</span>
+            <input type="text" id="flat" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50">
+          </div>
+          <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
+            <span>Address line 02 :</span>
+            <input type="text" id="street" name="street" placeholder="E.g. Street name" class="box" maxlength="50">
+          </div>
+          <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
+            <span>City :</span>
+            <input type="text" id="city" name="city" placeholder="E.g. New York City" class="box" maxlength="50">
+          </div>
+          <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
+            <span>State :</span>
+            <input type="text" id="state" name="state" placeholder="E.g. New York" class="box" maxlength="50">
+          </div>
+          <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
+            <span>Country :</span>
+            <input type="text" id="country" name="country" placeholder="E.g. USA" class="box" maxlength="50">
+          </div>
+          <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
+            <span>Pin code :</span>
+            <input type="number" id="pin_code" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box">
           </div>
         </div>
         <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
       </form>
-
     </section>
   <?php
   }
   ?>
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/user_script.js"></script>
-  <?php include 'components/scroll_up.php'; ?>
-  <script src="js/scrollUp.js"></script>
-  <script src="js/service_checkout.js"></script>
+  <script>
+    function toggleAddressFields() {
+      const deliveryOption = document.getElementById('deliveryOption').value;
+      const addressFields = document.querySelectorAll('.address-field');
+      const grandTotal = document.querySelector('.grand-total span');
 
-  <!-- <script>
-    // Function to toggle address fields based on delivery option
-    const toggleAddressFields = () => {
-      const deliveryOption = document.getElementById('deliveryOption');
-      const addressFields = document.getElementById('addressFields');
-      const addressInputs = addressFields.querySelectorAll('input, select');
-
-      if (deliveryOption.value === 'yes') {
-        addressFields.style.display = 'block';
-        // Update total price with delivery cost
-        updateTotalPrice(true);
-        // Make address fields required
-        addressInputs.forEach(input => input.required = true);
-      } else {
-        addressFields.style.display = 'none';
-        // Update total price without delivery cost
-        updateTotalPrice(false);
-        // Remove required attribute from address fields
-        addressInputs.forEach(input => input.required = false);
-      }
+      addressFields.forEach(field => {
+        if (deliveryOption === 'yes') {
+          field.style.display = 'block';
+          field.querySelector('input').setAttribute('required', 'required');
+          // Update grand total with delivery charge
+          grandTotal.textContent = '$<?= number_format($price + 9.99, 2); ?>';
+        } else {
+          field.style.display = 'none';
+          field.querySelector('input').removeAttribute('required');
+          // Update grand total without delivery charge
+          grandTotal.textContent = '$<?= number_format($price, 2); ?>';
+        }
+      });
     }
+  </script>
 
-    // Function to update total price based on delivery option
-    const updateTotalPrice = (hasDelivery) => {
-      const grandTotalSpan = document.querySelector('.grand-total span');
-      // Retrieve the price from the form
-      const priceInput = document.querySelector('input[name="price"]');
-      const servicePrice = parseFloat(priceInput.value);
-      const deliveryCost = 9.99;
-
-      const totalPrice = hasDelivery ? servicePrice + deliveryCost : servicePrice;
-      grandTotalSpan.textContent = '$' + totalPrice.toFixed(2);
-    }
-
-    // Call the function on page load to set the initial state
-    window.onload = toggleAddressFields;
-
-    // Attach the function to the change event of the delivery option select
-    const deliveryOption = document.getElementById('deliveryOption');
-    deliveryOption.addEventListener('change', toggleAddressFields);
-  </script> -->
 
 </body>
 

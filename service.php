@@ -131,6 +131,10 @@ if (isset($_GET['delete'])) {
                 <div>
                   <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
                   <input type="hidden" name="service_price" value="<?= $fetch_services["price"]; ?>">
+                  <input type="hidden" name="service_name" value="<?= $fetch_services['name']; ?>">
+                  <input type="hidden" name="service_email" value="<?= $fetch_services['email']; ?>">
+                  <input type="hidden" name="service_number" value="<?= $fetch_services['number']; ?>">
+
                   <p>Is resolved : <span><?= $fetch_services['is_resolved'] ? 'Yes' : 'No'; ?></span></p>
                   <p>Placed on : <span><?= $fetch_services['placed_on']; ?></span></p>
                   <p>Name : <span><?= $fetch_services['name']; ?></span></p>
