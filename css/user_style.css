@@ -763,11 +763,14 @@
 
 .avatar-form {
   width: 50%;
+  max-height: 95vh;
+  background-color: rgba(137, 236, 130, 0.1);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  overflow: auto;
+  overflow-x: auto;
 }
 
 .avatar-form h3 {
+  justify-content: flex-start;
   font-size: 3rem;
   color: var(--black);
 }
@@ -790,10 +793,16 @@
 .avatar-form .image-container {
   margin-top: 10px;
   width: 100%;
+  overflow-x: auto;
   display: flex; /* Change display to flex */
   flex-wrap: wrap; /* Allow items to wrap onto new line */
-  gap: 5px;
   justify-content: center; /* Center align items horizontally */
+  gap: 2.1rem;
+  border-radius: var(--border-radius);
+}
+
+.avatar-form .image-container::-webkit-scrollbar {
+  width: 8px;
 }
 
 .avatar-form .image-container label {
@@ -818,13 +827,6 @@
   transition: filter 300ms ease-in-out;
 }
 
-/* Media queries for responsiveness */
-@media screen and (max-width: 375px) {
-  .avatar-form .image-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
 
 /* Add media query for responsiveness */
 @media screen and (max-width: 768px) {
