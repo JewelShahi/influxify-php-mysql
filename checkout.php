@@ -7,27 +7,38 @@ if (isset($_SESSION['user_id'])) {
 } else {
   $user_id = '';
   header('location:user_login.php');
-};
+  exit; // Add exit after header to prevent further execution
+}
 
 if (isset($_POST['order'])) {
 
-  $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $number = filter_var($_POST['number'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $method = filter_var($_POST['method'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $delivery_option = filter_var($_POST['delivery'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $number = $_POST['number'];
-  $number = filter_var($number, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  $email = $_POST['email'];
-  $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  $method = $_POST['method'];
-  $method = filter_var($method, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  $address = 'Flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code'];
-  $address = filter_var($address, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  // Check if delivery option is set to "yes" and handle address fields accordingly
+  if ($delivery_option === 'yes') {
+    $flat = filter_var($_POST['flat'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $street = filter_var($_POST['street'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $city = filter_var($_POST['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $state = filter_var($_POST['state'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $country = filter_var($_POST['country'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $pin_code = filter_var($_POST['pin_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $address = "Flat no. $flat, $street, $city, $state, $country - $pin_code";
+    $delivery_cost = 9.99; // Assuming delivery cost is fixed at $9.99
+  } else {
+    // If delivery option is "no", set address to empty string and delivery cost to 0
+    $address = '-';
+    $delivery_cost = 0;
+  }
 
   $total_products = $_POST['total_products'];
   $total_price = $_POST['total_price'];
+
+  // Add delivery cost to the total price if delivery option is set to "yes"
+  $total_price += $delivery_cost;
 
   $check_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
   $check_cart->execute([$user_id]);
@@ -45,13 +56,16 @@ if (isset($_POST['order'])) {
 
       while ($cart_item = $get_cart_items->fetch()) {
 
+        $pid = $cart_item['pid'];
+        $qty = $cart_item['quantity'];
         $products_price = $cart_item['price'];
 
         // Insert each product along with overall order details into the orders table
-        $insert_order_item = $conn->prepare("INSERT INTO `orders`(
-          id, user_id, pid, qty, name, number, email, method, address, price, payment_status, order_status
-        ) VALUES(?,?,?,?,?,?,?,?,?,?,'pending', 'processing')");
-        $insert_order_item->execute([$order_id, $user_id, $cart_item['pid'], $cart_item['quantity'], $name, $number, $email, $method, $address, $products_price]);
+        $insert_order_item = $conn->prepare("
+          INSERT INTO `orders`(id, user_id, pid, qty, name, number, email, method, address, price, delivery, delivery_cost, payment_status, order_status)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?, 'pending', 'processing')
+        ");
+        $insert_order_item->execute([$order_id, $user_id, $pid, $qty, $name, $number, $email, $method, $address, $products_price, $delivery_option, $delivery_cost]);
       }
 
       // Delete items from the cart
@@ -66,7 +80,6 @@ if (isset($_POST['order'])) {
     $message[] = 'Your cart is empty';
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -125,6 +138,7 @@ if (isset($_POST['order'])) {
           ?>
           <input type="hidden" name="total_products" value="<?= $total_products; ?>">
           <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
+          <div class="delivery-cost" style="display: none;">Delivery cost: <span>$9.99</span></div>
           <div class="grand-total">Grand total : <span>$<?= $grand_total; ?></span></div>
         </div>
 
@@ -137,7 +151,7 @@ if (isset($_POST['order'])) {
           </div>
           <div class="inputBox">
             <span>Your phone number :</span>
-            <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="999999999999999" onkeypress="if(this.value.length < 10 || this.value.length > 15) return false;" required>
+            <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="999999999999999" onkeypress="if(this.value.length > 15) return false;" required>
           </div>
           <div class="inputBox">
             <span>Your email :</span>
@@ -152,26 +166,33 @@ if (isset($_POST['order'])) {
             </select>
           </div>
           <div class="inputBox">
+            <span>Include delivery :</span>
+            <select name="delivery" class="box" required onchange="updateTotalPrice(this.value)">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div class="inputBox" id="addressFields" style="display: none;">
             <span>Address line 01 :</span>
             <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
           </div>
-          <div class="inputBox">
+          <div class="inputBox" id="addressFields" style="display: none;">
             <span>Address line 02 :</span>
             <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
           </div>
-          <div class="inputBox">
+          <div class="inputBox" id="addressFields" style="display: none;">
             <span>City :</span>
             <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
           </div>
-          <div class="inputBox">
+          <div class="inputBox" id="addressFields" style="display: none;">
             <span>State :</span>
             <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
           </div>
-          <div class="inputBox">
+          <div class="inputBox" id="addressFields" style="display: none;">
             <span>Country :</span>
             <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
           </div>
-          <div class="inputBox">
+          <div class="inputBox" id="addressFields" style="display: none;">
             <span>Pin code :</span>
             <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
           </div>
@@ -185,10 +206,29 @@ if (isset($_POST['order'])) {
   }
   ?>
   <?php include 'components/footer.php'; ?>
+  
+  <script>
+    function updateTotalPrice(deliveryOption) {
+      const grandTotalSpan = document.querySelector('.grand-total span');
+      const deliveryCostDiv = document.querySelector('.delivery-cost');
+      const totalPriceInput = document.querySelector('input[name="total_price"]');
+      const totalPrice = parseFloat(totalPriceInput.value);
+      const deliveryCost = deliveryOption === 'yes' ? 9.99 : 0;
+      const totalWithDelivery = totalPrice + deliveryCost;
 
-  <script src="js/user_script.js"></script>
-  <?php include 'components/scroll_up.php'; ?>
-  <script src="js/scrollUp.js"></script>
+      deliveryCostDiv.style.display = deliveryOption === 'yes' ? 'block' : 'none';
+      grandTotalSpan.textContent = '$' + totalWithDelivery.toFixed(2);
+
+      const addressFields = document.querySelectorAll('.inputBox[id="addressFields"] input');
+      addressFields.forEach(input => {
+        input.required = deliveryOption === 'yes';
+        const display = deliveryOption === 'yes' ? 'block' : 'none';
+        input.closest('.inputBox').style.display = display;
+      });
+    }
+  </script>
+
+
 </body>
 
 </html>

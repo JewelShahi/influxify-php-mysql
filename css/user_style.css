@@ -1267,14 +1267,14 @@
   color: var(--red);
 }
 
-.display-orders .grand-total {
+.display-orders .grand-total, .display-orders .delivery-cost {
   margin-top: 1.5rem;
   margin-bottom: 2.5rem;
   font-size: 2.5rem;
   color: var(--light-color);
 }
 
-.display-orders .grand-total span {
+.display-orders .grand-total span, .display-orders .delivery-cost span {
   color: var(--red);
 }
 

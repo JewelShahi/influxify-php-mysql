@@ -36,6 +36,25 @@ if (isset($_POST['update_payment'])) {
 
 if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
+
+  // Fetch order details to return product quantities
+  $get_order_items = $conn->prepare("SELECT * FROM `orders` WHERE id = ?");
+  $get_order_items->execute([$delete_id]);
+
+  while ($order_item = $get_order_items->fetch()) {
+    $pid = $order_item['pid'];
+    $qty = $order_item['qty'];
+    $order_status = $order_item['order_status'];
+
+    // Check if order is not delivered
+    if ($order_status !== 'delivered') {
+      // Update product quantity
+      $update_product_qty = $conn->prepare("UPDATE `products` SET qty = qty + ? WHERE id = ?");
+      $update_product_qty->execute([$qty, $pid]);
+    }
+  }
+
+  // Delete the order
   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE id = ?");
   $delete_order->execute([$delete_id]);
 
@@ -84,6 +103,8 @@ if (isset($_GET['delete'])) {
           o.number,
           o.email,
           o.method,
+          o.delivery,
+          o.delivery_cost,
           o.address,
           o.payment_status,
           o.order_status,
@@ -113,9 +134,11 @@ if (isset($_GET['delete'])) {
                 <p> Name : <span><?= $fetch_orders['name']; ?></span> </p>
                 <p> E-mail : <span><?= $fetch_orders['email']; ?></span> </p>
                 <p> Phone number : <span><?= $fetch_orders['number']; ?></span> </p>
+                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_orders['delivery']; ?></span></p>
+                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery cost : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
                 <p> Address : <span><?= $fetch_orders['address']; ?></span> </p>
                 <p> Total products : <span><?= $fetch_orders['ordered_products']; ?></span> </p>
-                <p> Total price : <span>$<?= $fetch_orders['total_product_price']; ?>/-</span> </p>
+                <p> Total price : <span>$<?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?></span> </p>
                 <p> Payment method : <span><?= $fetch_orders['method']; ?></span> </p>
 
                 <form action="" method="post">

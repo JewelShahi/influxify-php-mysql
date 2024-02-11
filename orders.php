@@ -59,6 +59,8 @@ if (isset($_SESSION['user_id'])) {
             o.number,
             o.email,
             o.method,
+            o.delivery,
+            o.delivery_cost,
             o.address,
             o.payment_status,
             o.order_status,
@@ -88,10 +90,12 @@ if (isset($_SESSION['user_id'])) {
                   <p>Name : <span><?= $fetch_orders['name']; ?></span></p>
                   <p>E-mail : <span><?= $fetch_orders['email']; ?></span></p>
                   <p>Phone number : <span><?= $fetch_orders['number']; ?></span></p>
+                  <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_orders['delivery']; ?></span></p>
+                  <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery cost : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
                   <p>Address : <span><?= $fetch_orders['address']; ?></span></p>
                   <p>Payment method : <span><?= $fetch_orders['method']; ?></span></p>
                   <p>Ordered product(s) : <span><?= $fetch_orders['ordered_products']; ?></span></p>
-                  <p>Total price : <span>$<?= $fetch_orders['total_product_price']; ?></span></p>
+                  <p>Total price : <span>$<?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?></span></p>
                   <p>Payment status : <span><?= $fetch_orders['payment_status']; ?></span> </p>
                   <p>Order status : <span><?= $fetch_orders['order_status']; ?></span> </p>
                 </div>
