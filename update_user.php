@@ -134,7 +134,7 @@ if (isset($_POST['update_avatar'])) {
         <h3>Update avatar</h3>
 
         <div class="user-image-avatar">
-          <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
+          <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar">
         </div>
         <div class="image-container">
           <?php

@@ -784,7 +784,7 @@
 .avatar-form {
   width: 50%;
   max-height: 95vh;
-  background-color: rgba(137, 236, 130, 0.1);
+  background: linear-gradient(-150deg, rgba(36, 202, 44, 0.5), rgba(30, 150, 210, 0.6));
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   overflow-y: auto;
 }
@@ -792,7 +792,7 @@
 .avatar-form h3 {
   justify-content: flex-start;
   font-size: 3rem;
-  color: var(--black);
+  color: rgb(0, 0, 0);
 }
 
 .avatar-form .user-image-avatar {
@@ -807,6 +807,7 @@
 .avatar-form .user-image-avatar img {
   width: 55%;
   min-width: 175px;
+  box-shadow: 0 0 20px rgb(0, 0, 0);
   border-radius: var(--border-radius);
 }
 
@@ -826,12 +827,12 @@
 }
 
 .avatar-form .image-container label {
-  width: 100px; /* Set a fixed width */
-  height: 100px; /* Set a fixed height */
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   display: flex;
-  align-items: center; /* Center align content vertically */
-  justify-content: center; /* Center align content horizontally */
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar-form .input-hidden {
@@ -846,9 +847,9 @@
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center; /* Center the background */
-  border-radius: 50%; /* Make it a circle */
-  transition: background-size 1500ms linear;
+  background-position: center;
+  border-radius: 50%;
+  transition: 400ms linear;
   transform: translateZ(0);
 }
 
@@ -1267,14 +1268,16 @@
   color: var(--red);
 }
 
-.display-orders .grand-total, .display-orders .delivery-cost {
+.display-orders .grand-total,
+.display-orders .delivery-cost {
   margin-top: 1.5rem;
   margin-bottom: 2.5rem;
   font-size: 2.5rem;
   color: var(--light-color);
 }
 
-.display-orders .grand-total span, .display-orders .delivery-cost span {
+.display-orders .grand-total span,
+.display-orders .delivery-cost span {
   color: var(--red);
 }
 
