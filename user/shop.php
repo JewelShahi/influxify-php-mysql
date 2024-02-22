@@ -1,5 +1,7 @@
 <?php
-include 'components/connect.php';
+
+include '../components/connect.php';
+
 session_start();
 
 if (isset($_SESSION['user_id'])) {
@@ -8,7 +10,7 @@ if (isset($_SESSION['user_id'])) {
   $user_id = '';
 }
 
-include 'components/wishlist_cart.php';
+include '../components/wishlist_cart.php';
 
 // Handle filter submissions
 $filter_price = isset($_GET['price']) ? $_GET['price'] : '';
@@ -26,15 +28,17 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
-  <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/user_style.css">
+  
+  <!-- custom css -->
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
 <body>
 
-  <?php include 'components/user_header.php'; ?>
+  <?php include '../components/user_header.php'; ?>
 
   <section class="products">
 
@@ -143,7 +147,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
             <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
             <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
             <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-            <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
+            <img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
               <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
@@ -162,13 +166,18 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
     </div>
   </section>
 
-  <?php include 'components/footer.php'; ?>
+  <!-- Footer -->
+  <?php include '../components/footer.php'; ?>
 
-  <script src="js/user_script.js"></script>
-  <?php include 'components/scroll_up.php'; ?>
-  <script src="js/scrollUp.js"></script>
+  <!-- User script -->
+  <script src="../js/user_script.js"></script>
 
-  <script src="js/user_search.js"></script>
+  <!-- Scroll up button -->
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
+
+  <!-- User search filed -->
+  <script src="../js/user_search.js"></script>
 </body>
 
 </html>

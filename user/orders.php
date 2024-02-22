@@ -1,13 +1,13 @@
 <?php
 
-include 'components/connect.php';
+include '../components/connect.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-  header("location:user_login.php");
+  header("Location: user_login.php");
 };
 
 ?>
@@ -20,24 +20,24 @@ if (isset($_SESSION['user_id'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orders</title>
-  <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/global.css">
-
-  <link rel="stylesheet" href="css/user_style.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
 <body>
 
-  <?php include 'components/user_header.php'; ?>
+  <?php include '../components/user_header.php'; ?>
 
   <?php
   $select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
   $select_user_exists->execute([$user_id]);
   if ($select_user_exists->rowCount() == 0) {
-    header("location: user_login.php");
+    header("Location: user_login.php");
   } else {
   ?>
 
@@ -115,11 +115,16 @@ if (isset($_SESSION['user_id'])) {
   <?php
   }
   ?>
-  <?php include 'components/footer.php'; ?>
 
-  <script src="js/user_script.js"></script>
-  <?php include 'components/scroll_up.php'; ?>
-  <script src="js/scrollUp.js"></script>
+  <!-- Footer -->
+  <?php include '../components/footer.php'; ?>
+
+  <!-- User script -->
+  <script src="../js/user_script.js"></script>
+
+  <!-- Scroll up button -->
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>

@@ -14,6 +14,7 @@ document.querySelector("#user-btn").onclick = () => {
 let mainImage = document.querySelector(
   ".quick-view .box .row .image-container .main-image img"
 );
+
 let subImages = document.querySelectorAll(
   ".quick-view .box .row .image-container .sub-image img"
 );

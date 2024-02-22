@@ -1,5 +1,7 @@
 <?php
-include 'components/connect.php';
+
+include '../components/connect.php';
+
 session_start();
 
 if (isset($_SESSION['user_id'])) {
@@ -7,7 +9,8 @@ if (isset($_SESSION['user_id'])) {
 } else {
   $user_id = '';
 };
-include 'components/wishlist_cart.php';
+
+include '../components/wishlist_cart.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,18 +21,18 @@ include 'components/wishlist_cart.php';
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quick View</title>
-  <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/global.css">
-
-  <link rel="stylesheet" href="css/user_style.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
 <body>
 
-  <?php include 'components/user_header.php'; ?>
+  <?php include '../components/user_header.php'; ?>
 
   <section class="quick-view">
 
@@ -50,12 +53,12 @@ include 'components/wishlist_cart.php';
           <div class="row">
             <div class="image-container">
               <div class="main-image">
-                <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
+                <img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
               </div>
               <div class="sub-image">
-                <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
-                <img src="uploaded_img/products/<?= $fetch_product['image_02']; ?>" alt="">
-                <img src="uploaded_img/products/<?= $fetch_product['image_03']; ?>" alt="">
+                <img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
+                <img src="../uploaded_img/products/<?= $fetch_product['image_02']; ?>" alt="<?= $fetch_product['image_02']; ?>">
+                <img src="../uploaded_img/products/<?= $fetch_product['image_03']; ?>" alt="<?= $fetch_product['image_03']; ?>">
               </div>
             </div>
             <div class="content">
@@ -95,11 +98,16 @@ include 'components/wishlist_cart.php';
     ?>
 
   </section>
-  <?php include 'components/footer.php'; ?>
 
-  <script src="js/user_script.js"></script>
-  <?php include 'components/scroll_up.php'; ?>
-  <script src="js/scrollUp.js"></script>
+  <!-- Footer -->
+  <?php include '../components/footer.php'; ?>
+
+  <!-- User script -->
+  <script src="../js/user_script.js"></script>
+
+  <!-- Scroll up button -->
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>

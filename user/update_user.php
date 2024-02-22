@@ -1,13 +1,14 @@
 <?php
 
-include 'components/connect.php';
+include '../components/connect.php';
+
 session_start();
 
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-  header("location:user_login.php");
+  header("Location: user_login.php");
 };
 
 $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
@@ -20,6 +21,7 @@ if (isset($_POST['update_password'])) {
   $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+  // Checking if the password is an empty string (hashed empty string in php)
   $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
 
   $old_pass = filter_var($_POST['old_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -81,23 +83,24 @@ if (isset($_POST['update_avatar'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Update user</title>
-  <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/global.css">
 
-  <link rel="stylesheet" href="css/user_style.css">
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
 <body>
 
-  <?php include 'components/user_header.php'; ?>
+  <?php include '../components/user_header.php'; ?>
+
   <?php
   $select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
   $select_user_exists->execute([$user_id]);
   if ($select_user_exists->rowCount() == 0) {
-    header("location: user_login.php");
+    header("Location: user_login.php");
   } else {
   ?>
     <section class="user-update">
@@ -134,11 +137,11 @@ if (isset($_POST['update_avatar'])) {
         <h3>Update avatar</h3>
 
         <div class="user-image-avatar">
-          <img src="<?= 'uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar">
+          <img src="<?= '../uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar">
         </div>
         <div class="image-container">
           <?php
-          $avatarDirectory = 'uploaded_img/user_avatar/';
+          $avatarDirectory = '../uploaded_img/user_avatar/';
           $avatarImages = scandir($avatarDirectory);
 
           foreach ($avatarImages as $image) {
@@ -165,12 +168,22 @@ if (isset($_POST['update_avatar'])) {
   }
   ?>
 
-  <?php include 'components/footer.php'; ?>
-  <script src="js/update_avatar_admin_user.js"></script>
-  <script src="js/user_script.js"></script>
-  <?php include 'components/scroll_up.php'; ?>
-  <script src="js/scrollUp.js"></script>
-  <script src="js/toggle_password.js"></script>
+  <!-- Footer -->
+  <?php include '../components/footer.php'; ?>
+
+  <!-- Update avatar -->
+  <script src="../js/update_avatar_admin_user.js"></script>
+
+  <!-- Use script -->
+  <script src="../js/user_script.js"></script>
+
+  <!-- Toggle password eye button -->
+  <script src="../js/toggle_password.js"></script>
+
+  <!-- Scroll up button -->
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
+
 </body>
 
 </html>

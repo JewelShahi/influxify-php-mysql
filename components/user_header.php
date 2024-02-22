@@ -14,8 +14,8 @@ if (isset($message)) {
 <header class="header">
   <section class="flex">
     <div class="logo">
-      <img src="images/influxify-logo.ico" alt="logo" style="width: 30px;">
-      <a href="/influxify/home.php">Influxi<span>fy</span></a>
+      <img src="../images/influxify-logo.ico" alt="logo" style="width: 30px;">
+      <a href="../user/home.php">Influxi<span>fy</span></a>
     </div>
 
     <nav class="navbar">
@@ -59,7 +59,7 @@ if (isset($message)) {
         <sup class="sup"><?= $total_cart_counts; ?></sup>
       </a>
 
-      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
+      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
       
       <div id="menu-btn" class="fas fa-bars"></div>
 
@@ -78,7 +78,7 @@ if (isset($message)) {
           <a href="update_user.php" class="btn">
             <i class="fas fa-user-edit"></i> Update Profile
           </a>
-          <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
+          <a href="../components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>
         <?php

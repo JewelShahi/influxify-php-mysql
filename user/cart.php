@@ -1,13 +1,13 @@
 <?php
 
-include 'components/connect.php';
+include '../components/connect.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 } else {
   $user_id = '';
-  header('location:user_login.php');
+  header('Location: user_login.php');
 };
 
 if (isset($_POST['delete'])) {
@@ -43,7 +43,7 @@ if (isset($_GET['delete_all'])) {
     $update_product_quantity->execute([$cart_item['quantity'], $cart_item['pid']]);
   }
 
-  header('location: cart.php');
+  header('Location: cart.php');
   exit();
 }
 
@@ -89,23 +89,23 @@ if (isset($_POST['update_qty'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shopping Cart</title>
-  <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/user_style.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
 <body>
 
-  <?php include 'components/user_header.php'; ?>
+  <?php include '../components/user_header.php'; ?>
 
   <?php
   $select_user_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ?");
   $select_user_exists->execute([$user_id]);
   if ($select_user_exists->rowCount() == 0) {
-    header("location: user_login.php");
+    header("Location: user_login.php");
   } else {
   ?>
 
@@ -120,11 +120,11 @@ if (isset($_POST['update_qty'])) {
 
         $grand_total = 0;
         $select_cart = $conn->prepare("
-        SELECT c.user_id, c.pid, c.name, c.price, c.quantity, p.qty as qty, p.image_01 as image 
-        FROM cart c
-        JOIN products p ON c.pid = p.id 
-        WHERE user_id = ?
-       ");
+          SELECT c.user_id, c.pid, c.name, c.price, c.quantity, p.qty as qty, p.image_01 as image 
+          FROM cart c
+          JOIN products p ON c.pid = p.id 
+          WHERE user_id = ?
+        ");
         $select_cart->execute([$user_id]);
 
         if ($select_cart->rowCount() > 0) {
@@ -133,7 +133,7 @@ if (isset($_POST['update_qty'])) {
             <form action="" method="post" class="box">
               <input type="hidden" name="pid" value="<?= $fetch_cart['pid']; ?>">
               <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
-              <img src="uploaded_img/products/<?= $fetch_cart['image']; ?>" alt="">
+              <img src="../uploaded_img/products/<?= $fetch_cart['image']; ?>" alt="<?= $fetch_cart['image']; ?>">
               <div class="name"><?= $fetch_cart['name']; ?></div>
               <div class="flex">
                 <div class="price">$<?= $fetch_cart['price']; ?></div>
@@ -182,6 +182,7 @@ if (isset($_POST['update_qty'])) {
         $cart_product_quantity->execute([$user_id]);
         while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
         ?>
+        
           let qInp<?= $counter; ?> = document.getElementById('q<?= $counter; ?>');
           let uBtn<?= $counter; ?> = document.getElementById('u<?= $counter; ?>');
 
@@ -207,12 +208,16 @@ if (isset($_POST['update_qty'])) {
   <?php
   }
   ?>
-  <?php include 'components/footer.php'; ?>
 
-  <script src="js/user_script.js"></script>
+  <!-- Footer -->
+  <?php include '../components/footer.php'; ?>
 
-  <?php include 'components/scroll_up.php'; ?>
-  <script src="js/scrollUp.js"></script>
+  <!-- User script -->
+  <script src="../js/user_script.js"></script>
+
+  <!-- Scroll up button -->
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+include '../components/connect.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
 	$user_id = '';
 };
 
-include 'components/wishlist_cart.php';
+include '../components/wishlist_cart.php';
 
 ?>
 
@@ -21,19 +21,20 @@ include 'components/wishlist_cart.php';
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home</title>
-	<link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 	<!-- font awesome cdn link  -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	
 	<!-- custom css file link -->
-	<link rel="stylesheet" href="css/global.css">
-
-	<link rel="stylesheet" href="css/user_style.css">
+	<link rel="stylesheet" href="../css/global.css">
+	<link rel="stylesheet" href="../css/user_style.css">
 </head>
 
 <body style="height: auto;">
 
-	<?php include 'components/user_header.php'; ?>
+	<?php include '../components/user_header.php'; ?>
+
 	<div class="home-bg">
 		<section class="home">
 			<div class="swiper home-slider">
@@ -52,7 +53,7 @@ include 'components/wishlist_cart.php';
 						?>
 						<div class="swiper-slide slide">
 							<div class="image">
-								<img src="uploaded_img/products/<?php echo $image_01; ?>" alt="<?php echo $image_01; ?>">
+								<img src="../uploaded_img/products/<?php echo $image_01; ?>" alt="<?php echo $image_01; ?>">
 							</div>
 							<div class="content">
 								<h3><?php echo $name; ?></h3>
@@ -79,42 +80,42 @@ include 'components/wishlist_cart.php';
 			<div class="swiper-wrapper">
 
 				<a href="brand.php?brand=Samsung" class="swiper-slide slide">
-					<img src="images/brands/samsung.png" alt="samsung brand">
+					<img src="../images/brands/samsung.png" alt="samsung brand">
 					<h3>Samsung</h3>
 				</a>
 
 				<a href="brand.php?brand=Apple" class="swiper-slide slide">
-					<img src="images/brands/apple.png" alt="apple brand">
+					<img src="../images/brands/apple.png" alt="apple brand">
 					<h3>Apple</h3>
 				</a>
 
 				<a href="brand.php?brand=Google" class="swiper-slide slide">
-					<img src="images/brands/google.png" alt="google brand">
+					<img src="../images/brands/google.png" alt="google brand">
 					<h3>Google</h3>
 				</a>
 
 				<a href="brand.php?brand=Xiaomi" class="swiper-slide slide">
-					<img src="images/brands/xiaomi.png" alt="xiaomi brand">
+					<img src="../images/brands/xiaomi.png" alt="xiaomi brand">
 					<h3>Xiaomi</h3>
 				</a>
 
 				<a href="brand.php?brand=OnePlus" class="swiper-slide slide">
-					<img src="images/brands/oneplus.png" alt="one-plus brand">
+					<img src="../images/brands/oneplus.png" alt="one-plus brand">
 					<h3>OnePlus</h3>
 				</a>
 
 				<a href="brand.php?brand=Motorola" class="swiper-slide slide">
-					<img src="images/brands/motorola.png" alt="motorola brand">
+					<img src="../images/brands/motorola.png" alt="motorola brand">
 					<h3>Motorola</h3>
 				</a>
 
 				<a href="brand.php?brand=Oppo" class="swiper-slide slide">
-					<img src="images/brands/oppo.png" alt="oppo brand">
+					<img src="../images/brands/oppo.png" alt="oppo brand">
 					<h3>Oppo</h3>
 				</a>
 
 				<a href="brand.php?brand=Realme" class="swiper-slide slide">
-					<img src="images/brands/realme.png" alt="realme brand">
+					<img src="../images/brands/realme.png" alt="realme brand">
 					<h3>Realme</h3>
 				</a>
 
@@ -149,7 +150,7 @@ include 'components/wishlist_cart.php';
 							<input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
 							<button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
 							<a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-							<img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
+							<img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
 							<div class="name"><?= $fetch_product['name']; ?></div>
 							<div class="flex">
 								<div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
@@ -174,14 +175,18 @@ include 'components/wishlist_cart.php';
 
 	</section>
 
-	<?php include 'components/scroll_up.php'; ?>
-	<script src="js/scrollUp.js"></script>
+	<!-- Footer -->
+	<?php include '../components/footer.php'; ?>
 
-	<?php include 'components/footer.php'; ?>
-	<script src="js/user_script.js"></script>
+  <!-- User script -->
+	<script src="../js/user_script.js"></script>
+
+	<!-- Scroll up button -->
+	<?php include '../components/scroll_up.php'; ?>
+	<script src="../js/scrollUp.js"></script>
 
 	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-	<script src="js/swiper.js"></script>
+	<script src="../js/swiper.js"></script>
 
 </body>
 
