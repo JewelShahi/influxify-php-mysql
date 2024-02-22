@@ -130,7 +130,7 @@ if (isset($_GET['delete'])) {
             <?php
             while ($fetch_services = $select_services->fetch(PDO::FETCH_ASSOC)) {
             ?>
-              <form action="service_checkout.php" method="POST" id="serviceForm<?= $fetch_services['id']; ?>" class="service-box" style="<?= $fetch_services['is_resolved'] > 0 ? 'background-image: url(images/resolved-service-bg.png);' : ''; ?>">
+              <form action="service_checkout.php" method="POST" id="serviceForm<?= $fetch_services['id']; ?>" class="service-box" style="<?= $fetch_services['is_resolved'] > 0 ? 'background-image: url(../images/resolved-service-bg.png);' : ''; ?>">
                 <div>
                   <input type="hidden" name="service_id" value="<?= $fetch_services["id"]; ?>">
                   <input type="hidden" name="service_price" value="<?= $fetch_services["price"]; ?>">
