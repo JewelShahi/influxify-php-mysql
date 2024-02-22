@@ -1,19 +1,5 @@
 <?php
 
-// // Include the database connection file
-// include '../components/connect.php';
-
-// // Start the admin session
-// session_start();
-
-// // Retrieve the admin ID from the session
-// $admin_id = $_SESSION['admin_id'];
-
-// // If admin ID is not set, redirect to admin login page
-// if (!isset($admin_id)) {
-//   header('location:admin_login.php');
-// } 
-
 include '../components/connect.php';
 session_start();
 
