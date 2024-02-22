@@ -1,15 +1,20 @@
 <?php
 
+// Trying to connect to the db
 include '../components/connect.php';
+
+// Start the session
 session_start();
 
+// Check if the admin has a session
 if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
 } else {
   $admin_id = '';
-  header('location:user_login.php');
+  header('Location: admin_login.php');
 };
 
+// Register
 if (isset($_POST['submit'])) {
 
   $name = $_POST['name'];
@@ -28,10 +33,12 @@ if (isset($_POST['submit'])) {
   if (!preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/", $email)) {
     $message[] = 'Invalid email format!';
   }
+
   // Validate password length and format (e.g., at least 8 characters, one upper, one lower character and one digit)
   elseif (strlen($pass) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/', $pass)) {
     $message[] = 'Password must be at least 8 characters and contain at least one uppercase letter, lowercase letter and a digit!';
   }
+
   // Check if the password match the entered
   elseif ($hash_pass != $hash_cpass) {
     $message[] = 'Confirm password not matched!';
@@ -56,6 +63,7 @@ if (isset($_POST['submit'])) {
     }
   }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +75,11 @@ if (isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register An Admin</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- Custom css -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 
@@ -75,19 +87,23 @@ if (isset($_POST['submit'])) {
 
 <body class="no-overflow">
 
+  <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
 
+  <!-- Checks if the user is in the db -->
   <?php
   $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
   $select_admin_exists->execute([$admin_id]);
   if ($select_admin_exists->rowCount() == 0) {
-    header("location: admin_login.php");
+    header("Location: admin_login.php");
   } else {
   ?>
     <section class="register-admin">
       <div class="register-admin-blur">
         <form action="" method="post">
+
           <h3>Register an admin</h3>
+
           <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="input box" required>
           <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <div class="passwords">
@@ -104,12 +120,16 @@ if (isset($_POST['submit'])) {
         </form>
       </div>
     </section>
+
   <?php
   }
   ?>
 
-  <script src="../js/toggle_password.js"></script>
+  <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Toggle password -->
+  <script src="../js/toggle_password.js"></script>
 </body>
 
 </html>

@@ -1,15 +1,20 @@
 <?php
 
+// Trying to connect to the db
 include '../components/connect.php';
+
+// Start the session
 session_start();
 
+// Check if the user has a session
 if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
 } else {
   $admin_id = '';
-  header('location:user_login.php');
+  header('Location: admin_login.php');
 };
 
+// Update payment status
 if (isset($_POST['update_payment'])) {
   $order_id = $_POST['order_id'];
 
@@ -34,6 +39,7 @@ if (isset($_POST['update_payment'])) {
   }
 }
 
+// Delete placed order
 if (isset($_GET['delete'])) {
   $delete_id = $_GET['delete'];
 
@@ -58,7 +64,7 @@ if (isset($_GET['delete'])) {
   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE id = ?");
   $delete_order->execute([$delete_id]);
 
-  header('location: placed_orders.php');
+  header('Location: placed_orders.php');
 }
 
 ?>
@@ -72,7 +78,11 @@ if (isset($_GET['delete'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Placed Orders</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- Custom css -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 
@@ -80,12 +90,15 @@ if (isset($_GET['delete'])) {
 
 <body>
 
+  <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
+
+  <!-- Checks if the user is in the db -->
   <?php
   $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
   $select_admin_exists->execute([$admin_id]);
   if ($select_admin_exists->rowCount() == 0) {
-    header("location: admin_login.php");
+    header("Location: admin_login.php");
   } else {
   ?>
     <section class="orders">
@@ -179,7 +192,11 @@ if (isset($_GET['delete'])) {
   <?php
   }
   ?>
+
+  <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>
 </body>

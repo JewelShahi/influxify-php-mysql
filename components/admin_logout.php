@@ -8,4 +8,4 @@ session_start();
 session_unset();
 session_destroy();
 
-header('location:../admin/admin_login.php');
+header('Location: ../admin/admin_login.php');

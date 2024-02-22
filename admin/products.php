@@ -1,16 +1,21 @@
 <?php
 
+// Trying to connect to the db
 include '../components/connect.php';
+
+// Start the session
 session_start();
 
+
+// Check if the admin has a session
 if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
 } else {
   $admin_id = '';
-  header('location:user_login.php');
+  header('Location: admin_login.php');
 };
 
-
+// Add product
 if (isset($_POST['add_product'])) {
 
   $name = $_POST['name'];
@@ -74,14 +79,19 @@ if (isset($_POST['add_product'])) {
   $image_folder_03 = '../uploaded_img/products/' . $image_03;
 
   try {
+
+    // Inserting the data
     $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_01, $image_02, $image_03]);
 
     if ($insert_products) {
+
+      // Image size condition
       if ($image_size_01 > 2000000 or $image_size_02 > 2000000 or $image_size_03 > 2000000) {
         throw new Exception('Image size is too large!');
       }
 
+      // Moving to the folder - uploaded_img/products
       move_uploaded_file($image_tmp_name_01, $image_folder_01);
       move_uploaded_file($image_tmp_name_02, $image_folder_02);
       move_uploaded_file($image_tmp_name_03, $image_folder_03);
@@ -99,6 +109,7 @@ if (isset($_POST['add_product'])) {
   }
 };
 
+// Delete product
 if (isset($_GET['delete'])) {
 
   $delete_id = $_GET['delete'];
@@ -107,34 +118,40 @@ if (isset($_GET['delete'])) {
   $delete_product_image->execute([$delete_id]);
   $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
   $baseImagePath = '../uploaded_img/products/';
+
+  // If the image exist in the folder delete it
   if (file_exists($baseImagePath . $fetch_delete_image['image_01'])) {
     unlink($baseImagePath . $fetch_delete_image['image_01']);
   } else {
     $message[] = 'Image ' . $fetch_delete_image['image_01'] . ' wasn\'t found in folder ' . $baseImagePath;
   }
 
+  // If the image exist in the folder delete it
   if (file_exists($baseImagePath . $fetch_delete_image['image_02'])) {
     unlink($baseImagePath . $fetch_delete_image['image_02']);
   } else {
     $message[] = 'Image ' . $fetch_delete_image['image_02'] . ' wasn\'t found in folder ' . $baseImagePath;
   }
 
+  // If the image exist in the folder delete it
   if (file_exists($baseImagePath . $fetch_delete_image['image_03'])) {
     unlink($baseImagePath . $fetch_delete_image['image_03']);
   } else {
     $message[] = 'Image ' . $fetch_delete_image['image_03'] . ' wasn\'t found in folder ' . $baseImagePath;
   }
 
+  // Deleting the product
   $delete_product = $conn->prepare("DELETE FROM `products` WHERE id = ?");
   $delete_product->execute([$delete_id]);
 
-  $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE pid = ?");
-  $delete_cart->execute([$delete_id]);
+  // $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE pid = ?");
+  // $delete_cart->execute([$delete_id]);
 
-  $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE pid = ?");
-  $delete_wishlist->execute([$delete_id]);
+  // $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE pid = ?");
+  // $delete_wishlist->execute([$delete_id]);
+
   $message[] = 'Product is deleted successfully!';
-  header('location:products.php');
+  header('Location: products.php');
 }
 ?>
 
@@ -147,7 +164,11 @@ if (isset($_GET['delete'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- Custom css -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 
@@ -155,13 +176,15 @@ if (isset($_GET['delete'])) {
 
 <body>
 
+  <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
 
+  <!-- Checks if the user is in the db -->
   <?php
   $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
   $select_admin_exists->execute([$admin_id]);
   if ($select_admin_exists->rowCount() == 0) {
-    header("location: admin_login.php");
+    header("Location: admin_login.php");
   } else {
   ?>
 
@@ -303,7 +326,10 @@ if (isset($_GET['delete'])) {
   }
   ?>
 
+  <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>
 </body>

@@ -1,15 +1,20 @@
 <?php
 
+// Trying to connect to the db
 include '../components/connect.php';
+
+// Start the session
 session_start();
 
+// Check if the admin has a session
 if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
 } else {
   $admin_id = '';
-  header('location:user_login.php');
+  header('Location: admin_login.php');
 };
 
+// Update product
 if (isset($_POST['update'])) {
   $pid = $_POST['pid'];
 
@@ -23,7 +28,6 @@ if (isset($_POST['update'])) {
   $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $brand = $_POST['brand'];
-  // $brand = filter_var($brand, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $released = $_POST['released'];
   $released = filter_var($released, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -68,6 +72,8 @@ if (isset($_POST['update'])) {
   $image_folder_01 = '../uploaded_img/products/' . $image_01;
 
   if (!empty($image_01) && is_uploaded_file($image_tmp_name_01)) {
+
+    // Check for the image size
     if ($image_size_01 > 2000000) {
       $message[] = 'Image-1\'s size is too large!';
     } else {
@@ -76,9 +82,12 @@ if (isset($_POST['update'])) {
 
       // Check if the file was moved successfully
       if (move_uploaded_file($image_tmp_name_01, $image_folder_01)) {
+
+        // If the image exists, just remove it
         if (file_exists($baseImagePath . $old_image_01)) {
           unlink('../uploaded_img/products/' . $old_image_01);
         }
+
         $message[] = 'Image-1 has been updated successfully!';
       } else {
         $message[] = 'Failed to move Image-1 to the destination folder!';
@@ -94,6 +103,8 @@ if (isset($_POST['update'])) {
   $image_folder_02 = '../uploaded_img/products/' . $image_02;
 
   if (!empty($image_02) && is_uploaded_file($image_tmp_name_02)) {
+
+    // Check for the image size
     if ($image_size_02 > 2000000) {
       $message[] = 'Image-2\'s size is too large!';
     } else {
@@ -102,9 +113,12 @@ if (isset($_POST['update'])) {
 
       // Check if the file was moved successfully
       if (move_uploaded_file($image_tmp_name_02, $image_folder_02)) {
+
+        // if a image exists, just remove it
         if (file_exists($baseImagePath . $old_image_02)) {
           unlink('../uploaded_img/products/' . $old_image_02);
         }
+
         $message[] = 'Image-2 has been updated successfully!';
       } else {
         $message[] = 'Failed to move Image-2 to the destination folder!';
@@ -120,6 +134,8 @@ if (isset($_POST['update'])) {
   $image_folder_03 = '../uploaded_img/products/' . $image_03;
 
   if (!empty($image_03) && is_uploaded_file($image_tmp_name_03)) {
+
+    // Check for the image size
     if ($image_size_03 > 2000000) {
       $message[] = 'Image-3\'s size is too large!';
     } else {
@@ -128,9 +144,12 @@ if (isset($_POST['update'])) {
 
       // Check if the file was moved successfully
       if (move_uploaded_file($image_tmp_name_03, $image_folder_03)) {
+
+        // If the file image exists, just remove it
         if (file_exists($baseImagePath . $old_image_03)) {
           unlink('../uploaded_img/products/' . $old_image_03);
         }
+
         $message[] = 'Image-3 has been updated successfully!';
       } else {
         $message[] = 'Failed to move Image-3 to the destination folder!';
@@ -153,7 +172,11 @@ if (isset($_POST['update'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Update Products</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- Custom css -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 
@@ -161,13 +184,16 @@ if (isset($_POST['update'])) {
 
 <body>
 
+  <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
 
+
+  <!-- Checks if the user is in the db -->
   <?php
   $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
   $select_admin_exists->execute([$admin_id]);
   if ($select_admin_exists->rowCount() == 0) {
-    header("location: admin_login.php");
+    header("Location: admin_login.php");
   } else {
   ?>
 
@@ -276,7 +302,10 @@ if (isset($_POST['update'])) {
   }
   ?>
 
+  <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>
 </body>

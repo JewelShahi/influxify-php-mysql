@@ -1,15 +1,20 @@
 <?php
 
+// Trying to connect to the db
 include '../components/connect.php';
+
+// Start the session
 session_start();
 
+// Check if the admin has a session
 if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
 } else {
   $admin_id = '';
-  header('location:user_login.php');
+  header('Location: admin_login.php');
 };
 
+// Update admin
 if (isset($_POST['submit'])) {
 
   $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -51,6 +56,7 @@ if (isset($_POST['submit'])) {
   }
 }
 
+// Update avatar
 if (isset($_POST['update_avatar'])) {
   $avatar = $_POST['avatar'];
 
@@ -71,7 +77,11 @@ if (isset($_POST['update_avatar'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Update Admin Profile</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- Custom css -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 
@@ -79,13 +89,15 @@ if (isset($_POST['update_avatar'])) {
 
 <body>
 
+  <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
 
+  <!-- Checks if the user is in the db -->
   <?php
   $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
   $select_admin_exists->execute([$admin_id]);
   if ($select_admin_exists->rowCount() == 0) {
-    header("location: admin_login.php");
+    header("Location: admin_login.php");
   } else {
   ?>
     <section class="user-update">
@@ -126,7 +138,7 @@ if (isset($_POST['update_avatar'])) {
           <img src="<?= '../uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
         </div>
         <div class="image-container">
-          
+
           <?php
           $avatarDirectory = '../uploaded_img/user_avatar/';
           $avatarImages = scandir($avatarDirectory);
@@ -157,9 +169,14 @@ if (isset($_POST['update_avatar'])) {
   }
   ?>
 
-  <script src="../js/update_avatar_admin_user.js"></script>
-  <script src="../js/toggle_password.js"></script>
+  <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Toggle the visibility of the password -->
+  <script src="../js/toggle_password.js"></script>
+
+  <!-- Admin user avatar -->
+  <script src="../js/update_avatar_admin_user.js"></script>
 </body>
 
 </html>

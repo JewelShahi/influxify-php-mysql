@@ -1,13 +1,17 @@
 <?php
 
+// Trying to connect to the db
 include '../components/connect.php';
+
+// Start the session
 session_start();
 
+// Check if the user has a session
 if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
 } else {
   $admin_id = '';
-  header('location:user_login.php');
+  header('Location: user_login.php');
 };
 
 // If 'delete' parameter is set in the URL
@@ -26,7 +30,7 @@ if (isset($_GET['delete'])) {
   $delete_admins->execute([$delete_id]);
 
   // Redirect to admin accounts page after deletion
-  header('location:admin_accounts.php');
+  header('Location: admin_accounts.php');
 }
 ?>
 
@@ -42,24 +46,28 @@ if (isset($_GET['delete'])) {
   <title>Admin accounts</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
-  <!-- External CSS stylesheets -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- Custom css -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 </head>
 
 <body>
 
-  <!-- Include the admin header component -->
+  <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
 
+  <!-- Checks if the admin is in the db -->
   <?php
   $select_admin_exists = $conn->prepare("SELECT id FROM `users` WHERE id = ? AND isAdmin = 1");
   $select_admin_exists->execute([$admin_id]);
   if ($select_admin_exists->rowCount() == 0) {
-    header("location: admin_login.php");
+    header("Location: admin_login.php");
   } else {
   ?>
+
     <section class="accounts">
 
       <!-- Heading for admin accounts -->
@@ -118,11 +126,15 @@ if (isset($_GET['delete'])) {
         </div>
       </div>
     </section>
+
   <?php
   }
   ?>
-  <!-- Include the admin script and scroll-up components -->
+
+  <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>
 </body>

@@ -127,7 +127,7 @@
 .avatar-form {
   width: 50%;
   max-height: 95vh;
-  background: linear-gradient(-150deg, rgba(36, 202, 44, 0.5), rgba(30, 150, 210, 0.6));
+  background: linear-gradient(-150deg, rgba(64, 171, 70, 0.5), rgba(60, 132, 168, 0.6));
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   overflow-y: auto;
 }
