@@ -108,7 +108,8 @@ if (isset($_POST['update_avatar'])) {
         <h3>Update profile</h3>
 
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required>
+
+        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required readonly>
         <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
 
         <div class="password-container">
