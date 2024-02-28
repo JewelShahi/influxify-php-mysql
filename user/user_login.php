@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
         <div class="password-container">
           <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
-        </div>
+        </div> 
         <input type="submit" value="Log In" class="btn" name="submit">
         <p>Don't have an account?<br>Go ahead and create one for free!</p>
         <a href="user_register.php" class="option-btn">Register</a>

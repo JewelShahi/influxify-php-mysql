@@ -88,7 +88,7 @@ if (isset($_GET['delete'])) {
 
 </head>
 
-<body>
+<body style="height: auto;">
 
   <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>

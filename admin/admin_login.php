@@ -69,12 +69,18 @@ if (isset($_POST['submit'])) {
         <h3>Admin Log In</h3>
         <p>Email = <span>admin@admin.com</span> and Password = <span>admin</span></p>
         <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
-        <input type="password" name="pass" required placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <div class="password-container">
+          <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
+        </div>
         <input type="submit" value="Log In" class="btn" name="submit">
       </form>
     </div>
   </section>
 
 </body>
+
+<!-- Toggle visibility of the password -->
+<script src="../js/toggle_password.js"></script>
 
 </html>

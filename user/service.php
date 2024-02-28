@@ -73,7 +73,7 @@ if (isset($_GET['delete'])) {
   <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
-<body style="height: 100%;">
+<body style="height: auto;">
 
   <?php include '../components/user_header.php'; ?>
 

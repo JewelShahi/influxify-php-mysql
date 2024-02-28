@@ -17,11 +17,6 @@ if (isset($_SESSION['admin_id'])) {
 // Update admin
 if (isset($_POST['submit'])) {
 
-  $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-  $update_profile_name = $conn->prepare("UPDATE `users` SET name = ? WHERE id = ? AND isAdmin = 1");
-  $update_profile_name->execute([$name, $admin_id]);
-
   $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
   $prev_pass = $_POST['prev_pass'];
 
@@ -87,7 +82,7 @@ if (isset($_POST['update_avatar'])) {
 
 </head>
 
-<body>
+<body style="height: auto;">
 
   <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
@@ -106,8 +101,8 @@ if (isset($_POST['update_avatar'])) {
         <h3>Update Profile</h3>
 
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required>
-        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
+        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
+        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
 
         <div class="password-container">
           <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>

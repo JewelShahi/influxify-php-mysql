@@ -17,10 +17,6 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 
 if (isset($_POST['update_password'])) {
 
-  // Validate and sanitize input
-  $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
   // Checking if the password is an empty string (hashed empty string in php)
   $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
 
@@ -49,10 +45,6 @@ if (isset($_POST['update_password'])) {
   } elseif ($hash_new_pass !== $hash_cpass) {
     $message[] = 'Confirm password not matched!';
   } else {
-    // Update user profile
-    $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
-    $update_profile->execute([$name, $email, $user_id]);
-
     // Check if a new password is provided
     if ($new_pass !== '') {
       // Update password
@@ -109,8 +101,8 @@ if (isset($_POST['update_avatar'])) {
 
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
 
-        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" required readonly>
-        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>" readonly>
+        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
+        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
 
         <div class="password-container">
           <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>

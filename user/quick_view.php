@@ -30,7 +30,7 @@ include '../components/wishlist_cart.php';
   <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
-<body>
+<body style="height: auto;">
 
   <?php include '../components/user_header.php'; ?>
 

@@ -66,6 +66,56 @@ body {
 }
 /**********/
 
+/*------------ ALL BUTTON UI ------------ */
+.btn,
+.delete-btn,
+.option-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 20px 20px 20px 20px;
+  padding: 1rem 3rem;
+  font-size: 1.7rem;
+  color: var(--white);
+  cursor: pointer;
+  text-align: center;
+  transition: 300ms !important;
+}
+
+.btn:hover,
+.delete-btn:hover,
+.option-btn:hover {
+  background-color: var(--black);
+  box-shadow: 0 0 5px var(--gray), 0 0 8px var(--gray), 0 0 10px var(--gray);
+  transform: scale(1.02);
+}
+
+/********* different kinds of buttons ********/
+.btn {
+  background-color: var(--light-green);
+}
+
+.option-btn {
+  background-color: #1d7ecd;
+}
+
+/* DELETE/LOGOUT BUTTON UI */
+.delete-btn {
+  background-color: var(--red);
+}
+
+/* DIV FOR PROFILE BUTTONS */
+.flex-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  gap: 1rem;
+}
+
+/*--------------------------- */
+
 /****** input ******/
 .input {
   font-size: 20px;
@@ -83,6 +133,21 @@ body {
 .input:focus {
   box-shadow: 0 0 10px rgba(97, 255, 173, 0.7);
 }
+
+/* custom input type file */
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload .btn {
+  border-radius: 5px !important;
+}
+
+.custom-file-upload .btn:hover {
+  background-color: rgb(24, 118, 88);
+}
+/**/
+
 /**********************/
 
 /*******************************/
@@ -112,7 +177,7 @@ body {
   font-size: 1.5rem;
 }
 
-@media screen and (max-width: 991px){
+@media screen and (max-width: 991px) {
   .toggle-pass {
     font-size: 2.05rem;
   }
@@ -177,12 +242,12 @@ section {
 span {
   font-weight: 900;
 }
-
+/* 
 .disabled {
   pointer-events: none;
   user-select: none;
   opacity: 0.5;
-}
+} */
 /******/
 
 /*------ WHOLE NAVBAR -------*/
@@ -349,56 +414,6 @@ span {
   display: none;
 }
 /*------------------------------*/
-
-/*------------ ALL BUTTON UI ------------ */
-.btn,
-.delete-btn,
-.option-btn {
-  display: block;
-  width: 100%;
-  margin-top: 1rem;
-  border-radius: 20px 20px 20px 20px;
-  padding: 1rem 3rem;
-  font-size: 1.7rem;
-  color: var(--white);
-  cursor: pointer;
-  text-align: center;
-  transition: 300ms !important;
-}
-
-.btn:hover,
-.delete-btn:hover,
-.option-btn:hover {
-  background-color: var(--black);
-  box-shadow: 0 0 5px var(--gray), 0 0 8px var(--gray), 0 0 10px var(--gray);
-  transform: scale(1.02);
-}
-
-/*  */
-.btn {
-  background-color: var(--light-green);
-}
-
-.option-btn {
-  background-color: #1d7ecd;
-}
-
-/* DELETE/LOGOUT BUTTON UI */
-.delete-btn {
-  background-color: var(--red);
-}
-
-/* DIV FOR PROFILE BUTTONS */
-.flex-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  gap: 1rem;
-}
-
-/*--------------------------- */
 
 /*------------ ALL MESSAGE (WARNING, INFO, ALERT) UI ------------ */
 /* MESSAGE UI */

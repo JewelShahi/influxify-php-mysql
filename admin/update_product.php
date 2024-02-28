@@ -182,7 +182,7 @@ if (isset($_POST['update'])) {
 
 </head>
 
-<body>
+<body style="height: auto;">
 
   <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
@@ -286,7 +286,7 @@ if (isset($_POST['update'])) {
             <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
 
             <div class="flex-btn">
-              <input type="submit" name="update" class="btn" value="update">
+              <input type="submit" name="update" class="btn" value="Update">
               <a href="products.php" class="option-btn">Go Back</a>
             </div>
           </form>

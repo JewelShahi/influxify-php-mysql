@@ -6,7 +6,6 @@ include '../components/connect.php';
 // Start the session
 session_start();
 
-
 // Check if the admin has a session
 if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
@@ -144,12 +143,6 @@ if (isset($_GET['delete'])) {
   $delete_product = $conn->prepare("DELETE FROM `products` WHERE id = ?");
   $delete_product->execute([$delete_id]);
 
-  // $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE pid = ?");
-  // $delete_cart->execute([$delete_id]);
-
-  // $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE pid = ?");
-  // $delete_wishlist->execute([$delete_id]);
-
   $message[] = 'Product is deleted successfully!';
   header('Location: products.php');
 }
@@ -171,10 +164,9 @@ if (isset($_GET['delete'])) {
   <!-- Custom css -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
-
 </head>
 
-<body>
+<body style="height: auto;">
 
   <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
@@ -273,23 +265,42 @@ if (isset($_GET['delete'])) {
             <input type="number" name="price" min="0.00" step="0.01" class="box" required placeholder="Product price" onkeypress="if(this.value.length == 8) return false;">
           </div>
 
-          <div class="inputBox">
+          <!-- <div class="inputBox">
             <span>Image-1 <span style="color: red;">*</span></span>
             <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+          </div> -->
+
+
+        </div>
+        <div class="file-buttons">
+          <div class="inputBox">
+            <span>Image-1 <span style="color: red;">*</span></span>
+            <div class="custom-file-upload">
+              <label for="image_01" class="btn">Choose Image</label>
+              <input type="file" id="image_01" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
+              <span id="filename_01" class="chosen-file-name"></span>
+            </div>
           </div>
 
           <div class="inputBox">
             <span>Image-2 <span style="color: red;">*</span></span>
-            <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+            <div class="custom-file-upload">
+              <label for="image_02" class="btn">Choose Image</label>
+              <input type="file" id="image_02" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
+              <span id="filename_02" class="chosen-file-name"></span>
+            </div>
           </div>
 
           <div class="inputBox">
             <span>Image-3 <span style="color: red;">*</span></span>
-            <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+            <div class="custom-file-upload">
+              <label for="image_03" class="btn">Choose Image</label>
+              <input type="file" id="image_03" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
+              <span id="filename_03" class="chosen-file-name"></span>
+            </div>
           </div>
 
         </div>
-
         <input type="submit" value="Add product" class="btn" name="add_product">
       </form>
     </section>
@@ -328,6 +339,9 @@ if (isset($_GET['delete'])) {
 
   <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Custom file name show -->
+  <script src="../js/custom_choose_file.js"></script>
 
   <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>

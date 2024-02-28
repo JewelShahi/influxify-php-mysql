@@ -34,7 +34,7 @@ if (isset($_SESSION['admin_id'])) {
   <link rel="stylesheet" href="../css/global.css">
 </head>
 
-<body>
+<body style="height: auto;">
 
   <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>

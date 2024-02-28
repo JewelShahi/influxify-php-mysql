@@ -59,6 +59,10 @@
   width: 100%;
 }
 
+.admin-login .password-container > span {
+  color: #ffffff !important;
+}
+
 .user-update {
   background-color: var(--body);
   width: 100%;
@@ -127,7 +131,11 @@
 .avatar-form {
   width: 50%;
   max-height: 95vh;
-  background: linear-gradient(-150deg, rgba(64, 171, 70, 0.5), rgba(60, 132, 168, 0.6));
+  background: linear-gradient(
+    -150deg,
+    rgba(64, 171, 70, 0.5),
+    rgba(60, 132, 168, 0.6)
+  );
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   overflow-y: auto;
 }
@@ -170,12 +178,12 @@
 }
 
 .avatar-form .image-container label {
-  width: 100px; 
-  height: 100px; 
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar-form .input-hidden {
@@ -220,7 +228,6 @@
     border-radius: 0 0 var(--border-radius) var(--border-radius);
   }
 }
-
 
 /**************************************************/
 
@@ -444,7 +451,6 @@
 }
 
 .add-products form {
-  max-width: 70rem;
   margin: 0 auto;
   background-color: var(--white);
   box-shadow: 0 0 10px var(--black);
@@ -479,6 +485,23 @@
 .add-products form textarea {
   height: 5.4rem;
   resize: none;
+}
+
+.file-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.file-buttons > :last-child {
+  grid-column: 1 / -1; /* Make the last item span both columns */
+}
+
+@media screen and (max-width: 33rem) {
+  .file-buttons {
+    grid-template-columns: 100%; /* One item in a row for screens smaller than 33rem */
+  }
 }
 
 .show-products {
@@ -543,7 +566,6 @@
   box-shadow: 0 0 10px var(--black);
   border-radius: var(--border-radius);
   padding: 2rem;
-  max-width: 50rem;
   margin: 0 auto;
 }
 
@@ -571,6 +593,8 @@
   padding: 0.5rem;
   cursor: pointer;
   transition: 0.3s ease-in;
+  border-radius: var(--border-radius);
+  border: 1px solid rgb(55, 96, 59);
 }
 
 .update-product form .image-container .sub-image img:hover {
