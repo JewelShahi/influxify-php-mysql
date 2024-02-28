@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="../css/user_style.css">
 </head>
 
-<body class="no-overflow" style="height: auto;">
+<body class="no-overflow">
 
   <?php include '../components/user_header.php'; ?>
 

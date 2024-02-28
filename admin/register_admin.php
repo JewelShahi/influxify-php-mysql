@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
 
 </head>
 
-<body class="no-overflow" style="height: auto;">
+<body class="no-overflow">
 
   <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>

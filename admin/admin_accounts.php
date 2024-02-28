@@ -83,20 +83,20 @@ if (isset($_GET['delete'])) {
 
       <!-- Container for displaying admin accounts -->
       <div class="box-container">
-        <div class="info">
-          <?php
+        <?php
+        // Select all admin accounts from the database
+        $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 1");
+        $select_accounts->execute();
 
-          // Select all admin accounts from the database
-          $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 1");
-          $select_accounts->execute();
-
-          // Check if there are admin accounts available
-          if ($select_accounts->rowCount() > 0) {
-            // Loop through each admin account
-            while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
-          ?>
-              <!-- Box displaying admin details -->
-              <div class="box">
+        // Check if there are admin accounts available
+        if ($select_accounts->rowCount() > 0) {
+          // Loop through each admin account
+          while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <!-- Box displaying admin details -->
+            <div class="user-card">
+              <div class="after"></div>
+              <div class="user-info">
                 <p> Admin ID : <span><?= $fetch_accounts['id']; ?></span> </p>
                 <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
                 <!-- Buttons for updating and deleting admin accounts -->
@@ -116,15 +116,17 @@ if (isset($_GET['delete'])) {
                   }
                   ?>
                 </div>
+                <!-- <div class="before"></div> -->
               </div>
-          <?php
-            }
-          } else {
-            echo '<p class="empty">There are currently no available admin accounts</p>';
+            </div>
+        <?php
           }
-          ?>
-        </div>
+        } else {
+          echo '<p class="empty">There are currently no available admin accounts</p>';
+        }
+        ?>
       </div>
+
     </section>
 
   <?php
