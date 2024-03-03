@@ -66,7 +66,6 @@ include '../components/wishlist_cart.php';
               <div class="details"><?= $fetch_product['details']; ?></div>
               <div class="info"><span>Brand: </span><?= $fetch_product['brand']; ?></div>
               <div class="info"><span>Release date: </span><?= $fetch_product['released']; ?></div>
-              <div class="info"><span>Quantity: </span><?= $fetch_product['qty']; ?></div>
               <div class="info"><span>CPU: </span><?= $fetch_product['cpu']; ?></div>
               <div class="info"><span>Storage: </span><?= $fetch_product['storage']; ?></div>
               <div class="info"><span>RAM: </span><?= $fetch_product['ram']; ?></div>
@@ -75,9 +74,26 @@ include '../components/wishlist_cart.php';
               <div class="info"><span>Display (phone) size: </span><?= $fetch_product['size']; ?></div>
               <div class="info"><span>Battery: </span><?= $fetch_product['battery']; ?></div>
               <div class="info"><span>Color: </span><?= $fetch_product['color']; ?></div>
+              <?php
+              if ($fetch_product["qty"] <= 0) {
+              ?>
+                <div class="info" style="color: red; font-weight: bold; font-size: 2.5rem;"><span>Out of stocks</span></div>
+              <?php
+              } else {
+              ?>
+                <div class="info"><span>Remaining quantity: </span><?= $fetch_product['qty']; ?></div>
+              <?php
+              }
+              ?>
               <div class="flex">
                 <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
-                <input type="number" name="qty" class="qty input" min="1" max="<?php echo $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
+                <?php
+                if ($fetch_product["qty"] > 0) {
+                ?>
+                  <input type="number" name="qty" class="qty input" min="1" max="<?php echo $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
+                <?php
+                }
+                ?>
               </div>
               <div class="flex-btn">
                 <button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>" <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>>
