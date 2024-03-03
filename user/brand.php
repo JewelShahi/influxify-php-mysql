@@ -75,7 +75,7 @@ include '../components/wishlist_cart.php';
       <?php
         }
       } else {
-        echo '<p class="empty">No products found</p>';
+        echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">This brand doesn\'t have products yet!</p>';
       }
       ?>
 

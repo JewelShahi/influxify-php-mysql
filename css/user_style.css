@@ -494,6 +494,7 @@
 
 .products {
   background-color: var(--body);
+  min-height: 100vh;
 }
 
 .products .box-container {

@@ -551,11 +551,16 @@
 }
 
 .show-products .box-container .box .details {
-  font-size: 1.5rem;
+  font-size: 1.7rem !important;
+  padding-right: 0.5rem;
   color: var(--light-color);
   line-height: 2;
   height: 200px;
   overflow-y: auto;
+}
+
+.show-products .box-container .box .details::-webkit-scrollbar{
+  width: 8px !important;
 }
 
 .show-products .box-container .box .flex-btn {

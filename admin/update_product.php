@@ -40,9 +40,17 @@ if (isset($_POST['update'])) {
 
   $storage = $_POST['storage'];
   $storage = filter_var($storage, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  // Remove space between number and alphabetic part
+  $storage = preg_replace('/\s+/', '', $storage);
+  // Convert alphabetic part to uppercase
+  $storage = strtoupper($storage);
 
   $ram = $_POST['ram'];
   $ram = filter_var($ram, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  // Remove space between number and alphabetic part
+  $ram = preg_replace('/\s+/', '', $ram);
+  // Convert alphabetic part to uppercase
+  $ram = strtoupper($ram);
 
   $camera_count = $_POST['camera_count'];
   $camera_count = filter_var($camera_count, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -52,6 +60,12 @@ if (isset($_POST['update'])) {
 
   $size = $_POST['size'];
   $size = filter_var($size, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  // check the size if it has space between the number and alphabets
+  // and the alphabets lowercase
+  preg_match('/^(\d+)(\D+)/', $size, $size_matches);
+  $size_numeric_part = $size_matches[1];
+  $size_alphabetic_part = strtolower($size_matches[2]);
+  $size = $size_numeric_part . ' ' . $size_alphabetic_part;
 
   $battery = $_POST['battery'];
   $battery = filter_var($battery, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -63,7 +77,7 @@ if (isset($_POST['update'])) {
   if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $released)) {
     $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
     $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
-    
+
     $message[] = 'Product updated successfully!';
   } else {
     $message[] = 'Released date is not in the correct format (YYYY-MM-DD)!';
@@ -163,7 +177,6 @@ if (isset($_POST['update'])) {
       }
     }
   }
-
 }
 
 ?>
@@ -252,7 +265,7 @@ if (isset($_POST['update'])) {
 
             <span>Update released date</span>
             <input type="text" name="released" placeholder="Released date" class="box" value="<?= $fetch_products['released']; ?>">
-            
+
             <span>Update quantity</span>
             <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" value="<?= $fetch_products['qty']; ?>" required>
 
