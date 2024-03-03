@@ -88,7 +88,7 @@ if (isset($_GET['delete'])) {
                 <p> User ID :  <span><?= $fetch_accounts['id']; ?></span> </p>
                 <p> Name :  <span><?= $fetch_accounts['name']; ?></span> </p>
                 <p> E-mail :  <span><?= $fetch_accounts['email']; ?></span> </p>
-                <p> Registry date :  <span><?= $fetch_accounts['reg_date']; ?></span></p>
+                <p> Registry date :  <span><?= date('d/m/Y', strtotime($fetch_accounts['reg_date'])); ?></span></p>
                 <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account? User related information will also be deleted!')" class="delete-btn">Delete</a>
               </div>
             </div>

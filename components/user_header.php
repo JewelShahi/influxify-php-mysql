@@ -84,7 +84,7 @@ if (isset($message)) {
         <?php
         } else {
         ?>
-          <p>Please Log In or Register first!</p>
+          <p>Please Log In or Register!</p>
           <div class="flex-btn">
             <a href="user_login.php" class="option-btn">Log In</a>
             <a href="user_register.php" class="option-btn">Register</a>
