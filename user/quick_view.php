@@ -65,7 +65,7 @@ include '../components/wishlist_cart.php';
             <div class="content">
               <div class="details"><?= $fetch_product['details']; ?></div>
               <div class="info"><span>Brand: </span><?= $fetch_product['brand']; ?></div>
-              <div class="info"><span>Release date: </span><?= $fetch_product['released']; ?></div>
+              <div class="info"><span>Release date: </span><?= date('d/m/Y', strtotime($fetch_product['released'])); ?></div>
               <div class="info"><span>CPU: </span><?= $fetch_product['cpu']; ?></div>
               <div class="info"><span>Storage: </span><?= $fetch_product['storage']; ?></div>
               <div class="info"><span>RAM: </span><?= $fetch_product['ram']; ?></div>
