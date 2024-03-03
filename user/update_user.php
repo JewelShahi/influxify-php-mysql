@@ -119,7 +119,7 @@ if (isset($_POST['update_avatar'])) {
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
 
-        <input title="Registry date" type="date" maxlength="100" class="box" value="<?= $fetch_profile["reg_date"]; ?>" readonly>
+        <input title="Registry date" type="text" maxlength="100" class="box" value="<?= date('d/m/Y', strtotime($fetch_profile['reg_date'])); ?>" readonly>
 
         <button type="submit" class="btn submit-btn" name="update_password">
           <i class="fas fa-save"></i> Save Changes
