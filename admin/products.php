@@ -79,24 +79,26 @@ if (isset($_POST['add_product'])) {
 
   try {
 
+    // Check for release date format
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $released)) {
+      throw new Exception('Released date is not in the correct format (YYYY-MM-DD)!');
+    }
+
+    // Image size condition
+    if ($image_size_01 > 2000000 or $image_size_02 > 2000000 or $image_size_03 > 2000000) {
+      throw new Exception('Image size is too large!');
+    }
+
     // Inserting the data
     $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_01, $image_02, $image_03]);
 
-    if ($insert_products) {
+    // Moving images to the folder - uploaded_img/products
+    move_uploaded_file($image_tmp_name_01, $image_folder_01);
+    move_uploaded_file($image_tmp_name_02, $image_folder_02);
+    move_uploaded_file($image_tmp_name_03, $image_folder_03);
 
-      // Image size condition
-      if ($image_size_01 > 2000000 or $image_size_02 > 2000000 or $image_size_03 > 2000000) {
-        throw new Exception('Image size is too large!');
-      }
-
-      // Moving to the folder - uploaded_img/products
-      move_uploaded_file($image_tmp_name_01, $image_folder_01);
-      move_uploaded_file($image_tmp_name_02, $image_folder_02);
-      move_uploaded_file($image_tmp_name_03, $image_folder_03);
-
-      $message[] = 'New product added successfully!';
-    }
+    $message[] = 'New product added successfully!';
   } catch (PDOException $e) {
     if ($e->errorInfo[1] == 1062) {
       $message[] = 'Product with ' . $name . ' already exists!';
@@ -212,7 +214,7 @@ if (isset($_GET['delete'])) {
 
           <div class="inputBox">
             <span>Released date <span style="color: red;">*</span></span>
-            <input type="text" name="released" placeholder="Released date (00/00/0000)" class="box">
+            <input type="text" name="released" placeholder="Released date (YYYY-MM-DD)" class="box" required>
           </div>
 
           <div class="inputBox">
@@ -264,19 +266,14 @@ if (isset($_GET['delete'])) {
             <span>Product price <span style="color: red;">*</span></span>
             <input type="number" name="price" min="0.00" step="0.01" class="box" required placeholder="Product price" onkeypress="if(this.value.length == 8) return false;">
           </div>
-
-          <!-- <div class="inputBox">
-            <span>Image-1 <span style="color: red;">*</span></span>
-            <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-          </div> -->
-
-
         </div>
+
         <div class="file-buttons">
+
           <div class="inputBox">
             <span>Image-1 <span style="color: red;">*</span></span>
             <div class="custom-file-upload">
-              <label for="image_01" class="btn">Choose Image</label>
+              <label for="image_01" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
               <input type="file" id="image_01" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
               <span id="filename_01" class="chosen-file-name"></span>
             </div>
@@ -285,7 +282,7 @@ if (isset($_GET['delete'])) {
           <div class="inputBox">
             <span>Image-2 <span style="color: red;">*</span></span>
             <div class="custom-file-upload">
-              <label for="image_02" class="btn">Choose Image</label>
+              <label for="image_02" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
               <input type="file" id="image_02" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
               <span id="filename_02" class="chosen-file-name"></span>
             </div>
@@ -294,14 +291,16 @@ if (isset($_GET['delete'])) {
           <div class="inputBox">
             <span>Image-3 <span style="color: red;">*</span></span>
             <div class="custom-file-upload">
-              <label for="image_03" class="btn">Choose Image</label>
+              <label for="image_03" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
               <input type="file" id="image_03" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
               <span id="filename_03" class="chosen-file-name"></span>
             </div>
           </div>
 
         </div>
-        <input type="submit" value="Add product" class="btn" name="add_product">
+        <button type="submit" class="btn" name="add_product">
+          <i class="fa-regular fa-square-plus"></i> Add product
+        </button>
       </form>
     </section>
 

@@ -141,10 +141,11 @@ body {
 
 .custom-file-upload .btn {
   border-radius: 5px !important;
+  background-color: rgb(60, 150, 40) !important;
 }
 
 .custom-file-upload .btn:hover {
-  background-color: rgb(24, 118, 88);
+  background-color: rgb(24, 118, 88) !important;
 }
 /**/
 
@@ -453,7 +454,7 @@ span {
   background-color: var(--white);
   box-shadow: 0 0 10px var(--black);
   text-align: center;
-  color: var(--red);
+  color: var(--purple);
   border-radius: var(--border-radius);
   font-size: 2rem;
 }

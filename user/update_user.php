@@ -101,8 +101,8 @@ if (isset($_POST['update_avatar'])) {
 
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
 
-        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
-        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
+        <input title="Username" type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
+        <input title="E-mail" type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
 
         <div class="password-container">
           <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
@@ -118,6 +118,8 @@ if (isset($_POST['update_avatar'])) {
           <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
+
+        <input title="Registry date" type="date" maxlength="100" class="box" value="<?= $fetch_profile["reg_date"]; ?>" readonly>
 
         <button type="submit" class="btn submit-btn" name="update_password">
           <i class="fas fa-save"></i> Save Changes

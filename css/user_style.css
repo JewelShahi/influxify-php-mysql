@@ -72,6 +72,10 @@
   overflow-y: auto;
 }
 
+.home-bg .home .slide .content p::-webkit-scrollbar {
+  width: 8px !important;
+}
+
 .home-bg .home .slide .content h3 {
   margin-top: 1rem;
   font-size: 4rem;
@@ -263,6 +267,11 @@
   left: 1rem;
 }
 
+.quick-view {
+  background-color: var(--body);
+  min-height: 100vh;
+}
+
 .quick-view form {
   padding: 2rem;
   border-radius: 0.5rem;
@@ -302,7 +311,8 @@
   width: 10rem;
   object-fit: contain;
   padding: 0.5rem;
-  border: var(--border);
+  border-radius: var(--border-radius);
+  border: 1px solid rgb(55, 96, 59);
   cursor: pointer;
   transition: 0.2s linear;
 }
@@ -319,12 +329,25 @@
 }
 
 .quick-view form .row .content {
+  padding: 0.5rem;
   flex: 1 1 40rem;
 }
 
-.quick-view form .row .content .name {
+.quick-view form .row .content .info {
   font-size: 2rem;
   color: var(--black);
+}
+
+.quick-view form .row .content .details {
+  font-size: 2rem !important;
+  padding-right: 0.5rem;
+  margin: 1rem 0;
+  height: 170px;
+  overflow-y: auto;
+}
+
+.quick-view form .row .content .details::-webkit-scrollbar{
+  width: 8px !important;
 }
 
 .quick-view form .row .flex {
@@ -348,6 +371,10 @@
   font-weight: 900;
   font-size: 3rem;
   color: rgb(7, 101, 6);
+}
+
+.quick-view form .row .content > * {
+  padding: 0.5rem 0;
 }
 
 .quick-view form .row .content .details {
@@ -784,7 +811,11 @@
 .avatar-form {
   width: 50%;
   max-height: 95vh;
-  background: linear-gradient(-150deg, rgba(64, 171, 70, 0.5), rgba(60, 132, 168, 0.6));
+  background: linear-gradient(
+    -150deg,
+    rgba(64, 171, 70, 0.5),
+    rgba(60, 132, 168, 0.6)
+  );
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   overflow-y: auto;
 }
@@ -1169,7 +1200,7 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 100%;
-  background-color: rgba(52, 117, 65, 0.5);
+  background-color: rgba(4, 94, 22, 0.5);
   padding: 5rem 2rem;
   text-align: center;
 }
@@ -1225,7 +1256,7 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 100%;
-  background-color: rgba(52, 117, 65, 0.5);
+  background-color: rgba(4, 94, 22, 0.5);
   padding: 5rem 2rem;
   text-align: center;
 }

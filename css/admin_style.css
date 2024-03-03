@@ -698,8 +698,6 @@
   border-radius: var(--border-radius);
 }
 
-/* styles.css */
-
 .accounts {
   background: var(--body);
   min-height: 100%;
@@ -708,25 +706,38 @@
 
 .accounts .box-container {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 10px;
-  transition: 0.5s ease;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(33.33% - 10px), 1fr)); /* Up to three divs per row with a gap of 10px */
+  grid-gap: 10px;
 }
 
-.accounts .box-container > * {
-  min-width: 250px;
+.accounts .box-container > div {
+  width: 100%;
+  margin: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .accounts .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 10px), 1fr)); /* Up to two divs per row with a gap of 10px */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .accounts .box-container {
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% - 10px), 1fr)); /* One div per row with a gap of 10px */
+  }
 }
 
 .accounts .box-container .user-card {
   position: relative;
-  width: 30%;
-  height: 250px;
+  height: 380px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #0fae52;
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center;
   transition: 0.5s ease;
 }
 
@@ -742,8 +753,15 @@
   }
 }
 
-.accounts .box-container .user-card .user-info > * {
-  width: 100%;
+.accounts .box-container .user-card .user-info{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+}
+
+.accounts .box-container .user-card .user-info > *{
+  width: 80%;
 }
 
 #add-new-admin {
@@ -758,7 +776,7 @@
 .accounts .box-container .user-info p {
   font-size: 2rem;
   color: var(--light-color);
-  margin: 1rem 0;
+  margin: 0.7rem 0;
 }
 
 .accounts .box-container .user-info p span {

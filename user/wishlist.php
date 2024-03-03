@@ -38,7 +38,7 @@ if (isset($_GET['delete_all'])) {
 	<link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 	<!-- font awesome cdn link  -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-	
+
 	<!-- custom css file link  -->
 	<link rel="stylesheet" href="../css/global.css">
 	<link rel="stylesheet" href="../css/user_style.css">
@@ -94,7 +94,7 @@ if (isset($_GET['delete_all'])) {
 				<?php
 					}
 				} else {
-					echo '<p class="empty">Your wishlist is empty.</p>';
+					echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Your wishlist is empty.</p>';
 				}
 				?>
 			</div>

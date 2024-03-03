@@ -97,8 +97,11 @@ if (isset($_GET['delete'])) {
             <div class="user-card">
               <div class="after"></div>
               <div class="user-info">
+                <div style="margin-bottom: 0.7rem; border: 3px solid #3b8a59; display: inline-block; width: 80px; height: 80px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $fetch_accounts['avatar'] ?>'); background-size: cover; box-shadow: 0 0 10px 5px #2ad45b; "></div>
                 <p> Admin ID : <span><?= $fetch_accounts['id']; ?></span> </p>
                 <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
+                <p> Registry date : <span><?= $fetch_accounts['reg_date']; ?></span></p>
+                
                 <!-- Buttons for updating and deleting admin accounts -->
                 <div class="flex-btn">
                   <?php
@@ -116,7 +119,6 @@ if (isset($_GET['delete'])) {
                   }
                   ?>
                 </div>
-                <!-- <div class="before"></div> -->
               </div>
             </div>
         <?php

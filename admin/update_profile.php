@@ -15,7 +15,7 @@ if (isset($_SESSION['admin_id'])) {
 };
 
 // Update admin
-if (isset($_POST['submit'])) {
+if (isset($_POST['update_password'])) {
 
   $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
   $prev_pass = $_POST['prev_pass'];
@@ -31,22 +31,22 @@ if (isset($_POST['submit'])) {
 
   // Check if the new password meets the criteria
   if (strlen($new_pass) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/', $new_pass)) {
-    $message[] = 'Password must be at least 8 characters and contain at least one uppercase letter, lowercase letter and a digit!';
+    $message[] = "Password must be at least 8 characters and contain at least one uppercase letter, lowercase letter and a digit!";
   } elseif ($hash_old_pass == $empty_pass) {
-    $message[] = 'Please enter old password!';
+    $message[] = "Please enter old password!";
   } elseif ($hash_old_pass != $prev_pass) {
-    $message[] = 'Old password not matched!';
+    $message[] = "Old password not matched!";
   } elseif ($hash_old_pass == $hash_new_pass) {
-    $message[] = 'New password must be different from the old password!';
+    $message[] = "New password must be different from the old password!";
   } elseif ($hash_new_pass != $hash_confirm_pass) {
-    $message[] = 'Confirm password not matched!';
+    $message[] = "Confirm password not matched!";
   } else {
     if ($hash_new_pass != $empty_pass) {
       $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ? AND isAdmin = 1");
       $update_admin_pass->execute([$hash_confirm_pass, $admin_id]);
-      $message[] = 'Password updated successfully!';
+      $message[] = "Password updated successfully!";
     } else {
-      $message[] = 'Please enter a new password!';
+      $message[] = "Please enter a new password!";
     }
   }
 }
@@ -101,8 +101,9 @@ if (isset($_POST['update_avatar'])) {
         <h3>Update Profile</h3>
 
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
-        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
+        
+        <input title="Username" type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
+        <input title="E-mail" type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
 
         <div class="password-container">
           <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
@@ -115,9 +116,11 @@ if (isset($_POST['update_avatar'])) {
         </div>
 
         <div class="password-container">
-          <input type="password" name="cpass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <input type="password" name="confirm_pass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
+
+        <input title="Registry date" type="date" maxlength="100" class="box" value="<?= $fetch_profile["reg_date"]; ?>" readonly>
 
         <button type="submit" class="btn submit-btn" name="update_password">
           <i class="fas fa-save"></i> Save Changes

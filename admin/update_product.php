@@ -59,8 +59,15 @@ if (isset($_POST['update'])) {
   $color = $_POST['color'];
   $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
-  $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
+
+  if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $released)) {
+    $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
+    $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
+    
+    $message[] = 'Product updated successfully!';
+  } else {
+    $message[] = 'Released date is not in the correct format (YYYY-MM-DD)!';
+  }
 
   $baseImagePath = '../uploaded_img/products/';
 
@@ -157,8 +164,6 @@ if (isset($_POST['update'])) {
     }
   }
 
-  // header('Location: update_product.php?update=' . $pid);
-  $message[] = 'Product updated successfully!';
 }
 
 ?>
@@ -186,7 +191,6 @@ if (isset($_POST['update'])) {
 
   <!-- Navbar -->
   <?php include '../components/admin_header.php'; ?>
-
 
   <!-- Checks if the user is in the db -->
   <?php
@@ -247,8 +251,8 @@ if (isset($_POST['update'])) {
             </select>
 
             <span>Update released date</span>
-            <input type="text" name="released" placeholder="Released date (00/00/0000)" pattern="^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$" class="box" value="<?= $fetch_products['released']; ?>">
-
+            <input type="text" name="released" placeholder="Released date" class="box" value="<?= $fetch_products['released']; ?>">
+            
             <span>Update quantity</span>
             <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" value="<?= $fetch_products['qty']; ?>" required>
 
@@ -267,7 +271,7 @@ if (isset($_POST['update'])) {
             <span>Camera resolution</span>
             <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" value="<?= $fetch_products['camera_resolution']; ?>" required>
 
-            <span>Phone Size</span>
+            <span>Phone size</span>
             <input type="text" name="size" placeholder="Phone size" class="box" value="<?= $fetch_products['size']; ?>" required>
 
             <span>Battery</span>
@@ -276,14 +280,36 @@ if (isset($_POST['update'])) {
             <span>Phone color</span>
             <input type="text" name="color" placeholder="Color" class="box" value="<?= $fetch_products['color']; ?>" required>
 
-            <span>Update Image-1</span>
-            <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
+            <div class="file-buttons">
 
-            <span>Update Image-2</span>
-            <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
+              <div class="inputBox">
+                <span>Image-1</span>
+                <div class="custom-file-upload">
+                  <label for="image_01" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
+                  <input type="file" id="image_01" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input">
+                  <span id="filename_01" class="chosen-file-name"></span>
+                </div>
+              </div>
 
-            <span>Update Image-3</span>
-            <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
+              <div class="inputBox">
+                <span>Image-2</span>
+                <div class="custom-file-upload">
+                  <label for="image_02" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
+                  <input type="file" id="image_02" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input">
+                  <span id="filename_02" class="chosen-file-name"></span>
+                </div>
+              </div>
+
+              <div class="inputBox">
+                <span>Image-3</span>
+                <div class="custom-file-upload">
+                  <label for="image_03" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
+                  <input type="file" id="image_03" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input">
+                  <span id="filename_03" class="chosen-file-name"></span>
+                </div>
+              </div>
+
+            </div>
 
             <div class="flex-btn">
               <input type="submit" name="update" class="btn" value="Update">
@@ -304,6 +330,9 @@ if (isset($_POST['update'])) {
 
   <!-- Admin script -->
   <script src="../js/admin_script.js"></script>
+
+  <!-- Custom file name show -->
+  <script src="../js/custom_choose_file.js"></script>
 
   <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>

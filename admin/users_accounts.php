@@ -82,12 +82,13 @@ if (isset($_GET['delete'])) {
           while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <div class="user-card">
-              <!-- <div class="before"></div> -->
               <div class="after"></div>
               <div class="user-info">
-                <p> User ID : <span><?= $fetch_accounts['id']; ?></span> </p>
-                <p> Name : <span><?= $fetch_accounts['name']; ?></span> </p>
-                <p> E-mail : <span><?= $fetch_accounts['email']; ?></span> </p>
+                <div style="margin-bottom: 0.7rem; border: 3px solid #3b8a59; display: inline-block; width: 80px; height: 80px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $fetch_accounts['avatar'] ?>'); background-size: cover; box-shadow: 0 0 10px 5px #2ad45b; "></div>
+                <p> User ID :  <span><?= $fetch_accounts['id']; ?></span> </p>
+                <p> Name :  <span><?= $fetch_accounts['name']; ?></span> </p>
+                <p> E-mail :  <span><?= $fetch_accounts['email']; ?></span> </p>
+                <p> Registry date :  <span><?= $fetch_accounts['reg_date']; ?></span></p>
                 <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account? User related information will also be deleted!')" class="delete-btn">Delete</a>
               </div>
             </div>

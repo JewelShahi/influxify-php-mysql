@@ -24,7 +24,7 @@ include '../components/wishlist_cart.php';
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  
+
   <!-- custom css file link  -->
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/user_style.css">
@@ -36,7 +36,6 @@ include '../components/wishlist_cart.php';
 
   <section class="quick-view">
 
-    <h1 class="heading">Quick view</h1>
 
     <?php
     $pid = $_GET['pid'];
@@ -45,6 +44,8 @@ include '../components/wishlist_cart.php';
     if ($select_products->rowCount() > 0) {
       while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
     ?>
+        <h1 class="heading"><?= $fetch_product['name']; ?></h1>
+
         <form action="" method="post" class="box">
           <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
           <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
@@ -62,19 +63,18 @@ include '../components/wishlist_cart.php';
               </div>
             </div>
             <div class="content">
-              <div class="name">Name: <?= $fetch_product['name']; ?></div>
               <div class="details"><?= $fetch_product['details']; ?></div>
-              <div class="name">Brand: <?= $fetch_product['brand']; ?></div>
-              <div class="name">Release date: <?= $fetch_product['released']; ?></div>
-              <div class="name">Quantity: <?= $fetch_product['qty']; ?></div>
-              <div class="name">CPU: <?= $fetch_product['cpu']; ?></div>
-              <div class="name">Storage: <?= $fetch_product['storage']; ?></div>
-              <div class="name">RAM: <?= $fetch_product['ram']; ?></div>
-              <div class="name">Camera count: <?= $fetch_product['camera_count']; ?></div>
-              <div class="name">Camera resolution: <?= $fetch_product['camera_resolution']; ?></div>
-              <div class="name">Size(display): <?= $fetch_product['size']; ?></div>
-              <div class="name">Battery: <?= $fetch_product['battery']; ?></div>
-              <div class="name">Color: <?= $fetch_product['color']; ?></div>
+              <div class="info"><span>Brand: </span><?= $fetch_product['brand']; ?></div>
+              <div class="info"><span>Release date: </span><?= $fetch_product['released']; ?></div>
+              <div class="info"><span>Quantity: </span><?= $fetch_product['qty']; ?></div>
+              <div class="info"><span>CPU: </span><?= $fetch_product['cpu']; ?></div>
+              <div class="info"><span>Storage: </span><?= $fetch_product['storage']; ?></div>
+              <div class="info"><span>RAM: </span><?= $fetch_product['ram']; ?></div>
+              <div class="info"><span>Camera count: </span><?= $fetch_product['camera_count']; ?></div>
+              <div class="info"><span>Camera resolution: </span><?= $fetch_product['camera_resolution']; ?></div>
+              <div class="info"><span>Display (phone) size: </span><?= $fetch_product['size']; ?></div>
+              <div class="info"><span>Battery: </span><?= $fetch_product['battery']; ?></div>
+              <div class="info"><span>Color: </span><?= $fetch_product['color']; ?></div>
               <div class="flex">
                 <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
                 <input type="number" name="qty" class="qty input" min="1" max="<?php echo $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
@@ -93,7 +93,7 @@ include '../components/wishlist_cart.php';
     <?php
       }
     } else {
-      echo '<p class="empty">No products added yet!</p>';
+      echo '<p class="empty">Invalid product!</p>';
     }
     ?>
 
