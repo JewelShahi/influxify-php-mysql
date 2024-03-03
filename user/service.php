@@ -139,7 +139,7 @@ if (isset($_GET['delete'])) {
                   <input type="hidden" name="service_number" value="<?= $fetch_services['number']; ?>">
 
                   <p>Is resolved : <span><?= $fetch_services['is_resolved'] ? 'Yes' : 'No'; ?></span></p>
-                  <p>Placed on : <span><?= $fetch_services['placed_on']; ?></span></p>
+                  <p>Placed on : <span><?= date('d/m/Y H:i:s', strtotime($fetch_services['placed_on'])); ?></span></p>
                   <p>Name : <span><?= $fetch_services['name']; ?></span></p>
                   <p>E-mail : <span><?= $fetch_services['email']; ?></span></p>
                   <p>Phone number : <span><?= $fetch_services['number']; ?></span></p>

@@ -142,7 +142,7 @@ if (isset($_GET['delete'])) {
             <div class="box">
               <div class="blur">
                 <p> Order ID : <span><?= $fetch_orders['id']; ?></span> </p>
-                <p> Placed on : <span><?= $fetch_orders['placed_on']; ?></span> </p>
+                <p> Placed on : <span><?= date('d/m/Y H:i:s', strtotime($fetch_orders['placed_on'])); ?></span> </p>
                 <p> User ID : <span><?= $fetch_orders['user_id']; ?></span> </p>
                 <p> Name : <span><?= $fetch_orders['name']; ?></span> </p>
                 <p> E-mail : <span><?= $fetch_orders['email']; ?></span> </p>

@@ -86,7 +86,7 @@ if (isset($_SESSION['user_id'])) {
               <div class="box">
                 <div>
                   <p>Order ID : <span><?= $fetch_orders['id']; ?></span></p>
-                  <p>Placed on : <span><?= $fetch_orders['placed_on']; ?></span></p>
+                  <p>Placed on : <span><?= date('d/m/Y H:i:s', strtotime($fetch_orders['placed_on'])); ?></span></p>
                   <p>Name : <span><?= $fetch_orders['name']; ?></span></p>
                   <p>E-mail : <span><?= $fetch_orders['email']; ?></span></p>
                   <p>Phone number : <span><?= $fetch_orders['number']; ?></span></p>

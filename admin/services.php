@@ -96,7 +96,7 @@ if (isset($_GET['delete'])) {
               <div class="blur">
                 <input type="hidden" name="service_id" value="<?= $fetch_service['id']; ?>">
                 <p> Service ID : <span><?= $fetch_service['id']; ?></span></p>
-                <p> Placed on : <span><?= $fetch_service['placed_on']; ?></span></p>
+                <p> Placed on : <span><?= date('d/m/Y H:i:s', strtotime($fetch_service['placed_on'])); ?></span></p>
                 <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
                 <p> Name : <span><?= $fetch_service['name']; ?></span></p>
                 <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
