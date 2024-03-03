@@ -60,19 +60,28 @@ if (isset($_POST['update'])) {
 
   $size = $_POST['size'];
   $size = filter_var($size, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  // check the size if it has space between the number and alphabets
-  // and the alphabets lowercase
-  preg_match('/^(\d+)(\D+)/', $size, $size_matches);
-  $size_numeric_part = $size_matches[1];
-  $size_alphabetic_part = strtolower($size_matches[2]);
-  $size = $size_numeric_part . ' ' . $size_alphabetic_part;
+  // Check if there's a space between the number and alphabets and lowercase the alphabets
+  if (preg_match('/^(\d+(\.\d+)?)(\s*)(\D+)/', $size, $size_matches)) {
+    $size_numeric_part = $size_matches[1];
+    $size_whitespace = $size_matches[3]; // Matched whitespace
+    $size_alphabetic_part = strtolower($size_matches[4]);
+
+    // Ensure there's exactly one space between the numeric and alphabetic parts
+    if ($size_whitespace === '') {
+      // If there's no whitespace, add one space
+      $size = $size_numeric_part . ' ' . $size_alphabetic_part;
+    } else {
+      // If there's whitespace, ensure it's just one space
+      $size = $size_numeric_part . ' ' . preg_replace('/\s+/', '', $size_whitespace) . $size_alphabetic_part;
+    }
+  }
 
   $battery = $_POST['battery'];
   $battery = filter_var($battery, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $color = $_POST['color'];
   $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+  $color = strtolower($color);
 
   if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $released)) {
     $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
