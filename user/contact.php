@@ -8,90 +8,68 @@ if (isset($_SESSION['user_id'])) {
   $user_id = '';
 };
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us</title>
+  <title>Contact Info</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
-  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <!-- custom css file link  -->
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/user_style.css">
-
-  <!-- Fix this css -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    p {
-      margin-bottom: 15px;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .contact-info i {
-      margin-right: 10px;
-    }
-  </style>
 </head>
 
-<body>
+<body style="height: auto;">
 
   <?php include '../components/user_header.php'; ?>
 
-  <div class="container">
-    <h1>Contact Us</h1>
-
+  <div class="contact">
+    <h1 class="contact-header">Contact Information</h1>
     <div class="contact-info">
-      <p><i class="fas fa-map-marker-alt"></i> Our Shop Location: 123 Main Street, Cityville</p>
-      <p><i class="fas fa-phone"></i> Phone: +1 555-1234</p>
-      <p><i class="fas fa-envelope"></i> Email: info@example.com</p>
+      <div>
+        <span>Owner :</span>
+        <p>Jewel Shahi</p>
+      </div>
+      <div>
+        <span>Email :</span>
+        <a href="mailto:joeimportant1020@gmail.com">joeimportant1020@gmail.com</a>
+      </div>
+      <div>
+        <span>Phone :</span>
+        <a href="tel:+123456789">+123456789</a>
+      </div>
+      <div>
+        <span>Address :</span>
+        <p>123 Street Name<br>City, Country<br>Postal Code</p>
+      </div>
+      <div>
+        <span>Follow us on :</span>
+        <div class="medias">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <span>Opening Hours :</span>
+        <p>
+          Monday-Friday: 9am - 6pm<br>
+          Saturday: 10am - 4pm<br>
+          Sunday: Closed
+        </p>
+      </div>
     </div>
-
-    <h2>Owner Details</h2>
-    <p><strong>Owner Name:</strong> John Doe</p>
-    <p><strong>Email:</strong> john.doe@example.com</p>
-    <p><strong>Phone:</strong> +1 555-5678</p>
+    <iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.568348182773!2d23.35919807560296!3d42.670501815432935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa8587e5b96129%3A0xbbf46b29a556f55d!2z0KHQn9CT0JUg4oCe0JTQttC-0L0g0JDRgtCw0L3QsNGB0L7QsuKAnA!5e0!3m2!1sbg!2sbg!4v1709937746389!5m2!1sbg!2sbg" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </div>
 
-  <!-- Footer -->
   <?php include '../components/footer.php'; ?>
-
-  <!-- User script -->
   <script src="../js/user_script.js"></script>
-
-  <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>
+
 </body>
 
 </html>

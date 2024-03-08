@@ -177,6 +177,9 @@ if (isset($_POST['service_checkout_data'])) {
   <!-- Footer -->
   <?php include '../components/footer.php'; ?>
 
+  <!-- User script -->
+  <script src="../js/user_script.js"></script>
+
   <!-- Toggle address fields when delivery option is chnaged -->
   <script>
     const toggleAddressFields = () => {

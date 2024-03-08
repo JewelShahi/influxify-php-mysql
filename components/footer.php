@@ -20,7 +20,7 @@
     <div class="box">
       <h3>Contact us</h3>
       <a href="#"><i class="fas fa-phone"></i> +359 877564341</a>
-      <a href="mailto:joeimportant1020@gmail.com"><i class="fas fa-envelope"></i> joeimportant1020@gmail.com</a>
+      <a href="mailto:joeimportant1020@gmail.com" style="word-break: break-all;"><i class="fas fa-envelope"></i> joeimportant1020@gmail.com</a>
       <a href="#"><i class="fas fa-map-marker-alt"></i> Sofia, Bulgaria - 1000</a>
     </div>
   </section>

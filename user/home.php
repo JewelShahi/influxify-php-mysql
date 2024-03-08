@@ -85,7 +85,7 @@ include '../components/wishlist_cart.php';
 					</div>
 					<div class="missions-and-goals">
 						<h2>Our Mission</h2>
-						<ul class="bullet">
+						<ul class="bullet-point">
 							<li>
 								Our mission at Influxify is to innovate the mobile industry by providing advanced technology and unparalleled service.
 							</li>
@@ -94,7 +94,7 @@ include '../components/wishlist_cart.php';
 							</li>
 						</ul>
 						<h2>Our Goal</h2>
-						<ul class="bullet">
+						<ul class="bullet-point">
 							<li>
 								At Influxify, our goal is to be at the forefront of mobile innovation, continuously surpassing industry standards and customer expectations.
 							</li>
@@ -130,7 +130,7 @@ include '../components/wishlist_cart.php';
 					</div>
 					<div class="services-and-offers">
 						<h2>Our Services</h2>
-						<ul class="bullet">
+						<ul class="bullet-point">
 							<li>
 								Screen repair: Our technicians can quickly and efficiently replace cracked or damaged screens on your device.
 							</li>
@@ -142,7 +142,7 @@ include '../components/wishlist_cart.php';
 							</li>
 						</ul>
 						<h2>Our Offers</h2>
-						<ul class="bullet">
+						<ul class="bullet-point">
 							<li>
 								Free screen protector: Get a complimentary screen protector with any screen repair service.
 							</li>

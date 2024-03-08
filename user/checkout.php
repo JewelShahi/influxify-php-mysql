@@ -208,6 +208,9 @@ if (isset($_POST['order'])) {
   <!-- Footer -->
   <?php include '../components/footer.php'; ?>
 
+  <!-- User script -->
+	<script src="../js/user_script.js"></script>
+
   <!-- Update the total price when user wants delivery -->
   <script>
     const updateTotalPrice = (deliveryOption) => {
