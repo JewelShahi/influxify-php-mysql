@@ -112,6 +112,260 @@
   color: white;
 }
 
+.about-us-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100% !important;
+  background: url(../images/about-us.png) center/cover no-repeat;
+  background-size: cover;
+  padding: 0;
+}
+
+.about-us-section .header-blur,
+.about-us-section .about-us {
+  width: 100%;
+  backdrop-filter: blur(10px);
+  background-color: rgba(8, 14, 7, 0.5);
+}
+
+.about-us-section .header-blur {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.about-us-section .header-blur .heading {
+  text-align: center;
+  font-size: 5rem;
+  color: var(--white);
+  margin: 0;
+}
+
+.about-us {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100% !important;
+  min-height: 95vh;
+  overflow: hidden;
+}
+
+.about-us .info {
+  flex: 1;
+  padding: 10px;
+  color: var(--white);
+  width: 50%;
+  height: 100% !important;
+}
+
+.about-us .info .inner-info {
+  background-color: rgba(8, 63, 24, 0.4);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.about-us .info .inner-info .missions-and-goals {
+  padding: 10px;
+  background: rgb(3, 47, 12);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgb(15, 94, 8);
+}
+
+.about-us .info .inner-info h2 {
+  font-size: 3rem;
+  margin-top: 30px 0 8px 0;
+}
+
+.about-us .info .inner-info .bullet {
+  margin-left: 20px;
+}
+
+.about-us .info .inner-info p,
+.about-us .info .inner-info li {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.about-us .images {
+  width: 50%;
+  height: 100vh;
+  border-radius: 20px 0 0 20px;
+  background: url(../images/about-img.png) center/cover;
+}
+
+@media screen and (max-width: 840px) {
+  .about-us-section .header-blur .heading {
+    font-size: 4rem;
+  }
+
+  .about-us {
+    flex-direction: column-reverse;
+  }
+
+  .about-us .info .inner-info p,
+  .about-us .info .inner-info li,
+  .about-us .info .inner-info h2 {
+    text-align: center;
+  }
+
+  .about-us .info .inner-info p,
+  .about-us .info .inner-info li {
+    font-size: 1.8rem;
+  }
+
+  .about-us .info .inner-info h2 {
+    font-size: 2.5rem;
+  }
+
+  .about-us .info,
+  .about-us .images {
+    width: 100%;
+    height: auto;
+  }
+
+  .about-us .images {
+    width: 95%;
+    height: 40vh;
+    margin: 10px;
+    border-radius: 20px;
+  }
+}
+
+.services-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100% !important;
+  background: url(../images/our-services.png) center/cover no-repeat;
+  background-size: cover;
+  padding: 0;
+  border-radius: 20px;
+}
+
+.services-section .header-blur,
+.services-section .services-info {
+  width: 100%;
+  backdrop-filter: blur(10px);
+  background-color: rgba(90, 209, 218, 0.3); /* Bluish background color */
+}
+
+.services-section .header-blur {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.services-section .header-blur .heading {
+  text-align: center;
+  font-size: 5rem;
+  color: #fff;
+  margin: 0;
+}
+
+.services-info {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100% !important;
+  min-height: 95vh;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+}
+
+.services-info .info {
+  flex: 1;
+  padding: 10px;
+  color: #fff;
+  width: 50%;
+  height: 100% !important;
+}
+
+.services-info .info .inner-info {
+  background-color: rgba(5, 59, 102, 0.7); 
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.services-info .info .inner-info .services-and-offers {
+  padding: 10px;
+  background: rgb(5, 59, 102);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgb(49, 122, 182);
+}
+
+.services-info .info .inner-info h2 {
+  font-size: 3rem;
+  margin-top: 30px 0 8px 0;
+}
+
+.services-info .info .inner-info .bullet {
+  margin-left: 20px;
+}
+
+.services-info .info .inner-info p,
+.services-info .info .inner-info li {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.services-info .images {
+  width: 50%;
+  height: 100vh;
+  border-radius: 0 20px 20px 0;
+  background: url(../images/our-service-img.png) center/cover;
+}
+
+@media screen and (max-width: 840px) {
+  .services-section .header-blur .heading {
+    font-size: 4rem;
+  }
+
+  .services-info {
+    flex-direction: column;
+  }
+
+  .services-info .info .inner-info p,
+  .services-info .info .inner-info li,
+  .services-info .info .inner-info h2 {
+    text-align: center;
+  }
+
+  .services-info .info .inner-info p,
+  .services-info .inner-info li {
+    font-size: 1.8rem;
+  }
+
+  .services-info .info .inner-info h2 {
+    font-size: 2.5rem;
+  }
+
+  .services-info .info,
+  .services-info .images {
+    width: 100%;
+    height: auto;
+  }
+
+  .services-info .images {
+    width: 95%;
+    height: 40vh;
+    margin: 10px;
+    border-radius: 20px;
+  }
+}
+
 .brand {
   background-color: var(--body);
 }
@@ -346,7 +600,7 @@
   overflow-y: auto;
 }
 
-.quick-view form .row .content .details::-webkit-scrollbar{
+.quick-view form .row .content .details::-webkit-scrollbar {
   width: 8px !important;
 }
 
@@ -1550,6 +1804,10 @@
 
   .home-bg .home .slide .content {
     height: 100%;
+  }
+
+  .home-bg .home .slide {
+    padding-bottom: 0.5rem;
   }
 
   .home-bg .home .slide .content p {

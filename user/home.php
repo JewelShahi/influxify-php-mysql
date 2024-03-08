@@ -25,7 +25,7 @@ include '../components/wishlist_cart.php';
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 	<!-- font awesome cdn link  -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-	
+
 	<!-- custom css file link -->
 	<link rel="stylesheet" href="../css/global.css">
 	<link rel="stylesheet" href="../css/user_style.css">
@@ -57,7 +57,7 @@ include '../components/wishlist_cart.php';
 							</div>
 							<div class="content">
 								<h3><?php echo $name; ?></h3>
-								<p style="padding: 0 5px;"><?php echo $details; ?></p>
+								<p style="padding: 0 5px; width: 90%;"><?php echo $details; ?></p>
 								<br>
 								<a href="shop.php" class="btn shop-now-btn"><span>Shop now <span><i class="fa-solid fa-arrow-right"></i></a>
 							</div>
@@ -70,6 +70,94 @@ include '../components/wishlist_cart.php';
 			</div>
 		</section>
 	</div>
+
+	<section class="about-us-section">
+		<div class="header-blur">
+			<h1 class="heading">About Us</h1>
+		</div>
+		<div class="about-us">
+			<div class="info">
+				<div class="inner-info">
+					<div>
+						<p>
+							Influxify is dedicated to revolutionizing the mobile industry with cutting-edge technology and exceptional service, empowering individuals and businesses with reliable, high-quality communication solutions.
+						</p>
+					</div>
+					<div class="missions-and-goals">
+						<h2>Our Mission</h2>
+						<ul class="bullet">
+							<li>
+								Our mission at Influxify is to innovate the mobile industry by providing advanced technology and unparalleled service.
+							</li>
+							<li>
+								This enables seamless communication experiences for individuals and businesses alike.
+							</li>
+						</ul>
+						<h2>Our Goal</h2>
+						<ul class="bullet">
+							<li>
+								At Influxify, our goal is to be at the forefront of mobile innovation, continuously surpassing industry standards and customer expectations.
+							</li>
+							<li>
+								We achieve this by delivering customized solutions to meet the diverse needs of our users.
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="images"></div>
+		</div>
+	</section>
+
+	<section class="services-section">
+		<div class="header-blur">
+			<h1 class="heading">Services We Offer</h1>
+		</div>
+		<div class="services-info">
+			<div class="images"></div>
+			<div class="info">
+				<div class="inner-info">
+					<div>
+						<p>
+							At Influxify, our skilled technicians swiftly repair phone issues, from screens to the inner workings, restoring your device's functionality.
+						</p>
+						<p>
+							Trust us for fast, reliable service using genuine parts and advanced techniques.
+						</p>
+						<p>
+							Whether minor or major, Influxify delivers professional care for your phone.
+						</p>
+					</div>
+					<div class="services-and-offers">
+						<h2>Our Services</h2>
+						<ul class="bullet">
+							<li>
+								Screen repair: Our technicians can quickly and efficiently replace cracked or damaged screens on your device.
+							</li>
+							<li>
+								Battery replacement: We offer battery replacement services to ensure your device stays powered throughout the day.
+							</li>
+							<li>
+								Software troubleshooting: If you're experiencing software issues, our experts can diagnose and resolve them promptly.
+							</li>
+						</ul>
+						<h2>Our Offers</h2>
+						<ul class="bullet">
+							<li>
+								Free screen protector: Get a complimentary screen protector with any screen repair service.
+							</li>
+							<li>
+								Discounted battery replacement: Enjoy discounted rates on battery replacement services for a limited time.
+							</li>
+							<li>
+								Software diagnosis: Receive a free software diagnosis with any repair service.
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<section class="brand">
 
@@ -178,7 +266,7 @@ include '../components/wishlist_cart.php';
 	<!-- Footer -->
 	<?php include '../components/footer.php'; ?>
 
-  <!-- User script -->
+	<!-- User script -->
 	<script src="../js/user_script.js"></script>
 
 	<!-- Scroll up button -->
