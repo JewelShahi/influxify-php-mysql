@@ -553,6 +553,10 @@
   object-fit: contain;
 }
 
+.quick-view form .row .image-container .main-image img:hover {
+  transform: scale(1.1);
+}
+
 .quick-view form .row .image-container .sub-image {
   display: flex;
   gap: 1.5rem;
@@ -1664,7 +1668,7 @@
 }
 
 .display-orders p span {
-  color: var(--red);
+  color: #267fa8;
 }
 
 .display-orders .grand-total,
@@ -1677,7 +1681,11 @@
 
 .display-orders .grand-total span,
 .display-orders .delivery-cost span {
-  color: var(--red);
+  color: #3a9a5a;
+}
+
+.checkout-orders {
+  background-color: var(--body);
 }
 
 .checkout-orders form {
@@ -1690,7 +1698,7 @@
 
 .checkout-orders form h3 {
   border-radius: 0.5rem;
-  background-color: var(--black);
+  background-color: #105c15;
   color: var(--white);
   padding: 1.5rem 1rem;
   text-align: center;
@@ -1855,7 +1863,7 @@
     align-items: center;
     text-align: center;
   }
-  
+
   .footer .grid .box {
     margin-bottom: 20px;
   }
