@@ -29,7 +29,7 @@
 						"At Influxity, discover the latest smartphones that seamlessly blend innovation with style, elevating your tech experience to new heights."
 					</p>
 				</div>
-				<div class="testimonial-author">Satorou Gojo</div>
+				<div class="testimonial-author">Satoru Gojo</div>
 			</div>
 			<div class="testimonial">
 				<div class="testimonial-photo">

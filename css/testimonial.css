@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0b7970;
+  background-color: rgb(10, 124, 115);
   overflow: hidden;
   padding-top: 20px;
   height: 50vh;
@@ -14,7 +14,7 @@
   width: 100%;
   max-width: 740px;
   margin: 25px;
-  box-shadow: 0 0 5px #cbcbcb;
+  box-shadow: 0 0 20px #ababab;
   border-radius: 15px;
   position: relative;
   opacity: 0;
@@ -142,7 +142,7 @@ input[name="testimonial"]:nth-child(4):checked
   left: 0;
   border-radius: 50%;
   height: 100%;
-  box-shadow: 0 -4px 3px -2px #c3c2c2;
+  box-shadow: 0 -4px 10px rgba(255, 255, 255, 0.4);
   width: 100%;
   transform: scale(0.87);
   transition: 0.32s;
@@ -237,7 +237,7 @@ input[name="testimonial"]:nth-child(4):checked
   width: 2px;
 }
 
-@media screen and (max-width: 400px)  {
+@media screen and (max-width: 400px) {
   .testimonial-text {
     align-items: normal;
   }
@@ -247,9 +247,10 @@ input[name="testimonial"]:nth-child(4):checked
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 15px;
   text-align: right;
-  color: #bdbdbd;
+  color: #d8d8d8;
   letter-spacing: 0.24px;
   text-shadow: 0 0 1px #e3e3e3;
+  font-weight: 500;
 
   &:before {
     content: "— ";
@@ -277,7 +278,7 @@ input[name="testimonial"]:nth-child(4):checked
       width: 30px;
       border-radius: 50%;
       background-color: #ffffff;
-      box-shadow: 0 4px 6px -7px #000000;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
 
       span {
         background-color: #c3c3c3;
@@ -399,14 +400,14 @@ input[name="testimonial"]:nth-child(4):checked
 }
 
 .testimonial:nth-child(1) .photo-author {
-  background: url(../uploaded_img/user_avatar/ichigo-classic.png) no-repeat center/cover;
+  background: url(../uploaded_img/user_avatar/ichigo-classic.png) no-repeat
+    center/cover;
 }
 
 .testimonial:nth-child(2) .photo-author {
-  background: url("https://cdn.oneesports.id/cdn-data/sites/2/2022/12/Gojo-Jujutsu-Kaisen-Season-2.jpg") no-repeat center/cover;
+  background: url(../uploaded_img/user_avatar/gojo-smirk.png) no-repeat
+    center/cover;
 }
-
-/* url(../uploaded_img/user_avatar/gojo-classic.png) */
 
 .testimonial:nth-child(3) .photo-author {
   background: url("https://i.pinimg.com/736x/3a/cb/8f/3acb8fa584e030f80847c597ba951bf3.jpg")
@@ -414,6 +415,6 @@ input[name="testimonial"]:nth-child(4):checked
 }
 
 .testimonial:nth-child(4) .photo-author {
-  background: url("https://avatarfiles.alphacoders.com/248/248387.jpg")
+  background: url("https://img.wattpad.com/dcf41f3510271f0628dfa4c7e0a63e49935cb11d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f6f6853785f714171536b666836513d3d2d3230362e313636343036636163643231306537613837313737393833303031362e6a7067?s=fit&w=720&h=720")
     no-repeat center/cover;
 }
