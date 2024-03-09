@@ -234,7 +234,7 @@ input[name="testimonial"]:nth-child(4):checked
 }
 
 .testimonial-text::-webkit-scrollbar {
-  width: 2px;
+  width: 3px;
 }
 
 @media screen and (max-width: 400px) {

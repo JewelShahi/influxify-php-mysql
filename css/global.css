@@ -198,10 +198,15 @@ body {
   bottom: 15px;
   right: 15px;
   padding: 10px;
-  background-color: rgba(0, 123, 255, 0.7);
+  /* background-color: rgba(0, 123, 255, 0.7); */
+  background: linear-gradient(
+    45deg,
+    rgba(44, 150, 92, 0.8),
+    rgba(4, 134, 210, 0.8)
+  );
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: 300ms;
   z-index: 99999;
@@ -214,11 +219,11 @@ body {
 }
 
 #goUpBtn:hover {
-  background-color: rgba(0, 122, 253, 0.9);
+  background-color: rgba(74, 183, 255, 0.95);
 }
 
 #goUpBtn:active {
-  transform: scale(0.9);
+  transform: scale(0.85);
 }
 /*------------*/
 

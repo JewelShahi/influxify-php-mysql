@@ -39,11 +39,11 @@ if (isset($_SESSION['user_id'])) {
       </div>
       <div>
         <span>Phone :</span>
-        <a href="tel:+123456789">+123456789</a>
+        <a href="#">+359 877564341</a>
       </div>
       <div>
         <span>Address :</span>
-        <p>123 Street Name<br>City, Country<br>Postal Code</p>
+        <p>Sofia, Bulgaria - 1000</p>
       </div>
       <div>
         <span>Follow us on :</span>
