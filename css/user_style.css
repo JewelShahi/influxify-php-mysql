@@ -643,7 +643,7 @@
 
 /* contact */
 .contact {
-  background: linear-gradient(30deg, #0e601b, #06937e);
+  background: linear-gradient(30deg, #0d571a, #04816f);
   padding: 40px 10px 10px 10px;
   color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -671,6 +671,7 @@
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: 300ms ease-in-out !important;
 }
 
 .contact-info div span {
