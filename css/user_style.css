@@ -87,6 +87,7 @@
   display: inline-flex;
   font-size: 17px;
   align-items: center;
+  gap: 5px;
   width: auto;
   text-align: center;
   transform: scale(1);
@@ -96,6 +97,10 @@
   font-size: 18px;
   transform: translateX(0);
   transition: transform 0.3s ease-in;
+}
+
+.home-bg .home .slide .content .btn:hover {
+  transform: translateY(-0.5rem) !important;
 }
 
 .home-bg .home .slide .content .btn:hover i {
