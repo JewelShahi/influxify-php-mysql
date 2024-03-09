@@ -34,7 +34,7 @@ if (isset($_SESSION['user_id'])) {
         <p>Jewel Shahi</p>
       </div>
       <div>
-        <span>Email :</span>
+        <span>E-mail :</span>
         <a href="mailto:joeimportant1020@gmail.com">joeimportant1020@gmail.com</a>
       </div>
       <div>
@@ -56,9 +56,9 @@ if (isset($_SESSION['user_id'])) {
       <div>
         <span>Opening Hours :</span>
         <p>
-          Monday-Friday: 9am - 6pm<br>
-          Saturday: 10am - 4pm<br>
-          Sunday: Closed
+          Monday-Friday : <b>9AM</b> - <b>6PM</b><br>
+          Saturday : <b>10AM</b> - <b>4PM</b><br>
+          Sunday : <b>closed</b>
         </p>
       </div>
     </div>

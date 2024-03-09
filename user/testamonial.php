@@ -1,5 +1,5 @@
-<div class="main">
-	<div class="testimonials">
+<div class="main" data-aos="zoom-out" data-aos-duration="1000">
+	<div class="testimonials" data-aos="zoom-out-up" data-aos-duration="1000">
 		<input type="radio" name="testimonial" id="input-testimonial1" checked />
 		<input type="radio" name="testimonial" id="input-testimonial2" />
 		<input type="radio" name="testimonial" id="input-testimonial3" />

@@ -23,11 +23,14 @@ include '../components/wishlist_cart.php';
 	<title>Home</title>
 	<link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
 	<!-- font awesome cdn link  -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-	<!-- custom css file link -->
+	<!-- AOS -->
+	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
+	<!-- custom css file link -->
 	<link rel="stylesheet" href="../css/global.css">
 	<link rel="stylesheet" href="../css/testimonial.css">
 	<link rel="stylesheet" href="../css/user_style.css">
@@ -75,17 +78,17 @@ include '../components/wishlist_cart.php';
 
 	<section class="about-us-section">
 		<div class="header-blur">
-			<h1 class="heading">About Us</h1>
+			<h1 class="heading" data-aos="fade-up" data-aos-duration="1000">About Us</h1>
 		</div>
 		<div class="about-us">
-			<div class="info">
+			<div class="info" data-aos="fade-right" data-aos-duration="1000">
 				<div class="inner-info">
 					<div>
 						<p>
 							Influxify is dedicated to revolutionizing the mobile industry with cutting-edge technology and exceptional service, empowering individuals and businesses with reliable, high-quality communication solutions.
 						</p>
 					</div>
-					<div class="missions-and-goals">
+					<div class="missions-and-goals" data-aos="zoom-out" data-aos-duration="1000">
 						<h2>Our Mission</h2>
 						<ul class="bullet-point">
 							<li>
@@ -107,17 +110,17 @@ include '../components/wishlist_cart.php';
 					</div>
 				</div>
 			</div>
-			<div class="images"></div>
+			<div class="images" data-aos="fade-left" data-aos-duration="1000"></div>
 		</div>
 	</section>
 
 	<section class="services-section">
 		<div class="header-blur">
-			<h1 class="heading">Services We Offer</h1>
+			<h1 class="heading" data-aos="fade-down" data-aos-duration="1000">Services We Offer</h1>
 		</div>
 		<div class="services-info">
-			<div class="images"></div>
-			<div class="info">
+			<div class="images" data-aos="fade-right" data-aos-duration="1000"></div>
+			<div class="info" data-aos="fade-left" data-aos-duration="1000">
 				<div class="inner-info">
 					<div>
 						<p>
@@ -130,7 +133,7 @@ include '../components/wishlist_cart.php';
 							Whether minor or major, Influxify delivers professional care for your phone.
 						</p>
 					</div>
-					<div class="services-and-offers">
+					<div class="services-and-offers" data-aos="zoom-out" data-aos-duration="1000">
 						<h2>Our Services</h2>
 						<ul class="bullet-point">
 							<li>
@@ -163,9 +166,9 @@ include '../components/wishlist_cart.php';
 
 	<section class="brand">
 
-		<h1 class="heading">Shop by brand</h1>
+		<h1 class="heading" data-aos="fade-up" data-aos-duration="1000">Shop by brand</h1>
 
-		<div class="swiper brand-slider">
+		<div class="swiper brand-slider" data-aos="slide-right" data-aos-duration="1000">
 
 			<div class="swiper-wrapper">
 
@@ -220,9 +223,9 @@ include '../components/wishlist_cart.php';
 
 	<section class="home-products">
 
-		<h1 class="heading">Recently added to our collection</h1>
+		<h1 class="heading" data-aos="fade" data-aos-duration="1000">Recently added to our collection</h1>
 
-		<div class="swiper products-slider">
+		<div class="swiper products-slider" data-aos="slide-left" data-aos-duration="1000">
 
 			<div class="swiper-wrapper">
 				<?php
@@ -265,7 +268,7 @@ include '../components/wishlist_cart.php';
 
 	</section>
 
-	<?php include 'testamonial.php'; ?> 
+	<?php include 'testamonial.php'; ?>
 
 	<!-- https://tw-elements.com/snippets/tailwind/tailwindelements/5240636 -->
 
@@ -279,9 +282,21 @@ include '../components/wishlist_cart.php';
 	<?php include '../components/scroll_up.php'; ?>
 	<script src="../js/scrollUp.js"></script>
 
+	<!-- Carosell -->
 	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 	<script src="../js/swiper.js"></script>
 
+	<!-- AOS  -->
+	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+	<!-- Initialize AOS -->
+	<script>
+		AOS.init({
+			duration: 1000,
+			delay: 300,
+			once: true,
+		});
+	</script>
 </body>
 
 </html>

@@ -1967,8 +1967,8 @@
     height: 100%;
   }
 
-  .home-bg .home .slide {
-    padding-bottom: 0.5rem;
+  .home-bg .home .swiper-pagination {
+    padding-top: 0.5rem;
   }
 
   .home-bg .home .slide .content p {
