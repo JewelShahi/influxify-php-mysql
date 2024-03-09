@@ -7,20 +7,19 @@
   padding-top: 20px;
   height: auto;
   width: 100%;
-  border-radius: 10px;
 }
 
 .testimonials {
   background: linear-gradient(35deg, #24603e, #335fe6);
   width: 100%;
   max-width: 740px;
+  height: auto;
   margin: 20px;
   box-shadow: 0 0 5px #cbcbcb;
   border-radius: 15px;
   position: relative;
   opacity: 0;
-  animation: showTestimonials 0.32s 0.78s linear
-    forwards;
+  animation: showTestimonials 0.32s linear forwards;
 
   input {
     display: none;
@@ -71,7 +70,7 @@ input[name="testimonial"]:nth-child(4):checked
   opacity: 0;
   transform: translate(0, 38px);
   max-height: 80px;
-  animation: hideTestimonial 0s 0.52s forwards;
+  animation: hideTestimonial 0.3s forwards;
   position: relative;
 }
 
@@ -87,7 +86,7 @@ input[name="testimonial"]:nth-child(3):checked
 input[name="testimonial"]:nth-child(4):checked
   ~ .testimonials-inner
   .testimonial:nth-child(4) {
-  animation: showTestimonial 0s 0.72s forwards;
+  animation: showTestimonial 0.3sforwards;
   position: absolute;
   opacity: 1;
   transform: none;
@@ -125,8 +124,7 @@ input[name="testimonial"]:nth-child(4):checked
   span {
   background-color: rgb(6, 127, 8);
   transform: scale(1);
-  transition: transform 0.36s linear,
-    background-color 0.41s ease-in;
+  transition: transform 0.36s linear, background-color 0.41s ease-in;
 }
 
 .testimonial-photo {
