@@ -77,7 +77,7 @@ include '../components/wishlist_cart.php';
               <?php
               if ($fetch_product["qty"] <= 0) {
               ?>
-                <div class="info" style="color: red; font-weight: bold; font-size: 2.5rem;"><span>Out of stock</span></div>
+                <div class="info" style="color: #8d1f1f; font-weight: bold; font-size: 2.5rem;"><span>Out of stock</span></div>
               <?php
               } else {
               ?>

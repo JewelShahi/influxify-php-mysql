@@ -246,8 +246,20 @@ include '../components/wishlist_cart.php';
 							<img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
 							<div class="name"><?= $fetch_product['name']; ?></div>
 							<div class="flex">
-								<div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
-								<input type="number" name="qty" class="qty" min="1" max="<?= $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
+								<div class="price">
+									<span>$</span><?= $fetch_product['price']; ?>
+								</div>
+								<?php
+								if ($fetch_product['qty'] == 0) {
+								?>
+									<div class="out-of-stock">Out of stock</div>
+								<?php
+								} else {
+								?>
+									<input type="number" name="qty" class="qty" min="1" max="<?= $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
+								<?php
+								}
+								?>
 							</div>
 							<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>">
 								<i class="fas fa-plus"></i> Add to cart

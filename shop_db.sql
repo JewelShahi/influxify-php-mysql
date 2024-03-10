@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2024 at 12:10 AM
+-- Generation Time: Mar 10, 2024 at 09:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -21,7 +21,15 @@ SET time_zone = "+00:00";
 -- Database: `shop_db`
 --
 
+--
+-- Creating database: `shop_db`
+--
+
 CREATE DATABASE shop_db;
+
+--
+-- Using the databse
+--
 
 USE shop_db;
 
@@ -157,7 +165,7 @@ CREATE TABLE `services` (
 
 INSERT INTO `services` (`id`, `user_id`, `placed_on`, `name`, `email`, `number`, `brand`, `description`, `is_resolved`, `payment_method`, `payment_status`, `delivery`, `price`, `address`) VALUES
 (1, 1, '2024-01-21 08:42:15', 'Joe', 'Joe@joe.com', '78556632', 'Samsung', 'Dept', 0, NULL, 'pending', NULL, 43.53, '-'),
-(2, 1, '2024-01-27 09:03:48', 'Jewel Shahi', 'jewel@gmail.com', '0879456200', 'Samsung', 'The primary concern is that the phone screen appears to be cracked, and there is a noticeable lack of responsiveness. I first noticed the problem on [mention the date or approximate time]. There wasnt any specific incident that I can recall, but the screens behavior changed suddenly. Upon closer inspection, I observed several cracks on the screens surface. Its worth noting that these cracks seem to be affecting the overall functionality of the touchscreen. There havent been any recent software updates or changes in settings that I am aware of. The phone has been operating normally until the issue with the screen emerged.', 1, 'cash on delivery', 'completed', 'no', 28.00, '- '),
+(2, 1, '2024-01-27 09:03:48', 'Jewel Shahi', 'jewel@gmail.com', '0879456200', 'Samsung', 'The primary concern is that the phone screen appears to be cracked, and there is a noticeable lack of responsiveness. I first noticed the problem on [mention the date or approximate time]. There wasn\'t any specific incident that I can recall, but the screen\'s behavior changed suddenly. Upon closer inspection, I observed several cracks on the screen\'s surface. It\'s worth noting that these cracks seem to be affecting the overall functionality of the touchscreen. There haven\'t been any recent software updates or changes in settings that I am aware of. The phone has been operating normally until the issue with the screen emerged.', 1, 'cash on delivery', 'completed', 'no', 28.00, '- '),
 (3, 1, '2024-02-12 13:21:26', 'Jewel Shahi', 'jewel@jewel.com', '0877323151', 'Apple', 'Not good', 0, 'cash on delivery', 'pending', 'yes', 22.35, 'Flat no. amber, amber, amber, amber, Bulgaria - 12336');
 
 -- --------------------------------------------------------
@@ -181,7 +189,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `reg_date`) VALUES
-(1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'ulquiorra-cifer.png', '2023-12-15'),
+(1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'ichigo.png', '2023-12-15'),
 (2, 'Admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'mob.png', '2023-12-15'),
 (3, 'TesterAdmin', 'testadmin@test.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 'logedin.png', '2024-01-05'),
 (4, 'work', 'work@work.com', '4224b2ba1666666bae8616d1bb961c0e81f31666', 1, 'logedin.png', '2024-01-10'),

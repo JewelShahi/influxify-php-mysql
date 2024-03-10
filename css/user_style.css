@@ -577,10 +577,11 @@
   border-radius: var(--border-radius);
   border: 1px solid rgb(55, 96, 59);
   cursor: pointer;
-  transition: 0.2s linear;
+  transition: 300ms linear;
 }
 
-.quick-view form .flex .image-container .sub-image img:hover {
+.quick-view form .row .image-container .sub-image img:hover {
+  background-color: rgba(84, 156, 114, 0.5) !important;
   transform: scale(1.1);
 }
 
@@ -599,6 +600,12 @@
 .quick-view form .row .content .info {
   font-size: 2rem;
   color: var(--black);
+  font-weight: 600;
+}
+
+.quick-view form .row .content .info span{
+  font-size: 2.2rem;
+  font-weight: 900;
 }
 
 .quick-view form .row .content .details {
