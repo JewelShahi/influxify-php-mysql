@@ -567,6 +567,10 @@
   width: 100%;
 }
 
+.update-product {
+  background: var(--body);
+}
+
 .update-product form {
   background-color: var(--white);
   box-shadow: 0 0 10px var(--black);
@@ -604,6 +608,7 @@
 }
 
 .update-product form .image-container .sub-image img:hover {
+  background-color: rgba(84, 156, 114, 0.5) !important;
   transform: scale(1.1);
 }
 

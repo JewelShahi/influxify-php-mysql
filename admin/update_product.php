@@ -14,6 +14,182 @@ if (isset($_SESSION['admin_id'])) {
   header('Location: admin_login.php');
 };
 
+// real
+// // Update product
+// if (isset($_POST['update'])) {
+//   $pid = $_POST['pid'];
+
+//   $name = $_POST['name'];
+//   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $price = $_POST['price'];
+//   $price = filter_var($price, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $details = $_POST['details'];
+//   $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $brand = $_POST['brand'];
+
+//   $released = $_POST['released'];
+//   $released = filter_var($released, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $qty = $_POST['qty'];
+//   $qty = filter_var($qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $cpu = $_POST['cpu'];
+//   $cpu = filter_var($cpu, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $storage = $_POST['storage'];
+//   $storage = filter_var($storage, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   // Remove space between number and alphabetic part
+//   $storage = preg_replace('/\s+/', '', $storage);
+//   // Convert alphabetic part to uppercase
+//   $storage = strtoupper($storage);
+
+//   $ram = $_POST['ram'];
+//   $ram = filter_var($ram, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   // Remove space between number and alphabetic part
+//   $ram = preg_replace('/\s+/', '', $ram);
+//   // Convert alphabetic part to uppercase
+//   $ram = strtoupper($ram);
+
+//   $camera_count = $_POST['camera_count'];
+//   $camera_count = filter_var($camera_count, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $camera_resolution = $_POST['camera_resolution'];
+//   $camera_resolution = filter_var($camera_resolution, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $size = $_POST['size'];
+//   $size = filter_var($size, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   // Check if there's a space between the number and alphabets and lowercase the alphabets
+//   if (preg_match('/^(\d+(\.\d+)?)(\s*)(\D+)/', $size, $size_matches)) {
+//     $size_numeric_part = $size_matches[1];
+//     $size_whitespace = $size_matches[3]; // Matched whitespace
+//     $size_alphabetic_part = strtolower($size_matches[4]);
+
+//     // Ensure there's exactly one space between the numeric and alphabetic parts
+//     if ($size_whitespace === '') {
+//       // If there's no whitespace, add one space
+//       $size = $size_numeric_part . ' ' . $size_alphabetic_part;
+//     } else {
+//       // If there's whitespace, ensure it's just one space
+//       $size = $size_numeric_part . ' ' . preg_replace('/\s+/', '', $size_whitespace) . $size_alphabetic_part;
+//     }
+//   }
+
+//   $battery = $_POST['battery'];
+//   $battery = filter_var($battery, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $color = $_POST['color'];
+//   $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   $color = strtolower($color);
+
+//   if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) && checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
+//     $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
+//     $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
+
+//     $message[] = 'Product updated successfully!';
+//   } else {
+//     $message[] = 'Released date is not in the correct format (YYYY-MM-DD)!';
+//   }
+
+//   $baseImagePath = '../uploaded_img/products/';
+
+//   // Image-1
+//   $old_image_01 = $_POST['old_image_01'];
+//   $image_01 = $_FILES['image_01']['name'];
+//   $image_size_01 = $_FILES['image_01']['size'];
+//   $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
+//   $image_folder_01 = '../uploaded_img/products/' . $image_01;
+
+//   if (!empty($image_01) && is_uploaded_file($image_tmp_name_01)) {
+
+//     // Check for the image size
+//     if ($image_size_01 > 2000000) {
+//       $message[] = 'Image-1\'s size is too large!';
+//     } else {
+//       $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
+//       $update_image_01->execute([$image_01, $pid]);
+
+//       // Check if the file was moved successfully
+//       if (move_uploaded_file($image_tmp_name_01, $image_folder_01)) {
+
+//         // If the image exists, just remove it
+//         if (file_exists($baseImagePath . $old_image_01)) {
+//           unlink('../uploaded_img/products/' . $old_image_01);
+//         }
+
+//         $message[] = 'Image-1 has been updated successfully!';
+//       } else {
+//         $message[] = 'Failed to move Image-1 to the destination folder!';
+//       }
+//     }
+//   }
+
+//   // Image-2
+//   $old_image_02 = $_POST['old_image_02'];
+//   $image_02 = $_FILES['image_02']['name'];
+//   $image_size_02 = $_FILES['image_02']['size'];
+//   $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
+//   $image_folder_02 = '../uploaded_img/products/' . $image_02;
+
+//   if (!empty($image_02) && is_uploaded_file($image_tmp_name_02)) {
+
+//     // Check for the image size
+//     if ($image_size_02 > 2000000) {
+//       $message[] = 'Image-2\'s size is too large!';
+//     } else {
+//       $update_image_02 = $conn->prepare("UPDATE `products` SET image_02 = ? WHERE id = ?");
+//       $update_image_02->execute([$image_02, $pid]);
+
+//       // Check if the file was moved successfully
+//       if (move_uploaded_file($image_tmp_name_02, $image_folder_02)) {
+
+//         // if a image exists, just remove it
+//         if (file_exists($baseImagePath . $old_image_02)) {
+//           unlink('../uploaded_img/products/' . $old_image_02);
+//         }
+
+//         $message[] = 'Image-2 has been updated successfully!';
+//       } else {
+//         $message[] = 'Failed to move Image-2 to the destination folder!';
+//       }
+//     }
+//   }
+
+//   // Image-3
+//   $old_image_03 = $_POST['old_image_03'];
+//   $image_03 = $_FILES['image_03']['name'];
+//   $image_size_03 = $_FILES['image_03']['size'];
+//   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
+//   $image_folder_03 = '../uploaded_img/products/' . $image_03;
+
+//   if (!empty($image_03) && is_uploaded_file($image_tmp_name_03)) {
+
+//     // Check for the image size
+//     if ($image_size_03 > 2000000) {
+//       $message[] = 'Image-3\'s size is too large!';
+//     } else {
+//       $update_image_03 = $conn->prepare("UPDATE `products` SET image_03 = ? WHERE id = ?");
+//       $update_image_03->execute([$image_03, $pid]);
+
+//       // Check if the file was moved successfully
+//       if (move_uploaded_file($image_tmp_name_03, $image_folder_03)) {
+
+//         // If the file image exists, just remove it
+//         if (file_exists($baseImagePath . $old_image_03)) {
+//           unlink('../uploaded_img/products/' . $old_image_03);
+//         }
+
+//         $message[] = 'Image-3 has been updated successfully!';
+//       } else {
+//         $message[] = 'Failed to move Image-3 to the destination folder!';
+//       }
+//     }
+//   }
+// }
+
+// // ok modified
 // Update product
 if (isset($_POST['update'])) {
   $pid = $_POST['pid'];
@@ -79,11 +255,29 @@ if (isset($_POST['update'])) {
   $battery = $_POST['battery'];
   $battery = filter_var($battery, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+  // Check if the input contains a string
+  if (preg_match('/[a-zA-Z]/', $battery)) {
+    // Check if it ends with 'mah' (case insensitive)
+    if (preg_match('/mah$/i', $battery)) {
+      // Check if there's a space before 'mah', if not, add it
+      if (!preg_match('/\s*mah$/i', $battery)) {
+        $battery = preg_replace('/(\d+)\s*(mah)$/i', '$1 mAh', $battery);
+      }
+    } 
+  } else {
+    // If it contains only numbers, append ' mAh'
+    $battery .= " mAh";
+  }
+  // Add space between number and 'mAh' if missing
+  $battery = preg_replace('/(\d+)(mah)/i', '$1 mAh', $battery);
+  // Adjust 'mah' to uppercase if ' mah'
+  $battery = preg_replace('/ mah/i', ' mA' . 'h', $battery);
+
   $color = $_POST['color'];
   $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $color = strtolower($color);
 
-  if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $released)) {
+  if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) && checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
     $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
     $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
 
@@ -94,34 +288,41 @@ if (isset($_POST['update'])) {
 
   $baseImagePath = '../uploaded_img/products/';
 
+  // Function to sanitize and rename the image file
+  function sanitizeAndRenameImage($oldImageName, $newImageName, $imageTmpName, $imageFolder)
+  {
+    $extension = pathinfo($oldImageName, PATHINFO_EXTENSION);
+    $newImageName = strtolower(str_replace(' ', '_', $newImageName)) . '.' . $extension;
+
+    if (move_uploaded_file($imageTmpName, $imageFolder . $newImageName)) {
+      return $newImageName;
+    } else {
+      return false;
+    }
+  }
+
   // Image-1
   $old_image_01 = $_POST['old_image_01'];
   $image_01 = $_FILES['image_01']['name'];
   $image_size_01 = $_FILES['image_01']['size'];
   $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
-  $image_folder_01 = '../uploaded_img/products/' . $image_01;
+  $image_folder_01 = $baseImagePath;
 
   if (!empty($image_01) && is_uploaded_file($image_tmp_name_01)) {
+    $newImageName_01 = $name . '_01';
+    $new_image_01 = sanitizeAndRenameImage($image_01, $newImageName_01, $image_tmp_name_01, $image_folder_01);
 
-    // Check for the image size
-    if ($image_size_01 > 2000000) {
-      $message[] = 'Image-1\'s size is too large!';
-    } else {
+    if ($new_image_01) {
       $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
-      $update_image_01->execute([$image_01, $pid]);
+      $update_image_01->execute([$new_image_01, $pid]);
 
-      // Check if the file was moved successfully
-      if (move_uploaded_file($image_tmp_name_01, $image_folder_01)) {
-
-        // If the image exists, just remove it
-        if (file_exists($baseImagePath . $old_image_01)) {
-          unlink('../uploaded_img/products/' . $old_image_01);
-        }
-
-        $message[] = 'Image-1 has been updated successfully!';
-      } else {
-        $message[] = 'Failed to move Image-1 to the destination folder!';
+      if (!empty($old_image_01) && file_exists($image_folder_01 . $old_image_01)) {
+        unlink($image_folder_01 . $old_image_01);
       }
+
+      $message[] = 'Image-1 has been updated successfully!';
+    } else {
+      $message[] = 'Failed to move Image-1 to the destination folder!';
     }
   }
 
@@ -130,29 +331,23 @@ if (isset($_POST['update'])) {
   $image_02 = $_FILES['image_02']['name'];
   $image_size_02 = $_FILES['image_02']['size'];
   $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
-  $image_folder_02 = '../uploaded_img/products/' . $image_02;
+  $image_folder_02 = $baseImagePath;
 
   if (!empty($image_02) && is_uploaded_file($image_tmp_name_02)) {
+    $newImageName_02 = $name . '_02';
+    $new_image_02 = sanitizeAndRenameImage($image_02, $newImageName_02, $image_tmp_name_02, $image_folder_02);
 
-    // Check for the image size
-    if ($image_size_02 > 2000000) {
-      $message[] = 'Image-2\'s size is too large!';
-    } else {
+    if ($new_image_02) {
       $update_image_02 = $conn->prepare("UPDATE `products` SET image_02 = ? WHERE id = ?");
-      $update_image_02->execute([$image_02, $pid]);
+      $update_image_02->execute([$new_image_02, $pid]);
 
-      // Check if the file was moved successfully
-      if (move_uploaded_file($image_tmp_name_02, $image_folder_02)) {
-
-        // if a image exists, just remove it
-        if (file_exists($baseImagePath . $old_image_02)) {
-          unlink('../uploaded_img/products/' . $old_image_02);
-        }
-
-        $message[] = 'Image-2 has been updated successfully!';
-      } else {
-        $message[] = 'Failed to move Image-2 to the destination folder!';
+      if (!empty($old_image_02) && file_exists($image_folder_02 . $old_image_02)) {
+        unlink($image_folder_02 . $old_image_02);
       }
+
+      $message[] = 'Image-2 has been updated successfully!';
+    } else {
+      $message[] = 'Failed to move Image-2 to the destination folder!';
     }
   }
 
@@ -161,32 +356,27 @@ if (isset($_POST['update'])) {
   $image_03 = $_FILES['image_03']['name'];
   $image_size_03 = $_FILES['image_03']['size'];
   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
-  $image_folder_03 = '../uploaded_img/products/' . $image_03;
+  $image_folder_03 = $baseImagePath;
 
   if (!empty($image_03) && is_uploaded_file($image_tmp_name_03)) {
+    $newImageName_03 = $name . '_03';
+    $new_image_03 = sanitizeAndRenameImage($image_03, $newImageName_03, $image_tmp_name_03, $image_folder_03);
 
-    // Check for the image size
-    if ($image_size_03 > 2000000) {
-      $message[] = 'Image-3\'s size is too large!';
-    } else {
+    if ($new_image_03) {
       $update_image_03 = $conn->prepare("UPDATE `products` SET image_03 = ? WHERE id = ?");
-      $update_image_03->execute([$image_03, $pid]);
+      $update_image_03->execute([$new_image_03, $pid]);
 
-      // Check if the file was moved successfully
-      if (move_uploaded_file($image_tmp_name_03, $image_folder_03)) {
-
-        // If the file image exists, just remove it
-        if (file_exists($baseImagePath . $old_image_03)) {
-          unlink('../uploaded_img/products/' . $old_image_03);
-        }
-
-        $message[] = 'Image-3 has been updated successfully!';
-      } else {
-        $message[] = 'Failed to move Image-3 to the destination folder!';
+      if (!empty($old_image_03) && file_exists($image_folder_03 . $old_image_03)) {
+        unlink($image_folder_03 . $old_image_03);
       }
+
+      $message[] = 'Image-3 has been updated successfully!';
+    } else {
+      $message[] = 'Failed to move Image-3 to the destination folder!';
     }
   }
 }
+
 
 ?>
 

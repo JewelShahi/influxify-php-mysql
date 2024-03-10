@@ -14,6 +14,126 @@ if (isset($_SESSION['admin_id'])) {
   header('Location: admin_login.php');
 };
 
+// // Add product
+// if (isset($_POST['add_product'])) {
+
+//   $name = $_POST['name'];
+//   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $details = $_POST['details'];
+//   $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $brand = $_POST['brand'];
+//   $brand = filter_var($brand, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $released = $_POST['released'];
+//   $released = filter_var($released, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $qty = $_POST['qty'];
+//   $qty = filter_var($qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $cpu = $_POST['cpu'];
+//   $cpu = filter_var($cpu, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $storage = $_POST['storage'];
+//   $storage = filter_var($storage, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   // Remove space between number and alphabetic part
+//   $storage = preg_replace('/\s+/', '', $storage);
+//   // Convert alphabetic part to uppercase
+//   $storage = strtoupper($storage);
+
+//   $ram = $_POST['ram'];
+//   $ram = filter_var($ram, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   // Remove space between number and alphabetic part
+//   $ram = preg_replace('/\s+/', '', $ram);
+//   // Convert alphabetic part to uppercase
+//   $ram = strtoupper($ram);
+
+//   $camera_count = $_POST['camera_count'];
+//   $camera_count = filter_var($camera_count, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $camera_resolution = $_POST['camera_resolution'];
+//   $camera_resolution = filter_var($camera_resolution, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $size = $_POST['size'];
+//   $size = filter_var($size, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   // Check if there's a space between the number and alphabets and lowercase the alphabets
+//   if (preg_match('/^(\d+(\.\d+)?)(\s*)(\D+)/', $size, $size_matches)) {
+//     $size_numeric_part = $size_matches[1];
+//     $size_whitespace = $size_matches[3]; // Matched whitespace
+//     $size_alphabetic_part = strtolower($size_matches[4]);
+
+//     // Ensure there's exactly one space between the numeric and alphabetic parts
+//     if ($size_whitespace === '') {
+//       // If there's no whitespace, add one space
+//       $size = $size_numeric_part . ' ' . $size_alphabetic_part;
+//     } else {
+//       // If there's whitespace, ensure it's just one space
+//       $size = $size_numeric_part . ' ' . preg_replace('/\s+/', '', $size_whitespace) . $size_alphabetic_part;
+//     }
+//   }
+
+//   $battery = $_POST['battery'];
+//   $battery = filter_var($battery, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $color = $_POST['color'];
+//   $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   $color = strtolower($color);
+
+//   $price = $_POST['price'];
+//   $price = filter_var($price, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+//   $image_01 = $_FILES['image_01']['name'];
+//   $image_01 = filter_var($image_01, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   $image_size_01 = $_FILES['image_01']['size'];
+//   $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
+//   $image_folder_01 = '../uploaded_img/products/' . $image_01;
+
+//   $image_02 = $_FILES['image_02']['name'];
+//   $image_02 = filter_var($image_02, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   $image_size_02 = $_FILES['image_02']['size'];
+//   $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
+//   $image_folder_02 = '../uploaded_img/products/' . $image_02;
+
+//   $image_03 = $_FILES['image_03']['name'];
+//   $image_03 = filter_var($image_03, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+//   $image_size_03 = $_FILES['image_03']['size'];
+//   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
+//   $image_folder_03 = '../uploaded_img/products/' . $image_03;
+
+//   try {
+
+//     // Check for release date format
+//      if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) || !checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {  
+//       throw new Exception('Released date is not in the correct format (YYYY-MM-DD) or is invalid!');
+//      }
+
+//     // Image size condition
+//     if ($image_size_01 > 2000000 or $image_size_02 > 2000000 or $image_size_03 > 2000000) {
+//       throw new Exception('Image size is too large!');
+//     }
+
+//     // Inserting the data
+//     $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+//     $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_01, $image_02, $image_03]);
+
+//     // Moving images to the folder - uploaded_img/products
+//     move_uploaded_file($image_tmp_name_01, $image_folder_01);
+//     move_uploaded_file($image_tmp_name_02, $image_folder_02);
+//     move_uploaded_file($image_tmp_name_03, $image_folder_03);
+
+//     $message[] = 'New product added successfully!';
+//   } catch (PDOException $e) {
+//     if ($e->errorInfo[1] == 1062) {
+//       $message[] = 'Product with ' . $name . ' already exists!';
+//     } else {
+//       $message[] = 'Error: ' . $e->getMessage();
+//     }
+//   } catch (Exception $e) {
+//     $message[] = $e->getMessage();
+//   }
+// };
+
 // Add product
 if (isset($_POST['add_product'])) {
 
@@ -76,6 +196,24 @@ if (isset($_POST['add_product'])) {
   $battery = $_POST['battery'];
   $battery = filter_var($battery, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+  // Check if the input contains a string
+  if (preg_match('/[a-zA-Z]/', $battery)) {
+    // Check if it ends with 'mah' (case insensitive)
+    if (preg_match('/mah$/i', $battery)) {
+      // Check if there's a space before 'mah', if not, add it
+      if (!preg_match('/\s*mah$/i', $battery)) {
+        $battery = preg_replace('/(\d+)\s*(mah)$/i', '$1 mAh', $battery);
+      }
+    }
+  } else {
+    // If it contains only numbers, append ' mAh'
+    $battery .= " mAh";
+  }
+  // Add space between number and 'mAh' if missing
+  $battery = preg_replace('/(\d+)(mah)/i', '$1 mAh', $battery);
+  // Adjust 'mah' to uppercase if ' mah'
+  $battery = preg_replace('/ mah/i', ' mA' . 'h', $battery);
+
   $color = $_POST['color'];
   $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $color = strtolower($color);
@@ -83,44 +221,48 @@ if (isset($_POST['add_product'])) {
   $price = $_POST['price'];
   $price = filter_var($price, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $image_01 = $_FILES['image_01']['name'];
-  $image_01 = filter_var($image_01, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $image_size_01 = $_FILES['image_01']['size'];
-  $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
-  $image_folder_01 = '../uploaded_img/products/' . $image_01;
-
-  $image_02 = $_FILES['image_02']['name'];
-  $image_02 = filter_var($image_02, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $image_size_02 = $_FILES['image_02']['size'];
-  $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
-  $image_folder_02 = '../uploaded_img/products/' . $image_02;
-
-  $image_03 = $_FILES['image_03']['name'];
-  $image_03 = filter_var($image_03, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $image_size_03 = $_FILES['image_03']['size'];
-  $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
-  $image_folder_03 = '../uploaded_img/products/' . $image_03;
+  $image_folder = '../uploaded_img/products/';
+  $max_file_size = 2000000; // Maximum file size in bytes
 
   try {
 
     // Check for release date format
-    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $released)) {
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) && !checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
       throw new Exception('Released date is not in the correct format (YYYY-MM-DD)!');
     }
 
-    // Image size condition
-    if ($image_size_01 > 2000000 or $image_size_02 > 2000000 or $image_size_03 > 2000000) {
-      throw new Exception('Image size is too large!');
+    // Process and move uploaded images
+    $image_names = array(); // Store new image names
+
+    for ($i = 1; $i <= 3; $i++) {
+      $image_name = $_FILES["image_0$i"]["name"];
+      $image_size = $_FILES["image_0$i"]["size"];
+      $image_tmp_name = $_FILES["image_0$i"]["tmp_name"];
+
+      // Check if image size is within limits
+      if ($image_size > $max_file_size) {
+        throw new Exception("Image $i size is too large!");
+      }
+
+      // Rename the image file based on the product name
+      $new_image_name = strtolower(str_replace(' ', '_', $name)) . "_0$i";
+
+      // Append unique identifier and file extension
+      $extension = pathinfo($image_name, PATHINFO_EXTENSION);
+      $new_image_name .= ".$extension";
+
+      // Move the uploaded image to the target folder with the new filename
+      if (move_uploaded_file($image_tmp_name, $image_folder . $new_image_name)) {
+        $message[] = "Image $i uploaded successfully!";
+        $image_names[] = $new_image_name; // Store the new image name
+      } else {
+        $message[] = "Failed to upload Image $i!";
+      }
     }
 
     // Inserting the data
     $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_01, $image_02, $image_03]);
-
-    // Moving images to the folder - uploaded_img/products
-    move_uploaded_file($image_tmp_name_01, $image_folder_01);
-    move_uploaded_file($image_tmp_name_02, $image_folder_02);
-    move_uploaded_file($image_tmp_name_03, $image_folder_03);
+    $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_names[0], $image_names[1], $image_names[2]]);
 
     $message[] = 'New product added successfully!';
   } catch (PDOException $e) {
