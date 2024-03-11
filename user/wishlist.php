@@ -83,7 +83,12 @@ if (isset($_GET['delete_all'])) {
 							<a href="quick_view.php?pid=<?= $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
 							<img src="../uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="<?= $fetch_wishlist['image']; ?>">
 							<div class="name"><?= $fetch_wishlist['name']; ?></div>
-							<div class="price">$<?= $fetch_wishlist['price']; ?></div>
+							<div class="<?= $fetch_wishlist["product_quantity"] != 0 ? '' : 'flex'; ?>">
+								<div class="price">$<?= $fetch_wishlist['price']; ?></div>
+								<?php if ($fetch_wishlist["product_quantity"] == 0) : ?>
+									<div class="info out-of-stock"><span>Out of stock</span></div>
+								<?php endif; ?>
+							</div>
 							<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>" <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>>
 								<i class="fas fa-plus"></i> Add to cart
 							</button>

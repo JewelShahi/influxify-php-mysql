@@ -159,7 +159,6 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
               } else {
               ?>
                 <input type="number" name="qty" class="qty" min="1" max="<?php echo $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
-
               <?php
               }
               ?>

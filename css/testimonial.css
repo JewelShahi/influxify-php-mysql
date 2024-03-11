@@ -230,6 +230,7 @@ input[name="testimonial"]:nth-child(4):checked
 
   p {
     margin-bottom: 10px;
+    user-select: none;
   }
 }
 
@@ -251,6 +252,7 @@ input[name="testimonial"]:nth-child(4):checked
   letter-spacing: 0.24px;
   text-shadow: 0 0 1px #e3e3e3;
   font-weight: 500;
+  user-select: none;
 
   &:before {
     content: "— ";

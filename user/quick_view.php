@@ -75,11 +75,7 @@ include '../components/wishlist_cart.php';
               <div class="info"><span>Battery: </span><?= $fetch_product['battery']; ?></div>
               <div class="info"><span>Color: </span><?= $fetch_product['color']; ?></div>
               <?php
-              if ($fetch_product["qty"] <= 0) {
-              ?>
-                <div class="info" style="color: #8d1f1f; font-weight: bold; font-size: 2.5rem;"><span>Out of stock</span></div>
-              <?php
-              } else {
+              if ($fetch_product["qty"] != 0) {
               ?>
                 <div class="info"><span>Remaining quantity: </span><?= $fetch_product['qty']; ?></div>
               <?php
@@ -91,6 +87,10 @@ include '../components/wishlist_cart.php';
                 if ($fetch_product["qty"] > 0) {
                 ?>
                   <input type="number" name="qty" class="qty input" min="1" max="<?php echo $fetch_product['qty']; ?>" onkeypress="if(this.value.length == 2) return false;" <?php echo ($fetch_product['qty'] == 0) ? 'disabled value="0"' : 'value="1"'; ?>>
+                <?php
+                } else {
+                ?>
+                  <div class="info out-of-stock" style="font-size: 2.5rem;"><span>Out of stock</span></div>
                 <?php
                 }
                 ?>
