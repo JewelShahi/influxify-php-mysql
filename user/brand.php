@@ -65,7 +65,7 @@ include '../components/wishlist_cart.php';
             <img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
-              <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
+              <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
               <?php
               if ($fetch_product['qty'] == 0) {
               ?>
