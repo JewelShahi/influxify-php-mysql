@@ -54,12 +54,12 @@ if (isset($message)) {
         $user_image = "default.png";
       }
       ?>
-      <a href="wishlist.php" class="icon-link">
+      <a href="wishlist.php" class="icon-link" title="Wishlist">
         <i class="fas fa-heart"></i>
         <sup class="sup"><?= $total_wishlist_counts; ?></sup>
       </a>
       
-      <a href="cart.php" class="icon-link">
+      <a href="cart.php" class="icon-link" title="Cart">
         <i class="fas fa-shopping-cart"></i>
         <sup class="sup"><?= $total_cart_counts; ?></sup>
       </a>

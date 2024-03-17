@@ -40,9 +40,14 @@ if (isset($message)) {
 
     <div class="icons">
       <?php
+
       $admin_avatar = $conn->prepare("SELECT `avatar` FROM `users` WHERE id = ?");
       $admin_avatar->execute([$admin_id]);
       $avatar_result = $admin_avatar->fetchColumn();
+
+      $admin_name = $conn->prepare("SELECT `name` FROM `users` WHERE id = ?");
+      $admin_name->execute([$admin_id]);
+      $name_result = $admin_name->fetchColumn();
 
       // Check if there is a logged-in user
       if ($admin_id && !empty($avatar_result)) {
@@ -54,7 +59,7 @@ if (isset($message)) {
       }
       ?>
 
-      <div id="admin-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
+      <div id="admin-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; " title="<?= $name_result; ?>"></div>
 
       <div id="menu-btn-admin" class="fas fa-bars"></div>
 
