@@ -28,6 +28,7 @@ if (isset($message)) {
 
     <div class="icons">
       <?php
+
       $count_wishlist_items = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
       $count_wishlist_items->execute([$user_id]);
       $total_wishlist_counts = $count_wishlist_items->rowCount();
@@ -39,6 +40,10 @@ if (isset($message)) {
       $user_avatar = $conn->prepare("SELECT `avatar` FROM `users` WHERE id = ?");
       $user_avatar->execute([$user_id]);
       $avatar_result = $user_avatar->fetchColumn();
+
+      $user_name = $conn->prepare("SELECT `name` FROM `users` WHERE id = ?");
+      $user_name->execute([$user_id]);
+      $name_result = $user_name->fetchColumn();
 
       // Check if there is a logged-in user
       if ($user_id && !empty($avatar_result)) {
@@ -59,7 +64,7 @@ if (isset($message)) {
         <sup class="sup"><?= $total_cart_counts; ?></sup>
       </a>
 
-      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; "></div>
+      <div id="user-btn" style="border: 3px solid #3b8a59; margin: 0; display: inline-block; width: 35px; height: 35px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $user_image ?>'); background-size: cover; " title="<?= $name_result; ?>"></div>
       
       <div id="menu-btn" class="fas fa-bars"></div>
 
