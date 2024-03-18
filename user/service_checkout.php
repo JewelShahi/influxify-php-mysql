@@ -54,8 +54,8 @@ if (isset($_POST['service_checkout_data'])) {
     $city = filter_var($_POST['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $state = filter_var($_POST['state'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $country = filter_var($_POST['country'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $pin_code = filter_var($_POST['pin_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $address = "Flat no. $flat, $street, $city, $state, $country - $pin_code";
+    $zip_code = filter_var($_POST['zip_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $address = "Flat no. $flat, $street, $city, $state, $country - $zip_code";
   } else {
     $address = '-';
   }
@@ -163,8 +163,8 @@ if (isset($_POST['service_checkout_data'])) {
             <input type="text" id="country" name="country" placeholder="E.g. USA" class="box" maxlength="50">
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <span>Pin code :</span>
-            <input type="number" id="pin_code" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box">
+            <span>Zip code :</span>
+            <input type="number" id="pin_code" min="0" name="zip_code" placeholder="E.g. 12345" min="0" max="99999" onkeypress="if(this.value.length == 5) return false;" class="box">
           </div>
         </div>
         <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">

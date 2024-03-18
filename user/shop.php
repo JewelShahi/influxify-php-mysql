@@ -170,7 +170,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
       <?php
         }
       } else {
-        echo '<div class="empty" style="grid-column: 1 / -1; width: 100%;">Currently we don\'t products!</div>';
+        echo '<div class="empty" style="grid-column: 1 / -1; width: 100%;">We don\'t have this product now!</div>';
       }
       ?>
     </div>

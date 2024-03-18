@@ -48,7 +48,7 @@ if (isset($message)) {
       $admin_name = $conn->prepare("SELECT `name` FROM `users` WHERE id = ?");
       $admin_name->execute([$admin_id]);
       $name_result = $admin_name->fetchColumn();
-
+      
       // Check if there is a logged-in user
       if ($admin_id && !empty($avatar_result)) {
         // If logged in and avatar is not empty, set background image
