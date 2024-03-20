@@ -402,12 +402,12 @@ input[name="testimonial"]:nth-child(4):checked
 }
 
 .testimonial:nth-child(1) .photo-author {
-  background: url(../uploaded_img/user_avatar/ichigo-classic.png) no-repeat
+  background: url(../uploaded_img/user_avatar/ichigo-kurosaki-anime.png) no-repeat
     center/cover;
 }
 
 .testimonial:nth-child(2) .photo-author {
-  background: url(../uploaded_img/user_avatar/gojo-smirk.png) no-repeat
+  background: url(../uploaded_img/user_avatar/satoru-gojo-smirk.png) no-repeat
     center/cover;
 }
 
