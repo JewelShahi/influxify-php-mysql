@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2024 at 09:33 PM
+-- Generation Time: Mar 26, 2024 at 06:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,7 +53,8 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`user_id`, `pid`, `name`, `price`, `quantity`) VALUES
 (1, 8, 'Google Pixel 5 Just Black', 667.63, 2),
-(1, 17, 'Realme C31 Dark Green', 190.62, 1);
+(1, 17, 'Realme C31 Dark Green', 190.62, 1),
+(8, 5, 'Samsung Galaxy S21 Ultra Phantom Black', 1199.99, 3);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `details`, `brand`, `released`, `qty`, `cpu`, `storage`, `ram`, `camera_count`, `camera_resolution`, `size`, `battery`, `color`, `price`, `image_01`, `image_02`, `image_03`) VALUES
-(5, 'Samsung Galaxy S21 Ultra Phantom Black', 'The Samsung Galaxy S21 Ultra is a premium flagship smartphone with cutting-edge features, a top-of-the-line camera system, and powerful hardware.', 'Samsung', '2021-01-29', 5, 'Exynos 2100', '512GB', '16GB', 4, '108MP (wide), 12MP (ultrawide), 10MP (periscope telephoto), 10MP (telephoto)', '6.8 in', '5000 mAh', 'Phantom Black', 1199.99, 'Samsung Galaxy S21 Ultra 1.png', 'Samsung Galaxy S21 Ultra 2.png', 'Samsung Galaxy S21 Ultra 3.png'),
+(5, 'Samsung Galaxy S21 Ultra Phantom Black', 'The Samsung Galaxy S21 Ultra is a premium flagship smartphone with cutting-edge features, a top-of-the-line camera system, and powerful hardware.', 'Samsung', '2021-01-29', 2, 'Exynos 2100', '512GB', '16GB', 4, '108MP (wide), 12MP (ultrawide), 10MP (periscope telephoto), 10MP (telephoto)', '6.8 in', '5000 mAh', 'Phantom Black', 1199.99, 'Samsung Galaxy S21 Ultra 1.png', 'Samsung Galaxy S21 Ultra 2.png', 'Samsung Galaxy S21 Ultra 3.png'),
 (6, 'iPhone 13 Pro Max Graphite', 'The iPhone 13 Pro Max is the latest flagship smartphone from Apple, featuring a powerful A15 Bionic chip, exceptional camera capabilities, and a stunning Super Retina XDR display.', 'Apple', '2021-09-14', 11, 'A15 Bionic', '1TB', '8GB', 3, '12MP (wide), 12MP (ultrawide), 12MP (telephoto)', '6.7 in', '4352 mAh', 'Graphite', 2349.99, 'iphone 13 pro max graphyte 1.png', 'iphone 13 pro max graphyte 2.png', 'iphone 13 pro max graphyte 3.png'),
 (8, 'Google Pixel 5 Just Black', 'Experience the cutting-edge technology of the Google Pixel 5, a flagship smartphone that combines sleek design with powerful features. The device is equipped with an advanced processor ensuring smooth and efficient performance for all your tasks and applications. Capture stunning moments with the triple camera setup. The 6.0-inch display provides an immersive viewing experience. The Google Pixel 5 delivers a premium smartphone experience.', 'Google', '2022-10-01', 5, 'Qualcomm Snapdragon 765G', '128GB', '8GB', 3, '12.2 MP (main), 16 MP (ultrawide)', '6.0 in', '4080 mAh', 'Just Black', 667.63, 'Google Pixel 5 Just Black 1.png', 'Google Pixel 5 Just Black 2.png', 'Google Pixel 5 Just Black 3.png'),
 (9, 'OnePlus 9 Pro Morning Mist', 'Experience the power and elegance of the OnePlus 9 Pro. This flagship smartphone features a sleek design and cutting-edge technology. With a powerful Qualcomm Snapdragon 888 processor, 256GB of storage, and 12GB of RAM, the OnePlus 9 Pro delivers exceptional performance. The triple camera system includes a 48MP wide lens, a 50MP ultrawide lens, and an 8MP telephoto lens, providing versatility in capturing stunning moments. The 6.7-inch Fluid AMOLED display offers a vibrant and immersive viewing experience. A robust 4500mAh battery ensures long-lasting usage, and the device is available in the stylish &#039;Morning Mist&#039; color.', 'OnePlus', '2023-04-01', 7, 'Qualcomm Snapdragon 888', '256GB', '12GB', 3, '48MP (wide), 50MP (ultrawide), 8MP (telephoto)', '6.7 in', '4500 mAh', 'Morning Mist', 899.99, 'OnePlus 9 Pro Morning Mist 1.png', 'OnePlus 9 Pro Morning Mist 2.png', 'OnePlus 9 Pro Morning Mist 3.png'),
@@ -189,13 +190,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `reg_date`) VALUES
-(1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'ichigo.png', '2023-12-15'),
-(2, 'Admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'mob.png', '2023-12-15'),
+(1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'ryomen-sukuna.png', '2023-12-15'),
+(2, 'Admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'shigeo-kageyama.png', '2023-12-15'),
 (3, 'TesterAdmin', 'testadmin@test.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 'logedin.png', '2024-01-05'),
 (4, 'work', 'work@work.com', '4224b2ba1666666bae8616d1bb961c0e81f31666', 1, 'logedin.png', '2024-01-10'),
 (5, 'Jinwoo', 'jinwoo@jinwoo.com', 'b22e8a079a000cca38de961a1e5316f0494f7356', 1, 'sung-jin-woo.png', '2024-03-03'),
 (6, 'UserTest+10', 'usertest@gmail.com', '31f10d65cae2c4d8e9dd6e5f842c40ef10263f27', 0, 'logedin.png', '2024-03-03'),
-(7, 'New User', 'newser@new.com', 'b406f877e90994474d3a2d3e275dbf92467eefd7', 1, 'logedin.png', '2024-03-04');
+(7, 'New User', 'newser@new.com', 'b406f877e90994474d3a2d3e275dbf92467eefd7', 1, 'logedin.png', '2024-03-04'),
+(8, 'vladi', 'ok@gmail.com', '92c8b10157e05856af182a643de7dcea14472f74', 0, 'logedin.png', '2024-03-12');
 
 -- --------------------------------------------------------
 
@@ -274,19 +276,19 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
