@@ -540,6 +540,7 @@
 }
 
 .show-products .box-container .box .name {
+  text-align: center;
   font-size: 2rem;
   color: var(--black);
 }
