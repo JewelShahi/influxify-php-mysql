@@ -116,15 +116,15 @@ if (isset($_POST['service_checkout_data'])) {
         <h3>Place your info</h3>
         <div class="flex">
           <div class="inputBox">
-            <span>Name</span>
+            <span>Name :</span>
             <input type="text" placeholder="Enter your full name" class="box" maxlength="100" value="<?= $service_name ?>" readonly>
           </div>
           <div class="inputBox">
-            <span>E-mail</span>
+            <span>E-mail :</span>
             <input type="email" placeholder="Enter your email" class="box" maxlength="50" value="<?= $service_email ?>" readonly>
           </div>
           <div class="inputBox">
-            <span>Phone number</span>
+            <span>Phone number :</span>
             <input type="number" placeholder="Enter your phone number" class="box" maxlength="15" value="<?= $service_number ?>" readonly>
           </div>
           <div class="inputBox">
