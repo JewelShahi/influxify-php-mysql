@@ -86,6 +86,10 @@ if (isset($_GET['delete'])) {
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="../css/global.css">
 
+  <style>
+    
+  </style>
+
 </head>
 
 <body style="height: auto;">
@@ -123,7 +127,8 @@ if (isset($_GET['delete'])) {
           o.order_status,
           o.placed_on,
           SUM(o.price * o.qty) AS total_product_price,
-          GROUP_CONCAT(CONCAT(p.name, ' (x', o.qty, ')') ORDER BY o.pid SEPARATOR ', ') AS ordered_products
+          GROUP_CONCAT(CONCAT(p.name, ' (x', o.qty, ')') ORDER BY o.pid SEPARATOR ', ') AS ordered_products,
+          GROUP_CONCAT(p.image_01 ORDER BY o.pid SEPARATOR ', ') AS ordered_product_images
         FROM
           orders o
         JOIN
@@ -138,6 +143,9 @@ if (isset($_GET['delete'])) {
 
         if ($select_orders->rowCount() > 0) {
           while ($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)) {
+            // Split the ordered products and their images into arrays
+            $ordered_products = explode(", ", $fetch_orders['ordered_products']);
+            $ordered_product_images = explode(", ", $fetch_orders['ordered_product_images']);
         ?>
             <div class="box">
               <div class="blur">
@@ -151,6 +159,13 @@ if (isset($_GET['delete'])) {
                 <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery cost : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
                 <p> Address : <span><?= $fetch_orders['address']; ?></span> </p>
                 <p> Total products : <span><?= $fetch_orders['ordered_products']; ?></span> </p>
+                <div class="ordered-img">
+                    <?php
+                    for ($i = 0; $i < count($ordered_products); $i++) {
+                      echo '<img class="ordered-img-item" src="../uploaded_img/products/' . $ordered_product_images[$i] . '" alt="Product Image">';  // Modified: Added image display
+                    }
+                    ?>
+                  </div>
                 <p> Total price : <span>$<?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?></span> </p>
                 <p> Payment method : <span><?= $fetch_orders['method']; ?></span> </p>
 

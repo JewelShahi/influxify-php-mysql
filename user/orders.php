@@ -54,32 +54,32 @@ if (isset($_SESSION['user_id'])) {
           echo '<p class="empty">Please LogIn to see your order(s)</p>';
         } else {
           $select_orders = $conn->prepare("
-      SELECT
-        o.id,
-        o.name,
-        o.number,
-        o.email,
-        o.method,
-        o.delivery,
-        o.delivery_cost,
-        o.address,
-        o.payment_status,
-        o.order_status,
-        o.placed_on,
-        SUM(o.price * o.qty) AS total_product_price,
-        GROUP_CONCAT(CONCAT(p.name, ' (x', o.qty, ')') ORDER BY o.pid SEPARATOR ', ') AS ordered_products,
-        GROUP_CONCAT(p.image_01 ORDER BY o.pid SEPARATOR ', ') AS ordered_product_images  -- Modified: Added image_01 column to fetch
-      FROM
-        orders o
-      JOIN
-        products p ON o.pid = p.id
-      WHERE
-        o.user_id = ?
-      GROUP BY
-        o.id
-      ORDER BY
-        o.placed_on DESC
-    ");
+            SELECT
+              o.id,
+              o.name,
+              o.number,
+              o.email,
+              o.method,
+              o.delivery,
+              o.delivery_cost,
+              o.address,
+              o.payment_status,
+              o.order_status,
+              o.placed_on,
+              SUM(o.price * o.qty) AS total_product_price,
+              GROUP_CONCAT(CONCAT(p.name, ' (x', o.qty, ')') ORDER BY o.pid SEPARATOR ', ') AS ordered_products,
+              GROUP_CONCAT(p.image_01 ORDER BY o.pid SEPARATOR ', ') AS ordered_product_images
+            FROM
+              orders o
+            JOIN
+              products p ON o.pid = p.id
+            WHERE
+              o.user_id = ?
+            GROUP BY
+              o.id
+            ORDER BY
+              o.placed_on DESC
+          ");
           $select_orders->execute([$user_id]);
 
           if ($select_orders->rowCount() > 0) {
@@ -98,7 +98,6 @@ if (isset($_SESSION['user_id'])) {
                   <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_orders['delivery']; ?></span></p>
                   <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery cost : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
                   <p>Address : <span><?= $fetch_orders['address']; ?></span></p>
-                  <p>Payment method : <span><?= $fetch_orders['method']; ?></span></p>
                   <p>Ordered product(s) : <span><?= $fetch_orders['ordered_products']; ?></span></p>
                   <div class="ordered-img">
                     <?php
@@ -108,6 +107,7 @@ if (isset($_SESSION['user_id'])) {
                     ?>
                   </div>
                   <p>Total price : <span>$<?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?></span></p>
+                  <p>Payment method : <span><?= $fetch_orders['method']; ?></span></p>
                   <p>Payment status : <span><?= $fetch_orders['payment_status']; ?></span> </p>
                   <p>Order status : <span><?= $fetch_orders['order_status']; ?></span> </p>
                 </div>
