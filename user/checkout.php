@@ -24,8 +24,8 @@ if (isset($_POST['order'])) {
     $city = filter_var($_POST['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $state = filter_var($_POST['state'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $country = filter_var($_POST['country'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $pin_code = filter_var($_POST['pin_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $address = "Flat no. $flat, $street, $city, $state, $country - $pin_code";
+    $postal_code = filter_var($_POST['postal_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $address = "Flat №: $flat, Street: $street, City: $city, State: $state, Country: $country, Post code: $postal_code";
     $delivery_cost = 9.99; // Assuming delivery cost is fixed at $9.99
   } else {
     // If delivery option is "no", set address to empty string and delivery cost to 0
@@ -141,7 +141,7 @@ if (isset($_POST['order'])) {
           <div class="grand-total">Grand total : <span>$<?= $grand_total; ?></span></div>
         </div>
 
-        <h3>Place your shipping info</h3>
+        <h3>Place your shippostalg info</h3>
 
         <div class="flex">
           <div class="inputBox">
@@ -172,11 +172,11 @@ if (isset($_POST['order'])) {
             </select>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>Address line 01 :</span>
+            <span>Flat № :</span>
             <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>Address line 02 :</span>
+            <span>Street :</span>
             <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
@@ -192,8 +192,8 @@ if (isset($_POST['order'])) {
             <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>Pin code :</span>
-            <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+            <span>Postal code :</span>
+            <input type="number" min="0" name="postal_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
           </div>
         </div>
 

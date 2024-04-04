@@ -1788,6 +1788,7 @@
   .orders .box-container {
     grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
   }
+
 }
 
 .orders .box-container .box {
@@ -1798,6 +1799,7 @@
   overflow-y: auto;
   background: url(../images/order-bg.png) center/cover;
   border-radius: var(--border-radius);
+  text-align: center;
   box-shadow: 0 0 15px var(--black);
   transition: 300ms ease;
 }
@@ -1833,6 +1835,27 @@
 .orders .box-container .box div p span {
   color: #ffffff;
   font-size: large;
+}
+
+.orders .box-container .box .ordered-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  height: 200px;
+}
+
+.ordered-img::-webkit-scrollbar {
+  width: 5px;
+}
+
+.orders .box-container .box .ordered-img-item {
+  margin-left: 10px !important;
+  max-width: 50%;
+  height: 100%;
+  min-width: 80px;
+  object-fit: contain;
+  border-radius: 5px;
 }
 
 /* Footer */
