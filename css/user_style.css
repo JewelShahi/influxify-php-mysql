@@ -704,10 +704,6 @@
   font-size: 3rem !important;
 }
 
-.contact-info .medias a:hover {
-  color:rgb(0, 0, 0) !important;
-}
-
 .contact-info div p {
   margin: 0;
 }
@@ -715,11 +711,11 @@
 .contact-info div a {
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 200ms ease;
 }
 
 .contact-info div a:hover {
-  color: rgb(105, 197, 231);
+  color: rgb(135, 254, 114) !important;
 }
 
 .contact-map {
