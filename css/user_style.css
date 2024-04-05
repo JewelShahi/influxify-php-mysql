@@ -704,6 +704,10 @@
   font-size: 3rem !important;
 }
 
+.contact-info .medias a:hover {
+  color:rgb(0, 0, 0) !important;
+}
+
 .contact-info div p {
   margin: 0;
 }

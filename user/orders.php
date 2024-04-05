@@ -119,10 +119,7 @@ if (isset($_SESSION['user_id'])) {
           }
         }
         ?>
-
       </div>
-
-
     </section>
 
   <?php
@@ -138,6 +135,7 @@ if (isset($_SESSION['user_id'])) {
   <!-- Scroll up button -->
   <?php include '../components/scroll_up.php'; ?>
   <script src="../js/scrollUp.js"></script>
+
 </body>
 
 </html>
