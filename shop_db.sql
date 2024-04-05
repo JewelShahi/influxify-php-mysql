@@ -51,7 +51,8 @@ CREATE TABLE `cart` (
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`user_id`, `pid`, `name`, `price`, `quantity`) VALUES
+INSERT INTO `cart` (`user_id`, `pid`, `name`, `price`, `quantity`) 
+VALUES
 (1, 18, 'Motorola Moto e13 Autora Green', 158.00, 1),
 (8, 5, 'Samsung Galaxy S21 Ultra Phantom Black', 1199.99, 3);
 
@@ -83,7 +84,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `pid`, `user_id`, `name`, `number`, `email`, `method`, `delivery`, `delivery_cost`, `address`, `price`, `placed_on`, `payment_status`, `order_status`, `qty`) VALUES
+INSERT INTO `orders` (`id`, `pid`, `user_id`, `name`, `number`, `email`, `method`, `delivery`, `delivery_cost`, `address`, `price`, `placed_on`, `payment_status`, `order_status`, `qty`) 
+VALUES
 (1, 6, 1, 'Jewel', '087654321', 'jewel@gmail.com', 'credit card', 'no', 0.00, '-', 2349.99, '2024-01-20 22:21:51', 'completed', 'delivered', 1),
 (1, 8, 1, 'Jewel', '0876902143', 'joe@joe.com', 'credit card', 'no', 0.00, '-', 456.00, '2024-01-20 22:21:51', 'completed', 'delivered', 1),
 (1, 9, 1, 'Joe', '0887462351', 'jewel@gmail.com', 'credit card', 'no', 0.00, '-', 789.20, '2024-01-20 22:21:51', 'completed', 'delivered', 4),
@@ -125,7 +127,8 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `details`, `brand`, `released`, `qty`, `cpu`, `storage`, `ram`, `camera_count`, `camera_resolution`, `size`, `battery`, `color`, `price`, `image_01`, `image_02`, `image_03`) VALUES
+INSERT INTO `products` (`id`, `name`, `details`, `brand`, `released`, `qty`, `cpu`, `storage`, `ram`, `camera_count`, `camera_resolution`, `size`, `battery`, `color`, `price`, `image_01`, `image_02`, `image_03`) 
+VALUES
 (5, 'Samsung Galaxy S21 Ultra Phantom Black', 'The Samsung Galaxy S21 Ultra is a premium flagship smartphone with cutting-edge features, a top-of-the-line camera system, and powerful hardware.', 'Samsung', '2021-01-29', 2, 'Exynos 2100', '512GB', '16GB', 4, '108MP (wide), 12MP (ultrawide), 10MP (periscope telephoto), 10MP (telephoto)', '6.8 in', '5000 mAh', 'Phantom Black', 1199.99, 'Samsung Galaxy S21 Ultra 1.png', 'Samsung Galaxy S21 Ultra 2.png', 'Samsung Galaxy S21 Ultra 3.png'),
 (6, 'iPhone 13 Pro Max Graphite', 'The iPhone 13 Pro Max is the latest flagship smartphone from Apple, featuring a powerful A15 Bionic chip, exceptional camera capabilities, and a stunning Super Retina XDR display.', 'Apple', '2021-09-14', 11, 'A15 Bionic', '1TB', '8GB', 3, '12MP (wide), 12MP (ultrawide), 12MP (telephoto)', '6.7 in', '4352 mAh', 'Graphite', 2349.99, 'iphone 13 pro max graphyte 1.png', 'iphone 13 pro max graphyte 2.png', 'iphone 13 pro max graphyte 3.png'),
 (8, 'Google Pixel 5 Just Black', 'Experience the cutting-edge technology of the Google Pixel 5, a flagship smartphone that combines sleek design with powerful features. The device is equipped with an advanced processor ensuring smooth and efficient performance for all your tasks and applications. Capture stunning moments with the triple camera setup. The 6.0-inch display provides an immersive viewing experience. The Google Pixel 5 delivers a premium smartphone experience.', 'Google', '2022-10-01', 7, 'Qualcomm Snapdragon 765G', '128GB', '8GB', 3, '12.2 MP (main), 16 MP (ultrawide)', '6.0 in', '4080 mAh', 'Just Black', 667.63, 'Google Pixel 5 Just Black 1.png', 'Google Pixel 5 Just Black 2.png', 'Google Pixel 5 Just Black 3.png'),
@@ -164,10 +167,11 @@ CREATE TABLE `services` (
 -- Dumping data for table `services`
 --
 
-INSERT INTO `services` (`id`, `user_id`, `placed_on`, `name`, `email`, `number`, `brand`, `description`, `is_resolved`, `payment_method`, `payment_status`, `delivery`, `price`, `address`) VALUES
+INSERT INTO `services` (`id`, `user_id`, `placed_on`, `name`, `email`, `number`, `brand`, `description`, `is_resolved`, `payment_method`, `payment_status`, `delivery`, `price`, `address`)
+VALUES 
 (1, 1, '2024-01-21 08:42:15', 'Jewel', 'joeimportant1020@gmail.com', '0878146923', 'Samsung', 'Dept', 0, NULL, 'pending', NULL, 43.53, '-'),
-(2, 1, '2024-01-27 09:03:48', 'Joe', 'jewel@gmail.com', '0879456200', 'Samsung', 'The primary concern is that the phone screen appears to be cracked, and there is a noticeable lack of responsiveness. I first noticed the problem on [mention the date or approximate time]. There wasn\'t any specific incident that I can recall, but the screen\'s behavior changed suddenly. Upon closer inspection, I observed several cracks on the screen\'s surface. It\'s worth noting that these cracks seem to be affecting the overall functionality of the touchscreen. There haven\'t been any recent software updates or changes in settings that I am aware of. The phone has been operating normally until the issue with the screen emerged.', 1, 'cash on delivery', 'completed', 'no', 28.00, '- '),
-(3, 1, '2024-02-12 13:21:26', 'Jewel Shahi', 'jewel@jewel.com', '0877323151', 'Apple', 'Not good', 0, 'cash on delivery', 'pending', 'yes', 22.35, 'Flat №: 23, Street: Amber Street, City: Sofia, State: Sofia City, Country: Bulgaria, Post code: 12336\r\n');
+(2, 1, '2024-01-27 09:03:48', 'Joe', 'jewel@gmail.com', '0879456200', 'Samsung', 'The primary concern is that the phone screen appears to be cracked, and there is a noticeable lack of responsiveness. I first noticed the problem on [mention the date or approximate time]. There wasnt any specific incident that I can recall, but the screens behavior changed suddenly. Upon closer inspection, I observed several cracks on the screens surface. Its worth noting that these cracks seem to be affecting the overall functionality of the touchscreen. There havent been any recent software updates or changes in settings that I am aware of. The phone has been operating normally until the issue with the screen emerged.', 1, 'cash on delivery', 'completed', 'no', 28.00, '- '),
+(3, 1, '2024-02-12 13:21:26', 'Jewel Shahi', 'jewel@jewel.com', '0877323151', 'Apple', 'Not good', 0, 'cash on delivery', 'pending', 'yes', 22.35, 'Flat №: 23, Street: Amber Street, City: Sofia, State: Sofia City, Country: Bulgaria, Post code: 12336');
 
 -- --------------------------------------------------------
 
@@ -189,7 +193,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `reg_date`) VALUES
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `reg_date`) 
+VALUES
 (1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'ichigo-kurosaki.png', '2023-12-15'),
 (2, 'Admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'sung-jinwoo-death-look.png', '2023-12-15'),
 (3, 'TesterAdmin', 'testadmin@test.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 'logedin.png', '2024-01-05'),
@@ -216,7 +221,8 @@ CREATE TABLE `wishlist` (
 -- Dumping data for table `wishlist`
 --
 
-INSERT INTO `wishlist` (`user_id`, `pid`, `name`, `price`) VALUES
+INSERT INTO `wishlist` (`user_id`, `pid`, `name`, `price`)
+VALUES
 (1, 19, 'Oppo A12 Blue', 280);
 
 --
