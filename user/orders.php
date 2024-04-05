@@ -102,7 +102,7 @@ if (isset($_SESSION['user_id'])) {
                   <div class="ordered-img">
                     <?php
                     for ($i = 0; $i < count($ordered_products); $i++) {
-                      echo '<img class="ordered-img-item" src="../uploaded_img/products/' . $ordered_product_images[$i] . '" alt="Product Image">';  // Modified: Added image display
+                      echo '<img class="ordered-img-item" src="../uploaded_img/products/' . $ordered_product_images[$i] . '" alt="../uploaded_img/products/' . $ordered_product_images[$i] . '">';
                     }
                     ?>
                   </div>
