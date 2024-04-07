@@ -88,7 +88,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
       <label for="storage">Filter by storage:</label>
       <select id="storage" name="storage">
-        <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- All Storage --</option>
+        <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- All Storages --</option>
         <option value="32GB" <?= ($filter_storage == '32GB') ? 'selected' : '' ?>>32GB</option>
         <option value="64GB" <?= ($filter_storage == '64GB') ? 'selected' : '' ?>>64GB</option>
         <option value="128GB" <?= ($filter_storage == '128GB') ? 'selected' : '' ?>>128GB</option>
