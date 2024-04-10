@@ -10,7 +10,9 @@ if (isset($_SESSION['admin_id'])) {
   $admin_id = $_SESSION['admin_id'];
 
   header("Location: dashboard.php");
-}
+}else {
+  $admin_id = '';
+};
 
 if (isset($_POST['submit'])) {
   
