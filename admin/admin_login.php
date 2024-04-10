@@ -6,6 +6,12 @@ include '../components/connect.php';
 // Start the session
 session_start();
 
+if (isset($_SESSION['admin_id'])) {
+  $admin_id = $_SESSION['admin_id'];
+
+  header("Location: dashboard.php");
+}
+
 if (isset($_POST['submit'])) {
   
   $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
