@@ -122,8 +122,14 @@ if (isset($_POST['order'])) {
           $cart_items[] = '';
           $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
           $select_cart->execute([$user_id]);
+
+          // Check if there are any rows returned by the SELECT query
           if ($select_cart->rowCount() > 0) {
+
+            // Fetches the next row from the result set returned by the SELECT query as an associative array
             while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+              
+              // Accessing the value of the 'name', 'price' and 'quantity' columns from the fetched row
               $cart_items[] = $fetch_cart['name'] . ' (' . $fetch_cart['price'] . ' x ' . $fetch_cart['quantity'] . ') - ';
               $total_products = implode($cart_items);
               $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);

@@ -76,8 +76,11 @@ if (isset($_GET['delete'])) {
       <h1 class="heading">User accounts</h1>
       <div class="box-container">
         <?php
+
+        // Extracting all users with filed isAdmin = 0 (normal users)
         $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 0");
         $select_accounts->execute();
+
         if ($select_accounts->rowCount() > 0) {
           while ($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)) {
         ?>
