@@ -3,9 +3,8 @@ let homeSwiper = new Swiper(".home-slider", {
   loop: false, // Enable infinite loop
   effect: "slide", // Slide effect
   speed: 600, // Slide animation speed
-  spaceBetween: 500, // Space between slides (optional)
   autoplay: {
-    delay: 5000, // Autoplay delay (optional)
+    delay: 5500, // Autoplay delay (optional)
   },
   pagination: {
     el: ".swiper-pagination", // Pagination element selector (optional)
@@ -54,7 +53,7 @@ prevBtn.addEventListener("mouseout", () => {
 let brandSwiper = new Swiper(".brand-slider", {
   loop: false, // Enable infinite loop
   effect: "slide", // Slide effect
-  speed: 600, // Slide animation speed
+  speed: 200, // Slide animation speed
   spaceBetween: 20, // Space between slides (optional)
   pagination: {
     el: ".swiper-pagination", // Pagination element selector (optional)
@@ -65,8 +64,8 @@ let brandSwiper = new Swiper(".brand-slider", {
     prevEl: ".swiper-button-prev",
   },
   keyboard: {
-    enabled: true, // Keyboard navigation enabled
-    onlyInViewport: false, // Allow keyboard navigation outside viewport
+    enabled: true,
+    onlyInViewport: false,
   },
   breakpoints: {
     0: {
@@ -114,9 +113,10 @@ prevBtnBrand.addEventListener("mouseout", () => {
 /************ Product Swiper *****************/
 const productsSwiper = new Swiper(".products-slider", {
   loop: false,
+  seed: 200,
   spaceBetween: 20,
   autoplay: {
-    delay: 3000, // Autoplay delay (optional)
+    delay: 4000,
   },
   pagination: {
     el: ".swiper-pagination",

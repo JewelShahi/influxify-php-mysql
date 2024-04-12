@@ -275,7 +275,6 @@ if (isset($_POST['update'])) {
 
   $color = $_POST['color'];
   $color = filter_var($color, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $color = strtolower($color);
 
   if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) && checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
     $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");

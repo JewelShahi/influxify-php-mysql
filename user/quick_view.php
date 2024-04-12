@@ -75,7 +75,7 @@ include '../components/wishlist_cart.php';
               <div class="info"><span>Battery: </span><?= $fetch_product['battery']; ?></div>
               <div class="info"><span>Color: </span><?= $fetch_product['color']; ?></div>
               <?php
-              if ($fetch_product["qty"] != 0 || $fetch_product["qty"] <= 5) {
+              if ($fetch_product["qty"] != 0 && $fetch_product["qty"] <= 5) {
               ?>
                 <div class="info" style="color: #9c1313; !important"><span>Remaining quantity: </span><?= $fetch_product['qty']; ?></div>
               <?php
