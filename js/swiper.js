@@ -1,26 +1,29 @@
 /****** Swiper Display product *******/
 let homeSwiper = new Swiper(".home-slider", {
-  loop: true,
-  effect: "slide",
-  speed: 400,
-  spaceBetween: 20,
+  loop: false, // Enable infinite loop
+  effect: "slide", // Slide effect
+  speed: 600, // Slide animation speed
+  spaceBetween: 500, // Space between slides (optional)
   autoplay: {
-    delay: 5000,
+    delay: 5000, // Autoplay delay (optional)
   },
   pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
+    el: ".swiper-pagination", // Pagination element selector (optional)
+    clickable: true, // Enable pagination clicking (optional)
   },
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
   keyboard: {
-    enabled: true,
-    onlyInViewport: false,
+    enabled: true, // Keyboard navigation enabled
+    onlyInViewport: false, // Allow keyboard navigation outside viewport
   },
+  // Ensure smooth looping with any number of slides
+  loopAdditionalSlides: 1, // Add one extra blank slide
 });
 
+// Style and hover effects for navigation buttons (optional)
 const nextBtn = document.querySelector(".swiper-button-next");
 nextBtn.style.color = "white";
 nextBtn.style.fontWeight = "bold";
@@ -44,20 +47,26 @@ prevBtn.addEventListener("mouseover", () => {
 prevBtn.addEventListener("mouseout", () => {
   prevBtn.style.color = "white";
 });
+
 /************************************/
 
 /****** Brand Swiper *******/
 let brandSwiper = new Swiper(".brand-slider", {
-  loop: true,
-  effect: "slide",
-  spaceBetween: 20,
+  loop: false, // Enable infinite loop
+  effect: "slide", // Slide effect
+  speed: 600, // Slide animation speed
+  spaceBetween: 20, // Space between slides (optional)
   pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
+    el: ".swiper-pagination", // Pagination element selector (optional)
+    clickable: true, // Enable pagination clicking (optional)
   },
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
+  },
+  keyboard: {
+    enabled: true, // Keyboard navigation enabled
+    onlyInViewport: false, // Allow keyboard navigation outside viewport
   },
   breakpoints: {
     0: {
@@ -103,9 +112,12 @@ prevBtnBrand.addEventListener("mouseout", () => {
 });
 
 /************ Product Swiper *****************/
-let productsSwiper = new Swiper(".products-slider", {
-  loop: true,
+const productsSwiper = new Swiper(".products-slider", {
+  loop: false,
   spaceBetween: 20,
+  autoplay: {
+    delay: 3000, // Autoplay delay (optional)
+  },
   pagination: {
     el: ".swiper-pagination",
     clickable: true,

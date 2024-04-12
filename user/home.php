@@ -22,9 +22,11 @@ include '../components/wishlist_cart.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home</title>
 	<link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
-	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 
-	<!-- font awesome cdn link  -->
+	<!-- Swiper.js -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+	<!-- Fontawesome cdn link  -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 	<!-- AOS -->
@@ -75,6 +77,7 @@ include '../components/wishlist_cart.php';
 			</div>
 		</section>
 	</div>
+
 
 	<section class="about-us-section">
 		<div class="header-blur">
@@ -213,7 +216,6 @@ include '../components/wishlist_cart.php';
 				</a>
 
 			</div>
-
 			<div class="swiper-pagination"></div>
 			<div class="swiper-button-next" id="brand-next"></div>
 			<div class="swiper-button-prev" id="brand-prev"></div>
@@ -282,8 +284,6 @@ include '../components/wishlist_cart.php';
 
 	<?php include 'testamonial.php'; ?>
 
-	<!-- https://tw-elements.com/snippets/tailwind/tailwindelements/5240636 -->
-
 	<!-- Footer -->
 	<?php include '../components/footer.php'; ?>
 
@@ -295,7 +295,7 @@ include '../components/wishlist_cart.php';
 	<script src="../js/scrollUp.js"></script>
 
 	<!-- Carosell -->
-	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<script src="../js/swiper.js"></script>
 
 	<!-- AOS  -->
