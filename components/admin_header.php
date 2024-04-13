@@ -19,22 +19,29 @@ if (isset($message)) {
     </div>
 
     <nav class="navbar">
+      <!-- Dashboard -->
       <a href="../admin/dashboard.php">
         <i class="fa-solid fa-chart-simple"></i> Dashboard
       </a>
+      <!-- Products -->
       <a href="../admin/products.php">
         <i class="fas fa-shopping-bag"></i> Products
       </a>
+      <!-- Orders -->
       <a href="../admin/placed_orders.php">
-        <i class="fa-solid fa-clipboard-list"></i> Orders</a>
+        <i class="fa-solid fa-clipboard-list"></i> Orders
+      </a>
+      <!-- Services -->
+      <a href="../admin/services.php">
+        <i class="fa-solid fa-wrench"></i> Services
+      </a>
+      <!-- Admins -->
       <a href="../admin/admin_accounts.php">
         <i class="fas fa-user-cog"></i> Admins
       </a>
+      <!-- Users -->
       <a href="../admin/users_accounts.php">
         <i class="fas fa-users"></i> Users
-      </a>
-      <a href="../admin/services.php">
-        <i class="fa-solid fa-wrench"></i> Services
       </a>
     </nav>
 
@@ -48,7 +55,7 @@ if (isset($message)) {
       $admin_name = $conn->prepare("SELECT `name` FROM `users` WHERE id = ?");
       $admin_name->execute([$admin_id]);
       $name_result = $admin_name->fetchColumn();
-      
+
       // Check if there is a logged-in user
       if ($admin_id && !empty($avatar_result)) {
         // If logged in and avatar is not empty, set background image

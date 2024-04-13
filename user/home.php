@@ -47,9 +47,9 @@ include '../components/wishlist_cart.php';
 			<div class="swiper home-slider">
 				<div class="swiper-wrapper">
 					<?php
-					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products` ORDER BY RAND()");
+					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products` ORDER BY RAND() LIMIT 10");
 					$select_products->execute();
-					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);
+					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);					
 					?>
 
 					<?php for ($i = 0; $i < count($productData); $i++) { ?>
