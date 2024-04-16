@@ -76,7 +76,7 @@ if (isset($_GET['delete'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Поръчки</title>
+  <title>Заявени поръчки</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -107,7 +107,7 @@ if (isset($_GET['delete'])) {
   ?>
     <section class="orders">
 
-      <h1 class="heading">Поръчки</h1>
+      <h1 class="heading">Заявени поръчки</h1>
 
       <div class="box-container">
 
@@ -156,7 +156,7 @@ if (isset($_GET['delete'])) {
                 <p> Имейл : <span><?= $fetch_orders['email']; ?></span> </p>
                 <p> Тел. : <span><?= $fetch_orders['number']; ?></span> </p>
                 <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Доставка : <span><?= $fetch_orders['delivery']; ?></span></p>
-                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Цена за доставка : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
+                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Цена за доставка : <span><?= $fetch_orders['delivery_cost']; ?> лв.</span></p>
                 <p> Адрес : <span><?= $fetch_orders['address']; ?></span> </p>
                 <p> Поръчани продукти : <span><?= $fetch_orders['ordered_products']; ?></span> </p>
                 <div class="ordered-img">
@@ -166,7 +166,7 @@ if (isset($_GET['delete'])) {
                   }
                   ?>
                 </div>
-                <p> Обща цена : <span>$<?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?></span> </p>
+                <p> Обща сума : <span><?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?> лв.</span> </p>
                 <p> Вид на платежа : <span><?= $fetch_orders['method']; ?></span> </p>
 
                 <form action="" method="post">

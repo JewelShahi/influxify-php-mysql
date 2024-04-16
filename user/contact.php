@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Info</title>
+  <title>Информация за контакти</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -27,26 +27,26 @@ if (isset($_SESSION['user_id'])) {
   <?php include '../components/user_header.php'; ?>
 
   <div class="contact">
-    <h1 class="contact-header">Contact Information</h1>
+    <h1 class="contact-header">Информация за контакти</h1>
     <div class="contact-info">
       <div>
-        <span>Owner :</span>
-        <p>Jewel Shahi</p>
+        <span>Собственик :</span>
+        <p>Джуел Шахи</p>
       </div>
       <div>
-        <span>E-mail :</span>
+        <span>Емейл :</span>
         <a href="mailto:joeimportant1020@gmail.com">joeimportant1020@gmail.com</a>
       </div>
       <div>
-        <span>Phone :</span>
+        <span>Тел. номер :</span>
         <a href="#">+359 877564341</a>
       </div>
       <div>
-        <span>Address :</span>
-        <p>Sofia, Bulgaria - 1000</p>
+        <span>Адрес :</span>
+        <p>София, България - 1000</p>
       </div>
       <div>
-        <span>Follow us on :</span>
+        <span>Последвайте ни в :</span>
         <div class="medias">
           <a href="#"><i class="fab fa-facebook"></i></a>
           <a href="#"><i class="fab fa-twitter"></i></a>
@@ -54,11 +54,11 @@ if (isset($_SESSION['user_id'])) {
         </div>
       </div>
       <div>
-        <span>Opening Hours :</span>
+        <span>Отворени часове :</span>
         <p>
-          Monday-Friday : <b>9AM</b> - <b>6PM</b><br>
-          Saturday : <b>10AM</b> - <b>4PM</b><br>
-          Sunday : <b>closed</b>
+          Понеделник - Петък : <b>9:00</b> - <b>18:00</b><br>
+          Събота : <b>10:00</b> - <b>16:00</b><br>
+          Неделя : <b>неработен</b>
         </p>
       </div>
     </div>

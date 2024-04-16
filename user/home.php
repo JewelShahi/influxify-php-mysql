@@ -49,7 +49,7 @@ include '../components/wishlist_cart.php';
 					<?php
 					$select_products = $conn->prepare("SELECT `name`, `details`, `image_01` FROM `products` ORDER BY RAND() LIMIT 10");
 					$select_products->execute();
-					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);					
+					$productData = $select_products->fetchAll(PDO::FETCH_ASSOC);
 					?>
 
 					<?php for ($i = 0; $i < count($productData); $i++) { ?>
@@ -66,7 +66,7 @@ include '../components/wishlist_cart.php';
 								<h3><?php echo $name; ?></h3>
 								<p style="padding: 0 5px; width: 90%;"><?php echo $details; ?></p>
 								<br>
-								<a href="shop.php" class="btn shop-now-btn"><span>Shop now <span><i class="fa-solid fa-arrow-right"></i></a>
+								<a href="shop.php" class="btn shop-now-btn"><span>Пазарувай сега <span><i class="fa-solid fa-arrow-right"></i></a>
 							</div>
 						</div>
 					<?php } ?>
@@ -81,33 +81,33 @@ include '../components/wishlist_cart.php';
 
 	<section class="about-us-section">
 		<div class="header-blur">
-			<h1 class="heading" data-aos="fade-up" data-aos-duration="1000">About Us</h1>
+			<h1 class="heading" data-aos="fade-up" data-aos-duration="1000">За нас</h1>
 		</div>
 		<div class="about-us">
 			<div class="info" data-aos="fade-right" data-aos-duration="1000">
 				<div class="inner-info">
 					<div>
 						<p>
-							Influxify is dedicated to revolutionizing the mobile industry with cutting-edge technology and exceptional service, empowering individuals and businesses with reliable, high-quality communication solutions.
+							Influxify е посветен на революционизирането на мобилната индустрия с авангардни технологии и изключително обслужване, овластяване на хората и бизнеса с надеждни, висококачествени комуникационни решения.
 						</p>
 					</div>
 					<div class="missions-and-goals" data-aos="zoom-out" data-aos-duration="1000">
-						<h2>Our Mission</h2>
+						<h2>Нашата мисия</h2>
 						<ul class="bullet-point">
 							<li>
-								Our mission at Influxify is to innovate the mobile industry by providing advanced technology and unparalleled service.
+								Нашата мисия в Influxify е да иновираме мобилната индустрия, като предоставяме модерна технология и несравнимо обслужване.
 							</li>
 							<li>
-								This enables seamless communication experiences for individuals and businesses alike.
+								Това позволява безпроблемно преживяване както за физически лица, така и за фирми.
 							</li>
 						</ul>
-						<h2>Our Goal</h2>
+						<h2>Нашaтa цел</h2>
 						<ul class="bullet-point">
 							<li>
-								At Influxify, our goal is to be at the forefront of mobile innovation, continuously surpassing industry standards and customer expectations.
+								Нашата цел в Influxify е да бъдем в челните редици на мобилните иновации, непрекъснато надминавайки индустриалните стандарти и очакванията на клиентите.
 							</li>
 							<li>
-								We achieve this by delivering customized solutions to meet the diverse needs of our users.
+								Ние постигаме това, като предоставяме персонализирани решения, за да отговорим на разнообразните нужди на нашите потребители.
 							</li>
 						</ul>
 					</div>
@@ -119,7 +119,7 @@ include '../components/wishlist_cart.php';
 
 	<section class="services-section">
 		<div class="header-blur">
-			<h1 class="heading" data-aos="fade-down" data-aos-duration="1000">Services We Offer</h1>
+			<h1 class="heading" data-aos="fade-down" data-aos-duration="1000">Предлагани услуги</h1>
 		</div>
 		<div class="services-info">
 			<div class="images" data-aos="fade-right" data-aos-duration="1000"></div>
@@ -127,38 +127,37 @@ include '../components/wishlist_cart.php';
 				<div class="inner-info">
 					<div>
 						<p>
-							At Influxify, our skilled technicians swiftly repair phone issues, from screens to the inner workings, restoring your device's functionality.
+							В Influxify нашите квалифицирани техници бързо поправят проблемите с телефона, от екраните до вътрешната работа, като възстановяват функционалността на вашето устройство.
 						</p>
 						<p>
-							Trust us for fast, reliable service using genuine parts and advanced techniques.
+							Доверете ни се за бързо и надеждно обслужване с помощта на оригинални части и усъвършенствани техники.
 						</p>
 						<p>
-							Whether minor or major, Influxify delivers professional care for your phone.
+							Независимо от възрастта, Influxify осигурява професионална грижа за вашия телефон.
 						</p>
 					</div>
 					<div class="services-and-offers" data-aos="zoom-out" data-aos-duration="1000">
-						<h2>Our Services</h2>
+						<h2>Предлагани сервизи</h2>
 						<ul class="bullet-point">
 							<li>
-								Screen repair: Our technicians can quickly and efficiently replace cracked or damaged screens on your device.
+								Ремонт на екрани: Нашите техници могат бързо и ефективно да заменят напукани или повредени екрани на вашето устройство.
 							</li>
 							<li>
-								Battery replacement: We offer battery replacement services to ensure your device stays powered throughout the day.
+								Смяна на батерии: Ние предлагаме услуги за смяна на батерия, за да гарантираме, че вашето устройство остава захранено през целия ден.
 							</li>
 							<li>
-								Software troubleshooting: If you're experiencing software issues, our experts can diagnose and resolve them promptly.
-							</li>
+								Отстраняване на проблеми със софтуера: Ако имате проблеми със софтуера, нашите експерти могат да ги диагностицират и разрешат незабавно.</li>
 						</ul>
-						<h2>Our Offers</h2>
+						<h2>Нашите оферти</h2>
 						<ul class="bullet-point">
 							<li>
-								Free screen protector: Get a complimentary screen protector with any screen repair service.
+								Безплатен протектор за екран: Вземете безплатен протектор за екран с всяка услуга за ремонт на екрани.
 							</li>
 							<li>
-								Discounted battery replacement: Enjoy discounted rates on battery replacement services for a limited time.
+								Смяна на батерия с отстъпка: Възползвайте се от намалени цени за услуги за смяна на батерия за ограничен период от време.
 							</li>
 							<li>
-								Software diagnosis: Receive a free software diagnosis with any repair service.
+								Софтуерна диагностика: Получете безплатна софтуерна диагностика с всеки ремонтен сервиз.
 							</li>
 						</ul>
 					</div>
@@ -169,7 +168,7 @@ include '../components/wishlist_cart.php';
 
 	<section class="brand">
 
-		<h1 class="heading" data-aos="fade-up" data-aos-duration="1000">Shop by brand</h1>
+		<h1 class="heading" data-aos="fade-up" data-aos-duration="1000">Пазарувайте по марка</h1>
 
 		<div class="swiper brand-slider" data-aos="slide-right" data-aos-duration="1000">
 
@@ -225,7 +224,7 @@ include '../components/wishlist_cart.php';
 
 	<section class="home-products">
 
-		<h1 class="heading" data-aos="fade" data-aos-duration="1000">Recently added to our collection</h1>
+		<h1 class="heading" data-aos="fade" data-aos-duration="1000">Наскоро добавени към нашата колекция продукти</h1>
 
 		<div class="swiper products-slider" data-aos="slide-left" data-aos-duration="1000">
 
@@ -249,12 +248,12 @@ include '../components/wishlist_cart.php';
 							<div class="name"><?= $fetch_product['name']; ?></div>
 							<div class="flex">
 								<div class="price">
-									<span>$</span><?= $fetch_product['price']; ?>
+									<?= $fetch_product['price']; ?><span> лв.</span>
 								</div>
 								<?php
 								if ($fetch_product['qty'] == 0) {
 								?>
-									<div class="out-of-stock">Out of stock</div>
+									<div class="out-of-stock">Изчерпан</div>
 								<?php
 								} else {
 								?>
@@ -264,13 +263,13 @@ include '../components/wishlist_cart.php';
 								?>
 							</div>
 							<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>">
-								<i class="fas fa-plus"></i> Add to cart
+								<i class="fas fa-plus"></i> Добави в количката
 							</button>
 						</form>
 				<?php
 					}
 				} else {
-					echo '<p class="empty">No products added yet!</p>';
+					echo '<p class="empty">За момента няма добавени продукти!</p>';
 				}
 				?>
 

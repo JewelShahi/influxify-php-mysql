@@ -57,7 +57,7 @@ if (isset($_GET['delete_all'])) {
 	?>
 		<section class="products">
 
-			<h3 class="heading">Wishlist</h3>
+			<h3 class="heading">Желани продукти</h3>
 
 			<div class="box-container">
 
@@ -84,33 +84,33 @@ if (isset($_GET['delete_all'])) {
 							<img src="../uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="<?= $fetch_wishlist['image']; ?>">
 							<div class="name"><?= $fetch_wishlist['name']; ?></div>
 							<div class="<?= $fetch_wishlist["product_quantity"] != 0 ? '' : 'flex'; ?>">
-								<div class="price">$<?= $fetch_wishlist['price']; ?></div>
+								<div class="price"><?= $fetch_wishlist['price']; ?> лв.</div>
 								<?php if ($fetch_wishlist["product_quantity"] == 0) : ?>
-									<div class="info out-of-stock"><span>Out of stock</span></div>
+									<div class="info out-of-stock"><span>Изчерпан</span></div>
 								<?php endif; ?>
 							</div>
 							<button type="submit" name="add_to_cart" class="btn <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>" <?php if ($fetch_wishlist['product_quantity'] == 0) echo 'disabled'; ?>>
-								<i class="fas fa-plus"></i> Add to cart
+								<i class="fas fa-plus"></i> Добави в количката
 							</button>
-							<button type="submit" onclick="return confirm('Remove this from wishlist?');" class="delete-btn" name="delete">
-								<i class="fas fa-minus"></i> Remove item
+							<button type="submit" onclick="return confirm('Съгласни ли сте да махнете продукта от желанията?');" class="delete-btn" name="delete">
+								<i class="fas fa-minus"></i> Махни
 							</button>
 						</form>
 				<?php
 					}
 				} else {
-					echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Your wishlist is empty.</p>';
+					echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Вашият списък с желания е празен.</p>';
 				}
 				?>
 			</div>
 		</section>
 		<div class="wishlist-total">
-			<p>Grand total : <span>$<?= $grand_total; ?></span></p>
+			<p>Обща сума : <span><?= $grand_total; ?> лв.</span></p>
 			<a href="shop.php" class="option-btn">
-				<i class="fas fa-arrow-left"></i> Continue shopping
+				<i class="fas fa-arrow-left"></i> Към магазина
 			</a>
 			<a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Delete all from wishlist?');">
-				<i class="fas fa-trash-alt"></i> Remove all items
+				<i class="fas fa-trash-alt"></i> Махни всичко
 			</a>
 		</div>
 	<?php

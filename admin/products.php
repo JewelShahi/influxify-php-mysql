@@ -289,7 +289,7 @@ if (isset($_GET['delete'])) {
 
           <div class="inputBox">
             <span>Резолюция на камерата <span style="color: red;">*</span></span>
-            <input type="text" name="camera_resolution" placeholder="Разделителна способност" class="box" required>
+            <input type="text" name="camera_resolution" placeholder="Резолюция" class="box" required>
           </div>
 
           <div class="inputBox">

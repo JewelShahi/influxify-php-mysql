@@ -63,7 +63,7 @@ if (isset($_GET['delete'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services</title>
+  <title>Сервиз</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -87,7 +87,7 @@ if (isset($_GET['delete'])) {
 
     <section class="service" style="min-height: 100%;">
 
-      <h1 class="heading">Services</h1>
+      <h1 class="heading">Сервизи</h1>
 
       <?php
       if ($user_id == '') {
@@ -96,12 +96,12 @@ if (isset($_GET['delete'])) {
       ?>
         <div class="add-ticket">
           <form action="" method="post">
-            <h3>Add a service ticket</h3>
-            <input type="text" name="name" placeholder="Enter your full name" maxlength="100" class="box" required>
-            <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" required>
-            <input type="number" name="number" min="0" max="999999999999999" placeholder="Enter your phone number" onkeypress="if(this.value.length > 15) return false;" class="box" required>
+            <h3>Заявка за сервиз</h3>
+            <input type="text" name="name" placeholder="Пълно име" maxlength="100" class="box" required>
+            <input type="email" name="email" placeholder="Имейл" maxlength="50" class="box" required>
+            <input type="number" name="number" min="0" max="999999999999999" placeholder="Тел. номер" onkeypress="if(this.value.length > 15) return false;" class="box" required>
             <select name="brand" class="box" aria-labelledby="brandLabel" required>
-              <option selected default disabled>Select a brand</option>
+              <option selected default disabled>Избери марка</option>
               <?php
 
               $selectedBrand = $fetch_products['brand'];
@@ -113,8 +113,8 @@ if (isset($_GET['delete'])) {
 
               ?>
             </select>
-            <textarea name="description" class="box" placeholder="Enter description" cols="30" rows="10" required></textarea>
-            <button type="submit" name="send" class="btn">Add service ticket</button>
+            <textarea name="description" class="box" placeholder="Описание на проблема" cols="30" rows="10" required></textarea>
+            <button type="submit" name="send" class="btn">Заяви за сервиз</button>
           </form>
         </div>
 
@@ -125,7 +125,7 @@ if (isset($_GET['delete'])) {
 
         if ($select_services->rowCount() > 0) {
         ?>
-          <h3 class="heading-2">Placed services</h3>
+          <h3 class="heading-2">Заявени сервизни заявки</h3>
           <div class="service-box-container">
             <?php
             while ($fetch_services = $select_services->fetch(PDO::FETCH_ASSOC)) {
@@ -138,24 +138,31 @@ if (isset($_GET['delete'])) {
                   <input type="hidden" name="service_email" value="<?= $fetch_services['email']; ?>">
                   <input type="hidden" name="service_number" value="<?= $fetch_services['number']; ?>">
 
-                  <p>Is resolved : <span><?= $fetch_services['is_resolved'] ? 'Yes' : 'No'; ?></span></p>
-                  <p>Placed on : <span><?= date('d/m/Y H:i:s', strtotime($fetch_services['placed_on'])); ?></span></p>
-                  <p>Name : <span><?= $fetch_services['name']; ?></span></p>
-                  <p>E-mail : <span><?= $fetch_services['email']; ?></span></p>
-                  <p>Phone number : <span><?= $fetch_services['number']; ?></span></p>
-                  <p>Phone brand : <span><?= $fetch_services['brand']; ?></span></p>
-                  <p>Problem : <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
-                  <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_services['delivery']; ?></span></p>
-                  <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Payment method : <span><?= $fetch_services['payment_method']; ?></span></p>
-                  <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price <?= (($fetch_services['delivery'] == 'yes') && ($fetch_services['payment_method'] != null)) ? '(with delivery) ' : '' ?>: <br><span><?= $fetch_services['price']; ?></span></p>
-                  <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Pay for the service</button>
-                  <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Decline service</a>
+                  <p>Решен ли е проблема : <span><?= $fetch_services['is_resolved'] ? 'Yes' : 'No'; ?></span></p>
+                  <p>Заявена на : <span><?= date('d/m/Y H:i:s', strtotime($fetch_services['placed_on'])); ?></span></p>
+                  <p>Име : <span><?= $fetch_services['name']; ?></span></p>
+                  <p>Имейл : <span><?= $fetch_services['email']; ?></span></p>
+                  <p>Тел. номер : <span><?= $fetch_services['number']; ?></span></p>
+                  <p>Марка : <span><?= $fetch_services['brand']; ?></span></p>
+                  <p>Описание на проблема : <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
+                  <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Доставка : <span><?= $fetch_services['delivery']; ?></span></p>
+                  <?php
+                  if ($fetch_services['delivery'] == 'yes') {
+                  ?>
+                    <p> Адрес: <span><?= $fetch_services['address']; ?></span></p>
+                  <?php
+                  }
+                  ?>
+                  <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Вид на платеж : <span><?= $fetch_services['payment_method']; ?></span></p>
+                  <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Цена <?= (($fetch_services['delivery'] == 'yes') && ($fetch_services['payment_method'] != null)) ? '(с доставка) ' : '' ?>: <br><span><?= $fetch_services['price']; ?> лв.</span></p>
+                  <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Плати за сервиза</button>
+                  <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Съгласени ли сте да се откажете от заявката?');" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Откажи заявката</a>
                 </div>
               </form>
           <?php
             }
           } else {
-            echo '<p class="empty">No placed service(s) yet.</p>';
+            echo '<p class="empty">Все още няма заяки за сервиз.</p>';
           }
           ?>
           </div>

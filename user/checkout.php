@@ -76,7 +76,7 @@ if (isset($_POST['order'])) {
       $message[] = 'Грешка при поръчка. Моля, опитайте отново.';
     }
   } else {
-    $message[] = 'Your cart is empty!';
+    $message[] = 'Вашата количка е празна!';
   }
 }
 ?>
@@ -88,7 +88,7 @@ if (isset($_POST['order'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout</title>
+  <title>Заплащане на продукти</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -114,7 +114,7 @@ if (isset($_POST['order'])) {
 
       <form action="" method="POST">
 
-        <h3>Your orders</h3>
+        <h3>Избрани продукти</h3>
 
         <div class="display-orders">
           <?php
@@ -138,72 +138,73 @@ if (isset($_POST['order'])) {
           <?php
             }
           } else {
-            echo '<p class="empty">Your cart is empty!</p>';
+            echo '<p class="empty">Вашата количка е празна!</p>';
           }
           ?>
           <input type="hidden" name="total_products" value="<?= $total_products; ?>">
           <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
-          <div class="delivery-cost" style="display: none;">Delivery cost: <span>$9.99</span></div>
-          <div class="grand-total">Grand total : <span>$<?= $grand_total; ?></span></div>
+          <div class="delivery-cost" style="display: none;">Цена за доставка: <span>9.99 лв.</span></div>
+          <div class="grand-total">Обща сума : <span><?= $grand_total; ?> лв.</span></div>
         </div>
 
-        <h3>Place your shippostalg info</h3>
+        <h3>Вашата информация за плащане/доставка</h3>
 
         <div class="flex">
           <div class="inputBox">
-            <span>Your name :</span>
-            <input type="text" name="name" placeholder="Enter your name" class="box" maxlength="100" required>
+            <span>Вашето име :</span>
+            <input type="text" name="name" placeholder="Име" class="box" maxlength="100" required>
           </div>
           <div class="inputBox">
-            <span>Your phone number :</span>
-            <input type="number" name="number" placeholder="Enter your phone number" class="box" min="0" max="999999999999999" onkeypress="if(this.value.length > 15) return false;" required>
+            <span>Вашият тел. номер :</span>
+            <input type="number" name="number" placeholder="Тел. номер" class="box" min="0" max="999999999999999" onkeypress="if(this.value.length > 15) return false;" required>
           </div>
           <div class="inputBox">
-            <span>Your email :</span>
-            <input type="email" name="email" placeholder="Enter your email" class="box" maxlength="50" required>
+            <span>Вашият имейл :</span>
+            <input type="email" name="email" placeholder="Имейл" class="box" maxlength="50" required>
           </div>
           <div class="inputBox">
-            <span>Payment method :</span>
+            <span>Вид на плащане :</span>
             <select name="method" class="box" required>
-              <option value="cash on delivery">cash on delivery</option>
-              <option value="credit card">credit card</option>
-              <option value="paypal">paypal</option>
+              <option value="cash on delivery">наложен платеж</option>
+               <!-- TODO -->
+              <option value="credit-debit card">кредитна/дебитна карта</option>
+              <option value="paypal">PayPal</option>
             </select>
           </div>
           <div class="inputBox">
-            <span>Include delivery :</span>
+            <span>Включване на доставка (9.99 лв.) :</span>
             <select name="delivery" class="box" required onchange="updateTotalPrice(this.value)">
-              <option value="no">No</option>
-              <option value="yes">Yes</option>
+              <option value="no">Не</option>
+              <option value="yes">Да</option>
             </select>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>Flat № :</span>
-            <input type="text" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50" required>
+            <span>Блок № :</span>
+            <input type="text" name="flat" placeholder="Номер на блока" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>Street :</span>
-            <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
+            <span>Улица :</span>
+            <input type="text" name="street" placeholder="Улица" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>City :</span>
-            <input type="text" name="city" placeholder="E.g. New York City" class="box" maxlength="50" required>
+            <span>Град :</span>
+            <input type="text" name="city" placeholder="Град" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>State :</span>
-            <input type="text" name="state" placeholder="E.g. New York" class="box" maxlength="50" required>
+            <span>Квартал :</span>
+            <input type="text" name="state" placeholder="Квартал" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>Country :</span>
-            <input type="text" name="country" placeholder="E.g. USA" class="box" maxlength="50" required>
+            <span>Държава :</span>
+            <input type="text" name="country" placeholder="Държава" class="box" maxlength="50" required>
           </div>
           <div class="inputBox" id="addressFields" style="display: none;">
-            <span>Postal code :</span>
-            <input type="number" min="0" name="postal_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+            <span>Пощенски код :</span>
+            <input type="number" min="0" name="postal_code" placeholder="000000" min="0" max="999999" onkeypress="if(this.value.length > 6) return false;" class="box" required>
           </div>
         </div>
 
-        <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="Place order">
+        <input type="submit" name="order" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" value="Плати">
 
       </form>
     </section>

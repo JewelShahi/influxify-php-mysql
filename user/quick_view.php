@@ -20,7 +20,7 @@ include '../components/wishlist_cart.php';
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quick View</title>
+  <title>Информация за продукта</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -64,25 +64,25 @@ include '../components/wishlist_cart.php';
             </div>
             <div class="content">
               <div class="details"><?= $fetch_product['details']; ?></div>
-              <div class="info"><span>Brand: </span><?= $fetch_product['brand']; ?></div>
-              <div class="info"><span>Release date: </span><?= date('d/m/Y', strtotime($fetch_product['released'])); ?></div>
+              <div class="info"><span>Марка: </span><?= $fetch_product['brand']; ?></div>
+              <div class="info"><span>Дата на лансиране: </span><?= date('d/m/Y', strtotime($fetch_product['released'])); ?></div>
               <div class="info"><span>CPU: </span><?= $fetch_product['cpu']; ?></div>
-              <div class="info"><span>Storage: </span><?= $fetch_product['storage']; ?></div>
-              <div class="info"><span>RAM: </span><?= $fetch_product['ram']; ?></div>
-              <div class="info"><span>Camera count: </span><?= $fetch_product['camera_count']; ?></div>
-              <div class="info"><span>Camera resolution: </span><?= $fetch_product['camera_resolution']; ?></div>
-              <div class="info"><span>Display (phone) size: </span><?= $fetch_product['size']; ?></div>
-              <div class="info"><span>Battery: </span><?= $fetch_product['battery']; ?></div>
-              <div class="info"><span>Color: </span><?= $fetch_product['color']; ?></div>
+              <div class="info"><span>Вътрешна памет: </span><?= $fetch_product['storage']; ?></div>
+              <div class="info"><span>RAM памет: </span><?= $fetch_product['ram']; ?></div>
+              <div class="info"><span>Брой камери: </span><?= $fetch_product['camera_count']; ?></div>
+              <div class="info"><span>Резолюция камерата: </span><?= $fetch_product['camera_resolution']; ?></div>
+              <div class="info"><span>Размер на дисплейя: </span><?= $fetch_product['size']; ?></div>
+              <div class="info"><span>Капацитет на батерията: </span><?= $fetch_product['battery']; ?></div>
+              <div class="info"><span>Цвят: </span><?= $fetch_product['color']; ?></div>
               <?php
               if ($fetch_product["qty"] != 0 && $fetch_product["qty"] <= 5) {
               ?>
-                <div class="info" style="color: #9c1313; !important"><span>Remaining quantity: </span><?= $fetch_product['qty']; ?></div>
+                <div class="info" style="color: #9c1313; !important"><span>Оставащо количество: </span><?= $fetch_product['qty']; ?></div>
               <?php
               }
               ?>
               <div class="flex">
-                <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
+                <div class="price"><?= $fetch_product['price']; ?><span> лв.</span></div>
                 <?php
                 if ($fetch_product["qty"] > 0) {
                 ?>
@@ -90,17 +90,17 @@ include '../components/wishlist_cart.php';
                 <?php
                 } else {
                 ?>
-                  <div class="info out-of-stock" style="font-size: 2.5rem;"><span>Out of stock</span></div>
+                  <div class="info out-of-stock" style="font-size: 2.5rem;"><span>Изчерпан</span></div>
                 <?php
                 }
                 ?>
               </div>
               <div class="flex-btn">
                 <button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>" <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>>
-                  <i class="fas fa-plus"></i> Add to cart
+                  <i class="fas fa-plus"></i> Добави в количката
                 </button>
                 <button class="option-btn" type="submit" name="add_to_wishlist">
-                  <i class="fas fa-heart"></i> Add to wishlist
+                  <i class="fas fa-heart"></i> Добави към желания
                 </button>
               </div>
             </div>
@@ -109,7 +109,7 @@ include '../components/wishlist_cart.php';
     <?php
       }
     } else {
-      echo '<p class="empty">Invalid product!</p>';
+      echo '<p class="empty">Невалиден продукт!</p>';
     }
     ?>
 

@@ -55,7 +55,7 @@ if (isset($_POST['service_checkout_data'])) {
     $state = filter_var($_POST['state'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $country = filter_var($_POST['country'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $postal_code = filter_var($_POST['postal_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $address = "Flat №: $flat, Street: $street, City: $city, State: $state, Country: $country, Post code: $postal_code";
+    $address = "Блок №: $flat, Улица: $street, Град: $city, Квартал: $state, Държава: $country, Пощенски код: $postal_code";
   } else {
     $address = '-';
   }
@@ -67,7 +67,7 @@ if (isset($_POST['service_checkout_data'])) {
   $updateOrder->execute([$price, $delivery_option, $address, $method, $service_id]);
 
   // Redirect to service page after successful payment
-  $message[] = 'Successfully paid for the service!';
+  $message[] = 'Успешно заплатен сервиз!';
   header('Location: service.php');
   exit(); // Stop further execution after redirect
 }
@@ -80,7 +80,7 @@ if (isset($_POST['service_checkout_data'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Service payment</title>
+  <title>Плащане за сервиз</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -109,65 +109,65 @@ if (isset($_POST['service_checkout_data'])) {
         <input type="hidden" name="email" value="<?= $service_email; ?>">
         <input type="hidden" name="number" value="<?= $service_number; ?>">
 
-        <h3>Service payment</h3>
+        <h3>Плащане за сервиз</h3>
         <div class="display-orders">
-          <div class="grand-total">Grand total : <span>$<?= $price; ?></span></div>
+          <div class="grand-total">Обща сума : <span>$<?= $price; ?></span></div>
         </div>
-        <h3>Place your info</h3>
+        <h3>Вашата информация за плащане/доставка</h3>
         <div class="flex">
           <div class="inputBox">
-            <span>Name :</span>
-            <input type="text" placeholder="Enter your full name" class="box" maxlength="100" value="<?= $service_name ?>" readonly>
+            <span>Име :</span>
+            <input type="text" placeholder="Пълно име" class="box" maxlength="100" value="<?= $service_name ?>" readonly>
           </div>
           <div class="inputBox">
-            <span>E-mail :</span>
-            <input type="email" placeholder="Enter your email" class="box" maxlength="50" value="<?= $service_email ?>" readonly>
+            <span>Имейл :</span>
+            <input type="email" placeholder="Имейл" class="box" maxlength="50" value="<?= $service_email ?>" readonly>
           </div>
           <div class="inputBox">
-            <span>Phone number :</span>
-            <input type="number" placeholder="Enter your phone number" class="box" maxlength="15" value="<?= $service_number ?>" readonly>
+            <span>Тел. номер :</span>
+            <input type="number" placeholder="Тел. номер" class="box" maxlength="15" value="<?= $service_number ?>" readonly>
           </div>
           <div class="inputBox">
-            <span>Payment method :</span>
+            <span>Вид на платеж :</span>
             <select name="method" class="box" required>
-              <option value="cash on delivery">cash on delivery</option>
-              <option value="credit card">credit card</option>
-              <option value="paypal">paypal</option>
+              <option value="cash on delivery">наложен</option>
+              <option value="credit-debit card">кредитна/дебитна карта</option>
+              <option value="paypal">PayPal</option>
             </select>
           </div>
           <div class="inputBox">
-            <span>Include delivery : ($9.99)</span>
+            <span>Включване на доставка (9.99 лв.): </span>
             <select name="delivery" id="deliveryOption" class="box" required onchange="toggleAddressFields()">
-              <option value="no" <?= ($delivery_option === 'no') ? 'selected' : ''; ?>>No</option>
-              <option value="yes" <?= ($delivery_option === 'yes') ? 'selected' : ''; ?>>Yes</option>
+              <option value="no" <?= ($delivery_option === 'no') ? 'selected' : ''; ?>>Не</option>
+              <option value="yes" <?= ($delivery_option === 'yes') ? 'selected' : ''; ?>>Да</option>
             </select>
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <span>Flat № :</span>
-            <input type="text" id="flat" name="flat" placeholder="E.g. Flat number" class="box" maxlength="50">
+            <span>Блок № :</span>
+            <input type="text" id="flat" name="flat" placeholder="Блок №" class="box" maxlength="50">
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <span>Street :</span>
-            <input type="text" id="street" name="street" placeholder="E.g. Street name" class="box" maxlength="50">
+            <span>Улица :</span>
+            <input type="text" id="street" name="street" placeholder="Улица" class="box" maxlength="50">
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <span>City :</span>
-            <input type="text" id="city" name="city" placeholder="E.g. New York City" class="box" maxlength="50">
+            <span>Град :</span>
+            <input type="text" id="city" name="city" placeholder="Град" class="box" maxlength="50">
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <span>State :</span>
-            <input type="text" id="state" name="state" placeholder="E.g. New York" class="box" maxlength="50">
+            <span>Квартал :</span>
+            <input type="text" id="state" name="state" placeholder="Квартал" class="box" maxlength="50">
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <span>Country :</span>
-            <input type="text" id="country" name="country" placeholder="E.g. USA" class="box" maxlength="50">
+            <span>Държава :</span>
+            <input type="text" id="country" name="country" placeholder="Държава" class="box" maxlength="50">
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
-            <span>Postal code :</span>
-            <input type="number" id="pin_code" min="0" name="postal_code" placeholder="E.g. 12345" min="0" max="99999" onkeypress="if(this.value.length == 5) return false;" class="box">
+            <span>Пощенски код :</span>
+            <input type="number" id="pin_code" min="0" name="postal_code" placeholder="000000" min="0" max="999999" onkeypress="if(this.value.length > 6) return false;" class="box">
           </div>
         </div>
-        <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
+        <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Плати за сервиза">
       </form>
     </section>
   <?php

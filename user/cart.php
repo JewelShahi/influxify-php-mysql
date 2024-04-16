@@ -150,7 +150,7 @@ if (isset($_POST['update_qty'])) {
             $counter++;
           }
         } else {
-          echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Your cart is empty</p>';
+          echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Количката Ви е празна.</p>';
         }
         ?>
       </div>
@@ -161,11 +161,11 @@ if (isset($_POST['update_qty'])) {
       <a href="shop.php" class="option-btn">
         <i class="fas fa-arrow-left"></i> Към магазина
       </a>
-      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">
+      <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>" onclick="return confirm('Съгласни ли сте да махнете всичко от количката?');">
         <i class="fas fa-trash-alt"></i> Махни всичко
       </a>
       <a href="checkout.php" class="btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>">
-        <i class="fa-solid fa-wallet"></i> Плати
+        <i class="fa-solid fa-wallet"></i> Към заплащането
       </a>
     </div>
 

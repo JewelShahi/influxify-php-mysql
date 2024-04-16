@@ -303,8 +303,8 @@ if (isset($_POST['update'])) {
             <span>Обнови броя на камерите</span>
             <input type="number" name="camera_count" placeholder="Брой камери" class="box" min="0" step="1" value="<?= $fetch_products['camera_count']; ?>" required>
 
-            <span>Обнови резолюцията</span>
-            <input type="text" name="camera_resolution" placeholder="Разделителна способност" class="box" value="<?= $fetch_products['camera_resolution']; ?>" required>
+            <span>Обнови резолюцията на камерата</span>
+            <input type="text" name="camera_resolution" placeholder="Резолюция" class="box" value="<?= $fetch_products['camera_resolution']; ?>" required>
 
             <span>Обнови размера на дисплейя</span>
             <input type="text" name="size" placeholder="Размер на дисплей" class="box" value="<?= $fetch_products['size']; ?>" required>

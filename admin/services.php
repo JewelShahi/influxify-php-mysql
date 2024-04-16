@@ -103,8 +103,16 @@ if (isset($_GET['delete'])) {
                 <p> Тел. : <span><?= $fetch_service['number']; ?></span></p>
                 <p> Марка на телефона : <span><?= $fetch_service['brand']; ?></span></p>
                 <p> Описание на проблема : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
-                <p> Обща цена (<em>с доставка, ако е включена</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
-                <p> Вид на платежа : <span><?= $fetch_service['payment_method']; ?></span></p>
+                <p> Обща цена (<em>с доставка, ако е включена</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"> лв.</p>
+                <p> Доставка: <?= $fetch_service['delivery']; ?></p>
+                <?php
+                if ($fetch_service['delivery'] == 'yes') {
+                ?>
+                  <p> Адрес: <?= $fetch_service['address']; ?></p>
+                <?php
+                }
+                ?>
+                <p> Вид на платеж : <span><?= $fetch_service['payment_method']; ?></span></p>
                 <p id="paymentStatusLabel">Статус на плащане :</p>
                 <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
                   <option selected disabled><?= $fetch_service['payment_status']; ?></option>
