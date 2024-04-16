@@ -162,7 +162,7 @@ if (isset($_GET['delete'])) {
                 <div class="ordered-img">
                     <?php
                     for ($i = 0; $i < count($ordered_products); $i++) {
-                      echo '<img class="ordered-img-item" src="../uploaded_img/products/' . $ordered_product_images[$i] . '" alt="Product Image">';  // Modified: Added image display
+                      echo '<img class="ordered-img-item" src="../uploaded_img/products/' . $ordered_product_images[$i] . '" alt="' . $ordered_product_images[$i] . '">';
                     }
                     ?>
                   </div>
