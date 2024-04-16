@@ -164,7 +164,7 @@ if (isset($_POST['service_checkout_data'])) {
           </div>
           <div class="inputBox address-field" id="addressFields" style="display: <?= ($delivery_option === 'yes') ? 'block' : 'none'; ?>">
             <span>Postal code :</span>
-            <input type="number" id="pin_code" min="0" name="postal_code" placeholder="E.g. 12345" min="0" max="99999" onkeypress="if(this.value.length == 5) return false;" class="box">
+            <input type="number" id="pin_code" min="0" name="postal_code" placeholder="E.g. 123456" min="0" max="999999" onkeypress="if(this.value.length > 6) return false;" class="box">
           </div>
         </div>
         <input type="submit" name="service_checkout_data" class="btn <?= ($service_price > 0.00) ? '' : 'disabled'; ?>" value="Pay for the service">
