@@ -75,7 +75,7 @@ if (isset($_POST['update_qty'])) {
     $updateProductQty->execute([abs($qtyDifference), $pid]);
   }
 
-  $message[] = 'Cart quantity updated';
+  $message[] = 'Cart quantity updated!';
 }
 
 
