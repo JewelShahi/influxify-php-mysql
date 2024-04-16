@@ -147,7 +147,7 @@ if (isset($_POST['order'])) {
           <div class="grand-total">Grand total : <span>$<?= $grand_total; ?></span></div>
         </div>
 
-        <h3>Place your shippostalg info</h3>
+        <h3>Place your shipping and payment info</h3>
 
         <div class="flex">
           <div class="inputBox">
