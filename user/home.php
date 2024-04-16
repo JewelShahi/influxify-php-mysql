@@ -225,7 +225,7 @@ include '../components/wishlist_cart.php';
 
 	<section class="home-products">
 
-		<h1 class="heading" data-aos="fade" data-aos-duration="1000">Recently added to our collection</h1>
+		<h1 class="heading" data-aos="fade" data-aos-duration="1000">Recently added products to our collection</h1>
 
 		<div class="swiper products-slider" data-aos="slide-left" data-aos-duration="1000">
 
