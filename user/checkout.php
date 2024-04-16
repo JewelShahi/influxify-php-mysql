@@ -171,7 +171,7 @@ if (isset($_POST['order'])) {
             </select>
           </div>
           <div class="inputBox">
-            <span>Include delivery :</span>
+            <span>Include delivery : ($9.99) :</span>
             <select name="delivery" class="box" required onchange="updateTotalPrice(this.value)">
               <option value="no">No</option>
               <option value="yes">Yes</option>
