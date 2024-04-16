@@ -107,7 +107,7 @@ if (isset($_POST['add_product'])) {
 
     // Check for release date format
     if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) && !checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
-      throw new Exception('Released date is not in the correct format (YYYY-MM-DD)!');
+      throw new Exception('Датата на лансиране не е в правилния формат (ГГГГ-ММ-ДД)!');
     }
 
     // Process and move uploaded images
@@ -120,7 +120,7 @@ if (isset($_POST['add_product'])) {
 
       // Check if image size is within limits
       if ($image_size > $max_file_size) {
-        throw new Exception("Image $i size is too large!");
+        throw new Exception("Размерът на изображение $i е твърде голям!");
       }
 
       // Rename the image file based on the product name
@@ -132,10 +132,10 @@ if (isset($_POST['add_product'])) {
 
       // Move the uploaded image to the target folder with the new filename
       if (move_uploaded_file($image_tmp_name, $image_folder . $new_image_name)) {
-        $message[] = "Image $i uploaded successfully!";
+        $message[] = "Изображение $i е качено успешно!";
         $image_names[] = $new_image_name; // Store the new image name
       } else {
-        $message[] = "Failed to upload Image $i!";
+        $message[] = "Неуспешно качване на изображение $i!";
       }
     }
 
@@ -143,10 +143,10 @@ if (isset($_POST['add_product'])) {
     $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_names[0], $image_names[1], $image_names[2]]);
 
-    $message[] = 'New product added successfully!';
+    $message[] = 'Успешно е добавен новият продукт!';
   } catch (PDOException $e) {
     if ($e->errorInfo[1] == 1062) {
-      $message[] = 'Product with ' . $name . ' already exists!';
+      $message[] = 'Продукт с име '. $име. ' вече съществува!';
     } else {
       $message[] = 'Error: ' . $e->getMessage();
     }
@@ -169,40 +169,40 @@ if (isset($_GET['delete'])) {
   if (file_exists($baseImagePath . $fetch_delete_image['image_01'])) {
     unlink($baseImagePath . $fetch_delete_image['image_01']);
   } else {
-    $message[] = 'Image ' . $fetch_delete_image['image_01'] . ' wasn\'t found in folder ' . $baseImagePath;
+    $message[] = 'Изображение ' . $fetch_delete_image['image_01'] . ' не е намерено в папката ' . $baseImagePath;
   }
 
   // If the image exist in the folder delete it
   if (file_exists($baseImagePath . $fetch_delete_image['image_02'])) {
     unlink($baseImagePath . $fetch_delete_image['image_02']);
   } else {
-    $message[] = 'Image ' . $fetch_delete_image['image_02'] . ' wasn\'t found in folder ' . $baseImagePath;
+    $message[] = 'Изображение ' . $fetch_delete_image['image_02'] . ' не е намерено в папката ' . $baseImagePath;
   }
 
   // If the image exist in the folder delete it
   if (file_exists($baseImagePath . $fetch_delete_image['image_03'])) {
     unlink($baseImagePath . $fetch_delete_image['image_03']);
   } else {
-    $message[] = 'Image ' . $fetch_delete_image['image_03'] . ' wasn\'t found in folder ' . $baseImagePath;
+    $message[] = 'Изображение ' . $fetch_delete_image['image_03'] . ' не е намерено в папката ' . $baseImagePath;
   }
 
   // Deleting the product
   $delete_product = $conn->prepare("DELETE FROM `products` WHERE id = ?");
   $delete_product->execute([$delete_id]);
 
-  $message[] = 'Product is deleted successfully!';
+  $message[] = 'Продуктът е изтрит успешно!';
   header('Location: products.php');
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products</title>
+  <title>Продукти</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -228,24 +228,24 @@ if (isset($_GET['delete'])) {
   ?>
 
     <section class="add-products">
-      <h1 class="heading">Add a product</h1>
+      <h1 class="heading">Добавяне на продукт</h1>
       <form action="" method="post" enctype="multipart/form-data">
         <div class="flex">
 
           <div class="inputBox">
-            <span>Product name <span style="color: red;">*</span></span>
-            <input type="text" name="name" placeholder="Product name" class="box" required>
+            <span>Име на продукта <span style="color: red;">*</span></span>
+            <input type="text" name="name" placeholder="Име на продукта" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Product details <span style="color: red;">*</span></span>
-            <textarea name="details" placeholder="Product details" class="box" required></textarea>
+            <span>Описание на продукта <span style="color: red;">*</span></span>
+            <textarea name="details" placeholder="Детайли за продукта" class="box" required></textarea>
           </div>
 
           <div class="inputBox">
-            <span id="brandLabel">Product brand <span style="color: red;">*</span></span>
+            <span id="brandLabel">Марка на продукта <span style="color: red;">*</span></span>
             <select name="brand" class="box" aria-labelledby="brandLabel" required>
-              <option value="N/A" selected disabled>Add a brand</option>
+              <option value="N/A" selected disabled>Избери марка</option>
               <option value="Samsung">Samsung</option>
               <option value="Apple">Apple</option>
               <option value="Google">Google</option>
@@ -258,13 +258,13 @@ if (isset($_GET['delete'])) {
           </div>
 
           <div class="inputBox">
-            <span>Released date <span style="color: red;">*</span></span>
-            <input type="text" name="released" placeholder="Released date (YYYY-MM-DD)" class="box" required>
+            <span>Дата на лансиране <span style="color: red;">*</span></span>
+            <input type="text" name="released" placeholder="Дата на лансиране (ГГГГ-ММ-ДД)" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Product quantity <span style="color: red;">*</span></span>
-            <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" required>
+            <span>Количество на продукта <span style="color: red;">*</span></span>
+            <input type="number" name="qty" placeholder="Количество на продукта" class="box" min="0" step="1" required>
           </div>
 
           <div class="inputBox">
@@ -273,70 +273,70 @@ if (isset($_GET['delete'])) {
           </div>
 
           <div class="inputBox">
-            <span>Storage <span style="color: red;">*</span></span>
-            <input type="text" name="storage" placeholder="Storage" class="box" required>
+            <span>Вътрешна памет <span style="color: red;">*</span></span>
+            <input type="text" name="storage" placeholder="Вътрешна памет" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>RAM <span style="color: red;">*</span></span>
-            <input type="text" name="ram" placeholder="RAM" class="box" required>
+            <span>RAM памет <span style="color: red;">*</span></span>
+            <input type="text" name="ram" placeholder="RAM памет" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Camera count <span style="color: red;">*</span></span>
-            <input type="number" name="camera_count" placeholder="Camera count" class="box" min="0" step="1" required>
+            <span>Брой камери <span style="color: red;">*</span></span>
+            <input type="number" name="camera_count" placeholder="Брой камери" class="box" min="0" step="1" required>
           </div>
 
           <div class="inputBox">
-            <span>Camera resolution <span style="color: red;">*</span></span>
-            <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" required>
+            <span>Резолюция на камерата <span style="color: red;">*</span></span>
+            <input type="text" name="camera_resolution" placeholder="Разделителна способност" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Phone Size<span style="color: red;">*</span></span>
-            <input type="text" name="size" placeholder="Phone size" class="box" required>
+            <span>Размер на дисплея<span style="color: red;">*</span></span>
+            <input type="text" name="size" placeholder="Размер на дисплея" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Battery <span style="color: red;">*</span></span>
-            <input type="text" name="battery" placeholder="Battery" class="box" required>
+            <span>Батерия <span style="color: red;">*</span></span>
+            <input type="text" name="battery" placeholder="Батерия" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Phone color <span style="color: red;">*</span></span>
-            <input type="text" name="color" placeholder="Color" class="box" required>
+            <span>Цвят на телефона <span style="color: red;">*</span></span>
+            <input type="text" name="color" placeholder="Цвят" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Product price <span style="color: red;">*</span></span>
-            <input type="number" name="price" min="0.00" step="0.01" class="box" required placeholder="Product price" onkeypress="if(this.value.length == 8) return false;">
+            <span>Цена <span style="color: red;">*</span></span>
+            <input type="number" name="price" min="0.00" step="0.01" class="box" placeholder="Цена" onkeypress="if(this.value.length == 8) return false;" required>
           </div>
         </div>
 
         <div class="file-buttons">
 
           <div class="inputBox">
-            <span>Image-1 <span style="color: red;">*</span></span>
+            <span>Изображение-1 <span style="color: red;">*</span></span>
             <div class="custom-file-upload">
-              <label for="image_01" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
+              <label for="image_01" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Качи изображение</label>
               <input type="file" id="image_01" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
               <span id="filename_01" class="chosen-file-name"></span>
             </div>
           </div>
 
           <div class="inputBox">
-            <span>Image-2 <span style="color: red;">*</span></span>
+            <span>Изображение-2 <span style="color: red;">*</span></span>
             <div class="custom-file-upload">
-              <label for="image_02" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
+              <label for="image_02" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Качи изображение</label>
               <input type="file" id="image_02" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
               <span id="filename_02" class="chosen-file-name"></span>
             </div>
           </div>
 
           <div class="inputBox">
-            <span>Image-3 <span style="color: red;">*</span></span>
+            <span>Изображение-3 <span style="color: red;">*</span></span>
             <div class="custom-file-upload">
-              <label for="image_03" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image</label>
+              <label for="image_03" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Качи изображение</label>
               <input type="file" id="image_03" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box file-input" required>
               <span id="filename_03" class="chosen-file-name"></span>
             </div>
@@ -344,13 +344,13 @@ if (isset($_GET['delete'])) {
 
         </div>
         <button type="submit" class="btn" name="add_product">
-          <i class="fa-regular fa-square-plus"></i> Add product
+          <i class="fa-regular fa-square-plus"></i> Добави продукта
         </button>
       </form>
     </section>
 
     <section class="show-products">
-      <h1 class="heading">Added Products</h1>
+      <h1 class="heading">Добавени продукти</h1>
       <div class="box-container">
         <?php
         $select_products = $conn->prepare("SELECT * FROM `products`");
@@ -361,17 +361,17 @@ if (isset($_GET['delete'])) {
             <div class="box">
               <img src="../uploaded_img/products/<?= $fetch_products['image_01']; ?>" alt="<?= $fetch_products['image_01']; ?>">
               <div class="name"><?= $fetch_products['name']; ?></div>
-              <div class="price">$<span><?= $fetch_products['price']; ?></span></div>
+              <div class="price"><span><?= $fetch_products['price']; ?> лв.</span></div>
               <div class="details"><span><?= $fetch_products['details']; ?></span></div>
               <div class="flex-btn">
                 <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn"><i class="far fa-edit"></i></a>
-                <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('Delete this product?');"><i class="fas fa-trash"></i></a>
+                <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('Съгласен ли си да изтриеш продукта?');"><i class="fas fa-trash"></i></a>
               </div>
             </div>
         <?php
           }
         } else {
-          echo '<p class="empty">No Products Added Yet!</p>';
+          echo '<p class="empty">Все още няма добавени продукти.</p>';
         }
         ?>
       </div>

@@ -48,13 +48,13 @@ if (isset($_GET['delete'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services</title>
+  <title>Сервизи</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -82,7 +82,7 @@ if (isset($_GET['delete'])) {
 
     <section class="services">
 
-      <h1 class="heading">Services</h1>
+      <h1 class="heading">Сервизи</h1>
 
       <div class="box-container">
 
@@ -95,37 +95,37 @@ if (isset($_GET['delete'])) {
             <form action="" method="post" class="box">
               <div class="blur">
                 <input type="hidden" name="service_id" value="<?= $fetch_service['id']; ?>">
-                <p> Service ID : <span><?= $fetch_service['id']; ?></span></p>
-                <p> Placed on : <span><?= date('d/m/Y H:i:s', strtotime($fetch_service['placed_on'])); ?></span></p>
-                <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
-                <p> Name : <span><?= $fetch_service['name']; ?></span></p>
-                <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
-                <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
-                <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
-                <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
-                <p> Estimated price (delivery <em>if the user includes</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
-                <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
-                <p id="paymentStatusLabel">Payment status :</p>
+                <p> Сервиз № : <span><?= $fetch_service['id']; ?></span></p>
+                <p> Заявена на : <span><?= date('d/m/Y H:i:s', strtotime($fetch_service['placed_on'])); ?></span></p>
+                <p> Потребител № : <span><?= $fetch_service['user_id']; ?></span></p>
+                <p> Име : <span><?= $fetch_service['name']; ?></span></p>
+                <p> Имейл : <span><?= $fetch_service['email']; ?></span></p>
+                <p> Тел. : <span><?= $fetch_service['number']; ?></span></p>
+                <p> Марка на телефона : <span><?= $fetch_service['brand']; ?></span></p>
+                <p> Описание на проблема : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
+                <p> Обща цена (<em>с доставка, ако е включена</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
+                <p> Вид на платежа : <span><?= $fetch_service['payment_method']; ?></span></p>
+                <p id="paymentStatusLabel">Статус на плащане :</p>
                 <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
                   <option selected disabled><?= $fetch_service['payment_status']; ?></option>
-                  <option value="pending">pending</option>
-                  <option value="completed">completed</option>
+                  <option value="pending">Неплатен</option>
+                  <option value="completed">Платен</option>
                 </select>
-                <p id="isResolvedLabel">Is resolved :</p>
+                <p id="isResolvedLabel">Решен ли е проблема :</p>
                 <select name="is_resolved" class="select" aria-labelledby="isResolvedLabel">
-                  <option value="1" <?php echo $fetch_service['is_resolved'] == 1 ? 'selected' : ''; ?>>yes</option>
-                  <option value="0" <?php echo $fetch_service['is_resolved'] == 0 ? 'selected' : ''; ?>>no</option>
+                  <option value="1" <?php echo $fetch_service['is_resolved'] == 1 ? 'selected' : ''; ?>>Да</option>
+                  <option value="0" <?php echo $fetch_service['is_resolved'] == 0 ? 'selected' : ''; ?>>Не</option>
                 </select>
                 <div class="flex-btn">
-                  <button type="submit" name="update_service" class="option-btn">Update</button>
-                  <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Delete this service?');" class="delete-btn" style="<?= ($fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Delete</a>
+                  <button type="submit" name="update_service" class="option-btn">Обнови</button>
+                  <a href="services.php?delete=<?= $fetch_service['id']; ?>" onclick="return confirm('Съгласен ли си да изтриеш заявката?');" class="delete-btn" style="<?= ($fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Delete</a>
                 </div>
               </div>
             </form>
         <?php
           }
         } else {
-          echo '<p class="empty">At present, no services are available</p>';
+          echo '<p class="empty">До момента няма заявки за сервиз.</p>';
         }
         ?>
 

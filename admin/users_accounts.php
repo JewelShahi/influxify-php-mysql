@@ -40,13 +40,13 @@ if (isset($_GET['delete'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Users Accounts</title>
+  <title>Потребителски профили</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -73,7 +73,7 @@ if (isset($_GET['delete'])) {
   ?>
 
     <section class="accounts">
-      <h1 class="heading">User accounts</h1>
+      <h1 class="heading">Потребителски профили</h1>
       <div class="box-container">
         <?php
 
@@ -88,17 +88,17 @@ if (isset($_GET['delete'])) {
               <div class="after"></div>
               <div class="user-info">
                 <div style="margin-bottom: 0.7rem; border: 3px solid #3b8a59; display: inline-block; width: 80px; height: 80px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $fetch_accounts['avatar'] ?>'); background-size: cover; box-shadow: 0 0 10px 5px #2ad45b; "></div>
-                <p> User ID :  <span><?= $fetch_accounts['id']; ?></span> </p>
-                <p> Name :  <span><?= $fetch_accounts['name']; ?></span> </p>
-                <p> E-mail :  <span><?= $fetch_accounts['email']; ?></span> </p>
-                <p> Registry date :  <span><?= date('d/m/Y', strtotime($fetch_accounts['reg_date'])); ?></span></p>
-                <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Delete this account? User related information will also be deleted!')" class="delete-btn">Delete</a>
+                <p> Потребител № :  <span><?= $fetch_accounts['id']; ?></span> </p>
+                <p> Име :  <span><?= $fetch_accounts['name']; ?></span> </p>
+                <p> Имейл :  <span><?= $fetch_accounts['email']; ?></span> </p>
+                <p> Дата на регистрация :  <span><?= date('d/m/Y', strtotime($fetch_accounts['reg_date'])); ?></span></p>
+                <a href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('Съгласен ли си да изтриеш този профил? Информацията, свързана с потребителя, ще бъде изтрита!')" class="delete-btn">Изтрий</a>
               </div>
             </div>
         <?php
           }
         } else {
-          echo '<p class="empty">There are currently no available user accounts</p>';
+          echo '<p class="empty">В момента няма потребителски профили.</p>';
         }
         ?>
       </div>

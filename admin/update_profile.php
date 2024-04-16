@@ -31,22 +31,22 @@ if (isset($_POST['update_password'])) {
 
   // Check if the new password meets the criteria
   if (strlen($new_pass) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/', $new_pass)) {
-    $message[] = "Password must be at least 8 characters and contain at least one uppercase letter, lowercase letter and a digit!";
+    $message[] = "Паролата трябва да е поне 8 знака и да съдържа поне една главна буква, малка буква и цифра!";
   } elseif ($hash_old_pass == $empty_pass) {
-    $message[] = "Please enter old password!";
+    $message[] = "Моля, въведете старата парола!";
   } elseif ($hash_old_pass != $prev_pass) {
-    $message[] = "Old password not matched!";
+    $message[] = "Старата парола не съответства!";
   } elseif ($hash_old_pass == $hash_new_pass) {
-    $message[] = "New password must be different from the old password!";
+    $message[] = "Новата парола трябва да е различна от старата!";
   } elseif ($hash_new_pass != $hash_confirm_pass) {
-    $message[] = "Confirm password not matched!";
+    $message[] = "Потвърдената парола не съвпада!";
   } else {
     if ($hash_new_pass != $empty_pass) {
       $update_admin_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ? AND isAdmin = 1");
       $update_admin_pass->execute([$hash_confirm_pass, $admin_id]);
-      $message[] = "Password updated successfully!";
+      $message[] = "Паролата е актуализирана успешно!";
     } else {
-      $message[] = "Please enter a new password!";
+      $message[] = "Моля, въведете нова парола!";
     }
   }
 }
@@ -59,18 +59,18 @@ if (isset($_POST['update_avatar'])) {
   $update_avatar = $conn->prepare("UPDATE `users` SET avatar = ? WHERE id = ? and isAdmin = 1");
   $update_avatar->execute([$avatar, $admin_id]);
 
-  $message[] = "Admin avatar updated!";
+  $message[] = "Профилната снимка на админа е актуализирана!";
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Admin Profile</title>
+  <title>Актуализиране на администраторски профил</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -98,39 +98,39 @@ if (isset($_POST['update_avatar'])) {
     <section class="user-update">
       <form action="" class="user-form" method="post" enctype="multipart/form-data">
 
-        <h3>Update Profile</h3>
+        <h3>Обновяване на данните</h3>
 
         <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
         
-        <input title="Username" type="text" name="name" placeholder="Enter your username" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
-        <input title="E-mail" type="email" name="email" placeholder="Enter your email" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
+        <input title="Потребителско име" type="text" name="name" placeholder="Въведете потребителско име" maxlength="100" class="box" value="<?= $fetch_profile["name"]; ?>" readonly>
+        <input title="Имейл" type="email" name="email" placeholder="Въведете своя имейл" maxlength="50" class="box" value="<?= $fetch_profile["email"]; ?>" readonly>
 
         <div class="password-container">
-          <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <input type="password" name="old_pass" placeholder="Въведете старата парола" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
 
         <div class="password-container">
-          <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <input type="password" name="new_pass" placeholder="Въведете новата парола" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
 
         <div class="password-container">
-          <input type="password" name="confirm_pass" placeholder="Confirm your new password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <input type="password" name="confirm_pass" placeholder="Потвърдете новата парола" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
 
-        <input title="Registry date" type="text" maxlength="100" class="box" value="<?= date('d/m/Y', strtotime($fetch_profile['reg_date'])); ?>" readonly>
+        <input title="Дата на вписване" type="text" maxlength="100" class="box" value="<?= date('d/m/Y', strtotime($fetch_profile['reg_date'])); ?>" readonly>
 
         <button type="submit" class="btn submit-btn" name="update_password">
-          <i class="fas fa-save"></i> Save Changes
+          <i class="fas fa-save"></i> Запази
         </button>
 
       </form>
 
       <form action="" class="avatar-form" method="post">
 
-        <h3>Update avatar</h3>
+        <h3>Обнови профилната снимка</h3>
 
         <div class="user-image-avatar">
           <img src="<?= '../uploaded_img/user_avatar/' . $fetch_profile['avatar']; ?>" alt="<?= $fetch_profile['avatar']; ?>" id="main-avatar" width="200">
@@ -157,7 +157,7 @@ if (isset($_POST['update_avatar'])) {
 
         </div>
         <button type="submit" class="btn" name="update_avatar">
-          <i class="fa-solid fa-image"></i> Update avatar
+          <i class="fa-solid fa-image"></i> Обнови
         </button>
       </form>
 

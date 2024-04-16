@@ -150,10 +150,10 @@ if (isset($_GET['delete'])) {
             <div class="box">
               <div class="blur">
                 <p> Поръчка № : <span><?= $fetch_orders['id']; ?></span> </p>
-                <p> Поръчана на : <span><?= date('d/m/Y H:i:s', strtotime($fetch_orders['placed_on'])); ?></span> </p>
+                <p> Заявена на : <span><?= date('d/m/Y H:i:s', strtotime($fetch_orders['placed_on'])); ?></span> </p>
                 <p> Клиент № : <span><?= $fetch_orders['user_id']; ?></span> </p>
                 <p> Име : <span><?= $fetch_orders['name']; ?></span> </p>
-                <p> E-mail : <span><?= $fetch_orders['email']; ?></span> </p>
+                <p> Имейл : <span><?= $fetch_orders['email']; ?></span> </p>
                 <p> Тел. : <span><?= $fetch_orders['number']; ?></span> </p>
                 <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Доставка : <span><?= $fetch_orders['delivery']; ?></span></p>
                 <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Цена за доставка : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
@@ -189,7 +189,7 @@ if (isset($_GET['delete'])) {
 
                   <div class="flex-btn">
                     <input type="submit" value="Обнови" class="option-btn" name="update_payment">
-                    <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('Искаш ли да изтриш поръчката?');">Изтрий</a>
+                    <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('Съгласен ли си да изтриеш поръчката?');">Изтрий</a>
                   </div>
                 </form>
               </div>

@@ -49,7 +49,7 @@ if (isset($_SESSION['admin_id'])) {
   ?>
     <section class="dashboard">
 
-      <h1 class="heading">Табло</h1>
+      <h1 class="heading">Админско табло</h1>
 
       <div class="box-container">
 
@@ -104,7 +104,7 @@ if (isset($_SESSION['admin_id'])) {
           // Calculate the total income by summing income from both orders and services
           $income = $orders_total_income + $services_total_income;
           ?>
-          <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income, 2, '.', ','); ?></h3>
+          <h3 style="z-index: 9999; text-wrap: wrap;"><?= number_format($income, 2, '.', ','); ?> лв.</h3>
           <p>Общ доход</p>
         </div>
 
@@ -115,7 +115,7 @@ if (isset($_SESSION['admin_id'])) {
           $select_orders->execute();
           $income = $select_orders->fetch(PDO::FETCH_ASSOC);
           ?>
-          <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income['service_income'], 2, '.', ','); ?></h3>
+          <h3 style="z-index: 9999; text-wrap: wrap;"><?= number_format($income['service_income'], 2, '.', ','); ?> лв.</h3>
           <p>Доходи от услуги</p>
           <a href="services.php" class="btn">Виж услугите</a>
         </div>
