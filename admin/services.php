@@ -102,8 +102,8 @@ if (isset($_GET['delete'])) {
                 <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
                 <p> Phone number : <span><?= $fetch_service['number']; ?></span></p>
                 <p> Phone brand : <span><?= $fetch_service['brand']; ?></span></p>
-                <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
-                <p> Estimated price (delivery <em>if the user includes</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
+                <p> Problem description : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
+                <p> Total price (<em>with delivery, if included</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
                 <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
                 <p id="paymentStatusLabel">Payment status :</p>
                 <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
