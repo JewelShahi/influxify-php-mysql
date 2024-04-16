@@ -104,6 +104,14 @@ if (isset($_GET['delete'])) {
                 <p> Phone brand : <span><?= $fetch_service['brand']; ?></span></p>
                 <p> Problem description : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
                 <p> Total price (<em>with delivery, if included</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
+                <p> Delivery: <?= $fetch_service['delivery']; ?></p>
+                <?php
+                if ($fetch_service['delivery'] == 'yes') {
+                ?>
+                  <p> Address: <?= $fetch_service['address']; ?></p>
+                <?php
+                }
+                ?>
                 <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
                 <p id="paymentStatusLabel">Payment status :</p>
                 <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
