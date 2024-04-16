@@ -104,9 +104,9 @@ if (isset($_POST['update'])) {
     $update_product = $conn->prepare("UPDATE `products` SET name = ?, details = ?, brand = ?, released = ?, qty = ?, cpu = ?, storage = ?, ram = ?, camera_count = ?, camera_resolution = ?, size = ?, battery = ?, color = ?, price = ? WHERE id = ?");
     $update_product->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $pid]);
 
-    $message[] = 'Product updated successfully!';
+    $message[] = 'Product info updated successfully!';
   } else {
-    $message[] = 'Released date is not in the correct format (YYYY-MM-DD)!';
+    $message[] = 'Released date isn\'t in the correct format (YYYY-MM-DD)!';
   }
 
   $baseImagePath = '../uploaded_img/products/';
