@@ -17,7 +17,7 @@ if (isset($_POST['add_to_wishlist'])) {
     $check_cart_numbers->execute([$pid, $user_id]);
 
     if ($check_cart_numbers->rowCount() > 0) {
-      $message[] = 'Already added to cart!';
+      $message[] = 'Вече е добавен в количката!';
     } else {
       try {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -27,10 +27,10 @@ if (isset($_POST['add_to_wishlist'])) {
         $insert_wishlist->execute([$user_id, $pid, $name, $price]);
 
         $conn->commit();
-        $message[] = 'Added to wishlist!';
+        $message[] = 'Добавено към списъка с желания!';
       } catch (PDOException $e) {
         $conn->rollBack();
-        $message[] = "Already added to wishlist!";
+        $message[] = "Вече е добавен към списъка с желания!";
       }
     }
   }
@@ -75,13 +75,13 @@ if (isset($_POST['add_to_cart'])) {
         $delete_wishlist->execute([$pid, $user_id]);
 
         $conn->commit();
-        $message[] = 'Added to cart!';
+        $message[] = 'Добавено в количката!';
       } else {
-        $message[] = 'Insufficient quantity in stock!';
+        $message[] = 'Недостатъчно количество на склада!';
       }
     } catch (PDOException $e) {
       $conn->rollBack();
-      $message[] = 'Already added to cart!';
+      $message[] = 'Вече е добавен в количката!';
     }
   }
 }

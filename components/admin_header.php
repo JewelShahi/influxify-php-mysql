@@ -21,27 +21,27 @@ if (isset($message)) {
     <nav class="navbar">
       <!-- Dashboard -->
       <a href="../admin/dashboard.php">
-        <i class="fa-solid fa-chart-simple"></i> Dashboard
+        <i class="fa-solid fa-chart-simple"></i> Табло
       </a>
       <!-- Products -->
       <a href="../admin/products.php">
-        <i class="fas fa-shopping-bag"></i> Products
+        <i class="fas fa-shopping-bag"></i> Продукти
       </a>
       <!-- Orders -->
       <a href="../admin/placed_orders.php">
-        <i class="fa-solid fa-clipboard-list"></i> Orders
+        <i class="fa-solid fa-clipboard-list"></i> Поръчки
       </a>
       <!-- Services -->
       <a href="../admin/services.php">
-        <i class="fa-solid fa-wrench"></i> Services
+        <i class="fa-solid fa-wrench"></i> Сервиз
       </a>
       <!-- Admins -->
       <a href="../admin/admin_accounts.php">
-        <i class="fas fa-user-cog"></i> Admins
+        <i class="fas fa-user-cog"></i> Админи
       </a>
       <!-- Users -->
       <a href="../admin/users_accounts.php">
-        <i class="fas fa-users"></i> Users
+        <i class="fas fa-users"></i> Потребители
       </a>
     </nav>
 
@@ -81,10 +81,10 @@ if (isset($message)) {
         ?>
         <p><?= $fetch_profile['name']; ?></p>
         <a href="../admin/update_profile.php" class="btn">
-          <i class="fas fa-user-edit"></i> Update Profile
+          <i class="fas fa-user-edit"></i> Обнови профила
         </a>
-        <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
-          <i class="fas fa-sign-out-alt"></i> Logout
+        <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Съгласен ли си да излезеш от профила?');">
+          <i class="fas fa-sign-out-alt"></i> Изход
         </a>
       </div>
     </div>
