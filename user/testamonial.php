@@ -12,9 +12,9 @@
 				</div>
 				<div class="testimonial-text">
 					<p>
-						"Outstanding service and a diverse range of top-quality phones
-						make this shop the ultimate destination for all your mobile
-						needs."
+						"Изключително обслужване и разнообразна гама от висококачествени телефони
+						направете този магазин най-добрата дестинация за всички ваши мобилни устройства
+						потребности."
 					</p>
 				</div>
 				<div class="testimonial-author">Ichigo Kurosaki</div>
@@ -26,7 +26,7 @@
 				</div>
 				<div class="testimonial-text">
 					<p>
-						"At Influxity, discover the latest smartphones that seamlessly blend innovation with style, elevating your tech experience to new heights."
+						"В Influxity открийте най-новите смартфони, които безпроблемно съчетават иновация със стил, издигайки вашето технологично изживяване до нови висоти."
 					</p>
 				</div>
 				<div class="testimonial-author">Satoru Gojo</div>
@@ -38,7 +38,7 @@
 				</div>
 				<div class="testimonial-text">
 					<p>
-						"Influxity transformed my phone shopping experience into a journey of excitement and discovery, where every device felt like a window to a world of endless possibilities."
+						"Influxity превърна изживяването ми при пазаруване от телефон в пътуване на вълнение и открития, където всяко устройство се чувстваше като прозорец към свят на безкрайни възможности."
 					</p>
 				</div>
 				<div class="testimonial-author">Wang Ling</div>
@@ -50,7 +50,7 @@
 				</div>
 				<div class="testimonial-text">
 					<p>
-						"Experience seamless service and find your perfect phone match at our reliable phone shop."
+						"Насладете се на безпроблемно обслужване и намерете своя идеален телефон в нашия надежден телефонен магазин."
 					</p>
 				</div>
 				<div class="testimonial-author">Sung Jinwoo</div>

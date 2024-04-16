@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     $_SESSION['user_id'] = $row['id'];
     header('Location: home.php');
   } else {
-    $message[] = "Incorrect username or password!";
+    $message[] = "Неправилно потребителско име или парола!";
   }
 }
 ?>
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LogIn User</title>
+  <title>Потребителски вход</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -57,15 +57,15 @@ if (isset($_POST['submit'])) {
   <section class="user-login">
     <div>
       <form action="" method="post">
-        <h3>Log In</h3>
-        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <h3>Вход</h3>
+        <input type="email" name="email" placeholder="Имейл" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
         <div class="password-container">
-          <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <input type="password" name="pass" placeholder="Парола" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div> 
         <input type="submit" value="Log In" class="btn" name="submit">
-        <p>Don't have an account?<br>Go ahead and create one for free!</p>
-        <a href="user_register.php" class="option-btn">Register</a>
+        <p>Нямате профил?<br>Създайте сега безплатно!</p>
+        <a href="user_register.php" class="option-btn">Регистрация</a>
       </form>
     </div>
   </section>

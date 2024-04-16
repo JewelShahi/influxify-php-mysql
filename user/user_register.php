@@ -25,15 +25,15 @@ if (isset($_POST['submit'])) {
 
   // Validate email format
   if (!preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/", $email)) {
-    $message[] = 'Invalid email format!';
+    $message[] = 'Невалиден формат на имейла!';
   }
   // Validate password length and format (e.g., at least 8 characters, one upper, one lower character and one digit)
   elseif (strlen($pass) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/', $pass)) {
-    $message[] = 'Password must be at least 8 characters and contain at least one uppercase letter, lowercase letter and a digit!';
+    $message[] = 'Паролата трябва да е поне 8 знака и да съдържа поне една главна буква, малка буква и цифра!';
   }
   // Check if the password match the entered
   elseif ($hash_pass != $hash_cpass) {
-    $message[] = 'Confirm password not matched!';
+    $message[] = 'Потвърдената парола не съвпада!';
   } else {
 
     try {
@@ -43,14 +43,14 @@ if (isset($_POST['submit'])) {
 
       // Check if any rows were affected
       if ($insert_user->rowCount() > 0) {
-        $message[] = 'User registered successfully!';
+        $message[] = 'Потребителят е регистриран успешно!';
         header("Location: user_login.php");
       } else {
-        $message[] = 'Error registering user. Please try again.';
+        $message[] = 'Грешка при регистриране на потребител. Моля, опитайте отново.';
       }
     } catch (PDOException $e) {
       if ($e->errorInfo[1] == 1062) { // 1062 is the MySQL error code for duplicate entry
-        $message[] = 'User with ' . $email . ' already exists!';
+        $message[] = 'Потребител с ' . $email . ' вече съществува!';
       } else {
         $message[] = 'Error: ' . $e->getMessage();
       }
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register User</title>
+  <title>Регистрация на потребител</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -83,22 +83,22 @@ if (isset($_POST['submit'])) {
   <section class="user-register">
     <div>
       <form action="" method="post">
-        <h3>Register</h3>
-        <input type="text" name="name" placeholder="Enter your username" maxlength="100" class="input box" required>
-        <input type="email" name="email" placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+        <h3>Регистрация</h3>
+        <input type="text" name="name" placeholder="Въведете потребителско име" maxlength="100" class="input box" required>
+        <input type="email" name="email" placeholder="Въведете имейл" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
         <div class="passwords">
           <div class="password-container">
-            <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+            <input type="password" name="pass" placeholder="Въведете парола" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
             <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
           </div>
           <div class="password-container">
-            <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+            <input type="password" name="cpass" placeholder="Потвирдете паролата" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
             <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
           </div>
         </div>
         <input type="submit" value="Register" class="btn" name="submit">
-        <p>Already have an account?<br>Then just log in and pick up where you left off!</p>
-        <a href="user_login.php" class="option-btn">Log In</a>
+        <p>Вече имате профил?<br>След това просто влезте и продължете откъдето сте спрели!</p>
+        <a href="user_login.php" class="option-btn">Вход</a>
       </form>
     </div>
   </section>

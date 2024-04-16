@@ -27,7 +27,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products</title>
+  <title>Магазин</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
@@ -42,12 +42,12 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
   <section class="products">
 
-    <h1 class="heading">Products we offer</h1>
+    <h1 class="heading">Нашите предлагани продукти</h1>
 
     <!-- Search bar -->
     <form method="post" class="search-bar">
       <div>
-        <input class="input" type="text" id="search" name="search" placeholder="Enter product name" value="<?= $search_query ?>">
+        <input class="input" type="text" id="search" name="search" placeholder="Въведи име на продукта" value="<?= $search_query ?>">
         <button type="submit">
           <i class="fas fa-search"></i>
         </button>
@@ -56,13 +56,13 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
     <!-- Filter options -->
     <form method="get" class="filter-options">
-      <label for="price">Filter by price:</label>
+      <label for="price">Филтриране по цена:</label>
       <select id="price" name="price">
-        <option value="asc" <?= ($filter_price == 'asc') ? 'selected' : '' ?>>ASC</option>
-        <option value="desc" <?= ($filter_price == 'desc') ? 'selected' : '' ?>>DESC</option>
+        <option value="asc" <?= ($filter_price == 'asc') ? 'selected' : '' ?>>Възх.</option>
+        <option value="desc" <?= ($filter_price == 'desc') ? 'selected' : '' ?>>Низх.</option>
       </select>
 
-      <label for="brand">Filter by brand:</label>
+      <label for="brand">Филтриране по марка:</label>
       <select id="brand" name="brand">
         <option value="" <?= ($filter_brand == '') ? 'selected' : '' ?>>-- All Brands --</option>
         <option value="Samsung" <?= ($filter_brand == 'Samsung') ? 'selected' : '' ?>>Samsung</option>
@@ -75,7 +75,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="Realme" <?= ($filter_brand == 'Realme') ? 'selected' : '' ?>>Realme</option>
       </select>
 
-      <label for="ram">Filter by RAM:</label>
+      <label for="ram">Филтриране по RAM памет:</label>
       <select id="ram" name="ram">
         <option value="" <?= ($filter_ram == '') ? 'selected' : '' ?>>-- All RAM --</option>
         <option value="2GB" <?= ($filter_ram == '2GB') ? 'selected' : '' ?>>2GB</option>
@@ -86,7 +86,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
         <option value="16GB" <?= ($filter_ram == '16GB') ? 'selected' : '' ?>>16GB</option>
       </select>
 
-      <label for="storage">Filter by storage:</label>
+      <label for="storage">Филтриране по външна памет:</label>
       <select id="storage" name="storage">
         <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- All Storages --</option>
         <option value="32GB" <?= ($filter_storage == '32GB') ? 'selected' : '' ?>>32GB</option>
@@ -98,7 +98,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
       </select>
 
       <button type="submit">
-        <i class="fas fa-filter"></i> Apply Filters
+        <i class="fas fa-filter"></i> Прилагане на филтри
       </button>
     </form>
 
@@ -150,11 +150,11 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
             <img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
-              <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
+              <div class="price"><?= $fetch_product['price']; ?><span> лв.</span></div>
               <?php
               if ($fetch_product['qty'] == 0) {
               ?>
-                <div class="out-of-stock">Out of stock</div>
+                <div class="out-of-stock">Изчерпан</div>
               <?php
               } else {
               ?>
@@ -164,13 +164,13 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
               ?>
             </div>
             <button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>" <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>>
-              <i class="fas fa-plus"></i> Add to cart
+              <i class="fas fa-plus"></i> Добави в количката
             </button>
           </form>
       <?php
         }
       } else {
-        echo '<div class="empty" style="grid-column: 1 / -1; width: 100%;">We don\'t have this product now!</div>';
+        echo '<div class="empty" style="grid-column: 1 / -1; width: 100%;">В момента нямаме този продукт.</div>';
       }
       ?>
     </div>
