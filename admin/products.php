@@ -107,7 +107,7 @@ if (isset($_POST['add_product'])) {
 
     // Check for release date format
     if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) && !checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
-      throw new Exception('Released date is not in the correct format (YYYY-MM-DD)!');
+      throw new Exception('Released date isn\'t in the correct format (YYYY-MM-DD)!');
     }
 
     // Process and move uploaded images
@@ -146,7 +146,7 @@ if (isset($_POST['add_product'])) {
     $message[] = 'New product added successfully!';
   } catch (PDOException $e) {
     if ($e->errorInfo[1] == 1062) {
-      $message[] = 'Product with ' . $name . ' already exists!';
+      $message[] = 'Product with name ' . $name . ' already exists!';
     } else {
       $message[] = 'Error: ' . $e->getMessage();
     }
@@ -293,8 +293,8 @@ if (isset($_GET['delete'])) {
           </div>
 
           <div class="inputBox">
-            <span>Phone Size<span style="color: red;">*</span></span>
-            <input type="text" name="size" placeholder="Phone size" class="box" required>
+            <span>Display size<span style="color: red;">*</span></span>
+            <input type="text" name="size" placeholder="Display size" class="box" required>
           </div>
 
           <div class="inputBox">
@@ -350,7 +350,7 @@ if (isset($_GET['delete'])) {
     </section>
 
     <section class="show-products">
-      <h1 class="heading">Added Products</h1>
+      <h1 class="heading">Added products</h1>
       <div class="box-container">
         <?php
         $select_products = $conn->prepare("SELECT * FROM `products`");
@@ -371,7 +371,7 @@ if (isset($_GET['delete'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">No Products Added Yet!</p>';
+          echo '<p class="empty">No products added yet!</p>';
         }
         ?>
       </div>
