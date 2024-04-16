@@ -146,6 +146,13 @@ if (isset($_GET['delete'])) {
                   <p>Phone brand : <span><?= $fetch_services['brand']; ?></span></p>
                   <p>Problem : <br><span class="description-text"><?= $fetch_services['description']; ?></span></p>
                   <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_services['delivery']; ?></span></p>
+                  <?php
+                  if ($fetch_services['delivery'] == 'yes') {
+                  ?>
+                    <p> Address: <span><?= $fetch_services['address']; ?></span></p>
+                  <?php
+                  }
+                  ?>
                   <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Payment method : <span><?= $fetch_services['payment_method']; ?></span></p>
                   <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price <?= (($fetch_services['delivery'] == 'yes') && ($fetch_services['payment_method'] != null)) ? '(with delivery) ' : '' ?>: <br><span><?= $fetch_services['price']; ?></span></p>
                   <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Pay for the service</button>
