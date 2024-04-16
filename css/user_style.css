@@ -1536,6 +1536,7 @@
   margin: 0.5rem 0;
   font-size: 1.8rem;
   color: var(--black);
+  word-break: break-word;
 }
 
 .service-box div p span {
