@@ -140,7 +140,7 @@ if (isset($_POST['update_qty'])) {
                 <input type="number" id="q<?= $counter; ?>" name="qty" class="qty" min="1" max="<?php echo $fetch_cart['qty'] + $fetch_cart['quantity'] ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
                 <button type="submit" id="u<?= $counter; ?>" class="update-btn fas fa-edit fa-plus fa-2x" name="update_qty"></button>
               </div>
-              <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
+              <div class="sub-total"> Subtotal : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
               <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Remove this product from cart?');">
                 <i class="fas fa-minus-circle"></i> Remove
               </button>
