@@ -156,7 +156,7 @@ if (isset($_GET['delete'])) {
                 <p> E-mail : <span><?= $fetch_orders['email']; ?></span> </p>
                 <p> Phone number : <span><?= $fetch_orders['number']; ?></span> </p>
                 <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_orders['delivery']; ?></span></p>
-                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery cost : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
+                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery cost : <span>$<?= $fetch_orders['delivery_cost']; ?></span></p>
                 <p> Address : <span><?= $fetch_orders['address']; ?></span> </p>
                 <p> Total products : <span><?= $fetch_orders['ordered_products']; ?></span> </p>
                 <div class="ordered-img">
