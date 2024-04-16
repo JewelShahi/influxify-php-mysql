@@ -264,13 +264,13 @@ if (isset($_POST['update'])) {
 
             </div>
 
-            <span>Update name</span>
+            <span>Update product name</span>
             <input type="text" name="name" class="box" maxlength="100" placeholder="Product name" value="<?= $fetch_products['name']; ?>" required>
 
-            <span>Update price</span>
+            <span>Update product price</span>
             <input type="number" name="price" class="box" min="0.00" step="0.01" placeholder="Product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>" required>
 
-            <span>Update details</span>
+            <span>Update product details</span>
             <textarea name="details" class="box" required><?= $fetch_products['details']; ?></textarea>
 
             <span id="brandLabel">Update brand</span>
@@ -288,7 +288,7 @@ if (isset($_POST['update'])) {
             <span>Update released date</span>
             <input type="text" name="released" placeholder="Released date" class="box" value="<?= $fetch_products['released']; ?>">
 
-            <span>Update quantity</span>
+            <span>Update product quantity</span>
             <input type="number" name="qty" placeholder="Product quantity" class="box" min="0" step="1" value="<?= $fetch_products['qty']; ?>" required>
 
             <span>Update CPU</span>
@@ -312,7 +312,7 @@ if (isset($_POST['update'])) {
             <span>Update battery capacity</span>
             <input type="text" name="battery" placeholder="Battery" class="box" value="<?= $fetch_products['battery']; ?>" required>
 
-            <span>Update phone color</span>
+            <span>Update product color</span>
             <input type="text" name="color" placeholder="Color" class="box" value="<?= $fetch_products['color']; ?>" required>
 
             <div class="file-buttons">
