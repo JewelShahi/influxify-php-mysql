@@ -303,16 +303,16 @@ if (isset($_POST['update'])) {
             <span>Update camera count</span>
             <input type="number" name="camera_count" placeholder="Camera count" class="box" min="0" step="1" value="<?= $fetch_products['camera_count']; ?>" required>
 
-            <span>Camera resolution</span>
+            <span>Update camera resolution</span>
             <input type="text" name="camera_resolution" placeholder="Camera resolution" class="box" value="<?= $fetch_products['camera_resolution']; ?>" required>
 
-            <span>Phone size</span>
+            <span>Update diplay size</span>
             <input type="text" name="size" placeholder="Phone size" class="box" value="<?= $fetch_products['size']; ?>" required>
 
-            <span>Battery</span>
+            <span>Update battery capacity</span>
             <input type="text" name="battery" placeholder="Battery" class="box" value="<?= $fetch_products['battery']; ?>" required>
 
-            <span>Phone color</span>
+            <span>Update phone color</span>
             <input type="text" name="color" placeholder="Color" class="box" value="<?= $fetch_products['color']; ?>" required>
 
             <div class="file-buttons">
