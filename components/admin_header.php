@@ -81,7 +81,7 @@ if (isset($message)) {
         ?>
         <p><?= $fetch_profile['name']; ?></p>
         <a href="../admin/update_profile.php" class="btn">
-          <i class="fas fa-user-edit"></i> Update Profile
+          <i class="fas fa-user-edit"></i> Update profile
         </a>
         <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
           <i class="fas fa-sign-out-alt"></i> Logout
