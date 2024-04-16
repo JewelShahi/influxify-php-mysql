@@ -71,8 +71,8 @@ include '../components/wishlist_cart.php';
               <div class="info"><span>RAM: </span><?= $fetch_product['ram']; ?></div>
               <div class="info"><span>Camera count: </span><?= $fetch_product['camera_count']; ?></div>
               <div class="info"><span>Camera resolution: </span><?= $fetch_product['camera_resolution']; ?></div>
-              <div class="info"><span>Display (phone) size: </span><?= $fetch_product['size']; ?></div>
-              <div class="info"><span>Battery: </span><?= $fetch_product['battery']; ?></div>
+              <div class="info"><span>Display size: </span><?= $fetch_product['size']; ?></div>
+              <div class="info"><span>Battery capacity: </span><?= $fetch_product['battery']; ?></div>
               <div class="info"><span>Color: </span><?= $fetch_product['color']; ?></div>
               <?php
               if ($fetch_product["qty"] != 0 && $fetch_product["qty"] <= 5) {
