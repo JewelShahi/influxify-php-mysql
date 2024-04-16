@@ -28,7 +28,7 @@ if (isset($_GET['delete_all'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
 	<meta charset="UTF-8">

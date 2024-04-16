@@ -21,7 +21,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">

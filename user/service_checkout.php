@@ -74,7 +74,7 @@ if (isset($_POST['service_checkout_data'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">

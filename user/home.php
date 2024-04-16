@@ -14,7 +14,7 @@ include '../components/wishlist_cart.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en" style="height: auto;">
+<html lang="bg" style="height: auto;">
 
 <head>
 	<meta charset="UTF-8">

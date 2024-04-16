@@ -68,7 +68,7 @@ if (isset($_POST['update_avatar'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">

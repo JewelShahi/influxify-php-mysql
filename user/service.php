@@ -57,7 +57,7 @@ if (isset($_GET['delete'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">

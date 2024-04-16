@@ -25,7 +25,7 @@ if (isset($_POST['order'])) {
     $state = filter_var($_POST['state'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $country = filter_var($_POST['country'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $postal_code = filter_var($_POST['postal_code'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $address = "Flat №: $flat, Street: $street, City: $city, State: $state, Country: $country, Post code: $postal_code";
+    $address = "Блок №: $flat, Улица: $street, Град: $city, Квартал: $state, Държава: $country, Пощенски код: $postal_code";
     $delivery_cost = 9.99; // Assuming delivery cost is fixed at $9.99
   } else {
     // If delivery option is "no", set address to empty string and delivery cost to 0
@@ -71,18 +71,18 @@ if (isset($_POST['order'])) {
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
 
-      $message[] = 'Order placed successfully!';
+      $message[] = 'Поръчката е направена успешно!';
     } catch (Exception $e) {
-      $message[] = 'Error placing order. Please try again.';
+      $message[] = 'Грешка при поръчка. Моля, опитайте отново.';
     }
   } else {
-    $message[] = 'Your cart is empty';
+    $message[] = 'Your cart is empty!';
   }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
