@@ -40,7 +40,7 @@ include '../components/wishlist_cart.php';
     $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand LIKE ?");
     $select_products->execute(["$brand"]);
     ?>
-    <h1 class="heading">Category</h1>
+    <h1 class="heading">Brand</h1>
     <?php
     if ($select_products->rowCount() > 0) {
     ?>
