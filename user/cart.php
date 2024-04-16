@@ -150,7 +150,7 @@ if (isset($_POST['update_qty'])) {
             $counter++;
           }
         } else {
-          echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Your cart is empty</p>';
+          echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Your cart is empty!</p>';
         }
         ?>
       </div>
