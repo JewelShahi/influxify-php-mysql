@@ -76,7 +76,7 @@ if (isset($_POST['order'])) {
       $message[] = 'Error placing order. Please try again.';
     }
   } else {
-    $message[] = 'Your cart is empty';
+    $message[] = 'Your cart is empty!';
   }
 }
 ?>
