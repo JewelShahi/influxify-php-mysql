@@ -13,13 +13,13 @@ include '../components/wishlist_cart.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Category</title>
+  <title>Марка</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
@@ -40,11 +40,11 @@ include '../components/wishlist_cart.php';
     $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand LIKE ?");
     $select_products->execute(["$brand"]);
     ?>
-    <h1 class="heading">Category</h1>
+    <h1 class="heading">Марка</h1>
     <?php
     if ($select_products->rowCount() > 0) {
     ?>
-      <h3 class="heading" style="font-size: 3rem;">Products from brand - <?= $brand; ?></h3>
+      <h3 class="heading" style="font-size: 3rem;">Продукти от марка - <?= $brand; ?></h3>
     <?php
     }
     ?>
@@ -65,11 +65,11 @@ include '../components/wishlist_cart.php';
             <img src="../uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="<?= $fetch_product['image_01']; ?>">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
-              <div class="price"><span>$</span><?= $fetch_product['price']; ?></div>
+              <div class="price"><span></span><?= $fetch_product['price']; ?> лв.</div>
               <?php
               if ($fetch_product['qty'] == 0) {
               ?>
-                <div class="out-of-stock">Out of stock</div>
+                <div class="out-of-stock">Изчерпано</div>
               <?php
               } else {
               ?>
@@ -79,13 +79,13 @@ include '../components/wishlist_cart.php';
               ?>
             </div>
             <button type="submit" name="add_to_cart" class="btn <?php if ($fetch_product['qty'] == 0) echo 'disabled'; ?>">
-              <i class="fas fa-plus"></i> Add to cart
+              <i class="fas fa-plus"></i> Добави в количката
             </button>
           </form>
       <?php
         }
       } else {
-        echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">This brand doesn\'t have products yet!</p>';
+        echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Тази марка все още няма продукти.</p>';
       }
       ?>
 

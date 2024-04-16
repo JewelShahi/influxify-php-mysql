@@ -75,20 +75,20 @@ if (isset($_POST['update_qty'])) {
     $updateProductQty->execute([abs($qtyDifference), $pid]);
   }
 
-  $message[] = 'Cart quantity updated';
+  $message[] = 'Количеството в количката е актуализирано.';
 }
 
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopping Cart</title>
+  <title>Количка за пазаруване</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -111,7 +111,7 @@ if (isset($_POST['update_qty'])) {
 
     <section class="products shopping-cart">
 
-      <h3 class="heading">Shopping cart</h3>
+      <h3 class="heading">Количка за пазаруване</h3>
 
       <div class="box-container">
 
@@ -136,13 +136,13 @@ if (isset($_POST['update_qty'])) {
               <img src="../uploaded_img/products/<?= $fetch_cart['image']; ?>" alt="<?= $fetch_cart['image']; ?>">
               <div class="name"><?= $fetch_cart['name']; ?></div>
               <div class="flex">
-                <div class="price">$<?= $fetch_cart['price']; ?></div>
+                <div class="price"><?= $fetch_cart['price']; ?> лв.</div>
                 <input type="number" id="q<?= $counter; ?>" name="qty" class="qty" min="1" max="<?php echo $fetch_cart['qty'] + $fetch_cart['quantity'] ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
                 <button type="submit" id="u<?= $counter; ?>" class="update-btn fas fa-edit fa-plus fa-2x" name="update_qty"></button>
               </div>
-              <div class="sub-total"> Sub total : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
-              <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Remove this product from cart?');">
-                <i class="fas fa-minus-circle"></i> Remove
+              <div class="sub-total"> Междинна сума : <span>$<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span></div>
+              <button type="submit" class="delete-btn" name="delete" onclick="return confirm('Съгласни ли сте да махнете продукта от количката?');">
+                <i class="fas fa-minus-circle"></i> Махни
               </button>
             </form>
         <?php
@@ -157,15 +157,15 @@ if (isset($_POST['update_qty'])) {
     </section>
 
     <div class="cart-total">
-      <p>Grand total : <span>$<?= $grand_total; ?></span></p>
+      <p>Обща сума : <span><?= $grand_total; ?> лв.</span></p>
       <a href="shop.php" class="option-btn">
-        <i class="fas fa-arrow-left"></i> Continue shopping
+        <i class="fas fa-arrow-left"></i> Към магазина
       </a>
       <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>" onclick="return confirm('Remove all products from cart?');">
-        <i class="fas fa-trash-alt"></i> Remove all products
+        <i class="fas fa-trash-alt"></i> Махни всичко
       </a>
       <a href="checkout.php" class="btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>">
-        <i class="fa-solid fa-wallet"></i> Proceed to checkout
+        <i class="fa-solid fa-wallet"></i> Плати
       </a>
     </div>
 

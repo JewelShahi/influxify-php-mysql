@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
@@ -20,7 +20,7 @@
     Страницата, която търсите, не съществува или е възникнала друга грешка.
   </h5>
   <a href="home.php" class="btn" style="width: 200px;">
-    <i class="fas fa-arrow-left"></i> Go Back
+    <i class="fas fa-arrow-left"></i> Назад
   </a>
 </body>
 

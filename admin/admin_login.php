@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
     <div class="admin-login-bg">
       <form action="" method="post" class="admin-login-form">
         <h3>Админски вход</h3>
-        <p>Email = <span>admin@admin.com</span> и Парола = <span>admin</span></p>
+        <p>Имейл = <span>admin@admin.com</span> и Парола = <span>admin</span></p>
         <input type="email" name="email" required placeholder="Въведете имейл" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
         <div class="password-container">
           <input type="password" name="pass" placeholder="Въведете парола" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>

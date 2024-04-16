@@ -1883,7 +1883,6 @@
   font-size: 2rem;
   color: var(--white);
   margin-bottom: 2rem;
-  text-transform: capitalize;
 }
 
 .footer .grid .box a {
@@ -1934,7 +1933,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 832px) {
   #menu-btn {
     display: inline-block;
   }

@@ -996,13 +996,13 @@
   }
 }
 
-@media (max-width: 890px) {
+@media (max-width: 940px) {
   #menu-btn-admin {
     display: inline-block;
   }
 }
 
-@media (max-width: 890px) {
+@media (max-width: 940px) {
   .header .flex .navbar {
     position: absolute;
     top: 99%;
