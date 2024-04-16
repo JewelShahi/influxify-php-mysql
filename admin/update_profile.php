@@ -123,7 +123,7 @@ if (isset($_POST['update_avatar'])) {
         <input title="Registry date" type="text" maxlength="100" class="box" value="<?= date('d/m/Y', strtotime($fetch_profile['reg_date'])); ?>" readonly>
 
         <button type="submit" class="btn submit-btn" name="update_password">
-          <i class="fas fa-save"></i> Save Changes
+          <i class="fas fa-save"></i> Save changes
         </button>
 
       </form>
