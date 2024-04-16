@@ -155,7 +155,7 @@ if (isset($_GET['delete'])) {
           <?php
             }
           } else {
-            echo '<p class="empty">No placed service(s) yet.</p>';
+            echo '<p class="empty">No placed service(s) yet!</p>';
           }
           ?>
           </div>
