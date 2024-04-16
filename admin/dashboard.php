@@ -224,7 +224,7 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
           ?>
           <h3><?= $number_of_payment_status_completed; ?></h3>
-          <p>Total completed payment status orders services</p>
+          <p>Total completed payment status services</p>
           <a href="services.php" class="btn">See all services</a>
         </div>
 
