@@ -29,19 +29,19 @@ if (isset($_POST['send'])) {
   $description = filter_var($description, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   if (!preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/", $email)) {
-    $message[] = 'Invalid email format!';
+    $message[] = 'Невалиден формат на имейл!';
   } else {
     try {
       $insert_service = $conn->prepare("INSERT INTO `services` (user_id, name, email, number, brand, description) VALUES(?,?,?,?,?,?)");
       $insert_service->execute([$user_id, $name, $email, $number, $brand, $description]);
 
-      $message[] = 'Service ticket sent successfully!';
+      $message[] = 'Заявен е успошно сервиза!';
 
       // Redirect to a different page to prevent form resubmission
       header('Location: service.php');
     } catch (PDOException $e) {
       // Handle the exception - display an error message or log the error
-      $message[] = 'Error: ' . $e->getMessage();
+      $message[] = 'Грешка: ' . $e->getMessage();
     }
   }
 }

@@ -1,7 +1,7 @@
 <?php
 
 // db configuration (name, password)
-$db_name = 'mysql:host=localhost;dbname=shop_db';
+$db_name = 'mysql:host=localhost;dbname=shop-bg';
 $user_name = 'root';
 $user_password = '';
 
