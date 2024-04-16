@@ -293,17 +293,17 @@ if (isset($_GET['delete'])) {
           </div>
 
           <div class="inputBox">
-            <span>Display size<span style="color: red;">*</span></span>
+            <span>Display size <span style="color: red;">*</span></span>
             <input type="text" name="size" placeholder="Display size" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Battery <span style="color: red;">*</span></span>
+            <span>Battery capacity <span style="color: red;">*</span></span>
             <input type="text" name="battery" placeholder="Battery" class="box" required>
           </div>
 
           <div class="inputBox">
-            <span>Phone color <span style="color: red;">*</span></span>
+            <span>Product color <span style="color: red;">*</span></span>
             <input type="text" name="color" placeholder="Color" class="box" required>
           </div>
 
