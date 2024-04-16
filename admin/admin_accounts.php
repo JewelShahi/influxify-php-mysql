@@ -35,7 +35,7 @@ if (isset($_GET['delete'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
@@ -43,7 +43,7 @@ if (isset($_GET['delete'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Title and favicon -->
-  <title>Admin accounts</title>
+  <title>Администраторски профили</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -71,13 +71,13 @@ if (isset($_GET['delete'])) {
     <section class="accounts">
 
       <!-- Heading for admin accounts -->
-      <h1 class="heading">Admin accounts</h1>
+      <h1 class="heading">Админски профили</h1>
 
       <!-- Container for adding a new admin -->
       <div class="new-admin-container">
         <div id="add-new-admin">
-          <p>Add a new admin</p>
-          <a href="register_admin.php" class="option-btn">Register an admin</a>
+          <p>Добавяне на админ</p>
+          <a href="register_admin.php" class="option-btn">Регистрирай админ</a>
         </div>
       </div>
 
@@ -98,9 +98,9 @@ if (isset($_GET['delete'])) {
               <div class="after"></div>
               <div class="user-info">
                 <div style="margin-bottom: 0.7rem; border: 3px solid #3b8a59; display: inline-block; width: 80px; height: 80px; border-radius: 50%; background-image: url('../uploaded_img/user_avatar/<?= $fetch_accounts['avatar'] ?>'); background-size: cover; box-shadow: 0 0 10px 5px #2ad45b; "></div>
-                <p> Admin ID : <span><?= $fetch_accounts['id']; ?></span> </p>
-                <p> Admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
-                <p> Registry date : <span><?= date('d/m/Y', strtotime($fetch_accounts['reg_date'])); ?></span></p>
+                <p> Админски ID : <span><?= $fetch_accounts['id']; ?></span> </p>
+                <p> Име на админ : <span><?= $fetch_accounts['name']; ?></span> </p>
+                <p> Дата на регистрация : <span><?= date('d/m/Y', strtotime($fetch_accounts['reg_date'])); ?></span></p>
                 
                 <!-- Buttons for updating and deleting admin accounts -->
                 <div class="flex-btn">
@@ -108,14 +108,14 @@ if (isset($_GET['delete'])) {
                   // Check if the admin is viewing their own account
                   if ($fetch_accounts['id'] == $admin_id) {
                     // Display update button
-                    echo '<a href="update_profile.php" class="option-btn">Update</a>';
+                    echo '<a href="update_profile.php" class="option-btn">Актуализация</a>';
                   }
                   ?>
                   <?php
                   // Check if the admin is not viewing their own account and it's not the super admin (ID = 2)
                   if ($fetch_accounts['id'] != $admin_id && $fetch_accounts['id'] != 2) {
                     // Display delete button
-                    echo '<a href="admin_accounts.php?delete=' . $fetch_accounts['id'] . '" onclick="return confirm(\'Delete this account?\')" class="delete-btn">Delete</a>';
+                    echo '<a href="admin_accounts.php?delete=' . $fetch_accounts['id'] . '" onclick="return confirm(\'Съгласен ли си да изтриеш този профил?\')" class="delete-btn">Изтрий</a>';
                   }
                   ?>
                 </div>
@@ -124,7 +124,7 @@ if (isset($_GET['delete'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">There are currently no available admin accounts</p>';
+          echo '<p class="empty">Няма администраторски акаунти в момента.</p>';
         }
         ?>
       </div>

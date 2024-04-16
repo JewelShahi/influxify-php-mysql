@@ -14,13 +14,13 @@
 <body>
   <img src="../images/404.svg" alt="404 page not found">
   <h2>
-    Oops! Page Not Found.
+    Страницата не е намерена!
   </h2>
   <h5>
-    The page you are looking for doesn't exist or another error has occurred.
+    Страницата, която търсите, не съществува или е възникнала друга грешка.
   </h5>
   <a href="home.php" class="btn" style="width: 200px;">
-    <i class="fas fa-arrow-left"></i>  Go Back
+    <i class="fas fa-arrow-left"></i> Go Back
   </a>
 </body>
 

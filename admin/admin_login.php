@@ -31,19 +31,19 @@ if (isset($_POST['submit'])) {
 
     header('Location: dashboard.php');
   } else {
-    $message[] = 'Incorrect username or password!';
+    $message[] = 'Неправилно потребителско име или парола!';
   }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log In Admin</title>
+  <title>Админски вход</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   
   <!-- Icons -->
@@ -74,14 +74,14 @@ if (isset($_POST['submit'])) {
   <section class="admin-login">
     <div class="admin-login-bg">
       <form action="" method="post" class="admin-login-form">
-        <h3>Admin Log In</h3>
-        <p>Email = <span>admin@admin.com</span> and Password = <span>admin</span></p>
-        <input type="email" name="email" required placeholder="Enter your email" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
+        <h3>Админски вход</h3>
+        <p>Email = <span>admin@admin.com</span> и Парола = <span>admin</span></p>
+        <input type="email" name="email" required placeholder="Въведете имейл" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')">
         <div class="password-container">
-          <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+          <input type="password" name="pass" placeholder="Въведете парола" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
           <span id="toggle" class="toggle-pass fas fa-eye" onclick="togglePassword(this)"></span>
         </div>
-        <input type="submit" value="Log In" class="btn" name="submit">
+        <input type="submit" value="Вход" class="btn" name="submit">
       </form>
     </div>
   </section>

@@ -17,13 +17,13 @@ if (isset($_SESSION['admin_id'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>Администраторско табло</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -49,15 +49,15 @@ if (isset($_SESSION['admin_id'])) {
   ?>
     <section class="dashboard">
 
-      <h1 class="heading">Dashboard</h1>
+      <h1 class="heading">Табло</h1>
 
       <div class="box-container">
 
         <!-- Admin name -->
         <div class="box">
-          <h3>Welcome!</h3>
+          <h3 style="z-index: 100;">Привет!</h3>
           <p><?= $fetch_profile['name']; ?></p>
-          <a href="update_profile.php" class="btn">Update Profile</a>
+          <a href="update_profile.php" class="btn">Обнови профила си</a>
         </div>
 
         <!-- Total users -->
@@ -68,8 +68,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_users = $select_users->rowCount()
           ?>
           <h3><?= $number_of_users; ?></h3>
-          <p>Total users</p>
-          <a href="users_accounts.php" class="btn">See all users</a>
+          <p>Всички потребители</p>
+          <a href="users_accounts.php" class="btn">Виж потребителите</a>
         </div>
 
         <!-- Total admins -->
@@ -80,8 +80,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_admins = $select_admins->rowCount()
           ?>
           <h3><?= $number_of_admins; ?></h3>
-          <p>Total admins</p>
-          <a href="admin_accounts.php" class="btn">See all admins</a>
+          <p>Всички админи</p>
+          <a href="admin_accounts.php" class="btn">Виж админите</a>
         </div>
 
         <!-- Total income -->
@@ -105,7 +105,7 @@ if (isset($_SESSION['admin_id'])) {
           $income = $orders_total_income + $services_total_income;
           ?>
           <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income, 2, '.', ','); ?></h3>
-          <p>Total income</p>
+          <p>Общ доход</p>
         </div>
 
         <!-- Total service income -->
@@ -116,8 +116,8 @@ if (isset($_SESSION['admin_id'])) {
           $income = $select_orders->fetch(PDO::FETCH_ASSOC);
           ?>
           <h3 style="z-index: 9999; text-wrap: wrap;">$<?= number_format($income['service_income'], 2, '.', ','); ?></h3>
-          <p>Total service income</p>
-          <a href="services.php" class="btn">See all services</a>
+          <p>Доходи от услуги</p>
+          <a href="services.php" class="btn">Виж услугите</a>
         </div>
 
         <!-- Total orders -->
@@ -128,8 +128,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_orders = $select_orders->rowCount();
           ?>
           <h3><?= $number_of_orders; ?></h3>
-          <p>Total orders</p>
-          <a href="placed_orders.php" class="btn">See all orders</a>
+          <p>Всички поръчки</p>
+          <a href="placed_orders.php" class="btn">Виж поръчките</a>
         </div>
 
         <!-- Total order with status processing -->
@@ -140,8 +140,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_order_status_processing = $select_order_status_processing->rowCount()
           ?>
           <h3><?= $number_of_order_status_processing; ?></h3>
-          <p>Total processing order status</p>
-          <a href="placed_orders.php" class="btn">See all orders</a>
+          <p>Обработващи се поръчки</p>
+          <a href="placed_orders.php" class="btn">Виж поръчките</a>
         </div>
 
         <!-- Total order with status shipping -->
@@ -152,8 +152,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_order_status_shipping = $select_order_status_shipping->rowCount()
           ?>
           <h3><?= $number_of_order_status_shipping; ?></h3>
-          <p>Total shipping order status</p>
-          <a href="placed_orders.php" class="btn">See all orders</a>
+          <p>Доставящи се поръчки</p>
+          <a href="placed_orders.php" class="btn">Виж поръчките</a>
         </div>
 
         <!-- Total order with status delivered -->
@@ -164,8 +164,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_order_status_delivered = $select_order_status_delivered->rowCount()
           ?>
           <h3><?= $number_of_order_status_delivered; ?></h3>
-          <p>Total delivered order status</p>
-          <a href="placed_orders.php" class="btn">See all orders</a>
+          <p>Доставени поръчки</p>
+          <a href="placed_orders.php" class="btn">Виж поръчките</a>
         </div>
 
         <!-- Total payments with status pending -->
@@ -176,8 +176,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_payment_status_pendings = $select_payment_status_pendings->rowCount()
           ?>
           <h3><?= $number_of_payment_status_pendings; ?></h3>
-          <p>Total pending payment status orders</p>
-          <a href="placed_orders.php" class="btn">See all orders</a>
+          <p>Неплатени поръчки</p>
+          <a href="placed_orders.php" class="btn">Виж поръчките</a>
         </div>
 
         <!-- Total payments with status completed -->
@@ -188,8 +188,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
           ?>
           <h3><?= $number_of_payment_status_completed; ?></h3>
-          <p>Total completed payment status orders</p>
-          <a href="placed_orders.php" class="btn">See all orders</a>
+          <p>Платени поръчки</p>
+          <a href="placed_orders.php" class="btn">Виж поръчките</a>
         </div>
 
         <!-- Total services -->
@@ -200,8 +200,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_services = $select_services->rowCount()
           ?>
           <h3><?= $number_of_services; ?></h3>
-          <p>Total services</p>
-          <a href="services.php" class="btn">See all services</a>
+          <p>Заявени сервизи</p>
+          <a href="services.php" class="btn">Виж сервизите</a>
         </div>
 
         <!-- Total services with status pending -->
@@ -212,8 +212,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_payment_status_pendings = $select_payment_status_pendings->rowCount()
           ?>
           <h3><?= $number_of_payment_status_pendings; ?></h3>
-          <p>Total pending payment status services</p>
-          <a href="services.php" class="btn">See all services</a>
+          <p>Неплатени сервизи</p>
+          <a href="services.php" class="btn">Виж сервизите</a>
         </div>
 
         <!-- Total services with status completed -->
@@ -224,8 +224,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_payment_status_completed = $select_payment_status_completed->rowCount()
           ?>
           <h3><?= $number_of_payment_status_completed; ?></h3>
-          <p>Total completed payment status orders services</p>
-          <a href="services.php" class="btn">See all services</a>
+          <p>Платени сервизи</p>
+          <a href="services.php" class="btn">Виж сервизите</a>
         </div>
 
         <!-- Total services with status resolved -->
@@ -236,8 +236,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_resolved_services = $select_resolved_services->rowCount()
           ?>
           <h3><?= $number_of_resolved_services; ?></h3>
-          <p>Total resolved services</p>
-          <a href="services.php" class="btn">See all services</a>
+          <p>Довършени сервизи</p>
+          <a href="services.php" class="btn">Виж сервизите</a>
         </div>
 
         <!-- Total products -->
@@ -248,8 +248,8 @@ if (isset($_SESSION['admin_id'])) {
           $number_of_products = $select_products->rowCount()
           ?>
           <h3><?= $number_of_products; ?></h3>
-          <p>Total products</p>
-          <a href="products.php" class="btn">See all products</a>
+          <p>Общо продукти</p>
+          <a href="products.php" class="btn">Виж продуктите</a>
         </div>
 
       </div>

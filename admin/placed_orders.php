@@ -25,7 +25,7 @@ if (isset($_POST['update_payment'])) {
     $update_payment_status = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
     $update_payment_status->execute([$payment_status, $order_id]);
 
-    $message[] = 'Payment status updated!';
+    $message[] = 'Статусът на плащане е актуализиран!';
   }
 
   if (isset($_POST['order_status'])) {
@@ -35,7 +35,7 @@ if (isset($_POST['update_payment'])) {
     $update_order_status = $conn->prepare("UPDATE `orders` SET order_status = ? WHERE id = ?");
     $update_order_status->execute([$order_status, $order_id]);
 
-    $message[] = 'Order status updated!';
+    $message[] = 'Статусът на поръчката е актуализиран!';
   }
 }
 
@@ -70,13 +70,13 @@ if (isset($_GET['delete'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Placed Orders</title>
+  <title>Поръчки</title>
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
 
   <!-- Icons -->
@@ -87,7 +87,7 @@ if (isset($_GET['delete'])) {
   <link rel="stylesheet" href="../css/global.css">
 
   <style>
-    
+
   </style>
 
 </head>
@@ -107,7 +107,7 @@ if (isset($_GET['delete'])) {
   ?>
     <section class="orders">
 
-      <h1 class="heading">Placed Orders</h1>
+      <h1 class="heading">Поръчки</h1>
 
       <div class="box-container">
 
@@ -149,47 +149,47 @@ if (isset($_GET['delete'])) {
         ?>
             <div class="box">
               <div class="blur">
-                <p> Order ID : <span><?= $fetch_orders['id']; ?></span> </p>
-                <p> Placed on : <span><?= date('d/m/Y H:i:s', strtotime($fetch_orders['placed_on'])); ?></span> </p>
-                <p> User ID : <span><?= $fetch_orders['user_id']; ?></span> </p>
-                <p> Name : <span><?= $fetch_orders['name']; ?></span> </p>
+                <p> Поръчка № : <span><?= $fetch_orders['id']; ?></span> </p>
+                <p> Поръчана на : <span><?= date('d/m/Y H:i:s', strtotime($fetch_orders['placed_on'])); ?></span> </p>
+                <p> Клиент № : <span><?= $fetch_orders['user_id']; ?></span> </p>
+                <p> Име : <span><?= $fetch_orders['name']; ?></span> </p>
                 <p> E-mail : <span><?= $fetch_orders['email']; ?></span> </p>
-                <p> Phone number : <span><?= $fetch_orders['number']; ?></span> </p>
-                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery : <span><?= $fetch_orders['delivery']; ?></span></p>
-                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Delivery cost : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
-                <p> Address : <span><?= $fetch_orders['address']; ?></span> </p>
-                <p> Total products : <span><?= $fetch_orders['ordered_products']; ?></span> </p>
+                <p> Тел. : <span><?= $fetch_orders['number']; ?></span> </p>
+                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Доставка : <span><?= $fetch_orders['delivery']; ?></span></p>
+                <p style="<?= ($fetch_orders['delivery'] == 'yes') ? '' : 'display: none;'; ?>">Цена за доставка : <span><?= $fetch_orders['delivery_cost']; ?></span></p>
+                <p> Адрес : <span><?= $fetch_orders['address']; ?></span> </p>
+                <p> Поръчани продукти : <span><?= $fetch_orders['ordered_products']; ?></span> </p>
                 <div class="ordered-img">
-                    <?php
-                    for ($i = 0; $i < count($ordered_products); $i++) {
-                      echo '<img class="ordered-img-item" src="../uploaded_img/products/' . $ordered_product_images[$i] . '" alt="Product Image">';  // Modified: Added image display
-                    }
-                    ?>
-                  </div>
-                <p> Total price : <span>$<?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?></span> </p>
-                <p> Payment method : <span><?= $fetch_orders['method']; ?></span> </p>
+                  <?php
+                  for ($i = 0; $i < count($ordered_products); $i++) {
+                    echo '<img class="ordered-img-item" src="../uploaded_img/products/' . $ordered_product_images[$i] . '" alt="' . $ordered_product_images[$i] . '">';  // Modified: Added image display
+                  }
+                  ?>
+                </div>
+                <p> Обща цена : <span>$<?= $fetch_orders['total_product_price'] + $fetch_orders['delivery_cost']; ?></span> </p>
+                <p> Вид на платежа : <span><?= $fetch_orders['method']; ?></span> </p>
 
                 <form action="" method="post">
 
                   <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
-                  <p id="paymentStatusLabel">Payment status :</p>
+                  <p id="paymentStatusLabel">Статус на плащане :</p>
                   <select name="payment_status" class="select" aria-labelledby="paymentStatusLabel">
                     <option selected disabled><?= $fetch_orders['payment_status']; ?></option>
-                    <option value="pending">Pending</option>
-                    <option value="completed">Completed</option>
+                    <option value="pending">Неплатен</option>
+                    <option value="completed">Платен</option>
                   </select>
 
-                  <p id="orderStatusLabel">Order status :</p>
+                  <p id="orderStatusLabel">Статус на поръчката :</p>
                   <select name="order_status" class="select" aria-labelledby="orderStatusLabel">
                     <option selected disabled><?= $fetch_orders['order_status']; ?></option>
-                    <option value="processing">Processing</option>
-                    <option value="shipping">Shipping</option>
-                    <option value="delivered">Delivered</option>
+                    <option value="processing">Обработва се</option>
+                    <option value="shipping">Доставя се</option>
+                    <option value="delivered">Доставен</option>
                   </select>
 
                   <div class="flex-btn">
-                    <input type="submit" value="Update" class="option-btn" name="update_payment">
-                    <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('Delete this order?');">Delete</a>
+                    <input type="submit" value="Обнови" class="option-btn" name="update_payment">
+                    <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('Искаш ли да изтриш поръчката?');">Изтрий</a>
                   </div>
                 </form>
               </div>
@@ -197,7 +197,7 @@ if (isset($_GET['delete'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">No orders placed yet</p>';
+          echo '<p class="empty">Няма заявени поръчки.</p>';
         }
         ?>
 
