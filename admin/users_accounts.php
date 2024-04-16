@@ -98,7 +98,7 @@ if (isset($_GET['delete'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">There are currently no available user accounts</p>';
+          echo '<p class="empty">There are no user accounts right now!</p>';
         }
         ?>
       </div>
