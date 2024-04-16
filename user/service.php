@@ -101,7 +101,7 @@ if (isset($_GET['delete'])) {
             <input type="email" name="email" placeholder="Имейл" maxlength="50" class="box" required>
             <input type="number" name="number" min="0" max="999999999999999" placeholder="Тел. номер" onkeypress="if(this.value.length > 15) return false;" class="box" required>
             <select name="brand" class="box" aria-labelledby="brandLabel" required>
-              <option selected default disabled>Избери марка</option>
+              <option selected default disabled>Изберете марка</option>
               <?php
 
               $selectedBrand = $fetch_products['brand'];
