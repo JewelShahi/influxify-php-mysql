@@ -99,7 +99,7 @@ if (isset($_GET['delete_all'])) {
 				<?php
 					}
 				} else {
-					echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Your wishlist is empty.</p>';
+					echo '<p class="empty" style="grid-column: 1 / -1; width: 100%;">Your wishlist is empty!</p>';
 				}
 				?>
 			</div>
