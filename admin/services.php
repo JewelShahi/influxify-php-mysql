@@ -100,8 +100,8 @@ if (isset($_GET['delete'])) {
                 <p> User ID : <span><?= $fetch_service['user_id']; ?></span></p>
                 <p> Name : <span><?= $fetch_service['name']; ?></span></p>
                 <p> E-mail : <span><?= $fetch_service['email']; ?></span></p>
-                <p> Phone Number : <span><?= $fetch_service['number']; ?></span></p>
-                <p> Phone Brand : <span><?= $fetch_service['brand']; ?></span></p>
+                <p> Phone number : <span><?= $fetch_service['number']; ?></span></p>
+                <p> Phone brand : <span><?= $fetch_service['brand']; ?></span></p>
                 <p> Problem : <span class="long-text"><?= $fetch_service['description']; ?></span></p>
                 <p> Estimated price (delivery <em>if the user includes</em>) : <input type="number" name="estimated_price" class="price" min="0" max="999999" step="0.01" value="<?= $fetch_service['price']; ?>" <?= ($fetch_service['payment_method'] !== null) ? 'readonly' : ''; ?> style="<?= ($fetch_service['payment_method'] !== null) ? 'color: black;' : ''; ?>"></p>
                 <p> Payment method: <span><?= $fetch_service['payment_method']; ?></span></p>
@@ -125,7 +125,7 @@ if (isset($_GET['delete'])) {
         <?php
           }
         } else {
-          echo '<p class="empty">At present, no services are available</p>';
+          echo '<p class="empty">Right now there are no services to show!</p>';
         }
         ?>
 
