@@ -81,18 +81,18 @@ if (isset($message)) {
         ?>
           <p><?= $fetch_profile["name"]; ?></p>
           <a href="update_user.php" class="btn">
-            <i class="fas fa-user-edit"></i> Update Profile
+            <i class="fas fa-user-edit"></i> Обнови профила
           </a>
-          <a href="../components/user_logout.php" class="delete-btn" onclick="return confirm('Logout from the website?');">
-            <i class="fas fa-sign-out-alt"></i> Logout
+          <a href="../components/user_logout.php" class="delete-btn" onclick="return confirm('Съгласени ли сте да излезете от профила?');">
+            <i class="fas fa-sign-out-alt"></i> Изход
           </a>
         <?php
         } else {
         ?>
           <p>Please Log In or Register!</p>
           <div class="flex-btn">
-            <a href="user_login.php" class="option-btn">Log In</a>
-            <a href="user_register.php" class="option-btn">Register</a>
+            <a href="user_login.php" class="option-btn">Вход</a>
+            <a href="user_register.php" class="option-btn">Регистрация</a>
           </div>
         <?php
         }

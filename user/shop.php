@@ -64,7 +64,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
       <label for="brand">Филтриране по марка:</label>
       <select id="brand" name="brand">
-        <option value="" <?= ($filter_brand == '') ? 'selected' : '' ?>>-- All Brands --</option>
+        <option value="" <?= ($filter_brand == '') ? 'selected' : '' ?>>-- Всички марки --</option>
         <option value="Samsung" <?= ($filter_brand == 'Samsung') ? 'selected' : '' ?>>Samsung</option>
         <option value="Apple" <?= ($filter_brand == 'Apple') ? 'selected' : '' ?>>Apple</option>
         <option value="Google" <?= ($filter_brand == 'Google') ? 'selected' : '' ?>>Google</option>
@@ -77,7 +77,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
       <label for="ram">Филтриране по RAM памет:</label>
       <select id="ram" name="ram">
-        <option value="" <?= ($filter_ram == '') ? 'selected' : '' ?>>-- All RAM --</option>
+        <option value="" <?= ($filter_ram == '') ? 'selected' : '' ?>>-- Всички RAM памет --</option>
         <option value="2GB" <?= ($filter_ram == '2GB') ? 'selected' : '' ?>>2GB</option>
         <option value="4GB" <?= ($filter_ram == '4GB') ? 'selected' : '' ?>>4GB</option>
         <option value="6GB" <?= ($filter_ram == '6GB') ? 'selected' : '' ?>>6GB</option>
@@ -88,7 +88,7 @@ $search_query = isset($_POST['search']) ? $_POST['search'] : '';
 
       <label for="storage">Филтриране по външна памет:</label>
       <select id="storage" name="storage">
-        <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- All Storages --</option>
+        <option value="" <?= ($filter_storage == '') ? 'selected' : '' ?>>-- Всички вътрешни памет --</option>
         <option value="32GB" <?= ($filter_storage == '32GB') ? 'selected' : '' ?>>32GB</option>
         <option value="64GB" <?= ($filter_storage == '64GB') ? 'selected' : '' ?>>64GB</option>
         <option value="128GB" <?= ($filter_storage == '128GB') ? 'selected' : '' ?>>128GB</option>
