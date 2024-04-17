@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2024 at 11:03 PM
+-- Generation Time: Apr 17, 2024 at 10:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `cart` (
   `pid` int(11) NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `price` double(8,2) NOT NULL DEFAULT 0.00,
-  `quantity` int(10) NOT NULL
+  `quantity` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42,7 +42,8 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`user_id`, `pid`, `name`, `price`, `quantity`) VALUES
 (1, 15, 'Samsung Galaxy S24 Ultra Titanium Violet', 2999.99, 1),
 (1, 36, 'Realme GT NEO 3T Dragon Ball Z Blue', 1002.03, 1),
-(8, 5, 'Samsung Galaxy S21 Ultra Phantom Black', 1199.99, 3);
+(8, 5, 'Samsung Galaxy S21 Ultra Phantom Black', 1199.99, 3),
+(10, 17, 'Realme C31 Dark Green', 190.62, 1);
 
 -- --------------------------------------------------------
 
@@ -61,11 +62,11 @@ CREATE TABLE `orders` (
   `delivery` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'no',
   `delivery_cost` double(8,2) NOT NULL DEFAULT 0.00,
   `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '-',
-  `price` double(8,2) NOT NULL,
+  `price` double(8,2) NOT NULL DEFAULT 0.00,
   `placed_on` datetime NOT NULL DEFAULT current_timestamp(),
   `payment_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending',
   `order_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'processing',
-  `qty` int(11) NOT NULL
+  `qty` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -123,7 +124,7 @@ INSERT INTO `products` (`id`, `name`, `details`, `brand`, `released`, `qty`, `cp
 (11, 'Samsung Galaxy S23 Phantom Black', 'Discover the future of mobile technology with the Samsung Galaxy S23. This cutting-edge smartphone seamlessly combines futuristic design with advanced features. Powered by the latest Exynos 9000 (or Snapdragon 9XXX, depending on the region) processor, the Galaxy S23 delivers unparalleled performance. With a spacious 256GB of storage and a massive 12GB of RAM, this device ensures seamless multitasking and storage for all your needs. The innovative quad-camera system features a 108MP main lens, a 48MP ultrawide lens, a 8MP periscope telephoto lens, and a 5MP depth sensor, offering unparalleled photography capabilities. Immerse yourself in a stunning 6.5-inch Dynamic AMOLED display that brings colors to life. The robust 5000mAh battery ensures extended usage, and the phone is available in the sophisticated &#039;Celestial Blue&#039; color.', 'Samsung', '2023-03-15', 6, 'Snapdragon 8 Gen 2', '256GB', '8GB', 3, '12 MP (ultrawide), 50 MP (wide), 10 MP (telephoto)', '6.1 in', '3900 mAh', 'Phantom Black', 1440.00, 's galaxy s23 pblack 1.png', 's galaxy s23 pblack 2.png', 's galaxy s23 pblack 3.png'),
 (15, 'Samsung Galaxy S24 Ultra Titanium Violet', 'The Samsung Galaxy S24 Ultra Titanium Violet is a cutting-edge flagship smartphone that seamlessly blends stunning design with powerful features. Encased in a sleek titanium violet finish, the device exudes sophistication and style. Its vibrant and expansive display offers a mesmerizing visual experience, while the advanced camera system ensures exceptional photo and video capabilities. Packed with high-performance hardware and innovative technologies, the Galaxy S24 Ultra Titanium Violet is a symbol of Samsung&#039;s commitment to delivering a premium mobile experience.', 'Samsung', '2024-01-31', 2, 'Qualcomm Snapdragon 8 Gen 3', '1TB', '12GB', 4, '12 MP (ultra-wide), 10 MP (telephoto), 200 MP (wide), 50 MP (periscope telephoto)', '6.8 in', '5000 mAh', 'Titanium Violet', 2999.99, 'sgalaxy s24 ultra titanium violet 1.png', 'sgalaxy s24 ultra titanium violet 2.png', 'sgalaxy s24 ultra titanium violet 3.png'),
 (16, 'Xiaomi 11T Celestial Blue', 'The Xiaomi 11T Celestial Blue, now available at a 20% discount, continues to captivate with its elegant design and celestial-inspired color palette. The deep blues of its finish create a sophisticated appearance, now more accessible in price. This flagship device boasts a high-performance camera system and cutting-edge technology, delivering an immersive user experience. With its celestial blue hue and advanced features, the Xiaomi 11T Celestial Blue stands out as a symbol of style and innovation, offering affordability without compromising on quality.', 'Xiaomi', '2021-10-05', 4, 'Media Tek Dimensity 1200-Ultra', '128GB', '8GB', 3, '8 MP (ultrawide), 108 MP (wide), 5 MP (telephoto)', '6.67 in', '5000 mAh', 'Celestial Blue', 644.99, 'xiaomi 11t celestial blue 1.png', 'xiaomi 11t celestial blue 2.png', 'xiaomi 11t celestial blue 3.png'),
-(17, 'Realme C31 Dark Green', 'The Realme C31, a budget-friendly smartphone, features a 6.5-inch HD+ display for an immersive visual experience. Its robust processor and ample RAM ensure smooth multitasking, complemented by a long-lasting battery. The versatile camera setup, guided by AI-driven intelligence, captures moments with precision. Ample internal storage and expandable options cater to growing digital needs, and Realme UI enhances user experience. With comprehensive connectivity and advanced security features, the Realme C31 offers affordability without compromise.', 'Realme', '2022-01-31', 9, 'Unisoc Tiger T612', '64GB', '4GB', 3, '2 MP (macro), 13 MP (wide), 0.3 MP (depth)', '6.5 in', '5000 mAh', 'Dark Green', 190.62, 'realmeC31 dark green 1.png', 'realmeC31 dark green 2.png', 'realmeC31 dark green 3.png'),
+(17, 'Realme C31 Dark Green', 'The Realme C31, a budget-friendly smartphone, features a 6.5-inch HD+ display for an immersive visual experience. Its robust processor and ample RAM ensure smooth multitasking, complemented by a long-lasting battery. The versatile camera setup, guided by AI-driven intelligence, captures moments with precision. Ample internal storage and expandable options cater to growing digital needs, and Realme UI enhances user experience. With comprehensive connectivity and advanced security features, the Realme C31 offers affordability without compromise.', 'Realme', '2022-01-31', 8, 'Unisoc Tiger T612', '64GB', '4GB', 3, '2 MP (macro), 13 MP (wide), 0.3 MP (depth)', '6.5 in', '5000 mAh', 'Dark Green', 190.62, 'realmeC31 dark green 1.png', 'realmeC31 dark green 2.png', 'realmeC31 dark green 3.png'),
 (18, 'Motorola Moto e13 Autora Green', 'The Motorola Moto e13 Autora Green is a budget-friendly smartphone with a sleek design and vibrant green color. Featuring a responsive processor, reliable camera system, and optimized battery life, it offers a practical and user-friendly experience. Balancing affordability and functionality, the Moto e13 is a compelling option for those seeking a reliable and stylish smartphone.', 'Motorola', '2023-02-13', 1, 'Unisoc T606', '64GB', '2GB', 1, '13 MP Wide', '6.5 in', '5000 mAh', 'Autora Green', 157.99, 'motorola moto e13 autora green 1.png', 'motorola moto e13 autora green 2.png', 'motorola moto e13 autora green 3.png'),
 (19, 'Oppo A12 Blue', 'The Oppo A12 Blue is a sleek and affordable smartphone that combines style with practical features. Its eye-catching blue design adds a touch of elegance to the device. With a vibrant display, dual-camera system, and a reliable processor, the Oppo A12 Blue is equipped to capture and enjoy moments seamlessly. This budget-friendly smartphone strikes a balance between aesthetics and functionality, making it an appealing choice for users seeking an affordable and stylish mobile experience.', 'Oppo', '2020-04-20', 0, 'MediaTek Helio P35 MT6765', '32GB', '2GB', 2, '13 MP (standard), 2 MP (depth)', '6.7 in', '4230 mAh', 'blue', 279.99, 'oppo a12 1.png', 'oppo a12 2.png', 'oppo a12 3.png'),
 (24, 'OnePlus Nord 3 Misty Green', 'Introducing the OnePlus Nord 3: a seamless fusion of power, style, and affordability, setting a new standard in smartphone excellence. With its standout features, including a mighty 16GB RAM and MediaTek Dimensity 9000 chipset, it effortlessly handles every task while providing ample storage with its generous 256GB capacity. Experience lightning-fast 5G connectivity for instant downloads and seamless streaming on its immersive 6.74-inch Super Fluid AMOLED display with a silky-smooth 120Hz refresh rate. Dual SIM support simplifies your digital life, while its sleek Misty Green design and slim profile make a bold statement. The OnePlus Nord 3 redefines smartphone excellence, delivering unmatched performance, style, and affordability in one exceptional package.', 'OnePlus', '2023-07-11', 7, 'MediaTek Dimensity 9000', '256GB', '16GB', 3, '2 MP (macro), 8 MP (ultrawide), 50 MP (wide)', '6.74 in', '5000 mAh', 'Misty Green', 813.37, 'oneplus_nord_3_misty_green_01.png', 'oneplus_nord_3_misty_green_02.png', 'oneplus_nord_3_misty_green_03.png'),
@@ -169,9 +170,9 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `user_id`, `placed_on`, `name`, `email`, `number`, `brand`, `description`, `is_resolved`, `payment_method`, `payment_status`, `delivery`, `price`, `address`) VALUES
-(1, 1, '2024-01-21 08:42:15', 'Jewel', 'joeimportant1020@gmail.com', '0878146923', 'Samsung', 'Dept', 0, NULL, 'pending', 'no', 43.53, '-'),
+(1, 1, '2024-01-21 08:42:15', 'Jewel', 'joeimportant1020@gmail.com', '0878146923', 'Samsung', 'I\'ve been noticing my Samsung phone\'s battery draining faster than usual. It\'s frustrating because I can\'t seem to keep it charged for a full day. There are probably a few reasons for this, like the battery getting old, or maybe I\'m using some apps that are draining the battery more quickly. I\'ve tried adjusting some settings to use less battery, but it doesn\'t seem to be enough. I might need to take it in to a service technician to have them take a look and see if they can diagnose the exact cause. Maybe they\'ll need to replace the battery.', 0, NULL, 'pending', 'no', 43.53, '-'),
 (2, 1, '2024-01-27 09:03:48', 'Joe', 'jewel@gmail.com', '0879456200', 'Samsung', 'The primary concern is that the phone screen appears to be cracked, and there is a noticeable lack of responsiveness. I first noticed the problem on [mention the date or approximate time]. There wasn\'t any specific incident that I can recall, but the screen\'s behavior changed suddenly. Upon closer inspection, I observed several cracks on the screen\'s surface. It\'s worth noting that these cracks seem to be affecting the overall functionality of the touchscreen. There haven\'t been any recent software updates or changes in settings that I am aware of. The phone has been operating normally until the issue with the screen emerged.', 1, 'cash on delivery', 'completed', 'no', 28.00, '- '),
-(3, 1, '2024-02-12 13:21:26', 'Jewel Shahi', 'jewel@jewel.com', '0877323151', 'Apple', 'Not good', 0, 'cash on delivery', 'pending', 'yes', 22.35, 'Flat №: 23, Street: Amber Street, City: Sofia, State: Sofia City, Country: Bulgaria, Post code: 12336\r\n');
+(3, 1, '2024-02-12 13:21:26', 'Jewel Shahi', 'jewel@jewel.com', '0877323151', 'Apple', 'Oh no! I just went butterfingers and cracked the screen on my iPhone!  Totally stinks  - these things are slippery!  Everyone seems to crack their phone at some point, right?  I saw some stuff online about fixing it myself, but with iPhones, it seems pretty tricky.  Maybe for a super old model I\'d be okay, but I don\'t want to risk messing anything else up inside the phone. ', 0, 'cash on delivery', 'pending', 'yes', 22.35, 'Flat №: 23, Street: Amber Street, City: Sofia, State: Sofia City, Country: Bulgaria, Post code: 12336\r\n');
 
 -- --------------------------------------------------------
 
@@ -201,7 +202,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `re
 (5, 'Jinwoo', 'jinwoo@jinwoo.com', '43badabd40651b7b4e4e097e80af33ad2dd807aa', 1, 'sung-jinwoo.png', '2024-03-03'),
 (6, 'UserTest+10', 'usertest@gmail.com', '79dbd1fa6563c5ae0f5e6a7df6dcc1ee5c02e281', 0, 'shigeo-kageyama.png', '2024-03-03'),
 (7, 'New User', 'newser@new.com', 'b406f877e90994474d3a2d3e275dbf92467eefd7', 0, 'katsuki-bakugo.png', '2024-03-04'),
-(8, 'vladi', 'ok@gmail.com', '92c8b10157e05856af182a643de7dcea14472f74', 0, 'ryomen-sukuna.png', '2024-03-12');
+(8, 'vladi', 'ok@gmail.com', '92c8b10157e05856af182a643de7dcea14472f74', 0, 'ryomen-sukuna.png', '2024-03-12'),
+(10, 'User', 'alibaba@ali.com', '4318c3220b16e40fff31f25d83c67fab3d7257f9', 0, 'ichigo-kurosaki-ai.png', '2024-04-17');
 
 -- --------------------------------------------------------
 
@@ -213,7 +215,7 @@ CREATE TABLE `wishlist` (
   `user_id` int(100) NOT NULL,
   `pid` int(100) NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `price` int(100) NOT NULL
+  `price` double(8,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -221,7 +223,7 @@ CREATE TABLE `wishlist` (
 --
 
 INSERT INTO `wishlist` (`user_id`, `pid`, `name`, `price`) VALUES
-(1, 19, 'Oppo A12 Blue', 280);
+(1, 19, 'Oppo A12 Blue', 280.00);
 
 --
 -- Indexes for dumped tables
@@ -292,7 +294,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
