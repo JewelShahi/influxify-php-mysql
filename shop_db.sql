@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 10:55 PM
+-- Generation Time: Apr 17, 2024 at 11:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -197,13 +197,13 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `reg_date`) VALUES
 (1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'ichigo-kurosaki.png', '2023-12-15'),
 (2, 'Admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'satoru-gojo-blue.png', '2023-12-15'),
-(3, 'TesterAdmin', 'testadmin1050@test.com', '1dcb5a3bdfad6ac42dd8f778322ae5e60b586172', 1, 'ulquiorra-cifer.png', '2024-01-05'),
-(4, 'work', 'worker1020@work.com', 'b7830571013e3220b480d3015812eeb0a92657ba', 0, 'ichigo-kurosaki-anime.png', '2024-01-10'),
-(5, 'Jinwoo', 'jinwoo@jinwoo.com', '43badabd40651b7b4e4e097e80af33ad2dd807aa', 1, 'sung-jinwoo.png', '2024-03-03'),
-(6, 'UserTest+10', 'usertest@gmail.com', '79dbd1fa6563c5ae0f5e6a7df6dcc1ee5c02e281', 0, 'shigeo-kageyama.png', '2024-03-03'),
-(7, 'New User', 'newser@new.com', 'b406f877e90994474d3a2d3e275dbf92467eefd7', 0, 'katsuki-bakugo.png', '2024-03-04'),
-(8, 'vladi', 'ok@gmail.com', '92c8b10157e05856af182a643de7dcea14472f74', 0, 'ryomen-sukuna.png', '2024-03-12'),
-(10, 'User', 'alibaba@ali.com', '4318c3220b16e40fff31f25d83c67fab3d7257f9', 0, 'ichigo-kurosaki-ai.png', '2024-04-17');
+(3, 'Tester Admin', 'testadmin1050@test.com', '1dcb5a3bdfad6ac42dd8f778322ae5e60b586172', 1, 'ulquiorra-cifer.png', '2024-01-05'),
+(4, 'Worker', 'worker1020@work.com', 'b5a8489c97da586235b6d4d5f49db4da473b8383', 0, 'ichigo-kurosaki-anime.png', '2024-01-10'),
+(5, 'Sung Jinwoo', 'sungjinwoo10@jinwoo.com', 'f05f5d4cdeb74b5ba7746105ab8c9adaaf246808', 1, 'sung-jinwoo.png', '2024-03-03'),
+(6, 'User Test', 'usertest+10@gmail.com', 'b528913860816711ba0b9f575519cbf12351f292', 0, 'shigeo-kageyama.png', '2024-03-03'),
+(7, 'New User', 'newuser1020@new.com', '1b8e602d0988d10170e682307e5faddaa1ec2511', 0, 'katsuki-bakugo.png', '2024-03-04'),
+(8, 'Vladi', 'vladithebest10@gmail.com', '0b2d299d54aeb7388f10c34911785173c9c1a47c', 0, 'ryomen-sukuna.png', '2024-03-12'),
+(10, 'Ali Baba', 'alibaba1020@ali.com', '5e67f384abf548b2586de36d0e9e0bcd1e16ef29', 0, 'ichigo-kurosaki-ai.png', '2024-04-17');
 
 -- --------------------------------------------------------
 
