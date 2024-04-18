@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2024 at 04:15 PM
+-- Generation Time: Apr 18, 2024 at 06:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -161,7 +161,7 @@ CREATE TABLE `services` (
   `payment_method` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `payment_status` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending',
   `delivery` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'no',
-  `price` decimal(8,2) NOT NULL DEFAULT 0.00,
+  `price` double(8,2) NOT NULL DEFAULT 0.00,
   `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '-'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -195,8 +195,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `reg_date`) VALUES
-(1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'ichigo-kurosaki.png', '2023-12-15'),
-(2, 'Admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'satoru-gojo-blue.png', '2023-12-15'),
+(1, 'User', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0, 'anos-voldigoad.png', '2023-12-15'),
+(2, 'Admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'sung-jinwoo-death-look.png', '2023-12-15'),
 (3, 'Tester Admin', 'testadmin1050@test.com', '1dcb5a3bdfad6ac42dd8f778322ae5e60b586172', 1, 'ulquiorra-cifer.png', '2024-01-05'),
 (4, 'Worker', 'worker1020@work.com', 'b5a8489c97da586235b6d4d5f49db4da473b8383', 0, 'ichigo-kurosaki-anime.png', '2024-01-10'),
 (5, 'Sung Jinwoo', 'sungjinwoo10@jinwoo.com', 'f05f5d4cdeb74b5ba7746105ab8c9adaaf246808', 1, 'sung-jinwoo.png', '2024-03-03'),
@@ -288,13 +288,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
