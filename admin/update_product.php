@@ -87,7 +87,7 @@ if (isset($_POST['update'])) {
       if (!preg_match('/\s*mah$/i', $battery)) {
         $battery = preg_replace('/(\d+)\s*(mah)$/i', '$1 mAh', $battery);
       }
-    } 
+    }
   } else {
     // If it contains only numbers, append ' mAh'
     $battery .= " mAh";
@@ -127,80 +127,117 @@ if (isset($_POST['update'])) {
   // Image-1
   $old_image_01 = $_POST['old_image_01'];
   $image_01 = $_FILES['image_01']['name'];
-  $image_size_01 = $_FILES['image_01']['size'];
   $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
-  $image_folder_01 = $baseImagePath;
+  $image_size_01 = $_FILES['image_01']['size'];
+  $image_folder_01 = '../uploaded_img/products/';
+  $max_image_size = 2000000; // 2MB, adjust as needed
 
+  // Check if an image is uploaded and it's a valid upload
   if (!empty($image_01) && is_uploaded_file($image_tmp_name_01)) {
-    $newImageName_01 = $name . '_01';
-    $new_image_01 = sanitizeAndRenameImage($image_01, $newImageName_01, $image_tmp_name_01, $image_folder_01);
+    // Check if the image size is too large
+    if ($image_size_01 > $max_image_size) {
+      $message[] = 'Image 1 size is too large!';
+    } else {
+      // Extract the file extension
+      $extension = pathinfo($image_01, PATHINFO_EXTENSION);
 
-    if ($new_image_01) {
-      $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
-      $update_image_01->execute([$new_image_01, $pid]);
+      // Generate a new image name with extension
+      $new_image_name = strtolower($name) . '_01.' . $extension; // Example: image_123456_01.jpg
 
+      // Check if the old image exists and remove it
       if (!empty($old_image_01) && file_exists($image_folder_01 . $old_image_01)) {
         unlink($image_folder_01 . $old_image_01);
       }
 
-      $message[] = 'Image-1 has been updated successfully!';
-    } else {
-      $message[] = 'Failed to move Image-1 to the destination folder!';
+      // Move the uploaded file to the destination folder
+      if (move_uploaded_file($image_tmp_name_01, $image_folder_01 . $new_image_name)) {
+        // Update the database with the new image name
+        $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
+        $update_image_01->execute([$new_image_name, $pid]);
+
+        $message[] = 'Image 1 has been updated successfully!';
+      } else {
+        $message[] = 'Failed to move Image 1 to the destination folder! Check directory permissions and file path.';
+      }
     }
   }
 
   // Image-2
   $old_image_02 = $_POST['old_image_02'];
   $image_02 = $_FILES['image_02']['name'];
-  $image_size_02 = $_FILES['image_02']['size'];
   $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
-  $image_folder_02 = $baseImagePath;
+  $image_size_02 = $_FILES['image_02']['size'];
+  $image_folder_02 = '../uploaded_img/products/';
+  $max_image_size = 2000000; // 2MB, adjust as needed
 
+  // Check if an image is uploaded and it's a valid upload
   if (!empty($image_02) && is_uploaded_file($image_tmp_name_02)) {
-    $newImageName_02 = $name . '_02';
-    $new_image_02 = sanitizeAndRenameImage($image_02, $newImageName_02, $image_tmp_name_02, $image_folder_02);
+    // Check if the image size is too large
+    if ($image_size_02 > $max_image_size) {
+      $message[] = 'Image 2 size is too large!';
+    } else {
+      // Extract the file extension
+      $extension = pathinfo($image_02, PATHINFO_EXTENSION);
 
-    if ($new_image_02) {
-      $update_image_02 = $conn->prepare("UPDATE `products` SET image_02 = ? WHERE id = ?");
-      $update_image_02->execute([$new_image_02, $pid]);
+      // Generate a new image name with extension
+      $new_image_name = strtolower($name) . '_02.' . $extension; // Example: image_123456_02.jpg
 
+      // Check if the old image exists and remove it
       if (!empty($old_image_02) && file_exists($image_folder_02 . $old_image_02)) {
         unlink($image_folder_02 . $old_image_02);
       }
 
-      $message[] = 'Image-2 has been updated successfully!';
-    } else {
-      $message[] = 'Failed to move Image-2 to the destination folder!';
+      // Move the uploaded file to the destination folder
+      if (move_uploaded_file($image_tmp_name_02, $image_folder_02 . $new_image_name)) {
+        // Update the database with the new image name
+        $update_image_02 = $conn->prepare("UPDATE `products` SET image_02 = ? WHERE id = ?");
+        $update_image_02->execute([$new_image_name, $pid]);
+
+        $message[] = 'Image 2 has been updated successfully!';
+      } else {
+        $message[] = 'Failed to move Image 2 to the destination folder! Check directory permissions and file path.';
+      }
     }
   }
 
   // Image-3
   $old_image_03 = $_POST['old_image_03'];
   $image_03 = $_FILES['image_03']['name'];
-  $image_size_03 = $_FILES['image_03']['size'];
   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
-  $image_folder_03 = $baseImagePath;
+  $image_size_03 = $_FILES['image_03']['size'];
+  $image_folder_03 = '../uploaded_img/products/';
+  $max_image_size = 2000000; // 2MB, adjust as needed
 
+  // Check if an image is uploaded and it's a valid upload
   if (!empty($image_03) && is_uploaded_file($image_tmp_name_03)) {
-    $newImageName_03 = $name . '_03';
-    $new_image_03 = sanitizeAndRenameImage($image_03, $newImageName_03, $image_tmp_name_03, $image_folder_03);
+    // Check if the image size is too large
+    if ($image_size_03 > $max_image_size) {
+      $message[] = 'Image 3 size is too large!';
+    } else {
+      // Extract the file extension
+      $extension = pathinfo($image_03, PATHINFO_EXTENSION);
 
-    if ($new_image_03) {
-      $update_image_03 = $conn->prepare("UPDATE `products` SET image_03 = ? WHERE id = ?");
-      $update_image_03->execute([$new_image_03, $pid]);
+      // Generate a new image name with extension
+      $new_image_name = strtolower($name) . '_03.' . $extension; // Example: image_123456_03.jpg
 
+      // Check if the old image exists and remove it
       if (!empty($old_image_03) && file_exists($image_folder_03 . $old_image_03)) {
         unlink($image_folder_03 . $old_image_03);
       }
 
-      $message[] = 'Image-3 has been updated successfully!';
-    } else {
-      $message[] = 'Failed to move Image-3 to the destination folder!';
+      // Move the uploaded file to the destination folder
+      if (move_uploaded_file($image_tmp_name_03, $image_folder_03 . $new_image_name)) {
+        // Update the database with the new image name
+        $update_image_03 = $conn->prepare("UPDATE `products` SET image_03 = ? WHERE id = ?");
+        $update_image_03->execute([$new_image_name, $pid]);
+
+        $message[] = 'Image 3 has been updated successfully!';
+      } else {
+        $message[] = 'Failed to move Image 3 to the destination folder! Check directory permissions and file path.';
+      }
     }
   }
 }
-
-
 ?>
 
 <!DOCTYPE html>
