@@ -30,7 +30,7 @@ include '../components/wishlist_cart.php';
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 	<!-- AOS -->
-	<!-- <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"> -->
+	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 	<!-- custom css file link -->
 	<link rel="stylesheet" href="../css/global.css">
@@ -299,14 +299,14 @@ include '../components/wishlist_cart.php';
 	<script src="../js/swiper.js"></script>
 
 	<!-- AOS  -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 	<script>
 		AOS.init({
 			duration: 1000,
 			delay: 300,
 			once: true,
 		});
-	</script> -->
+	</script>
 </body>
 
 </html>

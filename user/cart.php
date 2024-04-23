@@ -182,7 +182,7 @@ if (isset($_POST['update_qty'])) {
         $cart_product_quantity->execute([$user_id]);
         while ($fetch_cart = $cart_product_quantity->fetch(PDO::FETCH_ASSOC)) {
         ?>
-        
+
           let qInp<?= $counter; ?> = document.getElementById('q<?= $counter; ?>');
           let uBtn<?= $counter; ?> = document.getElementById('u<?= $counter; ?>');
 
