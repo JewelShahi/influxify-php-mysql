@@ -38,7 +38,7 @@ include '../components/wishlist_cart.php';
 	<link rel="stylesheet" href="../css/user_style.css">
 </head>
 
-<body style="height: auto;">
+<body style="height: auto; overflow-x: hidden;">
 
 	<?php include '../components/user_header.php'; ?>
 
