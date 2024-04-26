@@ -1662,7 +1662,8 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 100%;
-  background-color: rgba(4, 94, 22, 0.5);
+  /* background-color: rgba(4, 94, 22, 0.5); */
+  background-image: linear-gradient(45deg, #0e627e, #067306);
   padding: 5rem 2rem;
   text-align: center;
 }
@@ -1675,13 +1676,13 @@
 
 .cart-total p {
   font-size: 2.5rem;
-  color: var(--black);
+  color: var(--white);
 }
 
 .cart-total p span {
   font-weight: 900;
   font-size: 2.2rem;
-  color: rgb(7, 101, 6);
+  color: rgb(91, 243, 91);
 }
 
 .display-orders {
