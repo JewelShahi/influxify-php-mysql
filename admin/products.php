@@ -106,44 +106,45 @@ if (isset($_POST['add_product'])) {
   try {
 
     // Check for release date format
-    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $released) && !checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
-      throw new Exception('Released date isn\'t in the correct format (YYYY-MM-DD)!');
-    }
-
-    // Process and move uploaded images
-    $image_names = array(); // Store new image names
-
-    for ($i = 1; $i <= 3; $i++) {
-      $image_name = $_FILES["image_0$i"]["name"];
-      $image_size = $_FILES["image_0$i"]["size"];
-      $image_tmp_name = $_FILES["image_0$i"]["tmp_name"];
-
-      // Check if image size is within limits
-      if ($image_size > $max_file_size) {
-        throw new Exception("Image $i size is too large!");
-      }
-
-      // Rename the image file based on the product name
-      $new_image_name = strtolower(str_replace(' ', '_', $name)) . "_0$i";
-
-      // Append unique identifier and file extension
-      $extension = pathinfo($image_name, PATHINFO_EXTENSION);
-      $new_image_name .= ".$extension";
-
-      // Move the uploaded image to the target folder with the new filename
-      if (move_uploaded_file($image_tmp_name, $image_folder . $new_image_name)) {
-        $message[] = "Image $i uploaded successfully!";
-        $image_names[] = $new_image_name; // Store the new image name
+    if (!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $released) || !checkdate((int)substr($released, 5, 2), (int)substr($released, 8, 2), (int)substr($released, 0, 4))) {
+      throw new Exception('Release date is invalid! Must be this format YYYY-MM-DD!');
       } else {
-        $message[] = "Failed to upload Image $i!";
+        
+      // Process and move uploaded images
+      $image_names = array(); // Store new image names
+
+      for ($i = 1; $i <= 3; $i++) {
+        $image_name = $_FILES["image_0$i"]["name"];
+        $image_size = $_FILES["image_0$i"]["size"];
+        $image_tmp_name = $_FILES["image_0$i"]["tmp_name"];
+
+        // Check if image size is within limits
+        if ($image_size > $max_file_size) {
+          throw new Exception("Image $i size is too large!");
+        }
+
+        // Rename the image file based on the product name
+        $new_image_name = strtolower(str_replace(' ', '_', $name)) . "_0$i";
+
+        // Append unique identifier and file extension
+        $extension = pathinfo($image_name, PATHINFO_EXTENSION);
+        $new_image_name .= ".$extension";
+
+        // Move the uploaded image to the target folder with the new filename
+        if (move_uploaded_file($image_tmp_name, $image_folder . $new_image_name)) {
+          $message[] = "Image $i uploaded successfully!";
+          $image_names[] = $new_image_name; // Store the new image name
+        } else {
+          $message[] = "Failed to upload Image $i!";
+        }
       }
+
+      // Inserting the data
+      $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_names[0], $image_names[1], $image_names[2]]);
+
+      $message[] = 'New product added successfully!';
     }
-
-    // Inserting the data
-    $insert_products = $conn->prepare("INSERT INTO `products` (name, details, brand, released, qty, cpu, storage, ram, camera_count, camera_resolution, size, battery, color, price, image_01, image_02, image_03) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $insert_products->execute([$name, $details, $brand, $released, $qty, $cpu, $storage, $ram, $camera_count, $camera_resolution, $size, $battery, $color, $price, $image_names[0], $image_names[1], $image_names[2]]);
-
-    $message[] = 'New product added successfully!';
   } catch (PDOException $e) {
     if ($e->errorInfo[1] == 1062) {
       $message[] = 'Product with name ' . $name . ' already exists!';

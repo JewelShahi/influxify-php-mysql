@@ -106,7 +106,7 @@ if (isset($_POST['update'])) {
 
     $message[] = 'Product info updated successfully!';
   } else {
-    $message[] = 'Released date isn\'t in the correct format (YYYY-MM-DD)!';
+    $message[] = 'Release date is invalid! Must be this format YYYY-MM-DD!';
   }
 
   $baseImagePath = '../uploaded_img/products/';
