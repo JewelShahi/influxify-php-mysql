@@ -270,7 +270,7 @@ if (isset($_GET['delete'])) {
 
           <div class="inputBox">
             <span>CPU <span style="color: red;">*</span></span>
-            <input type="text" name="cpu" placeholder="CPU" class="box" required>
+            <input type="text" name="cpu" placeholder="CPU model" class="box" required>
           </div>
 
           <div class="inputBox">
@@ -300,12 +300,12 @@ if (isset($_GET['delete'])) {
 
           <div class="inputBox">
             <span>Battery capacity <span style="color: red;">*</span></span>
-            <input type="text" name="battery" placeholder="Battery" class="box" required>
+            <input type="text" name="battery" placeholder="Battery capacity" class="box" required>
           </div>
 
           <div class="inputBox">
             <span>Product color <span style="color: red;">*</span></span>
-            <input type="text" name="color" placeholder="Color" class="box" required>
+            <input type="text" name="color" placeholder="Product color" class="box" required>
           </div>
 
           <div class="inputBox">
