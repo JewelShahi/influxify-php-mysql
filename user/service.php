@@ -156,7 +156,7 @@ if (isset($_GET['delete'])) {
                   <p style="<?= ($fetch_services['payment_method'] != null) ? '' : 'display: none;'; ?>">Payment method : <span><?= $fetch_services['payment_method']; ?></span></p>
                   <p style="<?= ($fetch_services['price'] > 0) ? '' : 'display: none;'; ?>">Price <?= (($fetch_services['delivery'] == 'yes') && ($fetch_services['payment_method'] != null)) ? '(with delivery) ' : '' ?>: <br><span><?= $fetch_services['price']; ?></span></p>
                   <button type="submit" name="service_checkout" class="option-btn" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Pay for the service</button>
-                  <a href="service.php?delete=' . $fetch_services['id'] . '" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Decline service</a>
+                  <a href="service.php?delete=<?= htmlspecialchars($fetch_services['id']); ?>" class="delete-btn" onclick="return confirm('Decline this order?');" style="<?= ($fetch_services['price'] > 0 && $fetch_services['payment_method'] == null) ? '' : 'display: none;'; ?>">Decline service</a>
                 </div>
               </form>
           <?php
