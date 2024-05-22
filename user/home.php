@@ -30,7 +30,7 @@ include '../components/wishlist_cart.php';
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 	<!-- AOS -->
-	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+	<!-- <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"> -->
 
 	<!-- custom css file link -->
 	<link rel="stylesheet" href="../css/global.css">
@@ -38,7 +38,7 @@ include '../components/wishlist_cart.php';
 	<link rel="stylesheet" href="../css/user_style.css">
 </head>
 
-<body style="height: auto; overflow-x: hidden;">
+<body style="height: auto; ">
 
 	<?php include '../components/user_header.php'; ?>
 
@@ -304,7 +304,6 @@ include '../components/wishlist_cart.php';
 		AOS.init({
 			duration: 1000,
 			delay: 300,
-			once: true,
 		});
 	</script>
 </body>
