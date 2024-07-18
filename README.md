@@ -1,41 +1,38 @@
-Как да стартираме уеб базираното приложение:
+# How to Start the Web-Based Application
 
-Инструкциите са за операционна система Windows.
+Instructions are for the Windows operating system.
 
-1. Необходимо е да се инталира XAMPP програмата, дава се всичко по подразбиране, инсталация в C: drive.
+1. Install the XAMPP program with all default settings, installing it on the C: drive.
 
-2. След инсталацията на XAMPP, ще се създаде папка xampp. Трябва да се влезе в него и после в папка htdocs.
+2. After installing XAMPP, a `xampp` folder will be created. Navigate into it and then into the `htdocs` folder.
 
-3. Следва да се премести папката influxify, която се намира във флашката, в папка htdocs (C:\xampp\htdocs). 
-(Може и да възникне проблем, за това е предоставен и zip файл. 
-При отварянето на zip трябва да се drag и drop на файла от zip-а и да се премести в C:\xampp\htdocs.
-При extract трябва да се внимава, защото създава папка и в него се съдържа същинската част 
-(трявба да се извлече от допълнителната папкаinfluxify папката),
-което трява да се премести в C:\xampp\htdocs).
+3. Move the `influxify` folder from the flash drive into the `htdocs` folder (`C:\xampp\htdocs`).
+    - (There might be an issue, so a zip file is provided. When opening the zip, drag and drop the file from the zip and move it to `C:\xampp\htdocs`.
+    - When extracting, be careful as it creates a folder containing the actual content (you need to extract the `influxify` folder from the additional folder), which should be moved to `C:\xampp\htdocs`).
 
-4. След тези стъпки, се стартират Apache и MySQL модулите от XAMPP Controll Panel приложението.
+4. After these steps, start the Apache and MySQL modules from the XAMPP Control Panel application.
 
-5. Следва стартирането на MySQL сървъра и избирането на бутона "Admin" на същия ред.
+5. Start the MySQL server and select the "Admin" button on the same row.
 
-6. Следва да се отвори страница в браузъра, с URL http://localhost/phpmyadmin/.
+6. Open a browser and go to the URL: `http://localhost/phpmyadmin/`.
 
-7. От лявата страна са изброени всички налични бази данни, всяка от които е с име. 
-За да добавим нова, натискаме бутона "+New". 
-След това се появява под navbar-а заглавие "Databases", под него има опция "Create database". 
-Трябва да се въведе "shop_db", като име на базата. След това клик на бутона "Create".
-След това се ъпдейтва интерфейса и дава опция "Create new table".
-Тогава от navbar-a на сайта избираме опция "Import". Дава опция за избиране на файл - "Choose file", кликаме го.
-Избираме файла за база данни, намиращ се в текущата директория на приложението или в флашката с име "shop_db.sql". 
-Най-от долу на сайта има бутон "Go"/"Import", цъка се и вече успешно е създадена базата данни на приложението.
+7. On the left side, all available databases are listed, each with a name.
+    - To add a new one, click the "+New" button.
+    - A title "Databases" will appear under the navbar, with an option "Create database".
+    - Enter `shop_db` as the database name, then click the "Create" button.
+    - The interface will update and provide an option "Create new table".
+    - Then, from the navbar on the site, select the "Import" option.
+    - There will be an option to select a file - "Choose file", click it.
+    - Select the database file located in the current directory of the application or on the flash drive named `shop_db.sql`.
+    - At the bottom of the site, there is a "Go"/"Import" button, click it and the application's database will be successfully created.
 
-8. Когато файловете на дипломната са прехвърлени в (C:\xampp\htdocs). 
-В браузъра се пише URL: http://localhost/influxify/user/ за клиентска част, а в този URL админска част: http://localhost/influxify/admin/admin_login.php.
-(Чрез http://localhost/influxify/admin/ може да се достъпи всички файлове от администратора, ако няма регистрация се препраща в http://localhost/influxify/admin/admin_login.php)
+8. When the project files are transferred to (`C:\xampp\htdocs`), open a browser and enter the URL: `http://localhost/influxify/user/` for the client side, and for the admin side: `http://localhost/influxify/admin/admin_login.php`.
+    - (Through `http://localhost/influxify/admin/`, you can access all admin files. If there is no registration, you will be redirected to `http://localhost/influxify/admin/admin_login.php`).
 
-9. Сайтът е готов за тестване.
+9. The website is ready for testing.
 
-10. Допълнителна информация относно проекта:
+10. Additional information regarding the project:
 
-* За добавяне на админ, трябва да се влезе в главният акаунт с Имейл: admin@admin.com Парола: admin. Ако имате вече създаден профил, просто влизате със своите данните.
-* При добавяне на спецификации за весеки от продуктите е добре при Storage и RAM след числото да има слядо написано GB. (Пример: 16GB)
-* Друго важно нещо да се спомене, ако пишете на друг език освен английски, може да възникне грешка, поради глобализацията, посочено в точка 3.1 от книжното тялото.
+    * To add an admin, log in with the main account with Email: `admin@admin.com` and Password: `admin`. If you already have a created profile, simply log in with your own credentials.
+    * When adding specifications for each product, it is good to add `GB` after the number for Storage and RAM. (Example: 16GB)
+    * Another important thing to mention, if you write in a language other than English, an error might occur due to globalization, as specified in point 3.1 of the document.
