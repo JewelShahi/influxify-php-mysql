@@ -203,7 +203,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `isAdmin`, `avatar`, `re
 (6, 'User Test', 'usertest+10@gmail.com', 'b528913860816711ba0b9f575519cbf12351f292', 0, 'shigeo-kageyama.png', '2024-03-03'),
 (7, 'New User', 'newuser1020@new.com', '1b8e602d0988d10170e682307e5faddaa1ec2511', 0, 'katsuki-bakugo.png', '2024-03-04'),
 (8, 'Vladi', 'vladithebest10@gmail.com', '0b2d299d54aeb7388f10c34911785173c9c1a47c', 0, 'ryomen-sukuna.png', '2024-03-12'),
-(10, 'Ali Baba', 'alibaba1020@ali.com', '5e67f384abf548b2586de36d0e9e0bcd1e16ef29', 0, 'ichigo-kurosaki-ai.png', '2024-04-17');
+(10, 'Ali Baba', 'alibaba1020@ali.com', '5e67f384abf548b2586de36d0e9e0bcd1e16ef29', 0, 'ichigo-kurosaki-ai.png', '2024-04-17'),
+(11, 'TheBestTester', 'thebesttester@gmail.com', '8081d30fbc22db5ac7b78d6e3b3c2689eb71a934', 1, 'anos-voldigoad.png', '2024-04-17');
 
 -- --------------------------------------------------------
 
