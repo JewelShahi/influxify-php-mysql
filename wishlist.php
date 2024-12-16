@@ -14,9 +14,9 @@ if (isset($_SESSION['user_id'])) {
 include 'components/wishlist_cart.php';
 
 if (isset($_POST['delete'])) {
-	$wishlist_id = $_POST['wishlist_id'];
-	$delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE id = ?");
-	$delete_wishlist_item->execute([$wishlist_id]);
+	$pid = $_POST['pid'];
+	$delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE user_id = ? AND pid = ?");
+	$delete_wishlist_item->execute([$user_id, $pid]);
 }
 
 if (isset($_GET['delete_all'])) {
@@ -39,7 +39,9 @@ if (isset($_GET['delete_all'])) {
 	<!-- font awesome cdn link  -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<!-- custom css file link  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/global.css">
+
+	<link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
@@ -48,13 +50,18 @@ if (isset($_GET['delete_all'])) {
 
 	<section class="products">
 
-		<h3 class="heading">your wishlist</h3>
+		<h3 class="heading">Your wishlist</h3>
 
 		<div class="box-container">
 
 			<?php
 			$grand_total = 0;
-			$select_wishlist = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
+			$select_wishlist = $conn->prepare("
+				SELECT w.user_id, w.pid, w.name, w.price, p.image_01 as image 
+				FROM wishlist w
+				JOIN products p ON w.pid = p.id 
+				WHERE user_id = ?
+			");
 			$select_wishlist->execute([$user_id]);
 			if ($select_wishlist->rowCount() > 0) {
 				while ($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)) {
@@ -62,52 +69,47 @@ if (isset($_GET['delete_all'])) {
 			?>
 					<form action="" method="post" class="box">
 						<input type="hidden" name="pid" value="<?= $fetch_wishlist['pid']; ?>">
-						<input type="hidden" name="wishlist_id" value="<?= $fetch_wishlist['id']; ?>">
 						<input type="hidden" name="name" value="<?= $fetch_wishlist['name']; ?>">
 						<input type="hidden" name="price" value="<?= $fetch_wishlist['price']; ?>">
 						<input type="hidden" name="image" value="<?= $fetch_wishlist['image']; ?>">
 						<a href="quick_view.php?pid=<?= $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
-						<img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="">
+						<img src="uploaded_img/products/<?= $fetch_wishlist['image']; ?>" alt="">
 						<div class="name"><?= $fetch_wishlist['name']; ?></div>
 						<div class="flex">
 							<div class="price">$<?= $fetch_wishlist['price']; ?>/-</div>
 							<input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
 						</div>
-						<input type="submit" value="add to cart" class="btn" name="add_to_cart">
-						<input type="submit" value="delete item" onclick="return confirm('delete this from wishlist?');" class="delete-btn" name="delete">
+						<button type="submit" class="btn" name="add_to_cart">
+							<i class="fas fa-plus"></i> Add to cart
+						</button>
+						<button type="submit" onclick="return confirm('Remove this from wishlist?');" class="delete-btn" name="delete">
+							<i class="fas fa-minus"></i> Remove item
+						</button>
 					</form>
 			<?php
 				}
 			} else {
-				echo '<p class="empty">your wishlist is empty</p>';
+				echo '<p class="empty">Your wishlist is empty.</p>';
 			}
 			?>
 		</div>
 
 		<div class="wishlist-total">
-			<p>grand total : <span>$<?= $grand_total; ?>/-</span></p>
-			<a href="shop.php" class="option-btn">continue shopping</a>
-			<a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('delete all from wishlist?');">delete all item</a>
+			<p>Drand total : <span>$<?= $grand_total; ?>/-</span></p>
+			<a href="shop.php" class="option-btn">
+				<i class="fas fa-arrow-left"></i> Continue shopping
+			</a>
+			<a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('Delete all from wishlist?');">
+				<i class="fas fa-trash-alt"></i> Remove all item
+			</a>
 		</div>
 
 	</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<?php include 'components/footer.php'; ?>
 
-	<script src="js/script.js"></script>
-
+	<script src="js/user_script.js"></script>
+	<?php include 'components/scroll_up.php'; ?>
+	<script src="js/scrollUp.js"></script>
 </body>
 
 </html>
