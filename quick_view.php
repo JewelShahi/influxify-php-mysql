@@ -26,7 +26,9 @@ include 'components/wishlist_cart.php';
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+
+  <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
@@ -52,12 +54,12 @@ include 'components/wishlist_cart.php';
           <div class="row">
             <div class="image-container">
               <div class="main-image">
-                <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
               </div>
               <div class="sub-image">
-                <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
-                <img src="uploaded_img/<?= $fetch_product['image_02']; ?>" alt="">
-                <img src="uploaded_img/<?= $fetch_product['image_03']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_01']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_02']; ?>" alt="">
+                <img src="uploaded_img/products/<?= $fetch_product['image_03']; ?>" alt="">
               </div>
             </div>
             <div class="content">
@@ -82,23 +84,11 @@ include 'components/wishlist_cart.php';
     ?>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/script.js"></script>
-
+  <script src="js/user_script.js"></script>
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>

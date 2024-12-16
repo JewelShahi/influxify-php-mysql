@@ -11,16 +11,11 @@ document.querySelector("#user-btn").onclick = () => {
   navbar.classList.remove("active");
 };
 
-window.onscroll = () => {
-  navbar.classList.remove("active");
-  profile.classList.remove("active");
-};
-
 let mainImage = document.querySelector(
-  ".update-product .image-container .main-image img"
+  ".quick-view .box .row .image-container .main-image img"
 );
 let subImages = document.querySelectorAll(
-  ".update-product .image-container .sub-image img"
+  ".quick-view .box .row .image-container .sub-image img"
 );
 
 subImages.forEach((images) => {
