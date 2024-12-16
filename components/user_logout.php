@@ -2,9 +2,16 @@
 
 include 'connect.php';
 
+session_name('user_session');
+
 session_start();
-session_unset();
+
+// Unset the specific user session variable
+unset($_SESSION['user']['user_id']);
+
 session_destroy();
+
+session_regenerate_id(true);
 
 header('location:../home.php');
 
