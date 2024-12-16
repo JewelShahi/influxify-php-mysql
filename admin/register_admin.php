@@ -3,7 +3,6 @@
 include '../components/connect.php';
 
 session_start();
-
 $admin_id = $_SESSION['admin_id'];
 
 if (!isset($admin_id)) {
@@ -13,30 +12,49 @@ if (!isset($admin_id)) {
 if (isset($_POST['submit'])) {
 
   $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
   $email = $_POST['email'];
-  $email = filter_var($email, FILTER_SANITIZE_STRING);
-  $pass = sha1($_POST['pass']);
-  $pass = filter_var($pass, FILTER_SANITIZE_STRING);
-  $cpass = sha1($_POST['cpass']);
-  $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
+  $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  $select_admin = $conn->prepare("SELECT * FROM `users` WHERE name = ? OR email = ?");
-  $select_admin->execute([$name, $email]);
+  $pass = filter_var($_POST['pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $hash_pass = sha1($pass);
 
-  if ($select_admin->rowCount() > 0) {
-    $message[] = 'Username already exist!';
+  $cpass = filter_var($_POST['cpass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $hash_cpass = sha1($cpass);
+
+  // Validate email format
+  if (!preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/", $email)) {
+    $message[] = 'Invalid email format!';
+  }
+  // Validate password length and format (e.g., at least 8 characters, one upper, one lower character and one digit)
+  elseif (strlen($pass) < 8 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/', $pass)) {
+    $message[] = 'Password must be at least 8 characters and contain at least one uppercase letter, lowercase letter and a digit!';
+  }
+  // Check if the password match the entered
+  elseif ($hash_pass != $hash_cpass) {
+    $message[] = 'Confirm password not matched!';
   } else {
-    if ($pass != $cpass) {
-      $message[] = 'Confirm password not matched!';
-    } else {
-      $insert_admin = $conn->prepare("INSERT INTO `users`(name, password, isAdmin) VALUES(?,?, 1)");
-      $insert_admin->execute([$name, $cpass]);
-      $message[] = 'New Admin Registered Successfully!';
+    try {
+
+      $insert_admin = $conn->prepare("INSERT INTO `users` (name, email, password, isAdmin, avatar) VALUES (?, ?, ?, 1, 'logedin.png')");
+      $insert_admin->execute([$name, $email, $hash_pass]);
+
+      // Check if any rows were affected
+      if ($insert_admin->rowCount() > 0) {
+        $message[] = 'Admin registration was successful. Welcome aboard!';
+      } else {
+        $message[] = 'Error registering admin. Please try again.';
+      }
+    } catch (PDOException $e) {
+      if ($e->errorInfo[1] == 1062) { // 1062 is the MySQL error code for duplicate entry
+        $message[] = 'User with ' . $email . ' already exists!';
+      } else {
+        $message[] = 'Error: ' . $e->getMessage();
+      }
     }
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -50,17 +68,20 @@ if (isset($_POST['submit'])) {
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="stylesheet" href="../css/admin_style.css">
+  <link rel="stylesheet" href="../css/global.css">
+
 </head>
 
 <body>
   <?php include '../components/admin_header.php'; ?>
   <section class="form-container">
     <form action="" method="post">
-      <h3>register now</h3>
-      <input type="text" name="name" required placeholder="enter your username" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" required placeholder="enter your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="cpass" required placeholder="confirm your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="register now" class="btn" name="submit">
+      <h3>Register Admin</h3>
+      <input type="text" name="name" placeholder="Enter your name" maxlength="100" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+      <input type="email" name="email" placeholder="Enter your e-mail" maxlength="50" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+      <input type="password" name="pass" placeholder="Enter your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+      <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" class="input box" oninput="this.value = this.value.replace(/\s/g, '')" required>
+      <input type="submit" value="Register" class="btn" name="submit">
     </form>
   </section>
   <script src="../js/admin_script.js"></script>

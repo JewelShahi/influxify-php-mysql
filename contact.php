@@ -1,7 +1,5 @@
 <?php
-
 include 'components/connect.php';
-
 session_start();
 
 if (isset($_SESSION['user_id'])) {
@@ -9,31 +7,6 @@ if (isset($_SESSION['user_id'])) {
 } else {
   $user_id = '';
 };
-
-if (isset($_POST['send'])) {
-
-  $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_STRING);
-  $email = $_POST['email'];
-  $email = filter_var($email, FILTER_SANITIZE_STRING);
-  $number = $_POST['number'];
-  $number = filter_var($number, FILTER_SANITIZE_STRING);
-  $msg = $_POST['msg'];
-  $msg = filter_var($msg, FILTER_SANITIZE_STRING);
-
-  $select_message = $conn->prepare("SELECT * FROM `messages` WHERE name = ? AND email = ? AND number = ? AND message = ?");
-  $select_message->execute([$name, $email, $number, $msg]);
-
-  if ($select_message->rowCount() > 0) {
-    $message[] = 'already sent message!';
-  } else {
-
-    $insert_message = $conn->prepare("INSERT INTO `messages`(user_id, name, email, number, message) VALUES(?,?,?,?,?)");
-    $insert_message->execute([$user_id, $name, $email, $number, $msg]);
-
-    $message[] = 'sent message successfully!';
-  }
-}
 ?>
 
 <!DOCTYPE html>
@@ -43,47 +16,76 @@ if (isset($_POST['send'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>contact</title>
+  <title>Contact Us</title>
   <link rel="shortcut icon" href="images/influxify-logo.ico" type="image/x-icon">
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/user_style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-info i {
+      margin-right: 10px;
+    }
+  </style>
 </head>
 
 <body>
 
   <?php include 'components/user_header.php'; ?>
 
-  <section class="contact">
+  <div class="container">
+    <h1>Contact Us</h1>
 
-    <form action="" method="post">
-      <h3>get in touch</h3>
-      <input type="text" name="name" placeholder="enter your name" required maxlength="20" class="box">
-      <input type="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
-      <input type="number" name="number" min="0" max="9999999999" placeholder="enter your number" required onkeypress="if(this.value.length == 10) return false;" class="box">
-      <textarea name="msg" class="box" placeholder="enter your message" cols="30" rows="10"></textarea>
-      <input type="submit" value="send message" name="send" class="btn">
-    </form>
+    <div class="contact-info">
+      <p><i class="fas fa-map-marker-alt"></i> Our Shop Location: 123 Main Street, Cityville</p>
+      <p><i class="fas fa-phone"></i> Phone: +1 555-1234</p>
+      <p><i class="fas fa-envelope"></i> Email: info@example.com</p>
+    </div>
 
-  </section>
+    <h2>Owner Details</h2>
+    <p><strong>Owner Name:</strong> John Doe</p>
+    <p><strong>Email:</strong> john.doe@example.com</p>
+    <p><strong>Phone:</strong> +1 555-5678</p>
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 
   <?php include 'components/footer.php'; ?>
-
-  <script src="js/script.js"></script>
-
+  <script src="js/user_script.js"></script>
 </body>
 
 </html>
