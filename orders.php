@@ -24,7 +24,9 @@ if (isset($_SESSION['user_id'])) {
   <!-- font awesome cdn link  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+
+  <link rel="stylesheet" href="css/user_style.css">
 </head>
 
 <body>
@@ -39,7 +41,7 @@ if (isset($_SESSION['user_id'])) {
 
       <?php
       if ($user_id == '') {
-        echo '<p class="empty">please login to see your orders</p>';
+        echo '<p class="empty">Please LogIn to see your orders</p>';
       } else {
         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE user_id = ?");
         $select_orders->execute([$user_id]);
@@ -72,23 +74,11 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
   <?php include 'components/footer.php'; ?>
 
-  <script src="js/script.js"></script>
-
+  <script src="js/user_script.js"></script>
+  <?php include 'components/scroll_up.php'; ?>
+  <script src="js/scrollUp.js"></script>
 </body>
 
 </html>
