@@ -38,12 +38,14 @@ if (isset($_GET['delete'])) {
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="stylesheet" href="../css/admin_style.css">
+  <link rel="stylesheet" href="../css/global.css">
+
 </head>
 
 <body>
   <?php include '../components/admin_header.php'; ?>
   <section class="accounts">
-    <h1 class="heading">user accounts</h1>
+    <h1 class="heading">User accounts</h1>
     <div class="box-container">
       <?php
       $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE isAdmin = 0");
@@ -60,12 +62,14 @@ if (isset($_GET['delete'])) {
       <?php
         }
       } else {
-        echo '<p class="empty">No Accounts Available!</p>';
+        echo '<p class="empty">There are currently no accounts available</p>';
       }
       ?>
     </div>
   </section>
   <script src="../js/admin_script.js"></script>
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>

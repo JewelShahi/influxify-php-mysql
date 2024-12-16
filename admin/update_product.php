@@ -14,11 +14,11 @@ if (isset($_POST['update'])) {
 
   $pid = $_POST['pid'];
   $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $price = $_POST['price'];
-  $price = filter_var($price, FILTER_SANITIZE_STRING);
+  $price = filter_var($price, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $details = $_POST['details'];
-  $details = filter_var($details, FILTER_SANITIZE_STRING);
+  $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? WHERE id = ?");
   $update_product->execute([$name, $price, $details, $pid]);
@@ -27,7 +27,7 @@ if (isset($_POST['update'])) {
 
   $old_image_01 = $_POST['old_image_01'];
   $image_01 = $_FILES['image_01']['name'];
-  $image_01 = filter_var($image_01, FILTER_SANITIZE_STRING);
+  $image_01 = filter_var($image_01, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_01 = $_FILES['image_01']['size'];
   $image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
   $image_folder_01 = '../uploaded_img/' . $image_01;
@@ -46,7 +46,7 @@ if (isset($_POST['update'])) {
 
   $old_image_02 = $_POST['old_image_02'];
   $image_02 = $_FILES['image_02']['name'];
-  $image_02 = filter_var($image_02, FILTER_SANITIZE_STRING);
+  $image_02 = filter_var($image_02, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_02 = $_FILES['image_02']['size'];
   $image_tmp_name_02 = $_FILES['image_02']['tmp_name'];
   $image_folder_02 = '../uploaded_img/' . $image_02;
@@ -65,7 +65,7 @@ if (isset($_POST['update'])) {
 
   $old_image_03 = $_POST['old_image_03'];
   $image_03 = $_FILES['image_03']['name'];
-  $image_03 = filter_var($image_03, FILTER_SANITIZE_STRING);
+  $image_03 = filter_var($image_03, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $image_size_03 = $_FILES['image_03']['size'];
   $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
   $image_folder_03 = '../uploaded_img/' . $image_03;
@@ -96,6 +96,8 @@ if (isset($_POST['update'])) {
   <link rel="shortcut icon" href="../images/influxify-logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="stylesheet" href="../css/admin_style.css">
+  <link rel="stylesheet" href="../css/global.css">
+
 </head>
 
 <body>
@@ -149,6 +151,8 @@ if (isset($_POST['update'])) {
     ?>
   </section>
   <script src="../js/admin_script.js"></script>
+  <?php include '../components/scroll_up.php'; ?>
+  <script src="../js/scrollUp.js"></script>
 </body>
 
 </html>
